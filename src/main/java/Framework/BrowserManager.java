@@ -12,6 +12,9 @@ public class BrowserManager {
     private static BrowserManager instance;
     public WebDriver Browser;
     public WebDriverWait Waiter;
+
+    private int timeout = 30;
+
     private BrowserManager() {
         openBrowser("Firefox");
         configureBrowser();
@@ -51,9 +54,9 @@ public class BrowserManager {
         Browser.manage().window().maximize();
 
         // Set Implicit Waits
-        Browser.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-        Browser.manage().timeouts().pageLoadTimeout(20, TimeUnit.SECONDS);
-        Browser.manage().timeouts().setScriptTimeout(15, TimeUnit.SECONDS);
+        Browser.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
+        Browser.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
+        Browser.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
 
         // Delete Cookies
         Browser.manage().deleteAllCookies();
@@ -62,7 +65,7 @@ public class BrowserManager {
 
     private void startWait()
     {
-        Waiter = new WebDriverWait(Browser, 15);
+        Waiter = new WebDriverWait(Browser, timeout);
     }
 
     public void goStartPage(String url)

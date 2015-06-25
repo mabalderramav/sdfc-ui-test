@@ -1,6 +1,7 @@
 package Pages;
 
 import Framework.BrowserManager;
+import Pages.TopBar.TabBar;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -46,7 +47,8 @@ public class LoginPage {
         return this;
     }
 
-    public void clickLogInToSalesforceButton() {
+    public TabBar clickLogInToSalesforceButton() {
         loginField.click();
+        return new TabBar(driver);
     }
 }
