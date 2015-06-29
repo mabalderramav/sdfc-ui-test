@@ -58,7 +58,7 @@ public class CreateCampaing {
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
         tapBar = new LoginPage()
-                .setUserNameField("automationqa@autom.com")
+                .setUserNameField("giselitamt6@gmail.com")
                 .setPasswordField("Control123")
                 .clickLogInToSalesforceButton();
     }

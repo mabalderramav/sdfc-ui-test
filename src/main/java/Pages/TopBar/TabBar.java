@@ -3,6 +3,7 @@ package Pages.TopBar;
 import Framework.BrowserManager;
 import Framework.CommonActions;
 import Pages.Campaigns.CampaignsHome;
+import Pages.Contacts.ContactsHome;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -23,6 +24,13 @@ public class TabBar {
     @FindBy(xpath = "//*[@id='Campaign_Tab']/*[contains(.,'Campaigns')]")
     @CacheLookup
     WebElement CampaignsTab;
+
+    //Contacts Locator
+//    @FindBy(xpath = "//a[@href='/003/o']")
+//    private WebElement contactsBtn;
+    @FindBy(xpath = "//a[@href='/003/o']")
+    @CacheLookup
+    WebElement contactsTab;
     //endregion
 
     public TabBar(WebDriver driver)
@@ -35,5 +43,10 @@ public class TabBar {
     public CampaignsHome clickCampaigns() {
         CommonActions.click(CampaignsTab);
         return new CampaignsHome(Driver);
+    }
+
+    public ContactsHome clickContacts() {
+        CommonActions.click(contactsTab);
+        return new ContactsHome(Driver);
     }
 }
