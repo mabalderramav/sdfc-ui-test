@@ -73,6 +73,14 @@ public class NewProductForm {
         return this;
     }
 
+    public NewProductForm uncheckActiveFlag(boolean flag) {
+        if (activeFlag.isSelected() && flag) {
+            activeFlag.click();
+        }
+
+        return this;
+    }
+
     public NewProductForm setProductCode(String productCode) {
         productCodeTextbox.clear();
         productCodeTextbox.sendKeys(productCode);
@@ -82,7 +90,11 @@ public class NewProductForm {
 
     public NewProductForm chooseProductFamilyDdl(String productFamily) {
         Select selectBox = new Select(multiSelectProductFamily);
-        selectBox.selectByVisibleText(productFamily);
+        if (productFamily.equals("")) {
+            selectBox.selectByIndex(0);
+        } else {
+            selectBox.selectByVisibleText(productFamily);
+        }
 
         return this;
     }

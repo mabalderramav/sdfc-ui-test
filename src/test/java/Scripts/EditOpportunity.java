@@ -1,5 +1,7 @@
 package Scripts;
 
+import Framework.BrowserManager;
+import Pages.LoginPage;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
@@ -8,32 +10,27 @@ import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import main.java.Pages.LoginPage;
-import main.java.Framework.BrowserManager;
+
+import java.util.Calendar;
 
 /**
- * Created by ivan on 28-06-15.
+ * Created by ivan on 29-06-15.
  */
-public class CreateOpportunity {
+public class EditOpportunity {
 
-    //region Objects
     TabBar              tapBar;
     OpportunitiesHome   opportunitiesHome;
     NewOpportunityForm  newOpportunityForm;
     OpportunityProfile  opportunityProfile;
-    //endregion
 
     //region values
+    private boolean isPrivate               = true;
     private String opportunityName          = "Opp_name1";
+    private String opportunityNameUpdate    = "Opp_name2";
     private String accountName              = "test account_1";
-    private String type                     = "Existing Customer - Replacement";
-    private String leadSource               = "Partner Referral";
-    private String amount                   = "100";
-    private String nextStep                 = "Conquer the world";
+    private String accountNameUpdate        = "test account_2";
     private String stage                    = "Needs Analysis";
-    private String primaryCampaignSource    = "Campaign_001";
-    private String orderNumber              = "00001";
-    private String deliveryInstallStatus    = "Yet to begin";
+    private String stageUpdate              = "Perception Analysis";
     //endregion
 
     @BeforeTest
@@ -44,11 +41,10 @@ public class CreateOpportunity {
                 .setUserNameField("vasquez.vn@gmail.com")
                 .setPasswordField("123Control")
                 .clickLogInToSalesforceButton();
+        createOpportunity();
     }
 
-    @Test
-    public void CreateOpportunity()
-    {
+    private void createOpportunity() {
         opportunitiesHome = tapBar
                 .clickOpportunityTab();
 
@@ -56,26 +52,31 @@ public class CreateOpportunity {
                 .clickNewButton();
 
         opportunityProfile = newOpportunityForm
-                .checkPrivateFlag(true)
+                .checkPrivateFlag(isPrivate)
                 .setOpportunityName(opportunityName)
                 .setAccountName(accountName)   // TODO: lookup
-                .chooseTypeDdl(type)
-                .chooseLeadSourceDdl(leadSource)
-                .setAmount(amount)
                 .setCurrentCloseDate()
-                .setNextStep(nextStep)
                 .chooseStageDdl(stage)
-                .setPrimaryCampaignSource(primaryCampaignSource)   // TODO: lookup
-                .setOrderNumber(orderNumber)
-                .chooseDeliveryInstallationStatusDdl(deliveryInstallStatus)
+                .pressSaveBtn();
+    }
+
+    @Test
+    public void EditOpportunity()
+    {
+        newOpportunityForm = opportunityProfile
+                .pressEditBtn();
+
+        opportunityProfile = newOpportunityForm
+                .uncheckPrivateFlag(isPrivate)
+                .setOpportunityName(opportunityNameUpdate)
+                .setAccountName(accountNameUpdate)   // TODO: lookup
+                .chooseStageDdl(stageUpdate)
                 .pressSaveBtn();
 
-        Assert.assertEquals(opportunityProfile.getOpportunityName(), opportunityName);
-        Assert.assertEquals(opportunityProfile.getAccountName(), accountName);
-        Assert.assertEquals(opportunityProfile.getStage(), stage);
-        Assert.assertEquals(opportunityProfile.getOrderNumber(), orderNumber);
-        Assert.assertEquals(opportunityProfile.getDeliveryInstallation(), deliveryInstallStatus);
-
+        Assert.assertEquals(opportunityProfile.isPrivateFlag(), false);
+        Assert.assertEquals(opportunityProfile.getOpportunityName(), opportunityNameUpdate);
+        Assert.assertEquals(opportunityProfile.getAccountName(), accountNameUpdate);
+        Assert.assertEquals(opportunityProfile.getStage(), stageUpdate);
     }
 
     @AfterTest

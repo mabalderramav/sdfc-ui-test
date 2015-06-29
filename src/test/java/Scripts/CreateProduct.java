@@ -58,11 +58,11 @@ public class CreateProduct {
                 .setDescription(descriptionProduct)
                 .pressSaveBtn();
 
-        Assert.assertEquals(productName, productProfile.getProductName());
-        Assert.assertEquals(productCode, productProfile.getProductcode());
-        Assert.assertEquals(isActive, productProfile.getActiveflag());
-        Assert.assertEquals(productFamily, productProfile.getProductFamily());
-        Assert.assertEquals(descriptionProduct, productProfile.getDescription());
+        Assert.assertEquals(productProfile.getProductName(), productName);
+        Assert.assertEquals(productProfile.getProductcode(), productCode);
+        Assert.assertEquals(productProfile.isActiveFlag(), isActive);
+        Assert.assertEquals(productProfile.getProductFamily(), productFamily);
+        Assert.assertEquals(productProfile.getDescription(), descriptionProduct);
 
     }
 

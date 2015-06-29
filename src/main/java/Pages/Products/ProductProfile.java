@@ -23,6 +23,11 @@ public class ProductProfile {
     @CacheLookup
     private WebElement deleteBtn;
 
+    // edit button
+    @FindBy(name = "edit")
+    @CacheLookup
+    private WebElement editBtn;
+
     // product name
     @FindBy(id = "Name_ileinner")
     @CacheLookup
@@ -63,6 +68,12 @@ public class ProductProfile {
         driver.switchTo().defaultContent();
     }
 
+    public NewProductForm pressEditBtn() {
+        editBtn.click();
+
+        return new NewProductForm(driver);
+    }
+
     // product name
     public String getProductName() {
         return productNameLabel.getText();
@@ -79,7 +90,7 @@ public class ProductProfile {
     }
 
     // active
-    public boolean getActiveflag() {
+    public boolean isActiveFlag() {
         boolean result = false;
         String attributeState = activeFlagImg.getAttribute("title");
 
@@ -88,13 +99,19 @@ public class ProductProfile {
             result = true;
         }
 
-
         return result;
     }
 
     // product family
     public String getProductFamily() {
-        return productFamilyLabel.getText();
+        String result = "-None-";
+
+        if (productFamilyLabel.getText().equals("None")) {
+            result = productFamilyLabel.getText();
+        }
+
+        return result;
+
     }
 
 }

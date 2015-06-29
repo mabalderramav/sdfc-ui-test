@@ -20,8 +20,8 @@ public class NewOpportunityForm {
     private WebDriverWait   wait;
 
     // to manage window popup
-    private String      mainWindowId;
-    private Set<String> windows;
+    private String          mainWindowId;
+    private Set<String>     windows;
 
     //region Locators
 
@@ -117,6 +117,15 @@ public class NewOpportunityForm {
     public NewOpportunityForm checkPrivateFlag(boolean flag) {
 
         if (!privateFlag.isSelected() && flag) {
+            privateFlag.click();
+        }
+
+        return this;
+    }
+
+    public NewOpportunityForm uncheckPrivateFlag(boolean flag) {
+
+        if (privateFlag.isSelected() && flag) {
             privateFlag.click();
         }
 

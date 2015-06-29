@@ -22,6 +22,10 @@ public class OpportunityProfile {
     @CacheLookup
     private WebElement deleteBtn;
 
+    @FindBy(name = "edit")
+    @CacheLookup
+    private WebElement editBtn;
+
     //Opportunity Name
     @FindBy(id = "opp3_ileinner")
     @CacheLookup
@@ -52,6 +56,11 @@ public class OpportunityProfile {
     @CacheLookup
     private WebElement deliveryInstallLabel;
 
+    // private Flag
+    @FindBy(id = "opp2_chkbox")
+    @CacheLookup
+    private WebElement privateFlagImg;
+
     //endregion
 
 
@@ -65,6 +74,24 @@ public class OpportunityProfile {
         deleteBtn.click();
         driver.switchTo().alert().accept();
         driver.switchTo().defaultContent();
+    }
+
+    public NewOpportunityForm pressEditBtn() {
+        editBtn.click();
+
+        return new NewOpportunityForm(driver);
+    }
+
+    public boolean isPrivateFlag() {
+        boolean result = false;
+        String attributeState = privateFlagImg.getAttribute("title");
+
+        if (attributeState.equals("Checked"))
+        {
+            result = true;
+        }
+
+        return result;
     }
 
     //region getters
