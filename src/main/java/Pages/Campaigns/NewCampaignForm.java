@@ -43,7 +43,7 @@ public class NewCampaignForm {
     @CacheLookup
     WebElement LookUpIcon;
 
-    @FindBy(id = "//*[@name='save']")
+    @FindBy(name = "save")
     @CacheLookup
     WebElement SaveButton;
     //endregion

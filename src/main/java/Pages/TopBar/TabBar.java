@@ -4,6 +4,7 @@ import Framework.BrowserManager;
 import Framework.CommonActions;
 import Pages.Campaigns.CampaignsHome;
 import Pages.Contacts.ContactsHome;
+import Pages.Leads.LeadHome;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Products.ProductsHome;
 import org.openqa.selenium.By;
@@ -34,6 +35,11 @@ public class TabBar {
     @FindBy(xpath = "//*[@id='Product2_Tab']/*[contains(.,'Products')]")
     @CacheLookup
     WebElement productsTab;
+	
+	
+    @FindBy(xpath = "//a[@title='Leads Tab']")
+    @CacheLookup
+    WebElement LeadTab;
 
     //Contacts Locator
 //    @FindBy(xpath = "//a[@href='/003/o']")
@@ -70,5 +76,10 @@ public class TabBar {
         CommonActions.click(productsTab);
 
         return new ProductsHome(Driver);
+    }
+	
+	    public LeadHome clickLead() {
+        CommonActions.click(LeadTab);
+        return new LeadHome(Driver);
     }
 }

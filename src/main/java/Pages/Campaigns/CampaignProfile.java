@@ -2,6 +2,8 @@ package Pages.Campaigns;
 
 
 import Framework.BrowserManager;
+import Framework.CommonActions;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -23,6 +25,9 @@ public class CampaignProfile {
     @CacheLookup
     WebElement CampaingNameLabel;
 
+    @FindBy(name = "del")
+    @CacheLookup
+    WebElement DeleteButton;
     //endregion
 
     public CampaignProfile(WebDriver driver)
@@ -34,6 +39,20 @@ public class CampaignProfile {
 
     public String getCampaingNameLabel() {
         return CampaingNameLabel.getText();
+    }
+
+    public CampaignsHome clickDeleteButton()
+    {
+        CommonActions.click(DeleteButton);
+        Alert alert = Driver.switchTo().alert();
+        alert.accept();
+        Driver.switchTo().defaultContent();
+        return new CampaignsHome(Driver);
+    }
+
+    public String getUrl()
+    {
+        return Driver.getCurrentUrl();
     }
 
 }

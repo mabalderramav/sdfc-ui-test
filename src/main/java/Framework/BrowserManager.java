@@ -12,11 +12,12 @@ public class BrowserManager {
     private static BrowserManager instance;
     public WebDriver Browser;
     public WebDriverWait Waiter;
-
+    private String browser;
     private int timeout = 30;
 
     private BrowserManager() {
-        openBrowser("Firefox");
+        browser = Environment.getInstance().getBrowser();
+        openBrowser(browser);
         configureBrowser();
 
     }
@@ -34,11 +35,11 @@ public class BrowserManager {
                 Browser = new FirefoxDriver();
             }
             else if (browserName.equalsIgnoreCase("Chrome")) {
-                System.setProperty("webdriver.chrome.driver", "src/Framework/Browser/Drivers/chromedriver.exe");
+                System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
                 Browser = new ChromeDriver();
             }
             else if (browserName.equalsIgnoreCase("IE")) {
-                System.setProperty("webdriver.ie.driver", "src/Framework/Browser/Drivers/IEDriverServer.exe");
+                System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
                 Browser = new InternetExplorerDriver();
             } else {
                 System.out.println("Incorrect Browser");

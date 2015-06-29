@@ -12,6 +12,8 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 
 public class CreateCampaing {
 
@@ -20,6 +22,9 @@ public class CreateCampaing {
     NewCampaignForm newCampaignForm;
     LookUpWindow lookUpWindow;
     CampaignProfile campaignProfile;
+
+    String campaongParent;
+    String campaingParantUrl;
 
     @Test
     public void CreateCampaing()
@@ -31,7 +36,7 @@ public class CreateCampaing {
                 .clickNewButton();
 
         lookUpWindow = newCampaignForm
-                .setCampaingNameField("Test100")
+                .setCampaingNameField("Test00100")
                 .checkActiveCheckbox()
                 .selectTypeDropdown("Email")
                 .setStartDateField("6/24/2015")
@@ -39,18 +44,17 @@ public class CreateCampaing {
 
         newCampaignForm = lookUpWindow
                 .switchSearchFrame()
-                .selectSearchWithinDropdown("My Campaigns")
-                .setSearchWithinField("Test01")
+                .setSearchWithinField(campaongParent)
                 .clickGoButton()
                 .switchResultsFrame()
-                .clickResult("Test01");
+                .clickResult(campaongParent);
 
         campaignProfile = newCampaignForm
                 .clickSaveButton();
 
         String campaingName = campaignProfile.getCampaingNameLabel();
 
-        Assert.assertEquals(campaingName, "Test100");
+        Assert.assertEquals(campaingName, "Test00100");
     }
 
     @BeforeTest
@@ -58,14 +62,36 @@ public class CreateCampaing {
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
         tapBar = new LoginPage()
-                .setUserNameField("giselitamt6@gmail.com")
+                .setUserNameField("automationqa@autom.com")
                 .setPasswordField("Control123")
                 .clickLogInToSalesforceButton();
+
+        campaongParent = "Parent" + new Random().nextInt(9999);
+        campaignsHome = tapBar
+                .clickCampaigns();
+
+        newCampaignForm = campaignsHome
+                .clickNewButton();
+
+        campaignProfile = newCampaignForm
+                .setCampaingNameField(campaongParent)
+                .checkActiveCheckbox()
+                .clickSaveButton();
+
+        campaingParantUrl = campaignProfile.getUrl();
     }
 
     @AfterTest
     public void afterTest()
     {
+        campaignsHome = campaignProfile
+                .clickDeleteButton();
+
+        campaignProfile = campaignsHome
+                .goCampaingProfile(campaingParantUrl);
+
+        campaignsHome = campaignProfile
+                .clickDeleteButton();
 
     }
 }

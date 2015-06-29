@@ -1,6 +1,7 @@
-package Pages.Campaigns;
+package Pages.Leads;
 
 import Framework.BrowserManager;
+import Pages.Leads.*;
 import Framework.CommonActions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 
-public class CampaignsHome {
+public class LeadHome {
     WebDriver Driver;
     WebDriverWait wait;
 
@@ -18,23 +19,18 @@ public class CampaignsHome {
 
     @FindBy(xpath = "//*[@name='new' and @type='button']")
     @CacheLookup
-    WebElement NewButtton;
+    WebElement NewLeadFormButtton;
     //endregion
 
-    public CampaignsHome(WebDriver driver)
+    public LeadHome(WebDriver driver)
     {
         Driver = driver;
         wait = BrowserManager.getInstance().Waiter;
         PageFactory.initElements(driver, this);
     }
 
-    public NewCampaignForm clickNewButton() {
-        CommonActions.click(NewButtton);
-        return new NewCampaignForm(Driver);
-    }
-
-    public CampaignProfile goCampaingProfile(String url) {
-        Driver.navigate().to(url);
-        return new CampaignProfile(Driver);
+    public NewLeadForm clickNewButton() {
+        CommonActions.click(NewLeadFormButtton);
+        return new NewLeadForm(Driver);
     }
 }
