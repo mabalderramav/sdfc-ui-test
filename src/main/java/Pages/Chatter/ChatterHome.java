@@ -1,8 +1,7 @@
-package Chatter;
+package Pages.Chatter;
 
 import Framework.BrowserManager;
 import Framework.CommonActions;
-import Pages.Contacts.NewContactForm;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;

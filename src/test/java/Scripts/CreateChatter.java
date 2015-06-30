@@ -1,14 +1,12 @@
 package Scripts;
 
-import Chatter.ChatterHome;
+import Pages.Chatter.ChatterHome;
 import Framework.BrowserManager;
-import Pages.Contacts.ContactsHome;
 import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
 import Pages.LookUp.LookUpWindow;
 import Pages.TopBar.TabBar;
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

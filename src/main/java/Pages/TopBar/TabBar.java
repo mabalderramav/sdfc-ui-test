@@ -1,6 +1,6 @@
 package Pages.TopBar;
 
-import Chatter.ChatterHome;
+import Pages.Chatter.ChatterHome;
 import Framework.BrowserManager;
 import Framework.CommonActions;
 import Pages.Campaigns.CampaignsHome;
@@ -8,7 +8,6 @@ import Pages.Contacts.ContactsHome;
 import Pages.Leads.LeadHome;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Products.ProductsHome;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
