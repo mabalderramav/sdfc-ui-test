@@ -1,7 +1,14 @@
 package Scripts;
 
 import Framework.BrowserManager;
+import Pages.Accounts.AccountProfile;
+import Pages.Accounts.AccountsHome;
+import Pages.Accounts.NewAccountForm;
+import Pages.Campaigns.CampaignProfile;
+import Pages.Campaigns.CampaignsHome;
+import Pages.Campaigns.NewCampaignForm;
 import Pages.LoginPage;
+import Pages.LookUp.LookUpWindow;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
@@ -11,29 +18,46 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 /**
  * Created by Ivan Vasquez on 6/29/2015.
  */
 public class CreateOpportunity {
 
     //region Objects
-    TabBar              tapBar;
-    OpportunitiesHome   opportunitiesHome;
-    NewOpportunityForm  newOpportunityForm;
-    OpportunityProfile  opportunityProfile;
+    private TabBar          tapBar;
+    private LookUpWindow    lookUpWindow;
+
+    private OpportunitiesHome   opportunitiesHome;
+    private NewOpportunityForm  newOpportunityForm;
+    private OpportunityProfile  opportunityProfile;
+
+    private CampaignsHome   campaignsHome;
+    private NewCampaignForm newCampaignForm;
+    private CampaignProfile campaignProfile;
+
+    private AccountsHome    accountsHome;
+    private NewAccountForm  newAccountForm;
+    private AccountProfile  accountProfile;
     //endregion
 
     //region values
+    private String campaignName;
+    private String campaingUrl;
+
+    private String accountName;
+    private String accountUrl;
+
     private String opportunityName          = "Opp_name1";
-    private String accountName              = "test account_1";
     private String type                     = "Existing Customer - Replacement";
     private String leadSource               = "Partner Referral";
     private String amount                   = "100";
     private String nextStep                 = "Conquer the world";
     private String stage                    = "Needs Analysis";
-    private String primaryCampaignSource    = "Campaign_001";
     private String orderNumber              = "00001";
     private String deliveryInstallStatus    = "Yet to begin";
+
     //endregion
 
     @BeforeTest
@@ -44,6 +68,8 @@ public class CreateOpportunity {
                 .setUserNameField("vasquez.vn@gmail.com")
                 .setPasswordField("123Control")
                 .clickLogInToSalesforceButton();
+        createCampaign();
+        createAccount();
     }
 
     @Test
@@ -58,14 +84,14 @@ public class CreateOpportunity {
         opportunityProfile = newOpportunityForm
                 .checkPrivateFlag(true)
                 .setOpportunityName(opportunityName)
-                .setAccountName(accountName)   // TODO: lookup
+                .setAccountName(accountName)
                 .chooseTypeDdl(type)
                 .chooseLeadSourceDdl(leadSource)
                 .setAmount(amount)
                 .setCurrentCloseDate()
                 .setNextStep(nextStep)
                 .chooseStageDdl(stage)
-                .setPrimaryCampaignSource(primaryCampaignSource)   // TODO: lookup
+                .setPrimaryCampaignSource(campaignName)
                 .setOrderNumber(orderNumber)
                 .chooseDeliveryInstallationStatusDdl(deliveryInstallStatus)
                 .pressSaveBtn();
@@ -83,4 +109,38 @@ public class CreateOpportunity {
     {
         opportunityProfile.pressDeleteBtn();
     }
+
+    private void createAccount() {
+        accountName = "Account_" + new Random().nextInt(9999);
+
+        accountsHome = tapBar
+                .clickAccountsTab();
+
+        newAccountForm = accountsHome
+                .clickNewButton();
+
+        accountProfile = newAccountForm
+                .setAccountName(accountName)
+                .pressSaveBtn();
+
+        accountUrl = accountProfile.getUrl();
+    }
+
+    private void createCampaign() {
+        campaignName = "Campaign_" + new Random().nextInt(9999);
+
+        campaignsHome = tapBar
+                .clickCampaigns();
+
+        newCampaignForm = campaignsHome
+                .clickNewButton();
+
+        campaignProfile = newCampaignForm
+                .setCampaingNameField(campaignName)
+                .checkActiveCheckbox()
+                .clickSaveButton();
+
+        campaingUrl = campaignProfile.getUrl();
+    }
+
 }

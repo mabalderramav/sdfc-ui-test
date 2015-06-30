@@ -1,5 +1,6 @@
 package Pages.TopBar;
 
+import Pages.Accounts.AccountsHome;
 import Pages.Chatter.ChatterHome;
 import Framework.BrowserManager;
 import Framework.CommonActions;
@@ -35,12 +36,14 @@ public class TabBar {
     @FindBy(xpath = "//*[@id='Product2_Tab']/*[contains(.,'Products')]")
     @CacheLookup
     WebElement productsTab;
-	
+
+    @FindBy(xpath = "//*[@id='Account_Tab']/*[contains(.,'Accounts')]")
+    @CacheLookup
+    WebElement accountTab;
 	
     @FindBy(xpath = "//a[@title='Leads Tab']")
     @CacheLookup
     WebElement LeadTab;
-
 
     @FindBy(xpath = "//a[@href='/003/o']")
     @CacheLookup
@@ -79,8 +82,14 @@ public class TabBar {
 
         return new ProductsHome(Driver);
     }
+
+    public AccountsHome clickAccountsTab() {
+        CommonActions.click(accountTab);
+
+        return new AccountsHome(Driver);
+    }
 	
-	    public LeadHome clickLead() {
+	public LeadHome clickLead() {
         CommonActions.click(LeadTab);
         return new LeadHome(Driver);
     }

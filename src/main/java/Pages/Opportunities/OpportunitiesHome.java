@@ -2,6 +2,7 @@ package Pages.Opportunities;
 
 import Framework.BrowserManager;
 import Framework.CommonActions;
+import Pages.Campaigns.CampaignProfile;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -23,12 +24,20 @@ public class OpportunitiesHome {
     public OpportunitiesHome(WebDriver driver) {
         this.driver = driver;
         wait = BrowserManager.getInstance().Waiter;
+
         PageFactory.initElements(driver, this);
     }
 
     public NewOpportunityForm clickNewButton() {
         CommonActions.click(NewButtton);
+
         return new NewOpportunityForm(driver);
+    }
+
+    public OpportunityProfile goOpportunityProfile(String url) {
+        driver.navigate().to(url);
+
+        return new OpportunityProfile(driver);
     }
 
 }

@@ -1,6 +1,8 @@
 package Pages.Opportunities;
 
 import Framework.BrowserManager;
+import Framework.CommonActions;
+import Pages.LookUp.LookUpWindow;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -43,8 +45,13 @@ public class NewOpportunityForm {
     @CacheLookup
     private WebElement accountNameTextBox;
 
-    @FindBy(xpath = "//img=[@alt='Account Name Lookup (New Window)']")
+    @FindBy(xpath = ".//*[@id='opp4_lkwgt']/img")
+    @CacheLookup
     private WebElement accountNameLookupIconBtn;
+
+    //@FindBy(id = "opp4_lkwgt")
+    //@CacheLookup
+    //private WebElement accountNameLookupIconBtn;
 
     @FindBy(id = "opp5")
     @CacheLookup
@@ -108,6 +115,7 @@ public class NewOpportunityForm {
         this.driver = driver;
         wait = BrowserManager.getInstance().Waiter;
         mainWindowId = driver.getWindowHandle();
+
         PageFactory.initElements(driver, this);
     }
 
@@ -237,5 +245,17 @@ public class NewOpportunityForm {
         saveBtn.click();
 
         return new OpportunityProfile(driver);
+    }
+
+    public LookUpWindow clickAccountNameLookUpIcon() {
+        CommonActions.click(accountNameLookupIconBtn);
+
+        return new LookUpWindow(driver);
+    }
+
+    public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
+        CommonActions.click(primaryCampaignSourceLookupIconBtn);
+
+        return new LookUpWindow(driver);
     }
 }

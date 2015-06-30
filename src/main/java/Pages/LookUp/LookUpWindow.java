@@ -3,6 +3,7 @@ package Pages.LookUp;
 import Framework.BrowserManager;
 import Framework.CommonActions;
 import Pages.Campaigns.NewCampaignForm;
+import Pages.Opportunities.NewOpportunityForm;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,6 +52,7 @@ public class LookUpWindow {
     @CacheLookup
     WebElement SearchResultFrame;
     //endregion
+
     public LookUpWindow(WebDriver driver) {
         Driver = driver;
         wait = BrowserManager.getInstance().Waiter;
@@ -60,30 +62,36 @@ public class LookUpWindow {
         Driver.switchTo().window(LookUpWindow);
     }
 
-    public LookUpWindow selectSearchWithinDropdown(String item)
-    {
+    public LookUpWindow selectSearchWithinDropdown(String item) {
         CommonActions.selectItem(SearchWithinDropdown, item);
+
         return this;
     }
-    public LookUpWindow setSearchWithinField(String text)
-    {
+
+    public LookUpWindow setSearchWithinField(String text) {
         CommonActions.setValue(SearchField, text);
         return this;
     }
-    public LookUpWindow clickGoButton()
-    {
+
+    public LookUpWindow clickGoButton() {
         CommonActions.click(GoButton);
+
         return this;
     }
 
-    public NewCampaignForm clickResult(String text)
-    {
+    public NewCampaignForm clickResult(String text) {
         CommonActions.click(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
         Driver.switchTo().defaultContent();
+
         return new NewCampaignForm(Driver);
     }
 
+    public NewOpportunityForm clickResultGotoNewOpportunityForm(String text) {
+        CommonActions.click(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
+        Driver.switchTo().defaultContent();
 
+        return new NewOpportunityForm(Driver);
+    }
 
     public LookUpWindow switchSearchFrame()
     {
