@@ -1,5 +1,6 @@
 package Pages.TopBar;
 
+import Chatter.ChatterHome;
 import Framework.BrowserManager;
 import Framework.CommonActions;
 import Pages.Campaigns.CampaignsHome;
@@ -41,13 +42,15 @@ public class TabBar {
     @CacheLookup
     WebElement LeadTab;
 
-    //Contacts Locator
-//    @FindBy(xpath = "//a[@href='/003/o']")
-//    private WebElement contactsBtn;
+
     @FindBy(xpath = "//a[@href='/003/o']")
     @CacheLookup
     WebElement contactsTab;
     //endregion
+
+    @FindBy(xpath = "//a[@href='/_ui/core/chatter/ui/ChatterPage']")
+    @CacheLookup
+    WebElement chatterTab;
 
     public TabBar(WebDriver driver)
     {
@@ -81,5 +84,10 @@ public class TabBar {
 	    public LeadHome clickLead() {
         CommonActions.click(LeadTab);
         return new LeadHome(Driver);
+    }
+
+    public ChatterHome clickChatter() {
+        CommonActions.click(chatterTab);
+        return new ChatterHome(Driver);
     }
 }

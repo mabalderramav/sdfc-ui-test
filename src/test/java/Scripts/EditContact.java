@@ -1,10 +1,7 @@
 package Scripts;
 
-
 import Framework.BrowserManager;
-import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.ContactsHome;
-import Pages.Contacts.NewContactForm;
 import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
@@ -16,14 +13,16 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * Created by Gisela on 6/28/2015.
+ * Created by Gisela on 6/29/2015.
  */
-public class CreateContact {
+public class EditContact {
     TabBar tapBar;
     ContactsHome contactsHome;
     NewContactForm newContactForm;
     LookUpWindow lookUpWindow;
     ContactsProfile contactsProfile;
+    ContactsProfile contactsProfileEdit;
+    NewContactForm newContactFormEdit;
 
     @Test
     public void CreateContact()
@@ -39,10 +38,10 @@ public class CreateContact {
                 .setLastName("TestLastName100")
                 .setTitle("TestTitle100")
                 .setDepartment("TestDepartment100");
-                //.setBirthDate("6/2/2014");
-               // .clickReportTo();
-               //.setAccountName("TestAccount100")
-                //.selectLeadSource("Test100");
+        //.setBirthDate("6/2/2014");
+        // .clickReportTo();
+        //.setAccountName("TestAccount100")
+        //.selectLeadSource("Test100");
 //
 //        newContactForm = lookUpWindow
 //                .switchSearchFrame()
@@ -52,12 +51,21 @@ public class CreateContact {
 //                .switchResultsFrame()
 //                .clickResult("Test01");
 
-        contactsProfile = newContactForm
-                .clickSaveButton();
+        contactsProfile = newContactForm.clickSaveButton();
+        //String contactName = contactsProfile.getContactNameLabel();
 
-        String contactName = contactsProfile.getContactNameLabel();
-        Assert.assertEquals(contactName, "Prof. Test100 TestLastName100");
-        contactsProfile.getContactNameLabel();
+        newContactFormEdit = contactsProfile.clickEditContact();
+        newContactFormEdit.selectFirstNameCategory("Prof.")
+                .setContactNameField("Test200")
+                .setLastName("TestLastName200")
+                .setTitle("TestTitle200")
+                .setDepartment("TestDepartment200");
+
+        contactsProfileEdit = newContactFormEdit.clickSaveButton();
+        String contactNameEdit = contactsProfileEdit.getContactNameLabel();
+        Assert.assertEquals(contactNameEdit, "Prof. Test200 TestLastName100TestLastName200");
+
+
     }
 
     @BeforeTest
@@ -73,6 +81,6 @@ public class CreateContact {
     @AfterTest
     public void afterTest()
     {
-        contactsProfile.deleteContact();
+        //contactsProfile.deleteContact();
     }
 }

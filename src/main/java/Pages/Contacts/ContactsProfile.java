@@ -1,6 +1,7 @@
 package Pages.Contacts;
 
 import Framework.BrowserManager;
+import Framework.CommonActions;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -29,6 +30,12 @@ public class ContactsProfile {
     private WebElement deleteButton;
     //endregion
 
+
+    @FindBy(xpath = "//input[@name='edit']")
+    @CacheLookup
+    private WebElement editButton;
+
+
     public ContactsProfile(WebDriver driver)
     {
         Driver = driver;
@@ -44,5 +51,13 @@ public class ContactsProfile {
         deleteButton.click();
         Alert javascriptAlert = Driver.switchTo().alert();
         javascriptAlert.accept();
+    }
+
+    public NewContactForm clickEditContact() {
+//        editButton.click();
+//        Alert javascriptAlert = Driver.switchTo().alert();
+//        javascriptAlert.accept();
+        CommonActions.click(editButton);
+        return new NewContactForm(Driver);
     }
 }
