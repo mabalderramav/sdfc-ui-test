@@ -1,12 +1,13 @@
 package Pages;
 
 import Framework.BrowserManager;
-import Pages.TopBar.TabBar;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class LoginPage {
@@ -30,8 +31,8 @@ public class LoginPage {
 
     public LoginPage()
     {
-        driver = BrowserManager.getInstance().Browser;
-        wait = BrowserManager.getInstance().Waiter;
+        driver = BrowserManager.getInstance().getDriver();
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 
@@ -47,8 +48,8 @@ public class LoginPage {
         return this;
     }
 
-    public TabBar clickLogInToSalesforceButton() {
+    public MainApp clickLogInToSalesforceButton() {
         loginField.click();
-        return new TabBar(driver);
+        return new MainApp();
     }
 }

@@ -1,4 +1,4 @@
-package Pages.TopBar;
+package Pages;
 
 import Pages.Accounts.AccountsHome;
 import Pages.Chatter.ChatterHome;
@@ -9,19 +9,21 @@ import Pages.Contacts.ContactsHome;
 import Pages.Leads.LeadHome;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Products.ProductsHome;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by Miguel.Pari on 6/17/2015.
  */
 public class TabBar {
-    WebDriver Driver;
-    WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
 
     //region Locators
 
@@ -50,52 +52,53 @@ public class TabBar {
     WebElement contactsTab;
     //endregion
 
-    @FindBy(xpath = "//a[@href='/_ui/core/chatter/ui/ChatterPage']")
+    @FindBy(linkText = "Chatter")
     @CacheLookup
-    WebElement chatterTab;
+    private WebElement chatterTab;
 
-    public TabBar(WebDriver driver)
+    public TabBar()
     {
-        Driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        driver = BrowserManager.getInstance().getDriver();
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 
     public CampaignsHome clickCampaigns() {
         CommonActions.click(CampaignsTab);
-        return new CampaignsHome(Driver);
+        return new CampaignsHome(driver);
     }
 
     public ContactsHome clickContacts() {
         CommonActions.click(contactsTab);
-        return new ContactsHome(Driver);
+        return new ContactsHome(driver);
     }
 
     public OpportunitiesHome clickOpportunityTab() {
         CommonActions.click(opportunitiesTab);
 
-        return new OpportunitiesHome(Driver);
+        return new OpportunitiesHome(driver);
     }
 
     public ProductsHome clickProductsTab() {
         CommonActions.click(productsTab);
 
-        return new ProductsHome(Driver);
+        return new ProductsHome(driver);
     }
 
     public AccountsHome clickAccountsTab() {
         CommonActions.click(accountTab);
 
-        return new AccountsHome(Driver);
+        return new AccountsHome(driver);
     }
 	
 	public LeadHome clickLead() {
         CommonActions.click(LeadTab);
-        return new LeadHome(Driver);
+        return new LeadHome(driver);
     }
 
-    public ChatterHome clickChatter() {
-        CommonActions.click(chatterTab);
-        return new ChatterHome(Driver);
-    }
+	public ChatterHome clickOnChatterTab() {
+		wait.until(ExpectedConditions.elementToBeClickable(chatterTab));
+		chatterTab.click();
+		return new ChatterHome();
+	}
 }

@@ -113,7 +113,7 @@ public class NewOpportunityForm {
 
     public NewOpportunityForm(WebDriver driver) {
         this.driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
         mainWindowId = driver.getWindowHandle();
 
         PageFactory.initElements(driver, this);

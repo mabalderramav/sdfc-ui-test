@@ -23,7 +23,7 @@ public class ProductsHome {
 
     public ProductsHome(WebDriver driver) {
         this.driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 

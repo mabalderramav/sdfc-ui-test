@@ -8,11 +8,13 @@ import Pages.Campaigns.CampaignProfile;
 import Pages.Campaigns.CampaignsHome;
 import Pages.Campaigns.NewCampaignForm;
 import Pages.LoginPage;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.LookUp.LookUpWindow;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -40,6 +42,7 @@ public class CreateOpportunity {
     private AccountsHome    accountsHome;
     private NewAccountForm  newAccountForm;
     private AccountProfile  accountProfile;
+    private MainApp mainApp;
     //endregion
 
     //region values
@@ -64,7 +67,7 @@ public class CreateOpportunity {
     public void BeforeTest()
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
+        mainApp = new LoginPage()
                 .setUserNameField("vasquez.vn@gmail.com")
                 .setPasswordField("123Control")
                 .clickLogInToSalesforceButton();

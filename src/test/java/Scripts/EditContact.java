@@ -5,8 +5,10 @@ import Pages.Contacts.ContactsHome;
 import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.LookUp.LookUpWindow;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -23,7 +25,8 @@ public class EditContact {
     ContactsProfile contactsProfile;
     ContactsProfile contactsProfileEdit;
     NewContactForm newContactFormEdit;
-
+    private MainApp mainApp; 
+    
     @Test
     public void CreateContact()
     {
@@ -72,7 +75,7 @@ public class EditContact {
     public void BeforeTest()
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
+        mainApp = new LoginPage()
                 .setUserNameField("giselitamt6@gmail.com")
                 .setPasswordField("Control123")
                 .clickLogInToSalesforceButton();

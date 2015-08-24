@@ -28,7 +28,7 @@ public class NewAccountForm {
 
     public NewAccountForm(WebDriver driver) {
         this.driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
 
         PageFactory.initElements(driver, this);
     }

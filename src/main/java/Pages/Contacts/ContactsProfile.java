@@ -39,7 +39,7 @@ public class ContactsProfile {
     public ContactsProfile(WebDriver driver)
     {
         Driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 

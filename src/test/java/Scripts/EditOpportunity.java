@@ -2,10 +2,12 @@ package Scripts;
 
 import Framework.BrowserManager;
 import Pages.LoginPage;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -20,7 +22,7 @@ public class EditOpportunity {
     OpportunitiesHome opportunitiesHome;
     NewOpportunityForm newOpportunityForm;
     OpportunityProfile opportunityProfile;
-
+    private MainApp mainApp;
     //region values
     private boolean isPrivate               = true;
     private String opportunityName          = "Opp_name1";
@@ -35,7 +37,7 @@ public class EditOpportunity {
     public void BeforeTest()
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
+        mainApp = new LoginPage()
                 .setUserNameField("vasquez.vn@gmail.com")
                 .setPasswordField("123Control")
                 .clickLogInToSalesforceButton();

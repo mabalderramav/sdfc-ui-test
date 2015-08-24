@@ -53,7 +53,7 @@ public class NewProductForm {
 
     public NewProductForm(WebDriver driver) {
         this.driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
 
         PageFactory.initElements(driver, this);
     }

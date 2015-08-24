@@ -2,10 +2,12 @@ package Scripts;
 
 import Framework.BrowserManager;
 import Pages.LoginPage;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.Products.NewProductForm;
 import Pages.Products.ProductProfile;
 import Pages.Products.ProductsHome;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -21,6 +23,7 @@ public class CreateProduct {
     ProductsHome productsHome;
     NewProductForm newProductForm;
     ProductProfile productProfile;
+    private MainApp mainApp;
     //endregion
 
     //region values
@@ -35,7 +38,7 @@ public class CreateProduct {
     public void BeforeTest()
     {
         BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
+        mainApp = new LoginPage()
                 .setUserNameField("vasquez.vn@gmail.com")
                 .setPasswordField("123Control")
                 .clickLogInToSalesforceButton();

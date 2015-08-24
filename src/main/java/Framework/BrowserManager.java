@@ -10,10 +10,10 @@ import java.util.concurrent.TimeUnit;
 
 public class BrowserManager {
     private static BrowserManager instance;
-    public WebDriver Browser;
-    public WebDriverWait Waiter;
+    public WebDriver driver;
+    public WebDriverWait wait;
     private String browser;
-    private int timeout = 30;
+    private static final int TIMEOUT_NORMAL = 30;
 
     private BrowserManager() {
         browser = Environment.getInstance().getBrowser();
@@ -32,15 +32,15 @@ public class BrowserManager {
     private void openBrowser(String browserName) {
         try {
             if (browserName.equalsIgnoreCase("Firefox")) {
-                Browser = new FirefoxDriver();
+                driver = new FirefoxDriver();
             }
             else if (browserName.equalsIgnoreCase("Chrome")) {
                 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
-                Browser = new ChromeDriver();
+                driver = new ChromeDriver();
             }
             else if (browserName.equalsIgnoreCase("IE")) {
                 System.setProperty("webdriver.ie.driver", "drivers/IEDriverServer.exe");
-                Browser = new InternetExplorerDriver();
+                driver = new InternetExplorerDriver();
             } else {
                 System.out.println("Incorrect Browser");
             }
@@ -52,25 +52,33 @@ public class BrowserManager {
 
     private void configureBrowser() {
         // Maximize Browser Window
-        Browser.manage().window().maximize();
+        driver.manage().window().maximize();
 
         // Set Implicit Waits
-        Browser.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
-        Browser.manage().timeouts().pageLoadTimeout(timeout, TimeUnit.SECONDS);
-        Browser.manage().timeouts().setScriptTimeout(timeout, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(TIMEOUT_NORMAL, TimeUnit.SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
+        driver.manage().timeouts().setScriptTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
 
         // Delete Cookies
-        Browser.manage().deleteAllCookies();
+        driver.manage().deleteAllCookies();
     }
 
 
     private void startWait()
     {
-        Waiter = new WebDriverWait(Browser, timeout);
+        wait = new WebDriverWait(driver, TIMEOUT_NORMAL);
     }
 
     public void goStartPage(String url)
     {
-        Browser.get(url);
+        driver.get(url);
     }
+    
+    public WebDriver getDriver() {
+        return driver;
+    }
+
+    public WebDriverWait getWait() {
+        return wait;
+    }	
 }

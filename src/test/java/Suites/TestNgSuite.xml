@@ -2,7 +2,7 @@
 <suite name="Suite1" verbose="1" >
     <test name="Regression1">
         <classes>
-            <class name="Scripts.TemplateScript"/>
+            <class name="Scripts.CreateChatter"/>
         </classes>
     </test>
 </suite>
