@@ -9,7 +9,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Framework.BrowserManager;
-
+import Framework.CommonActions;
 
 public class MainApp {
 	
@@ -33,17 +33,22 @@ public class MainApp {
     
     
     public MainApp clickUserButton(){
-    	userBtn.click();
+    	CommonActions.click(userBtn);
     	return this;
     }
     
     public void clickLogout () {
-    	wait.until(ExpectedConditions.elementToBeClickable(logoutBtn));
-    	logoutBtn.click();
+    	CommonActions.click(logoutBtn);
     }
     
    public TabBar goToTabBar() {
 	   return new TabBar();
    }
+   
+   public void closeMainApp() {
+   		driver.quit();      
+   }
+   
+   
 
 }

@@ -80,8 +80,7 @@ public class ChatterHome extends HomeBase{
     */
     
     public PostForm clickPostLnk() {
-    	wait.until(ExpectedConditions.elementToBeClickable(postLnk));
-    	postLnk.click();
+    	CommonActions.click(postLnk);
     	return new PostForm();
     }
 }

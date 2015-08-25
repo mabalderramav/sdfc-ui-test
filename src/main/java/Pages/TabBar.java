@@ -97,8 +97,7 @@ public class TabBar {
     }
 
 	public ChatterHome clickOnChatterTab() {
-		wait.until(ExpectedConditions.elementToBeClickable(chatterTab));
-		chatterTab.click();
+		CommonActions.click(chatterTab);
 		return new ChatterHome();
 	}
 }

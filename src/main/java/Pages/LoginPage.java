@@ -1,6 +1,7 @@
 package Pages;
 
 import Framework.BrowserManager;
+import Framework.Environment;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -51,5 +52,16 @@ public class LoginPage {
     public MainApp clickLogInToSalesforceButton() {
         loginField.click();
         return new MainApp();
+    }
+    
+    public MainApp loginAs(String username, String password) {
+    	BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
+    	MainApp mainApp = this.setUserNameField(username).setPasswordField(password).clickLogInToSalesforceButton();
+        return mainApp;
+    }
+
+    public MainApp loginAsPrimaryUser() {
+        return loginAs(Environment.getInstance().getPrimaryUser(),
+                Environment.getInstance().getPrimaryPassword());
     }
 }

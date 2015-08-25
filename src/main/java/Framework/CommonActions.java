@@ -13,6 +13,7 @@ public class CommonActions {
     }
     public static void setValue(WebElement element, String text)
     {
+    	element.clear();
         element.sendKeys(text);
     }
     public static void selectItem(WebElement element, String item)

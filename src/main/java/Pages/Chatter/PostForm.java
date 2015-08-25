@@ -10,6 +10,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import Framework.BrowserManager;
+import Framework.CommonActions;
 
 
 
@@ -18,26 +19,24 @@ public class PostForm {
 	private WebDriver driver;
 	private WebDriverWait wait;
 	
-	
-	@FindAll({
-		@FindBy(id = "publishereditablearea"),
-		@FindBy(id = "quickActionFeedBodyInput")
-		})
-    @CacheLookup
-    WebElement postTxt;
+	@FindBy(id = "publishereditablearea")
+	@CacheLookup
+	private WebElement createTxtArea;	
 	
 	@FindBy(id = "publishersharebutton")
     @CacheLookup
-    WebElement shareBtn;
+    private WebElement shareBtn;
 	
 	
-	@FindBy(id = "quickActionSubmitButton")
+	@FindBy(name = "quickActionSubmitButton")
     @CacheLookup
-    WebElement saveBtn;
+    private WebElement saveBtn;
 	
 	@FindBy(id = "quickActionFeedBodyInput")
 	@CacheLookup
-    WebElement editTxtArea;
+    private WebElement editTxtArea;
+	
+	private String postText;
 	
 	public PostForm() {
 		driver = BrowserManager.getInstance().getDriver();
@@ -46,29 +45,25 @@ public class PostForm {
 	}
 	
 	public PostForm setPostTxt(String postText) {
-		wait.until(ExpectedConditions.visibilityOf(postTxt));
-		postTxt.clear();
-		postTxt.sendKeys(postText);
+		this.postText = postText;
+		CommonActions.setValue(createTxtArea, postText);		
 		return this;
 	}
 	
-	public PostForm editPostTxt(String postTxt) {
-		wait.until(ExpectedConditions.visibilityOf(editTxtArea));
-		editTxtArea.click();
-		editTxtArea.clear();
-		editTxtArea.sendKeys(postTxt);
+	public PostForm editPostTxt(String postTxt) {	
+		this.postText = postTxt;
+		CommonActions.setValue(editTxtArea, postTxt);
 		return this;
 		
 	}
 	public PostContainer clickShareBtn() {
-		wait.until(ExpectedConditions.visibilityOf(shareBtn));
-		shareBtn.click();		
-		return new PostContainer();
+		CommonActions.click(shareBtn);		
+		return new PostContainer().setPostTxt(postText);
 	}
 	
-	public void clickSaveBtn() {
-		wait.until(ExpectedConditions.visibilityOf(saveBtn));
-		saveBtn.click();		
+	public PostContainer clickSaveBtn() {
+		CommonActions.click(saveBtn);
+		return new PostContainer().setPostTxt(postText);
 	}
 
 }

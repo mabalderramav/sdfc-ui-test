@@ -9,9 +9,10 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.util.concurrent.TimeUnit;
 
 public class BrowserManager {
+	
     private static BrowserManager instance;
-    public WebDriver driver;
-    public WebDriverWait wait;
+    private WebDriver driver;
+    private WebDriverWait wait;
     private String browser;
     private static final int TIMEOUT_NORMAL = 30;
 
