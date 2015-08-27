@@ -2,9 +2,7 @@ package Scripts;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import Pages.LoginPage;
@@ -13,22 +11,20 @@ import Pages.TabBar;
 import Pages.Chatter.ChatterHome;
 import Pages.Chatter.PostContainer;
 import Pages.Chatter.PostForm;
-import Pages.Contacts.ContactsProfile;
-import Pages.Contacts.NewContactForm;
-import Pages.LookUp.LookUpWindow;
-/**
-* Created by Franklin Plaza
-*/
-public class EditChatterPost {
-		
+
+public class CommentChatterPost {
+	
 	private ChatterHome chatterHome;
 	private MainApp mainApp;
 	private TabBar tabBar;
 	private PostForm postForm;
+	private PostForm commentForm;
+	private PostContainer comment;
 	private PostContainer postContainer;
-	private String postContain = "TestEditPost";
-	private String newPostContain = "TestPost123";
-    
+	private String postContain = "TestCommentPost";
+	private String commentContain = "TestComment";
+
+	
 	@BeforeMethod
 	public void createPost() {
 		
@@ -39,20 +35,19 @@ public class EditChatterPost {
 		postContainer = postForm.clickShareBtn();
 	    
 	}
-	
+		
 	@Test
-	public void editChatterPostTest(){
-		
-		postForm = postContainer.editPost(postContain);
-		postContainer = postForm.editPostTxt(newPostContain).clickSaveBtn();
-		Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");	
-		
-		}
-		
+	public void commentChatterPostTest(){
+		commentForm = postContainer.clickCommentLkn(postContain);
+		commentForm.setCommentTxt(commentContain,postContain);
+		comment = commentForm.clickCommentBtn();
+		Assert.assertTrue(comment.isPostDisplayed(), "Chatter Comment Displayed");
+	}
+	
 	@AfterMethod
-	public void deleteChatterPost() {	
-		postContainer.deletePost(newPostContain);
-			
-	}	
+	public void deleteChatterPost() {
+		postContainer.deletePost(postContain);
 		
+	}	
+
 }

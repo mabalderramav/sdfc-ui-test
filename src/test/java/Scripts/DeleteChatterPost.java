@@ -21,18 +21,14 @@ import Pages.LookUp.LookUpWindow;
 public class DeleteChatterPost {
 	
 	private ChatterHome chatterHome;
-	private NewContactForm newContactForm;
-	private LookUpWindow lookUpWindow;
-	private ContactsProfile contactsProfile;
 	private MainApp mainApp;
 	private TabBar tabBar;
 	private PostForm postForm;
 	private PostContainer postContainer;
 	private String postContain = "TestDeletePost";
-	private LoginPage loginPage;
-	    
+
 	@BeforeMethod
-	public void login() {
+	public void createPost() {
 		
 		mainApp = new MainApp();
 	    tabBar = mainApp.goToTabBar();
@@ -43,14 +39,17 @@ public class DeleteChatterPost {
 	}
 		
 	@Test
-	public void createChatterPostTest(){
+	public void deleteChatterPostTest(){
 		postContainer.deletePost(postContain);
+		mainApp = new MainApp();
+	    tabBar = mainApp.goToTabBar();
+	    chatterHome = tabBar.clickOnChatterTab();
 		Assert.assertFalse(postContainer.isPostDisplayed(), "Chatter Post Deleted");
 	}
 		
 	@AfterMethod
 	public void tearDown() {	
-		mainApp.clickUserButton().clickLogout();		
+		//mainApp.clickUserButton().clickLogout();		
 	}	
 
 }

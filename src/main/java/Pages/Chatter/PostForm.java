@@ -1,5 +1,6 @@
 package Pages.Chatter;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -50,6 +51,13 @@ public class PostForm {
 		return this;
 	}
 	
+	public PostForm setCommentTxt(String commentText, String postText) {
+		this.postText = commentText;
+		WebElement commentTxt = driver.findElement(By.xpath("//span[contains(.,'"+postText+"')]/following::textarea[contains(@class,'foobar cxnewcommenttext groupAtMentionsEnabled')]"));
+		CommonActions.setValue(commentTxt, commentText);		
+		return this;
+	}
+	
 	public PostForm editPostTxt(String postTxt) {	
 		this.postText = postTxt;
 		CommonActions.setValue(editTxtArea, postTxt);
@@ -64,6 +72,12 @@ public class PostForm {
 	public PostContainer clickSaveBtn() {
 		CommonActions.click(saveBtn);
 		return new PostContainer().setPostTxt(postText);
+	}
+	
+	public PostContainer clickCommentBtn() {
+		WebElement commentBtn = driver.findElement(By.xpath("//span[contains(.,'"+this.postText+"')]/following::input[@value = 'Comment']"));
+		CommonActions.click(commentBtn);
+		return new PostContainer().setPostTxt(this.postText);
 	}
 
 }
