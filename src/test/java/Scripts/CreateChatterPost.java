@@ -25,9 +25,6 @@ public class CreateChatterPost {
 	
     
     private ChatterHome chatterHome;
-    private NewContactForm newContactForm;
-    private LookUpWindow lookUpWindow;
-    private ContactsProfile contactsProfile;
     private MainApp mainApp;
     private TabBar tabBar;
     private PostForm postForm;
@@ -37,6 +34,7 @@ public class CreateChatterPost {
     
     @BeforeTest
 	public void login() {
+    	
     	loginPage = new LoginPage();
     	mainApp = loginPage.loginAsPrimaryUser();  
         tabBar = mainApp.goToTabBar();

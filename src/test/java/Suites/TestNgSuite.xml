@@ -2,8 +2,9 @@
 <suite name="Suite1" verbose="1" >
     <test name="Regression1">
         <classes>
-            <class name="Scripts.CreateChatterPost"/>
-            <class name="Scripts.EditChatterPost"/>
+        	<class name="Scripts.CreateChatterPost"/>
+     		<class name="Scripts.EditChatterPost"/>
+            <class name="Scripts.CommentChatterPost"/>
             <class name="Scripts.DeleteChatterPost"/>
         </classes>
     </test>

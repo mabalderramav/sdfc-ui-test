@@ -1,5 +1,7 @@
 package Pages.Chatter;
 
+import java.util.LinkedList;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -29,8 +31,6 @@ public class PostContainer {
     private WebElement editOptn;
 	private WebElement actionMenu;
 	private String postText;
-	
-	
 	
 	public PostContainer() {
 		driver = BrowserManager.getInstance().getDriver();
@@ -88,6 +88,13 @@ public class PostContainer {
 	public PostContainer setPostTxt(String postTxt) {
 		this.postText = postTxt;
 		return this;
+	}
+	
+	public PostForm clickCommentLkn(String postTxt) {
+		WebElement postContainer = driver.findElement(By.xpath("//span[contains(.,'"+postTxt+"')]/following::a[text()='Comment']"));
+		CommonActions.click(postContainer);
+		return new PostForm();
+		
 	}
 
 }
