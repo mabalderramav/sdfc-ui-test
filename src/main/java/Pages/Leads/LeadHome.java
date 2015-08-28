@@ -1,36 +1,27 @@
 package Pages.Leads;
 
 import Framework.BrowserManager;
-import Pages.Leads.*;
-import Framework.CommonActions;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
+import Framework.FormBase;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+/**
+ * Created by Pablo Zubieta on 27/08/2015.
+ * This class holds leads home page elements and inherits from FormBase the basic button "new"
+ */
 
-public class LeadHome {
-    WebDriver Driver;
-    WebDriverWait wait;
+public class LeadHome extends FormBase {
 
-    //region Locators
-
-    @FindBy(xpath = "//*[@name='new' and @type='button']")
-    @CacheLookup
-    WebElement NewLeadFormButtton;
-    //endregion
-
-    public LeadHome(WebDriver driver)
+    public LeadHome()
     {
-        Driver = driver;
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 
     public NewLeadForm clickNewButton() {
-        CommonActions.click(NewLeadFormButtton);
-        return new NewLeadForm(Driver);
+        wait.until(ExpectedConditions.elementToBeClickable(newElementBtn));
+        super.newElementBtn.click();
+        return new NewLeadForm(driver);
     }
 }
