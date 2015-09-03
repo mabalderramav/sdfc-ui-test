@@ -14,6 +14,7 @@ public class BrowserManager {
     private WebDriver driver;
     private WebDriverWait wait;
     private String browser;
+    private final String baseURL = "https://na24.salesforce.com/";
     private static final int TIMEOUT_NORMAL = 30;
 
     private BrowserManager() {
