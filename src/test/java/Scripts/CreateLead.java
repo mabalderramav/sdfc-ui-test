@@ -40,7 +40,6 @@ public class CreateLead {
         newLeadPage.fillNewLead();
         Lead leadLoaded = newLeadPage.getLoadedLead();
 
-        //newLeadPage.fillNewLead();
         LeadDetailsPage leadDetailsPage = newLeadPage.clickSaveButton();
 
         Assert.assertEquals(leadLoaded.nameSalutation + " " + leadLoaded.firstName + " " + leadLoaded.lastName, leadDetailsPage.getName() );
