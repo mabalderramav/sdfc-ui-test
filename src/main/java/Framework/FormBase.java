@@ -1,8 +1,7 @@
 package Framework;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
@@ -10,17 +9,13 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * This class contains the common procedures to manage Add, and Delete elements from different components:
  * Leads, Campaign, Account, Contact, Opportunity, Products
  */
-public abstract class FormBase {
+public class FormBase {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    @FindBy(name = "new")
-    protected WebElement newElementBtn;
-
-    @FindBy(name = "save_new")
-    protected WebElement saveAndNewBtn;
-
-    @FindBy(name = "cancel")
-    protected WebElement cancelBtn;
-
+    public FormBase() {
+        driver = BrowserManager.getInstance().getDriver();
+        wait = BrowserManager.getInstance().getWait();
+        PageFactory.initElements(driver, this);
+    }
 }

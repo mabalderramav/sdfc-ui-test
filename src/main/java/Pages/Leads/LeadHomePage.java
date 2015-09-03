@@ -1,8 +1,6 @@
 package Pages.Leads;
 
-import Framework.BrowserManager;
-import Framework.FormBase;
-import org.openqa.selenium.support.PageFactory;
+import Framework.ElementFormBase;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
@@ -10,18 +8,16 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * This class holds leads home page elements and inherits from FormBase the basic button "new"
  */
 
-public class LeadHomePage extends FormBase {
+public class LeadHomePage extends ElementFormBase {
 
-    public LeadHomePage()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
+    public LeadHomePage() {
+        super();
     }
 
-    public NewLeadPage clickNewButton() {
-        wait.until(ExpectedConditions.elementToBeClickable(newElementBtn));
-        super.newElementBtn.click();
+    @Override
+    public NewLeadPage clickNewBtn() {
+        //wait.until(ExpectedConditions.visibilityOf(newElementBtn));
+        newElementBtn.click();
         return new NewLeadPage();
     }
 }

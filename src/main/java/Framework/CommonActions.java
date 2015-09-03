@@ -21,6 +21,8 @@ public class CommonActions {
     {
         element.click();
     }
+
+
     public static void setValue(WebElement element, String text)
     {
     	element.clear();

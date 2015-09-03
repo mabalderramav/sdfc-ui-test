@@ -44,7 +44,7 @@ public class NewLeadPage extends FormBase{
     @CacheLookup
     WebElement SaveButton;
 
-    @FindBy(xpath = "//img[@alt='Campaign Lookup (New Window)']")
+    @FindBy(xpath = "//input[@id='lea20']")
     @CacheLookup
     WebElement campaingLookupField;
 
@@ -137,16 +137,27 @@ public class NewLeadPage extends FormBase{
     @CacheLookup
     WebElement assignRuleCheck;
 
+    private Lead leadObject;
+
     public NewLeadPage()
     {
         driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
+        try {
+            leadObject = JSONMapper.getLeadData();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
-    public boolean fillNewLead(Lead leadDestination){
+    public Lead getLoadedLead(){
+        return leadObject;
+    }
+
+    public boolean fillNewLead(){
         boolean result = false;
-        Lead leadObject;
+
         try {
 
             leadObject = JSONMapper.getLeadData();
@@ -223,8 +234,8 @@ public class NewLeadPage extends FormBase{
         return this;
     }
 
-    public LeadProfile clickSaveButton() {
+    public LeadDetailsPage clickSaveButton() {
         CommonActions.click(SaveButton);
-        return new LeadProfile(driver);
+        return new LeadDetailsPage();
     }
 }
