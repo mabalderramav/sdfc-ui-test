@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class LeadProfile {
+public class LeadDetailsPage {
 
     WebDriver Driver;
     WebDriverWait wait;
@@ -24,7 +24,7 @@ public class LeadProfile {
 
     //endregion
 
-    public LeadProfile(WebDriver driver)
+    public LeadDetailsPage(WebDriver driver)
     {
         Driver = driver;
         wait = BrowserManager.getInstance().getWait();

@@ -10,18 +10,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
  * This class holds leads home page elements and inherits from FormBase the basic button "new"
  */
 
-public class LeadHome extends FormBase {
+public class LeadHomePage extends FormBase {
 
-    public LeadHome()
+    public LeadHomePage()
     {
         driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 
-    public NewLeadForm clickNewButton() {
+    public NewLeadPage clickNewButton() {
         wait.until(ExpectedConditions.elementToBeClickable(newElementBtn));
         super.newElementBtn.click();
-        return new NewLeadForm(driver);
+        return new NewLeadPage();
     }
 }
