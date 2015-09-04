@@ -1,12 +1,14 @@
 package Framework.Objects;
 
+import Framework.JSONMapper;
+
 /**
  * Created by Pablo Zubieta on 01/09/2015.
  * Object that represents a Lead, holding all regarding information to create a new lead.
  * It will be filled by the JSONMapper object.
  */
 
-public class Lead {
+public class Lead extends ElementBase {
 
     /*Lead Information*/
     public String nameSalutation;
@@ -43,7 +45,7 @@ public class Lead {
     public String primary;
 
     /*Others*/
-    public String description;
+    //public String description;
     public String assignRule;
 
     public Lead(){}

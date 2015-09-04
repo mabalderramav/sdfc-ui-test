@@ -5,6 +5,7 @@ package Scripts;
  */
 
 
+import Framework.JSONMapper;
 import Framework.Objects.Lead;
 import Pages.Leads.LeadDetailsPage;
 import Pages.Leads.LeadHomePage;
@@ -23,6 +24,7 @@ public class CreateLead {
     private MainApp mainApp;
     private TabBar tabBar;
     private LoginPage loginPage;
+    private String path="src\\test\\resources\\CreateLeadData.json";
 
     @BeforeTest
     public void setUp() throws Exception {
@@ -37,9 +39,10 @@ public class CreateLead {
     public void createLeadTest() throws Exception {
 
         newLeadPage = leadHomePage.clickNewBtn();
-        newLeadPage.fillNewLead();
-        Lead leadLoaded = newLeadPage.getLoadedLead();
 
+        Lead leadLoaded = new Lead();
+        leadLoaded = (Lead) JSONMapper.getData(path,leadLoaded);
+        newLeadPage.fillNewLead(leadLoaded);
         LeadDetailsPage leadDetailsPage = newLeadPage.clickSaveButton();
 
         Assert.assertEquals(leadLoaded.nameSalutation + " " + leadLoaded.firstName + " " + leadLoaded.lastName, leadDetailsPage.getName() );

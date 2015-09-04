@@ -155,12 +155,10 @@ public class NewLeadPage extends FormBase{
         return leadObject;
     }
 
-    public boolean fillNewLead(){
+    public boolean fillNewLead(Lead leadObject){
         boolean result = false;
 
         try {
-
-            leadObject = JSONMapper.getLeadData();
 
             CommonActions.setValue(lastNameField, leadObject.lastName);
             CommonActions.setValue(companyField, leadObject.company);

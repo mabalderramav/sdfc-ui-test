@@ -1,5 +1,6 @@
 package Framework;
 
+import Framework.Objects.ElementBase;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import Framework.Objects.Account;
 import Framework.Objects.Lead;
@@ -12,38 +13,14 @@ import java.io.IOException;
  */
 public class JSONMapper {
 
-    public static Opportunity getOpportunityData(String jsonFile){
-        Opportunity opportunity = new Opportunity();
+    public static ElementBase getData(String path, ElementBase elementBase){
+
         try {
             ObjectMapper mapper = new ObjectMapper();
-            opportunity = mapper.readValue(new File(jsonFile), Opportunity.class);
+            elementBase = mapper.readValue(new File(path), elementBase.getClass());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return opportunity;
+        return elementBase;
     }
-
-    public static Lead getLeadData(){
-        Lead lead = new Lead();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            lead = mapper.readValue(new File("src\\test\\resources\\CreateLeadData.json"), Lead.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return lead;
-    }
-
-    public static Account getAccountData(){
-        Account account = new Account();
-        try {
-            ObjectMapper mapper = new ObjectMapper();
-            account = mapper.readValue(new File("src\\test\\resources\\CreateAccountData.json"), Account.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return account;
-    }
-
-
 }
