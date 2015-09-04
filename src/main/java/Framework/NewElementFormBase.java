@@ -34,11 +34,6 @@ public abstract class  NewElementFormBase extends FormBase{
     protected abstract Object clickSaveNewBtn();
     protected abstract Object clickCancelBtn();
 
-    /**
-     * Methods that encapsulates the the operations waiting for the element and the action
-     *
-     * @author: Walter
-     */
     protected void clickSaveButton() {
         this.wait.until(ExpectedConditions.visibilityOf(saveBtn));
         saveBtn.click();
@@ -73,18 +68,7 @@ public abstract class  NewElementFormBase extends FormBase{
             comboBox.selectByVisibleText(value);
         }
         catch(WebDriverException e){
-            throw new WebDriverException("The value " +value+ "couldn't be selected");
+            throw new WebDriverException("The value " + value + "couldn't be selected");
         }
-    }
-
-    protected void fillTextBox(WebElement webElement, String value){
-        wait.until(ExpectedConditions.visibilityOf(webElement));
-        webElement.clear();
-        try {
-            Thread.sleep(200);
-        }
-        catch (Exception e){}
-
-        webElement.sendKeys(value);
     }
 }
