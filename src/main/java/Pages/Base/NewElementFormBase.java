@@ -1,5 +1,6 @@
-package Framework;
+package Pages.Base;
 
+import Framework.FormBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
@@ -10,7 +11,7 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Created by Pablo Zubieta on 03/09/2015.
  */
-public abstract class  NewElementFormBase extends FormBase{
+public abstract class  NewElementFormBase extends FormBase {
 
     @FindBy(name = "save")
     protected WebElement saveBtn;

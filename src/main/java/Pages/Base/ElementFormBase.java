@@ -1,4 +1,4 @@
-package Framework;
+package Pages.Base;
 
 import Framework.CommonActions;
 import Framework.FormBase;
