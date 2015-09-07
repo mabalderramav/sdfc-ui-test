@@ -2,6 +2,9 @@ package Pages.Accounts;
 
 import Framework.BrowserManager;
 import Framework.CommonActions;
+import Pages.Base.FormBase;
+import Pages.Base.HomeBase;
+import Pages.Base.ViewFormBase;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -12,7 +15,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class AccountsHome {
+public class AccountHomePage extends HomeBase{
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -21,15 +24,21 @@ public class AccountsHome {
     @CacheLookup
     WebElement NewButtton;
 
-    public AccountsHome(WebDriver driver) {
+    public AccountHomePage(WebDriver driver) {
         this.driver = driver;
         wait = BrowserManager.getInstance().getWait();
 
         PageFactory.initElements(driver, this);
     }
 
-    public NewAccountForm clickNewButton() {
+    @Override
+    public ViewFormBase clickNewViewLnk() {
+        return null;
+    }
+
+    @Override
+    public FormBase clickNewBtn() {
         CommonActions.click(NewButtton);
-        return new NewAccountForm(driver);
+        return new NewAccountPage(driver);
     }
 }

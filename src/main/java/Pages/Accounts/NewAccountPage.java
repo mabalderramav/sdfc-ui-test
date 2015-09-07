@@ -11,7 +11,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by ivan on 30-06-15.
  */
-public class NewAccountForm {
+public class NewAccountPage {
 
     private WebDriver       driver;
     private WebDriverWait   wait;
@@ -26,14 +26,14 @@ public class NewAccountForm {
     private WebElement saveBtn;
     //endregion
 
-    public NewAccountForm(WebDriver driver) {
+    public NewAccountPage(WebDriver driver) {
         this.driver = driver;
         wait = BrowserManager.getInstance().getWait();
 
         PageFactory.initElements(driver, this);
     }
 
-    public NewAccountForm setAccountName(String accountName) {
+    public NewAccountPage setAccountName(String accountName) {
         accountNameTextbox.clear();
         accountNameTextbox.sendKeys(accountName);
 
