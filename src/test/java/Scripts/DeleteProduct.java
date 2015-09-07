@@ -20,7 +20,7 @@ import org.testng.annotations.AfterTest;
 /**
  * Created by Ruber Cuellar
  */
-public class EditProduct {
+public class DeleteProduct {
 
     //region Objects
     private ProductsHome productsHome;
@@ -33,14 +33,11 @@ public class EditProduct {
     //endregion
 
     //region values
-    private String  productName                 = "product_001";
-    private String  productNameUpdated          = "product_002";
-    private String  productCode                 = "prod_001";
-    private String  productCodeUpdated          = "prod_002";
-    private String  descriptionProduct          = "description Test";
-    private String  descriptionProductUpdated   = "description Test2";
-    private boolean isActive                    = true;
-    private String  productFamily               = "None";
+    private String  productName         = "product_001";
+    private String  productCode         = "prod_001";
+    private String  descriptionProduct  = "description Test";
+    private boolean isActive            = true;
+    private String  productFamily       = "None";
     //endregion
 
     @BeforeTest
@@ -61,28 +58,16 @@ public class EditProduct {
     }
 
     @Test
-    public void EditProduct()
+    public void DeleteProduct()
     {
-        newProductForm = productProfile.clickEditProduct();
-        productProfile = newProductForm
-                .setProductName(productNameUpdated)
-                .setProductCode(productCodeUpdated)
-                .checkActiveFlag(isActive)
-                .chooseProductFamilyDdl(productFamily)
-                .setDescription(descriptionProductUpdated)
-                .pressSaveBtn();
-
-        Assert.assertEquals(productProfile.getProductName(), productNameUpdated);
-        Assert.assertEquals(productProfile.getProductcode(), productCodeUpdated);
-        Assert.assertEquals(productProfile.isActiveFlag(), isActive);
-        Assert.assertEquals(productProfile.getProductFamily(), productFamily);
-        Assert.assertEquals(productProfile.getDescription(), descriptionProductUpdated);
-
+        productProfile.pressDeleteBtn();
+        Assert.assertFalse(productProfile.isProductDisplayed(productName), "Product Deleted");
     }
 
     @AfterTest
     public void afterTest()
     {
-        productProfile.pressDeleteBtn();
+        mainApp.clickUserButton().clickLogout();
     }
+
 }

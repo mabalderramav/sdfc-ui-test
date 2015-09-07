@@ -1,12 +1,14 @@
 package Pages.Opportunities;
 
 import Framework.BrowserManager;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import Framework.CommonActions;
+import Pages.MainApp;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import sun.applet.Main;
 
 /**
  * Created by ivan on 26-06-15.
@@ -64,22 +66,28 @@ public class OpportunityProfile {
     //endregion
 
 
-    public OpportunityProfile(WebDriver driver) {
-        this.driver = driver;
+    public OpportunityProfile() {
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 
-    public void pressDeleteBtn() {
-        deleteBtn.click();
-        driver.switchTo().alert().accept();
-        driver.switchTo().defaultContent();
+    public MainApp clickDeteleBtn() {
+        CommonActions.click(deleteBtn);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        return new MainApp();
+    }
+
+    public NewOpportunityForm clickEditBtn() {
+        CommonActions.click(editBtn);
+        return new NewOpportunityForm();
     }
 
     public NewOpportunityForm pressEditBtn() {
         editBtn.click();
 
-        return new NewOpportunityForm(driver);
+        return new NewOpportunityForm();
     }
 
     public boolean isPrivateFlag() {
@@ -126,5 +134,23 @@ public class OpportunityProfile {
         return deliveryInstallLabel.getText();
     }
     //endregion
+    public boolean isOpportunityDisplayed(String Opportunity) {
+        WebElement opportunityContainer;
+        try {
+            opportunityContainer = driver.findElement(By.linkText(Opportunity));
+        } catch(WebDriverException e) {
+            return false;
+        }
+        return isElementPresent(opportunityContainer);
+
+    }
+    public boolean isElementPresent(WebElement webElement) {
+        try {
+            webElement.getText();
+            return true;
+        } catch (WebDriverException e) {
+            return false;
+        }
+    }
 
 }

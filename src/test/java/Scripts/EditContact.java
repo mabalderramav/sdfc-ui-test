@@ -15,75 +15,65 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 /**
- * Created by Gisela on 6/29/2015.
+ * Created by Ruber Cuellar
  */
 public class EditContact {
-    TabBar tapBar;
-    ContactsHome contactsHome;
-    NewContactForm newContactForm;
-    LookUpWindow lookUpWindow;
-    ContactsProfile contactsProfile;
-    ContactsProfile contactsProfileEdit;
-    NewContactForm newContactFormEdit;
-    private MainApp mainApp; 
-    
-    @Test
-    public void CreateContact()
-    {
-        contactsHome = tapBar.clickContacts();
+    private ContactsHome contactsHome;
+    private LookUpWindow lookUpWindow;
+    private MainApp mainApp;
+    private TabBar tabBar;
+    private ContactsProfile contactsProfile;
+    private NewContactForm newContactForm;
+    private LoginPage loginPage;
+    private String firstNameCategory = "Prof.";
+    private String contactName = "Test122";
+    private String lastName = "lastName22";
+    private String title = "title22";
+    private String department = "department22";
 
-        newContactForm = contactsHome
-                .clickNewButton();
+    private String firstNameCategoryEdit = "Mr.";
+    private String contactNameEdit = "NewEdit";
+    private String lastNameEdit = "lastEdit";
+    private String titleEdit = "TitleEdit";
+    private String departmentEdit = "DepEdit";
 
-        //lookUpWindow =
-        newContactForm.selectFirstNameCategory("Prof.")
-                .setContactNameField("Test100")
-                .setLastName("TestLastName100")
-                .setTitle("TestTitle100")
-                .setDepartment("TestDepartment100");
-        //.setBirthDate("6/2/2014");
-        // .clickReportTo();
-        //.setAccountName("TestAccount100")
-        //.selectLeadSource("Test100");
-//
-//        newContactForm = lookUpWindow
-//                .switchSearchFrame()
-//                .selectSearchWithinDropdown("My Campaigns")
-//                .setSearchWithinField("Test01")
-//                .clickGoButton()
-//                .switchResultsFrame()
-//                .clickResult("Test01");
-
-        contactsProfile = newContactForm.clickSaveButton();
-        //String contactName = contactsProfile.getContactNameLabel();
-
-        newContactFormEdit = contactsProfile.clickEditContact();
-        newContactFormEdit.selectFirstNameCategory("Prof.")
-                .setContactNameField("Test200")
-                .setLastName("TestLastName200")
-                .setTitle("TestTitle200")
-                .setDepartment("TestDepartment200");
-
-        contactsProfileEdit = newContactFormEdit.clickSaveButton();
-        String contactNameEdit = contactsProfileEdit.getContactNameLabel();
-        Assert.assertEquals(contactNameEdit, "Prof. Test200 TestLastName100TestLastName200");
-
-
-    }
 
     @BeforeTest
-    public void BeforeTest()
-    {
-        BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        mainApp = new LoginPage()
-                .setUserNameField("giselitamt6@gmail.com")
-                .setPasswordField("Control123")
-                .clickLogInToSalesforceButton();
+    public void login() {
+        loginPage = new LoginPage();
+        mainApp = loginPage.loginAsPrimaryUser();
+        tabBar = mainApp.goToTabBar();
+        contactsHome = tabBar.clickOnContactsHome();
+        newContactForm = contactsHome.clickPostLnk();
+        newContactForm.selectFirstNameCategory(firstNameCategory)
+                .setContactNameField(contactName)
+                .setLastName(lastName)
+                .setTitle(title)
+                .setDepartment(title);
+
+        contactsProfile = newContactForm.clickSaveButton();
     }
+    @Test
+    public void EditContact()
+    {
+        newContactForm = contactsProfile.clickEditContact();
+        newContactForm.selectFirstNameCategory(firstNameCategoryEdit)
+                .setContactNameField(contactNameEdit)
+                .setLastName(lastNameEdit)
+                .setTitle(titleEdit)
+                .setDepartment(departmentEdit);
+
+        contactsProfile = newContactForm.clickSaveButton();
+        String contactNameEditLabel = contactsProfile.getContactNameLabel();
+        Assert.assertEquals(contactNameEditLabel,  firstNameCategoryEdit + " " + contactNameEdit + " " + lastNameEdit);
+
+
+    }
+
 
     @AfterTest
     public void afterTest()
     {
-        //contactsProfile.deleteContact();
+        contactsProfile.deleteContact();
     }
 }
