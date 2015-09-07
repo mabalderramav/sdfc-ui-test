@@ -22,8 +22,7 @@ import Pages.LookUp.LookUpWindow;
 /**
  * Created by Ruber Cuellar
  */
-public class CreateContact {
-
+public class DeleteContact {
 
     private ContactsHome contactsHome;
     private LookUpWindow lookUpWindow;
@@ -44,10 +43,6 @@ public class CreateContact {
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
         contactsHome = tabBar.clickOnContactsHome();
-    }
-
-    @Test
-    public void createChatterPostTest(){
         newContactForm = contactsHome.clickPostLnk();
         newContactForm.selectFirstNameCategory(firstNameCategory)
                 .setContactNameField(contactName)
@@ -56,16 +51,19 @@ public class CreateContact {
                 .setDepartment(title);
 
         contactsProfile = newContactForm.clickSaveButton();
+    }
 
-        String contactNameLabel = contactsProfile.getContactNameLabel();
-        Assert.assertEquals(contactNameLabel, firstNameCategory + " " + contactName + " " + lastName);
-        contactsProfile.getContactNameLabel();
+    @Test
+    public void DeleteContact(){
 
+        contactsProfile.deleteContact();
+        Assert.assertFalse(contactsProfile.isContactDisplayed(lastName + ", " + contactName), "Contact Deleted");
+        System.out.println(lastName + ", " + contactName);
     }
 
     @AfterMethod
     public void afterTest() {
-        contactsProfile.deleteContact();
+        mainApp.clickUserButton().clickLogout();
 
     }
 

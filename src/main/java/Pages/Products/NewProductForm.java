@@ -14,8 +14,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  */
 public class NewProductForm {
 
-    private WebDriver       driver;
-    private WebDriverWait   wait;
 
     //region Locators
 
@@ -49,12 +47,13 @@ public class NewProductForm {
     @CacheLookup
     private WebElement descriptionTextArea;
 
-    //endregion
+    private WebDriver driver;
+    private WebDriverWait wait;
 
-    public NewProductForm(WebDriver driver) {
-        this.driver = driver;
+
+    public NewProductForm() {
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
-
         PageFactory.initElements(driver, this);
     }
 
@@ -109,6 +108,6 @@ public class NewProductForm {
     public ProductProfile pressSaveBtn() {
         saveBtn.click();
 
-        return new ProductProfile(driver);
+        return new ProductProfile();
     }
 }

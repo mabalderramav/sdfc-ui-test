@@ -1,7 +1,10 @@
 package Pages.Products;
 
 import Framework.BrowserManager;
+import Framework.CommonActions;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -12,9 +15,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by ivan on 28-06-15.
  */
 public class ProductProfile {
-
-    private WebDriver       driver;
-    private WebDriverWait   wait;
 
     //region Locators
 
@@ -53,12 +53,16 @@ public class ProductProfile {
     @CacheLookup
     private WebElement productFamilyLabel;
 
-    //endregion
+    @FindBy(xpath = "//input[@name='edit']")
+    @CacheLookup
+    private WebElement editButton;
 
-    public ProductProfile(WebDriver driver) {
-        this.driver = driver;
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    public ProductProfile() {
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
-
         PageFactory.initElements(driver, this);
     }
 
@@ -71,7 +75,7 @@ public class ProductProfile {
     public NewProductForm pressEditBtn() {
         editBtn.click();
 
-        return new NewProductForm(driver);
+        return new NewProductForm();
     }
 
     // product name
@@ -104,14 +108,35 @@ public class ProductProfile {
 
     // product family
     public String getProductFamily() {
-        String result = "-None-";
-
+        String result = "None";
         if (productFamilyLabel.getText().equals("None")) {
             result = productFamilyLabel.getText();
         }
-
         return result;
+    }
 
+    public NewProductForm clickEditProduct() {
+        CommonActions.click(editButton);
+        return new NewProductForm();
+    }
+
+    public boolean isProductDisplayed(String Product) {
+        WebElement productContainer;
+        try {
+            productContainer = driver.findElement(By.linkText(Product));
+        } catch(WebDriverException e) {
+            return false;
+        }
+        return isElementPresent(productContainer);
+
+    }
+    public boolean isElementPresent(WebElement webElement) {
+        try {
+            webElement.getText();
+            return true;
+        } catch (WebDriverException e) {
+            return false;
+        }
     }
 
 }

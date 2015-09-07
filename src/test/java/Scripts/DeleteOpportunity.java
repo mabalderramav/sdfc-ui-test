@@ -8,9 +8,9 @@ import Pages.Campaigns.CampaignProfile;
 import Pages.Campaigns.CampaignsHome;
 import Pages.Campaigns.NewCampaignForm;
 import Pages.LoginPage;
-import Pages.LookUp.LookUpWindow;
 import Pages.MainApp;
 import Pages.TabBar;
+import Pages.LookUp.LookUpWindow;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
@@ -20,27 +20,28 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+
 /**
- * Created by Ruber cuellar
+ * Created by Ruber Cuellar on 8/31/2015.
  */
-public class EditOpportunity {
+public class DeleteOpportunity {
 
     //region Objects
     private TabBar          tabBar;
-    private LookUpWindow lookUpWindow;
+    private LookUpWindow    lookUpWindow;
     private LoginPage loginPage;
 
     private OpportunitiesHome   opportunitiesHome;
     private NewOpportunityForm  newOpportunityForm;
     private OpportunityProfile  opportunityProfile;
 
-    private CampaignsHome campaignsHome;
+    private CampaignsHome   campaignsHome;
     private NewCampaignForm newCampaignForm;
     private CampaignProfile campaignProfile;
 
-    private AccountsHome accountsHome;
-    private NewAccountForm newAccountForm;
-    private AccountProfile accountProfile;
+    private AccountsHome    accountsHome;
+    private NewAccountForm  newAccountForm;
+    private AccountProfile  accountProfile;
     private MainApp mainApp;
     //endregion
 
@@ -60,14 +61,6 @@ public class EditOpportunity {
     private String deliveryInstallStatus    = "Yet to begin";
     private String accountName = "RuberAccount";
 
-    private String opportunityNameUpdated = "Opp_name2";
-    private String typeUpdated = "Existing Customer - Upgrade";
-    private String leadSourceUpdated = "Web";
-    private String amountUpdated = "200";
-    private String nextStepUpdated = "Updated";
-    private String stageUpdated = "Closed Lost";
-    private String deliveryInstallStatusUpdated = "In progress";
-
     //endregion
 
     @BeforeTest
@@ -76,12 +69,13 @@ public class EditOpportunity {
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
+
         accountsHome = tabBar.clickOnAccountsHome();
         newAccountForm = accountsHome.clickNewButton();
-
         accountProfile = newAccountForm
                 .setAccountName(accountName)
                 .pressSaveBtn();
+
         accountUrl = accountProfile.getUrl();
 
         opportunitiesHome = tabBar.clickOnOpportunitiesHome();
@@ -104,37 +98,21 @@ public class EditOpportunity {
     }
 
     @Test
-    public void EditOpportunity()
+    public void CreateOpportunity()
     {
-        newOpportunityForm = opportunityProfile.clickEditBtn();
-        opportunityProfile = newOpportunityForm
-                .checkPrivateFlag(true)
-                .setOpportunityName(opportunityNameUpdated)
-                .chooseTypeDdl(typeUpdated)
-                .chooseLeadSourceDdl(leadSourceUpdated)
-                .setAmount(amountUpdated)
-                .setCurrentCloseDate()
-                .setNextStep(nextStepUpdated)
-                .chooseStageDdl(stageUpdated)
-                .chooseDeliveryInstallationStatusDdl(deliveryInstallStatusUpdated)
-                .pressSaveBtn();
-        Assert.assertEquals(opportunityProfile.getOpportunityName(), opportunityNameUpdated);
-        Assert.assertEquals(opportunityProfile.getAccountName(), accountName);
-        Assert.assertEquals(opportunityProfile.getStage(), stageUpdated);
-        Assert.assertEquals(opportunityProfile.getOrderNumber(), orderNumber);
-        Assert.assertEquals(opportunityProfile.getDeliveryInstallation(), deliveryInstallStatusUpdated);
+        opportunityProfile.clickDeteleBtn();
+        Assert.assertFalse(opportunityProfile.isOpportunityDisplayed(opportunityName), "Product Deleted");
     }
 
     @AfterTest
     public void afterTest()
     {
-        mainApp = opportunityProfile.clickDeteleBtn();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm.clickOnAccount(accountName);
         mainApp = accountProfile.deleteAccount();
         mainApp.clickUserButton().clickLogout();
-
     }
+
 }

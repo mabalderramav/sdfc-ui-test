@@ -111,12 +111,12 @@ public class NewOpportunityForm {
 
     //endregion
 
-    public NewOpportunityForm(WebDriver driver) {
-        this.driver = driver;
+    public NewOpportunityForm() {
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
+        PageFactory.initElements(driver, this);
         mainWindowId = driver.getWindowHandle();
 
-        PageFactory.initElements(driver, this);
     }
 
     // TODO: Implement method to switch to popup window
@@ -244,7 +244,7 @@ public class NewOpportunityForm {
     public OpportunityProfile pressSaveBtn() {
         saveBtn.click();
 
-        return new OpportunityProfile(driver);
+        return new OpportunityProfile();
     }
 
     public LookUpWindow clickAccountNameLookUpIcon() {

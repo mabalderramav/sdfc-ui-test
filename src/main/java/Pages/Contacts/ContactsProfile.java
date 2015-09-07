@@ -2,9 +2,8 @@ package Pages.Contacts;
 
 import Framework.BrowserManager;
 import Framework.CommonActions;
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import Pages.MainApp;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -14,10 +13,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
  * Created by Gisela on 6/28/2015.
  */
 public class ContactsProfile {
-    WebDriver Driver;
-    WebDriverWait wait;
 
-    //region Locators
 
     @FindBy(className = "topName")
     @CacheLookup
@@ -36,9 +32,12 @@ public class ContactsProfile {
     private WebElement editButton;
 
 
-    public ContactsProfile(WebDriver driver)
+    private WebDriver driver;
+    private WebDriverWait wait;
+
+    public ContactsProfile()
     {
-        Driver = driver;
+        driver = BrowserManager.getInstance().getDriver();
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
@@ -47,10 +46,11 @@ public class ContactsProfile {
         return ContactNameLabel.getText();
     }
 
-    public void deleteContact() {
+    public MainApp deleteContact() {
         deleteButton.click();
-        Alert javascriptAlert = Driver.switchTo().alert();
+        Alert javascriptAlert = driver.switchTo().alert();
         javascriptAlert.accept();
+        return new MainApp();
     }
 
     public NewContactForm clickEditContact() {
@@ -58,6 +58,25 @@ public class ContactsProfile {
 //        Alert javascriptAlert = Driver.switchTo().alert();
 //        javascriptAlert.accept();
         CommonActions.click(editButton);
-        return new NewContactForm(Driver);
+        return new NewContactForm();
     }
+    public boolean isContactDisplayed(String Contact) {
+        WebElement contactContainer;
+        try {
+            contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + Contact + "')]"));
+        } catch(WebDriverException e) {
+            return false;
+        }
+        return isElementPresent(contactContainer);
+
+    }
+    public boolean isElementPresent(WebElement webElement) {
+        try {
+            webElement.getText();
+            return true;
+        } catch (WebDriverException e) {
+            return false;
+        }
+    }
+
 }
