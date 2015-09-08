@@ -19,4 +19,13 @@ public class FormBase {
         wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
+    public FormBase(WebDriver driver) {
+        this.driver = driver;
+        wait = BrowserManager.getInstance().getWait();
+        PageFactory.initElements(driver, this);
+    }
+
+    public WebDriver getDriver() {
+        return this.driver;
+    }
 }

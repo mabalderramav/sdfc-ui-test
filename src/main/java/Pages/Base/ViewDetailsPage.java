@@ -1,0 +1,41 @@
+package Pages.Base;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+
+public class ViewDetailsPage extends DetailsPage {
+
+    @FindBy(xpath = "//select[@class='title']")
+    @CacheLookup
+    protected WebElement ViewNameText;
+
+    @FindBy(linkText = "Edit")
+    @CacheLookup
+    public WebElement editLink;
+
+    @FindBy(linkText = "Delete")
+    @CacheLookup
+    public WebElement deleteLink;
+
+    public String getViewName() {
+        Select select = new Select(ViewNameText);
+        return select.getFirstSelectedOption().getText();
+    }
+
+
+    public ViewFormPage clickEditViewLink() {
+        wait.until(ExpectedConditions
+                .visibilityOf(editLink));
+        editLink.click();
+        return new ViewFormPage();
+    }
+
+    /*
+    public ElementFormBase clickDeleteViewLink() {
+       // Todo    	
+    }
+    */
+}
