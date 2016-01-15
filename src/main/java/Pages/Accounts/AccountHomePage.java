@@ -30,15 +30,5 @@ public class AccountHomePage extends HomeBase{
 
         PageFactory.initElements(driver, this);
     }
-
-    @Override
-    public ViewFormBase clickNewViewLnk() {
-        return null;
-    }
-
-    @Override
-    public FormBase clickNewBtn() {
-        CommonActions.click(NewButtton);
-        return new NewAccountPage(driver);
-    }
+    
 }
