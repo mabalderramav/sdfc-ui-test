@@ -55,7 +55,7 @@ public class LookUpWindow {
 
     public LookUpWindow(WebDriver driver) {
         Driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
 
         String LookUpWindow = new LinkedList(driver.getWindowHandles()).getLast().toString();

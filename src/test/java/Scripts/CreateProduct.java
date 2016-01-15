@@ -1,26 +1,35 @@
 package Scripts;
 
 import Framework.BrowserManager;
+import Pages.Contacts.ContactsHome;
+import Pages.Contacts.ContactsProfile;
+import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
+import Pages.LookUp.LookUpWindow;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.Products.NewProductForm;
 import Pages.Products.ProductProfile;
 import Pages.Products.ProductsHome;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 import org.testng.annotations.AfterTest;
 
 /**
- * Created by Ivan Vasquez on 6/29/2015.
+ * Created by Ruber Cuellar
  */
 public class CreateProduct {
 
     //region Objects
-    TabBar tapBar;
-    ProductsHome productsHome;
-    NewProductForm newProductForm;
-    ProductProfile productProfile;
+    private ProductsHome productsHome;
+    private LookUpWindow lookUpWindow;
+    private MainApp mainApp;
+    private TabBar tabBar;
+    private ProductProfile productProfile;
+    private NewProductForm newProductForm;
+    private LoginPage loginPage;
     //endregion
 
     //region values
@@ -34,22 +43,16 @@ public class CreateProduct {
     @BeforeTest
     public void BeforeTest()
     {
-        BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
-                .setUserNameField("vasquez.vn@gmail.com")
-                .setPasswordField("123Control")
-                .clickLogInToSalesforceButton();
+        loginPage = new LoginPage();
+        mainApp = loginPage.loginAsPrimaryUser();
+        tabBar = mainApp.goToTabBar();
+        productsHome = tabBar.clickOnProductsHome();
     }
 
     @Test
     public void CreateProduct()
     {
-        productsHome = tapBar
-                .clickProductsTab();
-
-        newProductForm = productsHome
-                .clickNewButton();
-
+        newProductForm = productsHome.clickNewButton();
         productProfile = newProductForm
                 .setProductName(productName)
                 .setProductCode(productCode)

@@ -1,0 +1,36 @@
+{
+  "nameSalutation":"Mr.",
+  "firstName":"Testname",
+  "lastName":"Testlastname",
+  "company":"TestCompany",
+  "title":"Testtitle",
+  "leadSource":"Web",
+  "campaign":null,
+  "campaignLookup":"CampaignParent",
+  "industry":"Engineering",
+  "annualRevenue":"10000",
+  "phone":"555-5555",
+  "mobile":"591-7894561",
+  "fax":"591-789-4561",
+  "email":"pztestmail@test.com",
+  "website":"www.pztestwebsite.com",
+  "leadStatus":"Open - Not Contacted",
+  "rating":"Hot",
+  "numEmployees":"800",
+
+  "street":"Test Street",
+  "city":"Test city",
+  "stateProvince":"cochabamba",
+  "zipCode":"00001",
+  "country":"Bolivia",
+
+  "productInterest":"GC1000 series",
+  "SICCode":"GC1000",
+  "numberLocations":"100",
+  "currentGenerators":"generator001",
+  "primary":"No",
+
+  "description":"Acceptance test - lead creation",
+  "assignRule":null
+
+}

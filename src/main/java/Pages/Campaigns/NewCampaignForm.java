@@ -51,7 +51,7 @@ public class NewCampaignForm {
     public NewCampaignForm(WebDriver driver)
     {
         Driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
         PageFactory.initElements(driver, this);
     }
 

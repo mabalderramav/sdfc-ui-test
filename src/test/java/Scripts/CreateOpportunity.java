@@ -8,26 +8,28 @@ import Pages.Campaigns.CampaignProfile;
 import Pages.Campaigns.CampaignsHome;
 import Pages.Campaigns.NewCampaignForm;
 import Pages.LoginPage;
+import Pages.MainApp;
+import Pages.TabBar;
 import Pages.LookUp.LookUpWindow;
 import Pages.Opportunities.NewOpportunityForm;
 import Pages.Opportunities.OpportunitiesHome;
 import Pages.Opportunities.OpportunityProfile;
-import Pages.TopBar.TabBar;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Random;
 
 /**
- * Created by Ivan Vasquez on 6/29/2015.
+ * Created by Ruber Cuellar
  */
 public class CreateOpportunity {
 
     //region Objects
-    private TabBar          tapBar;
+    private TabBar          tabBar;
     private LookUpWindow    lookUpWindow;
+    private LoginPage loginPage;
 
     private OpportunitiesHome   opportunitiesHome;
     private NewOpportunityForm  newOpportunityForm;
@@ -40,13 +42,13 @@ public class CreateOpportunity {
     private AccountsHome    accountsHome;
     private NewAccountForm  newAccountForm;
     private AccountProfile  accountProfile;
+    private MainApp mainApp;
     //endregion
 
     //region values
     private String campaignName;
     private String campaingUrl;
 
-    private String accountName;
     private String accountUrl;
 
     private String opportunityName          = "Opp_name1";
@@ -57,30 +59,36 @@ public class CreateOpportunity {
     private String stage                    = "Needs Analysis";
     private String orderNumber              = "00001";
     private String deliveryInstallStatus    = "Yet to begin";
+    private String accountName = "RuberAccount";
 
     //endregion
 
     @BeforeTest
     public void BeforeTest()
     {
-        BrowserManager.getInstance().goStartPage("https://login.salesforce.com/");
-        tapBar = new LoginPage()
-                .setUserNameField("vasquez.vn@gmail.com")
-                .setPasswordField("123Control")
-                .clickLogInToSalesforceButton();
-        createCampaign();
-        createAccount();
+        loginPage = new LoginPage();
+        mainApp = loginPage.loginAsPrimaryUser();
+        tabBar = mainApp.goToTabBar();
+
+        //newOpportunityForm = opportunitiesHome.click
+
+        accountsHome = tabBar.clickOnAccountsHome();
+
+        newAccountForm = accountsHome.clickNewButton();
+
+        accountProfile = newAccountForm
+                .setAccountName(accountName)
+                .pressSaveBtn();
+
+        accountUrl = accountProfile.getUrl();
+
+        opportunitiesHome = tabBar.clickOnOpportunitiesHome();
     }
 
     @Test
     public void CreateOpportunity()
     {
-        opportunitiesHome = tapBar
-                .clickOpportunityTab();
-
-        newOpportunityForm = opportunitiesHome
-                .clickNewButton();
-
+        newOpportunityForm = opportunitiesHome.clickNewButton();
         opportunityProfile = newOpportunityForm
                 .checkPrivateFlag(true)
                 .setOpportunityName(opportunityName)
@@ -96,6 +104,7 @@ public class CreateOpportunity {
                 .chooseDeliveryInstallationStatusDdl(deliveryInstallStatus)
                 .pressSaveBtn();
 
+
         Assert.assertEquals(opportunityProfile.getOpportunityName(), opportunityName);
         Assert.assertEquals(opportunityProfile.getAccountName(), accountName);
         Assert.assertEquals(opportunityProfile.getStage(), stage);
@@ -107,40 +116,13 @@ public class CreateOpportunity {
     @AfterTest
     public void afterTest()
     {
-        opportunityProfile.pressDeleteBtn();
+        mainApp = opportunityProfile.clickDeteleBtn();
+        tabBar = mainApp.goToTabBar();
+        accountsHome = tabBar.clickOnAccountsHome();
+        newAccountForm = accountsHome.clickNewButton();
+        accountProfile = newAccountForm.clickOnAccount(accountName);
+        mainApp = accountProfile.deleteAccount();
+        mainApp.clickUserButton().clickLogout();
+
     }
-
-    private void createAccount() {
-        accountName = "Account_" + new Random().nextInt(9999);
-
-        accountsHome = tapBar
-                .clickAccountsTab();
-
-        newAccountForm = accountsHome
-                .clickNewButton();
-
-        accountProfile = newAccountForm
-                .setAccountName(accountName)
-                .pressSaveBtn();
-
-        accountUrl = accountProfile.getUrl();
-    }
-
-    private void createCampaign() {
-        campaignName = "Campaign_" + new Random().nextInt(9999);
-
-        campaignsHome = tapBar
-                .clickCampaigns();
-
-        newCampaignForm = campaignsHome
-                .clickNewButton();
-
-        campaignProfile = newCampaignForm
-                .setCampaingNameField(campaignName)
-                .checkActiveCheckbox()
-                .clickSaveButton();
-
-        campaingUrl = campaignProfile.getUrl();
-    }
-
 }

@@ -24,7 +24,7 @@ public class AccountProfile {
 
     public AccountProfile(WebDriver driver) {
         this.driver = driver;
-        wait = BrowserManager.getInstance().Waiter;
+        wait = BrowserManager.getInstance().getWait();
 
         PageFactory.initElements(driver, this);
     }
