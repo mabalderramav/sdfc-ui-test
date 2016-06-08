@@ -97,8 +97,8 @@ task runTestNGTestCases(type: Test) {
                 }
         }
     }
-*/
-    downloadDrivers.execute()
+
+    downloadDrivers.execute()*/
 
 }
 
