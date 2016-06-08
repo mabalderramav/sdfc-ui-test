@@ -73,7 +73,7 @@ task runTestNGTestCases(type: Test) {
     systemProperties.put('browser', browser)
 
     println browser
-
+/*
     task downloadDrivers(type: Copy) {
         File drivers = new File('./drivers')
         drivers.mkdirs()
@@ -97,7 +97,7 @@ task runTestNGTestCases(type: Test) {
                 }
         }
     }
-
+*/
     downloadDrivers.execute()
 
 }
