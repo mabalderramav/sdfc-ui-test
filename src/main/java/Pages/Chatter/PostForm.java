@@ -5,6 +5,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import Framework.CommonActions;
 import Pages.Base.AbstractSectionFrame;
@@ -33,26 +34,20 @@ public class PostForm extends AbstractSectionFrame{
 	@FindBy(css = "iframe[class='cke_wysiwyg_frame cke_reset']")
 	@CacheLookup
 	private WebElement textAreaFrame;
-	@FindBy(css = ".chatterPublisherRTE.cke_editable.cke_editable_themed.cke_contents_ltr.cke_show_borders > p")
+	@FindBy(tagName = "body")
 	@CacheLookup
 	private WebElement textAreaField;
 	
 	private String postText;
 
 	public void PostForm(){
-		//wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
-		CommonActions.click(createTxtArea);
-		Actions action = new Actions(driver);
-		action.moveToElement(createTxtArea).build().perform();
-		driver.switchTo().frame(textAreaFrame);
-		System.out.println("To string: "+driver.toString());
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
 	}
 	
 	public PostForm setPostTxt(String postText) {
-		Actions action = new Actions(driver);
-		action.moveToElement(textAreaField).click().build().perform();
 		this.postText = postText;
-		CommonActions.setValue(textAreaField, postText);
+		Actions action = new Actions(driver);
+		action.moveToElement(textAreaField).sendKeys(postText).build().perform();
 		returnRoot();
 		return this;
 	}

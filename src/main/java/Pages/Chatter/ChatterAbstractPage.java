@@ -1,7 +1,6 @@
 package Pages.Chatter;
 
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
@@ -41,9 +40,9 @@ public class ChatterAbstractPage extends AbstractBasePage {
     @CacheLookup
     WebElement CommentButton;
     
-    @FindBy(id = "publisherAttachTextPost")
+    @FindBy(id = "publishereditablearea")
     @CacheLookup
-    WebElement postLnk;
+    WebElement textArea;
 
     /*
     public ChatterAbstractPage setPubliSheredArea(String text) {
@@ -72,9 +71,9 @@ public class ChatterAbstractPage extends AbstractBasePage {
     */
     
     public PostForm clickPostLnk() {
-    	CommonActions.click(postLnk);
-        Actions action = new Actions(driver);
-        action.moveToElement(postLnk).click().build().perform();
+    	CommonActions.click(textArea);
+        //Actions action = new Actions(driver);
+        //action.moveToElement(textArea).build();
     	return new PostForm();
     }
 }

@@ -5,6 +5,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import Pages.LoginPage;
 import Pages.MainApp;
 import Pages.TabBar;
 import Pages.Chatter.ChatterAbstractPage;
@@ -21,14 +22,15 @@ public class EditChatterPost {
 	private TabBar tabBar;
 	private PostForm postForm;
 	private PostContainer postContainer;
+	private LoginPage loginPage;
 	private String postContain = "TestEditPost";
 	private String newPostContain = "TestPost123";
     
 	@BeforeMethod
 	public void createPost() {
-		
-		mainApp = new MainApp();
-	    tabBar = mainApp.goToTabBar();
+		loginPage = new LoginPage();
+		mainApp = loginPage.loginAsPrimaryUser();
+		tabBar = mainApp.goToTabBar();
 	    chatterHome = tabBar.clickOnChatterTab();
 	    postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
 		postContainer = postForm.clickShareBtn();

@@ -47,7 +47,7 @@ public class CreateChatterPost {
 	
 	@AfterMethod
 	public void deleteChatterPost() {
-		//postContainer.deletePost(postContain);
+		postContainer.deletePost(postContain);
 		
 	}	
 	
