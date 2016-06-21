@@ -1,21 +1,17 @@
 package Pages.Campaigns;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.LookUp.LookUpWindow;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
+import Pages.LookUp.CampaignLookup;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class NewCampaignForm {
-    WebDriver Driver;
-    WebDriverWait wait;
+public class NewCampaignForm extends AbstractBasePage {
 
     //region Locators
 
@@ -48,13 +44,6 @@ public class NewCampaignForm {
     WebElement SaveButton;
     //endregion
 
-    public NewCampaignForm(WebDriver driver)
-    {
-        Driver = driver;
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
-
     public NewCampaignForm setCampaingNameField(String text) {
         CommonActions.setValue(CampaingNameField, text);
         return this;
@@ -71,12 +60,12 @@ public class NewCampaignForm {
         CommonActions.setValue(StartDateField, date);
         return this;
     }
-    public LookUpWindow clickLookUpIcon() {
+    public CampaignLookup clickLookUpIcon() {
         CommonActions.click(LookUpIcon);
-        return new LookUpWindow(Driver);
+        return new CampaignLookup();
     }
     public CampaignProfile clickSaveButton() {
         CommonActions.click(SaveButton);
-        return new CampaignProfile(Driver);
+        return new CampaignProfile();
     }
 }

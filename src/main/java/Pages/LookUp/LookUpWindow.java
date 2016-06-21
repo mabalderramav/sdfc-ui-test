@@ -1,31 +1,20 @@
 package Pages.LookUp;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.Campaigns.NewCampaignForm;
-import Pages.Opportunities.NewOpportunityForm;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.Set;
+import Framework.CommonActions;
+import Pages.Base.AbstractModalWindow;
+import Pages.Campaigns.NewCampaignForm;
+import Pages.Opportunities.NewOpportunityForm;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class LookUpWindow {
-    WebDriver Driver;
-    WebDriverWait wait;
-    String PreviousWindow;
-    String LookUpWindow;
+public class LookUpWindow extends AbstractModalWindow{
 
-    //region Locators
 
     @FindBy(xpath = "//div[@class='pBody']/select")
     @CacheLookup
@@ -53,15 +42,6 @@ public class LookUpWindow {
     WebElement SearchResultFrame;
     //endregion
 
-    public LookUpWindow(WebDriver driver) {
-        Driver = driver;
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-
-        String LookUpWindow = new LinkedList(driver.getWindowHandles()).getLast().toString();
-        Driver.switchTo().window(LookUpWindow);
-    }
-
     public LookUpWindow selectSearchWithinDropdown(String item) {
         CommonActions.selectItem(SearchWithinDropdown, item);
 
@@ -81,27 +61,27 @@ public class LookUpWindow {
 
     public NewCampaignForm clickResult(String text) {
         CommonActions.click(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
-        Driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
 
-        return new NewCampaignForm(Driver);
+        return new NewCampaignForm();
     }
 
     public NewOpportunityForm clickResultGotoNewOpportunityForm(String text) {
         CommonActions.click(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
-        Driver.switchTo().defaultContent();
+        driver.switchTo().defaultContent();
 
-        return new NewOpportunityForm(Driver);
+        return new NewOpportunityForm();
     }
 
     public LookUpWindow switchSearchFrame()
     {
-        Driver.switchTo().frame(SearchFrame);
+        driver.switchTo().frame(SearchFrame);
         return this;
     }
 
     public LookUpWindow switchResultsFrame()
     {
-        Driver.switchTo().frame(SearchResultFrame);
+        driver.switchTo().frame(SearchResultFrame);
         return this;
     }
 

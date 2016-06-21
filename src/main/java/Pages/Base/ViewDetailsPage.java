@@ -26,15 +26,15 @@ public class ViewDetailsPage extends DetailsPage {
     }
 
 
-    public ViewFormPage clickEditViewLink() {
+    public ViewFormBasePage clickEditViewLink() {
         wait.until(ExpectedConditions
                 .visibilityOf(editLink));
         editLink.click();
-        return new ViewFormPage();
+        return new ViewFormBasePage();
     }
 
     /*
-    public ElementFormBase clickDeleteViewLink() {
+    public ElementFormBasePage clickDeleteViewLink() {
        // Todo    	
     }
     */

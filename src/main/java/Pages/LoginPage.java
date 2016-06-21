@@ -1,22 +1,16 @@
 package Pages;
 
-import Framework.BrowserManager;
-import Framework.Environment;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class LoginPage {
+import Framework.BrowserManager;
+import Framework.Environment;
+import Pages.Base.AbstractBasePage;
 
-    WebDriver driver;
-    WebDriverWait wait;
-
-    //region Locators
+public class LoginPage extends AbstractBasePage {
+    public static final String baseURL = "https://na24.salesforce.com/";
+   //region Locators
     @FindBy(id = "username")
     @CacheLookup
     WebElement userNameField;
@@ -30,11 +24,8 @@ public class LoginPage {
     WebElement loginField;
     //endregion
 
-    public LoginPage()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
+    public LoginPage(){
+        driver.get(baseURL);
     }
 
     public LoginPage setUserNameField(String email) {

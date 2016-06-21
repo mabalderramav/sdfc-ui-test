@@ -1,20 +1,16 @@
 package Pages.Contacts;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.Contacts.ContactsProfile;
-import Pages.LookUp.LookUpWindow;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
 
 /**
  * Created by Gisela on 6/28/2015.
  */
-public class NewContactForm {
+public class NewContactForm extends AbstractBasePage{
 
     @FindBy(id = "name_salutationcon2")
     @CacheLookup
@@ -80,15 +76,6 @@ public class NewContactForm {
     @CacheLookup
     WebElement cancelBtn;
 
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    public NewContactForm()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
     public NewContactForm selectFirstNameCategory(String item) {
         CommonActions.selectItem(firstNameCategoryField, item);
         return this;

@@ -1,18 +1,20 @@
 package Pages.Contacts;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.MainApp;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
+import Pages.MainApp;
 
 /**
  * Created by Gisela on 6/28/2015.
  */
-public class ContactsProfile {
+public class ContactsProfile extends AbstractBasePage {
 
 
     @FindBy(className = "topName")
@@ -30,17 +32,6 @@ public class ContactsProfile {
     @FindBy(xpath = "//input[@name='edit']")
     @CacheLookup
     private WebElement editButton;
-
-
-    private WebDriver driver;
-    private WebDriverWait wait;
-
-    public ContactsProfile()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
 
     public String getContactNameLabel() {
         return ContactNameLabel.getText();

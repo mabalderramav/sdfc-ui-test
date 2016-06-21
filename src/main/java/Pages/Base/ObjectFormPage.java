@@ -1,7 +1,7 @@
 package Pages.Base;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class ObjectFormPage extends NewElementFormBase{
+public class ObjectFormPage extends NewElementFormBasePage {
 
     public ObjectFormPage clickSaveNewBtn() {
         wait.until(ExpectedConditions

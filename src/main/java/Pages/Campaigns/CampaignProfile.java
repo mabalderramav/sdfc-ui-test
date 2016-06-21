@@ -1,23 +1,18 @@
 package Pages.Campaigns;
 
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class CampaignProfile {
-
-    WebDriver Driver;
-    WebDriverWait wait;
+public class CampaignProfile extends AbstractBasePage{
 
     //region Locators
 
@@ -30,12 +25,6 @@ public class CampaignProfile {
     WebElement DeleteButton;
     //endregion
 
-    public CampaignProfile(WebDriver driver)
-    {
-        Driver = driver;
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
 
     public String getCampaingNameLabel() {
         return CampaingNameLabel.getText();
@@ -44,15 +33,15 @@ public class CampaignProfile {
     public CampaignsHome clickDeleteButton()
     {
         CommonActions.click(DeleteButton);
-        Alert alert = Driver.switchTo().alert();
+        Alert alert = driver.switchTo().alert();
         alert.accept();
-        Driver.switchTo().defaultContent();
-        return new CampaignsHome(Driver);
+        driver.switchTo().defaultContent();
+        return new CampaignsHome();
     }
 
     public String getUrl()
     {
-        return Driver.getCurrentUrl();
+        return driver.getCurrentUrl();
     }
 
 }

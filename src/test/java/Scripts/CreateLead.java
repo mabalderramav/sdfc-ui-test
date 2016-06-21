@@ -5,24 +5,26 @@ package Scripts;
  */
 
 
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
 import Framework.JSONMapper;
 import Framework.Objects.Lead;
+import Pages.Leads.LeadAbstractPagePage;
 import Pages.Leads.LeadDetailsPage;
-import Pages.Leads.LeadHomePage;
 import Pages.Leads.NewLeadPage;
 import Pages.LoginPage;
 import Pages.MainApp;
 import Pages.TabBar;
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.Test;
-import org.testng.annotations.BeforeTest;
 
 public class CreateLead {
-    private LeadHomePage leadHomePage;
+    private LeadAbstractPagePage leadHomePage;
     private NewLeadPage newLeadPage;
     private MainApp mainApp;
     private TabBar tabBar;
+
     private LoginPage loginPage;
     private String path="src\\test\\resources\\CreateLeadData.json";
 
@@ -32,21 +34,14 @@ public class CreateLead {
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
         leadHomePage = tabBar.clickLead();
-
+        // create campaign
     }
 
     @Test
     public void createLeadTest() throws Exception {
-
-        newLeadPage = leadHomePage.clickNewBtn();
-
-        Lead leadLoaded = new Lead();
-        leadLoaded = (Lead) JSONMapper.getData(path,leadLoaded);
-        newLeadPage.fillNewLead(leadLoaded);
-        LeadDetailsPage leadDetailsPage = newLeadPage.clickSaveButton();
-
-        Assert.assertEquals(leadLoaded.nameSalutation + " " + leadLoaded.firstName + " " + leadLoaded.lastName, leadDetailsPage.getName() );
-
+        LeadDetailsPage leadDetailsPage  = leadHomePage.clickNewBtn().fillNewLeadFromJson(NewLeadPage.LEAD_DATA_PATH).clickSaveButton();
+        Lead expectedLead = JSONMapper.getLeadData(NewLeadPage.LEAD_DATA_PATH);
+        Assert.assertEquals(leadDetailsPage.getName(),expectedLead.nameSalutation + " " + expectedLead.firstName + " " + expectedLead.lastName, "Lead not created properly, names does not match");
     }
 
     @AfterTest

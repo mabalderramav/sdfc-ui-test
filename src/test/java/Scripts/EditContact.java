@@ -1,7 +1,6 @@
 package Scripts;
 
-import Framework.BrowserManager;
-import Pages.Contacts.ContactsHome;
+import Pages.Contacts.ContactsAbstractPage;
 import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
@@ -18,7 +17,7 @@ import org.testng.annotations.Test;
  * Created by Ruber Cuellar
  */
 public class EditContact {
-    private ContactsHome contactsHome;
+    private ContactsAbstractPage contactsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;

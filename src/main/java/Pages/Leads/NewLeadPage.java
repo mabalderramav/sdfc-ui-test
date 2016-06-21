@@ -1,204 +1,210 @@
 package Pages.Leads;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Framework.FormBase;
-import Framework.Objects.Lead;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import Framework.CommonActions;
 import Framework.JSONMapper;
+import Framework.Objects.Lead;
+import Pages.Base.FormBasePage;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  * Updated by Pablo Zubieta on 09/01/2015
  */
-public class NewLeadPage extends FormBase{
+public class NewLeadPage extends FormBasePage {
 
     @FindBy(id = "name_lastlea2")
     @CacheLookup
-    WebElement lastNameField;
+    private WebElement lastNameField;
 
     @FindBy(id = "lea13")
     @CacheLookup
-    WebElement leadStatusField;
+    private WebElement leadStatusField;
 
     @FindBy(id = "lea3")
     @CacheLookup
-    WebElement companyField;
+    private WebElement companyField;
 
     @FindBy(id = "name_firstlea2")
     @CacheLookup
-    WebElement firstNameField;
+    private WebElement firstNameField;
 
     @FindBy(id = "lea16street")
     @CacheLookup
-    WebElement streetField;
+    private WebElement streetField;
 
     @FindBy(id = "lea16city")
     @CacheLookup
-    WebElement leadCityField;
+    private WebElement leadCityField;
 
     @FindBy(name = "save")
     @CacheLookup
-    WebElement SaveButton;
+    private WebElement SaveButton;
 
     @FindBy(xpath = "//input[@id='lea20']")
     @CacheLookup
-    WebElement campaingLookupField;
+    private WebElement campaingLookupField;
 
     @FindBy(id = "name_salutationlea2")
     @CacheLookup
-    WebElement nameSalutationField;
+    private WebElement nameSalutationField;
 
     @FindBy(id = "lea4")
     @CacheLookup
-    WebElement titleField;
+    private WebElement titleField;
 
     @FindBy(id = "lea5")
     @CacheLookup
-    WebElement leadSourceField;
+    private WebElement leadSourceField;
 
     @FindBy(id = "lea6")
     @CacheLookup
-    WebElement industryField;
+    private WebElement industryField;
 
     @FindBy(id = "lea7")
     @CacheLookup
-    WebElement annualRevenueField;
+    private WebElement annualRevenueField;
 
     @FindBy(id = "lea8")
     @CacheLookup
-    WebElement phoneField;
+    private WebElement phoneField;
 
     @FindBy(id = "lea9")
     @CacheLookup
-    WebElement mobileField;
+    private WebElement mobileField;
 
     @FindBy(id = "lea10")
     @CacheLookup
-    WebElement faxField;
+    private WebElement faxField;
 
     @FindBy(id = "lea11")
     @CacheLookup
-    WebElement emailField;
+    private WebElement emailField;
 
     @FindBy(id = "lea12")
     @CacheLookup
-    WebElement websiteField;
+    private WebElement websiteField;
 
     @FindBy(id = "lea14")
     @CacheLookup
-    WebElement ratingField;
+    private WebElement ratingField;
 
     @FindBy(id = "lea15")
     @CacheLookup
-    WebElement numEmployeesField;
+    private WebElement numEmployeesField;
 
     @FindBy(id = "lea16state")
     @CacheLookup
-    WebElement stateField;
+    private WebElement stateField;
 
     @FindBy(id = "lea16zip")
     @CacheLookup
-    WebElement zipCodeField;
+    private WebElement zipCodeField;
 
     @FindBy(id = "lea16country")
     @CacheLookup
-    WebElement countryField;
+    private WebElement countryField;
 
     @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::span/select")
     @CacheLookup
-    WebElement productInterestField;
+    private WebElement productInterestField;
 
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::input")
     @CacheLookup
-    WebElement SICcodeField;
+    private WebElement SICcodeField;
 
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::input")
     @CacheLookup
-    WebElement numLocationsField;
+    private WebElement numLocationsField;
 
     @FindBy(xpath = "//td[contains(.,'Current Generator')]/following::input")
     @CacheLookup
-    WebElement currentGeneratorsField;
+    private WebElement currentGeneratorsField;
 
     @FindBy(xpath = "//td[contains(.,'Primary')]/following::span/select")
     @CacheLookup
-    WebElement primaryField;
+    private WebElement primaryField;
 
     /*Others*/
     @FindBy(id = "lea17")
     @CacheLookup
-    WebElement descriptionField;
+    private WebElement descriptionField;
 
     @FindBy(id = "lea21")
     @CacheLookup
-    WebElement assignRuleCheck;
+    private WebElement assignRuleCheck;
+
+    @FindBy(id="lea20_lkwgt")
+    private WebElement campaignIcon;
 
     private Lead leadObject;
-
-    public NewLeadPage()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-        try {
-            leadObject = JSONMapper.getLeadData();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+    public static final String LEAD_DATA_PATH = "src\\test\\resources\\CreateLeadData.json";
 
     public Lead getLoadedLead(){
         return leadObject;
     }
 
-    public boolean fillNewLead(Lead leadObject){
-        boolean result = false;
-
+    public void loadDataFromJson(String path){
         try {
-
-            CommonActions.setValue(lastNameField, leadObject.lastName);
-            CommonActions.setValue(companyField, leadObject.company);
-            CommonActions.selectItem(leadStatusField, leadObject.leadStatus);
-            CommonActions.setValue(campaingLookupField, leadObject.campaignLookup);
-            CommonActions.selectItem(nameSalutationField, leadObject.nameSalutation);
-            CommonActions.setValue(firstNameField, leadObject.firstName);
-            CommonActions.setValue(titleField, leadObject.title);
-            CommonActions.selectItem(leadSourceField, leadObject.leadSource);
-            CommonActions.selectItem(industryField, leadObject.industry);
-            CommonActions.setValue(annualRevenueField, leadObject.annualRevenue);
-            CommonActions.setValue(phoneField, leadObject.phone);
-            CommonActions.setValue(mobileField, leadObject.mobile);
-            CommonActions.setValue(faxField, leadObject.fax);
-            CommonActions.setValue(emailField, leadObject.email);
-            CommonActions.setValue(websiteField, leadObject.website);
-            CommonActions.selectItem(ratingField, leadObject.rating);
-            CommonActions.setValue(numEmployeesField, leadObject.numEmployees);
-            CommonActions.setValue(streetField, leadObject.street);
-            CommonActions.setValue(leadCityField, leadObject.city);
-            CommonActions.setValue(stateField, leadObject.stateProvince);
-            CommonActions.setValue(zipCodeField, leadObject.zipCode);
-            CommonActions.setValue(countryField, leadObject.country);
-            CommonActions.selectItem(productInterestField, leadObject.productInterest);
-            CommonActions.setValue(SICcodeField, leadObject.SICCode);
-            CommonActions.setValue(numLocationsField, leadObject.numberLocations);
-            CommonActions.setValue(currentGeneratorsField, leadObject.currentGenerators);
-            CommonActions.selectItem(primaryField, leadObject.primary);
-            CommonActions.setValue(descriptionField, leadObject.description);
-            if (leadObject.assignRule == "yes"){
-                CommonActions.check(assignRuleCheck);
-            }
-            result = true;
-
+            leadObject = JSONMapper.getLeadData(path);
         } catch (Exception e) {
-        e.printStackTrace();
+            e.printStackTrace();
+        }
+    }
+    public void fillTheForm(){
+        CommonActions.setValue(lastNameField, leadObject.lastName);
+        CommonActions.setValue(companyField, leadObject.company);
+        CommonActions.selectItem(leadStatusField, leadObject.leadStatus);
+        //CommonActions.setValue(campaingLookupField, leadObject.campaignLookup);
+        selectCampaign(leadObject.campaignLookup);
+        CommonActions.selectItem(nameSalutationField, leadObject.nameSalutation);
+        CommonActions.setValue(firstNameField, leadObject.firstName);
+        CommonActions.setValue(titleField, leadObject.title);
+        CommonActions.selectItem(leadSourceField, leadObject.leadSource);
+        CommonActions.selectItem(industryField, leadObject.industry);
+        CommonActions.setValue(annualRevenueField, leadObject.annualRevenue);
+        CommonActions.setValue(phoneField, leadObject.phone);
+        CommonActions.setValue(mobileField, leadObject.mobile);
+        CommonActions.setValue(faxField, leadObject.fax);
+        CommonActions.setValue(emailField, leadObject.email);
+        CommonActions.setValue(websiteField, leadObject.website);
+        CommonActions.selectItem(ratingField, leadObject.rating);
+        CommonActions.setValue(numEmployeesField, leadObject.numEmployees);
+        CommonActions.setValue(streetField, leadObject.street);
+        CommonActions.setValue(leadCityField, leadObject.city);
+        CommonActions.setValue(stateField, leadObject.stateProvince);
+        CommonActions.setValue(zipCodeField, leadObject.zipCode);
+        CommonActions.setValue(countryField, leadObject.country);
+        CommonActions.selectItem(productInterestField, leadObject.productInterest);
+        CommonActions.setValue(SICcodeField, leadObject.SICCode);
+        CommonActions.setValue(numLocationsField, leadObject.numberLocations);
+        CommonActions.setValue(currentGeneratorsField, leadObject.currentGenerators);
+        CommonActions.selectItem(primaryField, leadObject.primary);
+        CommonActions.setValue(descriptionField, leadObject.description);
+        if (leadObject.assignRule == "yes"){
+            CommonActions.check(assignRuleCheck);
         }
 
-        return result;
+    }
 
+    public NewLeadPage fillNewLeadFromJson(String path){
+        try {
+            loadDataFromJson(path);
+            fillTheForm();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return this;
+    }
+
+    private void selectCampaign(String campaignLookupText) {
+        wait.until(ExpectedConditions.elementToBeClickable(this.campaignIcon));
+        campaignIcon.click();
+        LeadCampaignLookup campaignLookup = new LeadCampaignLookup();
+        campaignLookup.selectCampaignWithName(campaignLookupText);
     }
 
     public NewLeadPage setLastNameField(String text) {

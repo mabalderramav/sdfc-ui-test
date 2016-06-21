@@ -1,24 +1,23 @@
 package Scripts;
 
-import Framework.BrowserManager;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import Pages.Accounts.AccountAbstractPage;
 import Pages.Accounts.AccountProfile;
-import Pages.Accounts.AccountsHome;
-import Pages.Accounts.NewAccountForm;
+import Pages.Accounts.NewAccountPage;
 import Pages.Campaigns.CampaignProfile;
 import Pages.Campaigns.CampaignsHome;
 import Pages.Campaigns.NewCampaignForm;
 import Pages.LoginPage;
 import Pages.LookUp.LookUpWindow;
 import Pages.MainApp;
-import Pages.TabBar;
 import Pages.Opportunities.NewOpportunityForm;
-import Pages.Opportunities.OpportunitiesHome;
+import Pages.Opportunities.OpportunitiesAbstractPage;
 import Pages.Opportunities.OpportunityProfile;
-
-import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import Pages.TabBar;
 
 /**
  * Created by Ruber cuellar
@@ -30,7 +29,7 @@ public class EditOpportunity {
     private LookUpWindow lookUpWindow;
     private LoginPage loginPage;
 
-    private OpportunitiesHome   opportunitiesHome;
+    private OpportunitiesAbstractPage opportunitiesHome;
     private NewOpportunityForm  newOpportunityForm;
     private OpportunityProfile  opportunityProfile;
 
@@ -38,8 +37,8 @@ public class EditOpportunity {
     private NewCampaignForm newCampaignForm;
     private CampaignProfile campaignProfile;
 
-    private AccountsHome accountsHome;
-    private NewAccountForm newAccountForm;
+    private AccountAbstractPage accountsHome;
+    private NewAccountPage newAccountForm;
     private AccountProfile accountProfile;
     private MainApp mainApp;
     //endregion
@@ -131,8 +130,7 @@ public class EditOpportunity {
         mainApp = opportunityProfile.clickDeteleBtn();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        newAccountForm = accountsHome.clickNewButton();
-        accountProfile = newAccountForm.clickOnAccount(accountName);
+        accountProfile = accountsHome.clickOnAccount(accountName);
         mainApp = accountProfile.deleteAccount();
         mainApp.clickUserButton().clickLogout();
 
