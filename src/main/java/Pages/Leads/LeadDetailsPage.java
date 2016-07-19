@@ -1,20 +1,16 @@
 package Pages.Leads;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Framework.FormBase;
-import Framework.Objects.Lead;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Base.FormBasePage;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class LeadDetailsPage extends FormBase {
+public class LeadDetailsPage extends FormBasePage {
 
     //region Locators
 
@@ -124,12 +120,6 @@ public class LeadDetailsPage extends FormBase {
 
     //endregion
 
-    public LeadDetailsPage()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
 
     /*Lead Information*/
     public String getOwner() {
@@ -137,6 +127,7 @@ public class LeadDetailsPage extends FormBase {
     }
 
     public String getName() {
+        System.out.println("name: "+name.getText());
         return name.getText();
     }
 
@@ -241,9 +232,9 @@ public class LeadDetailsPage extends FormBase {
     }
 */
 
-    public LeadHomePage deleteLead() {
+    public LeadAbstractPagePage deleteLead() {
         CommonActions.deleteMe(driver);
-        return new LeadHomePage();
+        return new LeadAbstractPagePage();
 
     }
 }

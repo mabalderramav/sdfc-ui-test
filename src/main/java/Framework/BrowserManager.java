@@ -1,20 +1,20 @@
 package Framework;
 
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import java.util.concurrent.TimeUnit;
 
 public class BrowserManager {
-	
+
     private static BrowserManager instance;
     private WebDriver driver;
     private WebDriverWait wait;
     private String browser;
-    private final String baseURL = "https://na24.salesforce.com/";
     private static final int TIMEOUT_NORMAL = 30;
 
     private BrowserManager() {
@@ -34,7 +34,9 @@ public class BrowserManager {
     private void openBrowser(String browserName) {
         try {
             if (browserName.equalsIgnoreCase("Firefox")) {
+                System.out.println("browser: start");
                 driver = new FirefoxDriver();
+                System.out.println("browser: end");
             }
             else if (browserName.equalsIgnoreCase("Chrome")) {
                 System.setProperty("webdriver.chrome.driver", "drivers/chromedriver.exe");
@@ -52,17 +54,19 @@ public class BrowserManager {
         }
     }
 
-    private void configureBrowser() {
-        // Maximize Browser Window
-        driver.manage().window().maximize();
-
+    public void configureBrowser() {
+        System.out.println("Configure browser... start");
         // Set Implicit Waits
         driver.manage().timeouts().implicitlyWait(TIMEOUT_NORMAL, TimeUnit.SECONDS);
-        driver.manage().timeouts().pageLoadTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
-        driver.manage().timeouts().setScriptTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
+        //driver.manage().timeouts().pageLoadTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
+        //driver.manage().timeouts().setScriptTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
 
         // Delete Cookies
-        driver.manage().deleteAllCookies();
+        //driver.manage().deleteAllCookies();
+        startWait();
+        // Maximize Browser Window
+        driver.manage().window().maximize();
+        System.out.println("Configure browser... end");
     }
 
 

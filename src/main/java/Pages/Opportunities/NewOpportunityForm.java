@@ -1,25 +1,20 @@
 package Pages.Opportunities;
 
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.LookUp.LookUpWindow;
-import org.openqa.selenium.WebDriver;
+import java.util.Set;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.Select;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Set;
+import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
+import Pages.LookUp.LookUpWindow;
 
 /**
  * Created by ivan on 26-06-15.
  */
-public class NewOpportunityForm {
-
-    private WebDriver       driver;
-    private WebDriverWait   wait;
+public class NewOpportunityForm extends AbstractBasePage{
 
     // to manage window popup
     private String          mainWindowId;
@@ -112,11 +107,7 @@ public class NewOpportunityForm {
     //endregion
 
     public NewOpportunityForm() {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
         mainWindowId = driver.getWindowHandle();
-
     }
 
     // TODO: Implement method to switch to popup window
@@ -250,12 +241,12 @@ public class NewOpportunityForm {
     public LookUpWindow clickAccountNameLookUpIcon() {
         CommonActions.click(accountNameLookupIconBtn);
 
-        return new LookUpWindow(driver);
+        return new LookUpWindow();
     }
 
     public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
         CommonActions.click(primaryCampaignSourceLookupIconBtn);
 
-        return new LookUpWindow(driver);
+        return new LookUpWindow();
     }
 }

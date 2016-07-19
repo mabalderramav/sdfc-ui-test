@@ -6,7 +6,7 @@
   "title":"Testtitle",
   "leadSource":"Web",
   "campaign":null,
-  "campaignLookup":"CampaignParent",
+  "campaignLookup":"testCampaign1",
   "industry":"Engineering",
   "annualRevenue":"10000",
   "phone":"555-5555",

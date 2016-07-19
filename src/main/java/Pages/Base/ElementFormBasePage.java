@@ -1,14 +1,13 @@
 package Pages.Base;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public abstract class ElementFormBase extends FormBase{
+public abstract class ElementFormBasePage extends AbstractBasePage {
 
 
     @FindBy(name = "new")
@@ -26,9 +25,6 @@ public abstract class ElementFormBase extends FormBase{
     @CacheLookup
     private WebElement editViewLink;
 
-    public ElementFormBase(WebDriver driver) {
-        super(driver);
-    }
 
     public ObjectFormPage clickNewButton() {
         wait.until(ExpectedConditions
@@ -37,18 +33,18 @@ public abstract class ElementFormBase extends FormBase{
         return new ObjectFormPage();
     }
 
-    public ViewFormPage clickCreateNewViewLink() {
+    public ViewFormBasePage clickCreateNewViewLink() {
         wait.until(ExpectedConditions
                 .visibilityOf(createNewViewLink));
         createNewViewLink.click();
-        return new ViewFormPage();
+        return new ViewFormBasePage();
     }
 
-    public ViewFormPage clickEditViewLink() {
+    public ViewFormBasePage clickEditViewLink() {
         wait.until(ExpectedConditions
                 .visibilityOf(editViewLink));
         editViewLink.click();
-        return new ViewFormPage();
+        return new ViewFormBasePage();
     }
 
     @SuppressWarnings("finally")

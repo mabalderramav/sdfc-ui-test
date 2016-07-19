@@ -4,8 +4,8 @@ import org.apache.log4j.Logger;
 
 
 public class LoggerManager {
-	
-	private static LoggerManager instance = null;
+
+    private static LoggerManager instance = null;
     private static Logger logger;
 
 

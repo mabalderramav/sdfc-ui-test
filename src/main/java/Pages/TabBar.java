@@ -1,29 +1,23 @@
-ckage Pages;
+package Pages;
 
-import Pages.Accounts.AccountsHome;
-import Pages.Chatter.ChatterHome;
-import Framework.BrowserManager;
-import Framework.CommonActions;
-import Pages.Campaigns.CampaignsHome;
-import Pages.Contacts.ContactsHome;
-import Pages.Leads.LeadHomePage;
-import Pages.Opportunities.OpportunitiesHome;
-import Pages.Products.ProductsHome;
-
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.WebDriverWait;
+
+import Framework.CommonActions;
+import Pages.Accounts.AccountAbstractPage;
+import Pages.Base.AbstractBasePage;
+import Pages.Campaigns.CampaignsHome;
+import Pages.Chatter.ChatterAbstractPage;
+import Pages.Contacts.ContactsAbstractPage;
+import Pages.Leads.LeadAbstractPagePage;
+import Pages.Opportunities.OpportunitiesAbstractPage;
+import Pages.Products.ProductsAbstractPage;
 
 /**
  * Created by Miguel.Pari on 6/17/2015.
  */
-public class TabBar {
-    private WebDriver driver;
-    private WebDriverWait wait;
-
+public class TabBar extends AbstractBasePage{
     //region Locators
 
     @FindBy(xpath = "//*[@id='Campaign_Tab']/*[contains(.,'Campaigns')]")
@@ -58,43 +52,37 @@ public class TabBar {
     @CacheLookup
     private WebElement opportunitiesTab;
 
-    public TabBar()
-    {
-        driver = BrowserManager.getInstance().getDriver();
-        wait = BrowserManager.getInstance().getWait();
-        PageFactory.initElements(driver, this);
-    }
 
     public CampaignsHome clickCampaigns() {
         CommonActions.click(CampaignsTab);
-        return new CampaignsHome(driver);
+        return new CampaignsHome();
     }
 
-    public ContactsHome clickOnContactsHome() {
+    public ContactsAbstractPage clickOnContactsHome() {
         CommonActions.click(contactsTab);
-        return new ContactsHome();
+        return new ContactsAbstractPage();
     }
-    public ProductsHome clickOnProductsHome() {
+    public ProductsAbstractPage clickOnProductsHome() {
         CommonActions.click(productsTab);
-        return new ProductsHome();
+        return new ProductsAbstractPage();
     }
-    public OpportunitiesHome clickOnOpportunitiesHome() {
+    public OpportunitiesAbstractPage clickOnOpportunitiesHome() {
         CommonActions.click(opportunitiesTab);
-        return new OpportunitiesHome();
+        return new OpportunitiesAbstractPage();
     }
-    public AccountsHome clickOnAccountsHome() {
-        CommonActions.click(accountsTab);
-        return new AccountsHome();
+    public AccountAbstractPage clickOnAccountsHome() {
+        CommonActions.click(accountTab);
+        return new AccountAbstractPage();
     }
 	
-	public LeadHomePage clickLead() {
+	public LeadAbstractPagePage clickLead() {
         CommonActions.click(LeadTab);
 
-        return new LeadHomePage();
+        return new LeadAbstractPagePage();
     }
 
-	public ChatterHome clickOnChatterTab() {
+	public ChatterAbstractPage clickOnChatterTab() {
 		CommonActions.click(chatterTab);
-		return new ChatterHome();
+		return new ChatterAbstractPage();
 	}
 }

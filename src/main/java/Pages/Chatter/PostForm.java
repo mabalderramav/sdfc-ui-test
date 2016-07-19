@@ -1,26 +1,20 @@
 package Pages.Chatter;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import Framework.BrowserManager;
 import Framework.CommonActions;
+import Pages.Base.AbstractSectionFrame;
 
 
+public class PostForm extends AbstractSectionFrame{
 
-public class PostForm {
 	
-	private WebDriver driver;
-	private WebDriverWait wait;
-	
-	@FindBy(id = "publishereditablearea")
+	@FindBy(id = "cke_26_contents")
 	@CacheLookup
 	private WebElement createTxtArea;	
 	
@@ -36,18 +30,25 @@ public class PostForm {
 	@FindBy(id = "quickActionFeedBodyInput")
 	@CacheLookup
     private WebElement editTxtArea;
+
+	@FindBy(css = "iframe[class='cke_wysiwyg_frame cke_reset']")
+	@CacheLookup
+	private WebElement textAreaFrame;
+	@FindBy(tagName = "body")
+	@CacheLookup
+	private WebElement textAreaField;
 	
 	private String postText;
-	
-	public PostForm() {
-		driver = BrowserManager.getInstance().getDriver();
-		wait = BrowserManager.getInstance().getWait();
-		PageFactory.initElements(driver, this);
+
+	public void PostForm(){
+		wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
 	}
 	
 	public PostForm setPostTxt(String postText) {
 		this.postText = postText;
-		CommonActions.setValue(createTxtArea, postText);		
+		Actions action = new Actions(driver);
+		action.moveToElement(textAreaField).sendKeys(postText).build().perform();
+		returnRoot();
 		return this;
 	}
 	
@@ -65,7 +66,7 @@ public class PostForm {
 		
 	}
 	public PostContainer clickShareBtn() {
-		CommonActions.click(shareBtn);		
+		CommonActions.click(shareBtn);
 		return new PostContainer().setPostTxt(postText);
 	}
 	

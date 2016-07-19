@@ -1,20 +1,15 @@
 package Scripts;
 
 
-import Pages.Contacts.ContactsHome;
+import Pages.Contacts.ContactsAbstractPage;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import Framework.BrowserManager;
 import Pages.LoginPage;
 import Pages.MainApp;
 import Pages.TabBar;
-import Pages.Chatter.ChatterHome;
-import Pages.Chatter.PostContainer;
-import Pages.Chatter.PostForm;
 import Pages.Contacts.ContactsProfile;
 import Pages.Contacts.NewContactForm;
 import Pages.LookUp.LookUpWindow;
@@ -24,7 +19,7 @@ import Pages.LookUp.LookUpWindow;
  */
 public class DeleteContact {
 
-    private ContactsHome contactsHome;
+    private ContactsAbstractPage contactsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;

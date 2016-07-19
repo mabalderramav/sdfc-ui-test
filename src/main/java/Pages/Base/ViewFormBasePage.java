@@ -1,15 +1,10 @@
 package Pages.Base;
 
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import java.util.concurrent.TimeUnit;
-
-public class ViewFormBase extends NewElementFormBase {
+public class ViewFormBasePage extends NewElementFormBasePage {
 	
 	private static final int TIMEOUT_NORMAL = 15;
 
@@ -29,27 +24,13 @@ public class ViewFormBase extends NewElementFormBase {
     @CacheLookup
     public WebElement viewUniqueName;
 
-    public ViewFormBase(WebDriver driver) {        
-        try {
-        	driver.manage().timeouts().implicitlyWait(TIMEOUT_NORMAL, TimeUnit.SECONDS);
-            driver.manage().window().maximize();     
-            
-            wait.withTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS).until(
-                    ExpectedConditions.visibilityOf(viewTitle));
-        } catch (WebDriverException e) {
-            throw new WebDriverException(e);
-        } finally {
-            wait.withTimeout(TIMEOUT_NORMAL, TimeUnit.SECONDS);
-        }
-    }
-
-    public ViewFormBase setViewName(String name) {
+    public ViewFormBasePage setViewName(String name) {
         viewName.clear();
         viewName.sendKeys(name);
         return this;
     }
 
-    public ViewFormBase setUniqueViewName(String name) {
+    public ViewFormBasePage setUniqueViewName(String name) {
         viewUniqueName.clear();
         viewUniqueName.sendKeys(name);
         return this;

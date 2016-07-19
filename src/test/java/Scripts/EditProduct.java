@@ -1,16 +1,12 @@
 package Scripts;
 
-import Framework.BrowserManager;
-import Pages.Contacts.ContactsHome;
-import Pages.Contacts.ContactsProfile;
-import Pages.Contacts.NewContactForm;
 import Pages.LoginPage;
 import Pages.LookUp.LookUpWindow;
 import Pages.MainApp;
+import Pages.Products.ProductsAbstractPage;
 import Pages.TabBar;
 import Pages.Products.NewProductForm;
 import Pages.Products.ProductProfile;
-import Pages.Products.ProductsHome;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -23,7 +19,7 @@ import org.testng.annotations.AfterTest;
 public class EditProduct {
 
     //region Objects
-    private ProductsHome productsHome;
+    private ProductsAbstractPage productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;

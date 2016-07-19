@@ -1,13 +1,12 @@
 package Pages.Accounts;
 
-import Pages.Base.ViewFormBase;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import java.util.List;
 
-public class AccountViewForm extends ViewFormBase{
+import Pages.Base.ViewFormBasePage;
+
+public class AccountViewForm extends ViewFormBasePage {
 	@FindBy(id = "fname")
     @CacheLookup
     private WebElement viewNameText;
@@ -40,9 +39,6 @@ public class AccountViewForm extends ViewFormBase{
     @CacheLookup
     private WebElement selectedFields;
 
-    public AccountViewForm(WebDriver driver) {
-        super(driver);
-    }
 
     public AccountViewForm setViewNameText(String viewName) {
         viewNameText.sendKeys(viewName);

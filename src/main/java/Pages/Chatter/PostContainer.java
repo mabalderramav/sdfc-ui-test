@@ -1,26 +1,18 @@
 package Pages.Chatter;
 
-import java.util.LinkedList;
-
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
-import Framework.BrowserManager;
 import Framework.CommonActions;
+import Pages.Base.AbstractBasePage;
 
 
-public class PostContainer {
-	
-	private WebDriver driver;
-	private WebDriverWait wait;
+public class PostContainer extends AbstractBasePage {
+
 	
 	@FindBy(linkText = "Delete")
     @CacheLookup
@@ -31,13 +23,6 @@ public class PostContainer {
     private WebElement editOptn;
 	private WebElement actionMenu;
 	private String postText;
-	
-	public PostContainer() {
-		driver = BrowserManager.getInstance().getDriver();
-		wait = BrowserManager.getInstance().getWait();
-		PageFactory.initElements(driver, this);
-		
-	}
 	
 	public void deletePost(String postTxt) {
 		clickActionMenu(postTxt);

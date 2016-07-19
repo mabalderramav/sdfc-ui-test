@@ -1,12 +1,11 @@
 package Framework;
 
-import Framework.Objects.ElementBase;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import Framework.Objects.Account;
-import Framework.Objects.Lead;
-import Framework.Objects.Opportunity;
 import java.io.File;
 import java.io.IOException;
+
+import Framework.Objects.ElementBase;
+import Framework.Objects.Lead;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Created by Pablo Zubieta on 01/09/2015.
@@ -22,5 +21,10 @@ public class JSONMapper {
             e.printStackTrace();
         }
         return elementBase;
+    }
+
+    public static Lead getLeadData(String path) {
+        Lead lead = (Lead) JSONMapper.getData(path,new Lead());
+        return lead;
     }
 }
