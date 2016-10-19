@@ -50,6 +50,12 @@ public class LoginPage extends AbstractBasePage {
         return mainApp;
     }
 
+    /**
+     * use
+     *
+     * @return
+     */
+    @Deprecated
     public MainApp loginAsPrimaryUser() {
         return loginAs(Environment.getInstance().getPrimaryUser(),
                 Environment.getInstance().getPrimaryPassword());
