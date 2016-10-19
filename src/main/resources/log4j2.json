@@ -19,7 +19,7 @@
     },
     "loggers": {
       "logger": {
-        "name": "org.fundacionjala.saleforceuitest",
+        "name": "org.fundacionjala.sfdc",
         "level": "ALL",
         "additivity": "false",
         "AppenderRef": {
