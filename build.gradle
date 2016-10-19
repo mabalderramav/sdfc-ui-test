@@ -6,6 +6,7 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * user guide available at http://gradle.org/docs/2.4/userguide/tutorial_java_projects.html
  */
+group 'org.fundacionjala.saleforceuitest'
 buildscript {
     repositories {
         jcenter()
@@ -19,6 +20,10 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'idea'
 apply plugin: 'eclipse'
+apply plugin: 'checkstyle'
+checkstyle {
+    toolVersion = "6.1.1"
+}
 
 //handling the download drivers
 apply plugin: 'de.undercouch.download'
@@ -35,22 +40,19 @@ repositories {
 
 // In this section you declare the dependencies for your production and test code
 dependencies {
-     // http://mvnrepository.com/artifact/log4j/log4j
-    compile group: 'log4j', name: 'log4j', version: '1.2.17'
-     // http://mvnrepository.com/artifact/org.apache.logging.log4j/log4j-core
-    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.6'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-api', version: '2.7'
+    compile group: 'org.apache.logging.log4j', name: 'log4j-core', version: '2.7'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-core', version: '2.8.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.3'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.8.3'
     // The production code uses the SLF4J logging API at compile time
     compile 'org.slf4j:slf4j-api:1.7.12'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-java', version: '2.53.0'
     compile group: 'org.testng', name: 'testng', version: '6.9.10'
     compile 'com.googlecode.json-simple:json-simple:1.1.1'
-    compile 'com.fasterxml.jackson.core:jackson-core:2.5.4'
-    compile 'com.fasterxml.jackson.core:jackson-databind:2.5.4'
     compile 'org.uncommons:reportng:1.1.4'
     compile 'com.google.inject:guice:3.0'
-    // http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-chrome-driver
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.53.0'
-    // http://mvnrepository.com/artifact/org.seleniumhq.selenium/selenium-ie-driver
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
 
 
@@ -82,33 +84,33 @@ task runTestNGTestCases(type: Test) {
     systemProperties.put('browser', browser)
 
     println browser
-/*
-task downloadDrivers(type: Copy) {
-        File drivers = new File('./drivers')
-        drivers.mkdirs()
 
-            download {
-                src 'http://chromedriver.storage.googleapis.com/2.15/chromedriver_win32.zip'
-                dest drivers
-                onlyIfNewer true
-            }
-            download {
-                src 'http://selenium.googlecode.com/files/IEDriverServer_x64_2.28.0.zip'
-                dest drivers
-                onlyIfNewer true
-            }
+//task downloadDrivers(type: Copy) {
+//        File drivers = new File('./drivers')
+//        drivers.mkdirs()
+//
+//            download {
+//                src 'http://chromedriver.storage.googleapis.com/2.15/chromedriver_win32.zip'
+//                dest drivers
+//                onlyIfNewer true
+//            }
+//            download {
+//                src 'http://selenium.googlecode.com/files/IEDriverServer_x64_2.28.0.zip'
+//                dest drivers
+//                onlyIfNewer true
+//            }
+//
+//        file(drivers).listFiles().each {
+//            artifact ->
+//                if (artifact.name.endsWith('.zip')) {
+//                    from zipTree(artifact)
+//                    into drivers
+//                }
+//        }
+//}
+//
+//downloadDrivers.execute()
 
-        file(drivers).listFiles().each {
-            artifact ->
-                if (artifact.name.endsWith('.zip')) {
-                    from zipTree(artifact)
-                    into drivers
-                }
-        }
-}
-
-downloadDrivers.execute()
-*/
 }
 
 
