@@ -1,35 +1,35 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
-/**
- * Created by Ronald on 23/06/2015.
- */
-
-
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.framework.objects.Lead;
-import org.fundacionjala.sfdc.pages.leads.LeadAbstractPagePage;
-import org.fundacionjala.sfdc.pages.leads.LeadDetailsPage;
-import org.fundacionjala.sfdc.pages.leads.NewLeadPage;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.leads.LeadAbstractPage;
+import org.fundacionjala.sfdc.pages.leads.LeadDetails;
+import org.fundacionjala.sfdc.pages.leads.LeadForm;
 
+/**
+ * This class verify the Creation of Lead.
+ */
 public class CreateLead {
-    private LeadAbstractPagePage leadHomePage;
-    private NewLeadPage newLeadPage;
+    private LeadAbstractPage leadHomePage;
     private MainApp mainApp;
     private TabBar tabBar;
-
+    private LeadDetails leadDetails;
     private LoginPage loginPage;
-    private String path="src\\test\\resources\\CreateLeadData.json";
 
+    /**
+     * This method execute the preconditions to make the validation to the creation of lead.
+     *
+     */
     @BeforeTest
-    public void setUp() throws Exception {
+    public void setUp() {
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -37,16 +37,25 @@ public class CreateLead {
         // create campaign
     }
 
+    /**
+     * This method create a new Lead and make the corresponding assertions.
+     */
     @Test
-    public void createLeadTest() throws Exception {
-        LeadDetailsPage leadDetailsPage  = leadHomePage.clickNewBtn().fillNewLeadFromJson(NewLeadPage.LEAD_DATA_PATH).clickSaveButton();
-        Lead expectedLead = JsonMapper.getLeadData(NewLeadPage.LEAD_DATA_PATH);
-        Assert.assertEquals(leadDetailsPage.getName(),expectedLead.nameSalutation + " " + expectedLead.firstName + " " + expectedLead.lastName, "Lead not created properly, names does not match");
+    public void createLeadTest(){
+        leadDetails = leadHomePage.clickNewBtn()
+                .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
+                .clickSaveButton();
+        Lead expectedLead = (Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new Lead());
+        Assert.assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
+                + " " + expectedLead.lastName, "Lead not created properly, names does not match");
     }
 
+    /**
+     * This method delete the created Lead.
+     */
     @AfterTest
-    public void tearDown() throws Exception {
-
+    public void tearDown() {
+        leadDetails.deleteLead();
     }
 }
 
