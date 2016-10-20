@@ -10,7 +10,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 /**
  * This base page the product abstract class.
  */
-public class ProductsAbstract extends AbstractBasePage {
+public class Product extends AbstractBasePage {
 
     @FindBy(xpath = "//*[@name='new' and @type='button']")
     @CacheLookup

@@ -6,155 +6,117 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.framework.objects.Lead;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.base.FormBasePage;
 
 /**
- * Created by Miguel.Pari on 6/24/2015.
- * Updated by Pablo Zubieta on 09/01/2015
+ * This class represent the Form to create a new Lead.
  */
-public class NewLeadPage extends FormBasePage {
+public class LeadForm extends FormBasePage {
+
+    public static final String LEAD_DATA_PATH = "src\\test\\resources\\json\\CreateLeadData.json";
 
     @FindBy(id = "name_lastlea2")
     @CacheLookup
     private WebElement lastNameField;
-
     @FindBy(id = "lea13")
     @CacheLookup
     private WebElement leadStatusField;
-
     @FindBy(id = "lea3")
     @CacheLookup
     private WebElement companyField;
-
     @FindBy(id = "name_firstlea2")
     @CacheLookup
     private WebElement firstNameField;
-
     @FindBy(id = "lea16street")
     @CacheLookup
     private WebElement streetField;
-
     @FindBy(id = "lea16city")
     @CacheLookup
     private WebElement leadCityField;
-
     @FindBy(name = "save")
     @CacheLookup
-    private WebElement SaveButton;
-
+    private WebElement saveButton;
     @FindBy(xpath = "//input[@id='lea20']")
     @CacheLookup
     private WebElement campaingLookupField;
-
     @FindBy(id = "name_salutationlea2")
     @CacheLookup
     private WebElement nameSalutationField;
-
     @FindBy(id = "lea4")
     @CacheLookup
     private WebElement titleField;
-
     @FindBy(id = "lea5")
     @CacheLookup
     private WebElement leadSourceField;
-
     @FindBy(id = "lea6")
     @CacheLookup
     private WebElement industryField;
-
     @FindBy(id = "lea7")
     @CacheLookup
     private WebElement annualRevenueField;
-
     @FindBy(id = "lea8")
     @CacheLookup
     private WebElement phoneField;
-
     @FindBy(id = "lea9")
     @CacheLookup
     private WebElement mobileField;
-
     @FindBy(id = "lea10")
     @CacheLookup
     private WebElement faxField;
-
     @FindBy(id = "lea11")
     @CacheLookup
     private WebElement emailField;
-
     @FindBy(id = "lea12")
     @CacheLookup
     private WebElement websiteField;
-
     @FindBy(id = "lea14")
     @CacheLookup
     private WebElement ratingField;
-
     @FindBy(id = "lea15")
     @CacheLookup
     private WebElement numEmployeesField;
-
     @FindBy(id = "lea16state")
     @CacheLookup
     private WebElement stateField;
-
     @FindBy(id = "lea16zip")
     @CacheLookup
     private WebElement zipCodeField;
-
     @FindBy(id = "lea16country")
     @CacheLookup
     private WebElement countryField;
-
     @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::span/select")
     @CacheLookup
     private WebElement productInterestField;
-
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::input")
     @CacheLookup
     private WebElement SICcodeField;
-
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::input")
     @CacheLookup
     private WebElement numLocationsField;
-
     @FindBy(xpath = "//td[contains(.,'Current Generator')]/following::input")
     @CacheLookup
     private WebElement currentGeneratorsField;
-
     @FindBy(xpath = "//td[contains(.,'Primary')]/following::span/select")
     @CacheLookup
     private WebElement primaryField;
-
     /*Others*/
     @FindBy(id = "lea17")
     @CacheLookup
     private WebElement descriptionField;
-
     @FindBy(id = "lea21")
     @CacheLookup
     private WebElement assignRuleCheck;
-
-    @FindBy(id="lea20_lkwgt")
+    @FindBy(id = "lea20_lkwgt")
     private WebElement campaignIcon;
 
     private Lead leadObject;
-    public static final String LEAD_DATA_PATH = "src\\test\\resources\\CreateLeadData.json";
 
-    public Lead getLoadedLead(){
-        return leadObject;
-    }
-
-    public void loadDataFromJson(String path){
-        try {
-            leadObject = JsonMapper.getLeadData(path);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-    public void fillTheForm(){
+    /**
+     * This method fill the Form with the information of the Json.
+     */
+    public void fillTheForm() {
         CommonActions.sendKeys(lastNameField, leadObject.lastName);
         CommonActions.sendKeys(companyField, leadObject.company);
         CommonActions.selectItem(leadStatusField, leadObject.leadStatus);
@@ -184,15 +146,20 @@ public class NewLeadPage extends FormBasePage {
         CommonActions.sendKeys(currentGeneratorsField, leadObject.currentGenerators);
         CommonActions.selectItem(primaryField, leadObject.primary);
         CommonActions.sendKeys(descriptionField, leadObject.description);
-        if (leadObject.assignRule == "yes"){
+        if (leadObject.assignRule == "yes") {
             CommonActions.check(assignRuleCheck);
         }
-
     }
 
-    public NewLeadPage fillNewLeadFromJson(String path){
+    /**
+     * This method loads data to fill the form for a given Json file.
+     *
+     * @param path the path where is the Json file.
+     * @return the Lead form.
+     */
+    public LeadForm fillNewLeadFromJson(final String path) {
         try {
-            loadDataFromJson(path);
+            leadObject = (Lead) JsonMapper.getData(path, new Lead());
             fillTheForm();
         } catch (Exception e) {
             e.printStackTrace();
@@ -200,46 +167,80 @@ public class NewLeadPage extends FormBasePage {
         return this;
     }
 
-    private void selectCampaign(String campaignLookupText) {
+    /**
+     * This method selects the campaign where the Lead is take in account.
+     *
+     * @param campaignLookupText the campaign name.
+     */
+    private void selectCampaign(final String campaignLookupText) {
         wait.until(ExpectedConditions.elementToBeClickable(this.campaignIcon));
         campaignIcon.click();
         LeadCampaignLookup campaignLookup = new LeadCampaignLookup();
         campaignLookup.selectCampaignWithName(campaignLookupText);
     }
 
-    public NewLeadPage setLastNameField(String text) {
-        CommonActions.sendKeys(lastNameField, text);
-        return this;
+    /**
+     * This method sets the Last name in the field
+     *
+     * @param lastName the last name of the Lead.
+     */
+    public void setLastNameField(final String lastName) {
+        CommonActions.sendKeys(lastNameField, lastName);
     }
 
-
-    public NewLeadPage setStatusField(String text) {
-        CommonActions.sendKeys(leadStatusField, text);
-        return this;
+    /**
+     * This method sets the Status of the Lead.
+     *
+     * @param status the status of the Lead.
+     */
+    public void setStatusField(final String status) {
+        CommonActions.sendKeys(leadStatusField, status);
     }
 
-    public NewLeadPage setCompanyField(String text){
-        CommonActions.sendKeys(companyField, text);
-        return this;
+    /**
+     * This method sets the company name of the Lead.
+     *
+     * @param company the company where the lead is working.
+     */
+    public void setCompanyField(final String company) {
+        CommonActions.sendKeys(companyField, company);
+
     }
 
-    public NewLeadPage setFirstNameField(String text){
-        CommonActions.sendKeys(firstNameField, text);
-        return this;
+    /**
+     * This method sets the first name of the Lead.
+     *
+     * @param firstName the first name info.
+     */
+    public void setFirstNameField(final String firstName) {
+        CommonActions.sendKeys(firstNameField, firstName);
     }
 
-    public NewLeadPage setStreetField(String text){
-        CommonActions.sendKeys(streetField, text);
-        return this;
+    /**
+     * This method set the Street of the Lead.
+     *
+     * @param street the street info of the Lead.
+     */
+    public void setStreetField(final String street) {
+        CommonActions.sendKeys(streetField, street);
     }
 
-    public NewLeadPage setLeadCityField(String text){
-        CommonActions.sendKeys(leadCityField, text);
-        return this;
+    /**
+     * This method set the city of the Lead.
+     *
+     * @param city the city info of the Lead.
+     */
+    public void setLeadCityField(final String city) {
+        CommonActions.sendKeys(leadCityField, city);
     }
 
-    public LeadDetailsPage clickSaveButton() {
-        CommonActions.clickElement(SaveButton);
-        return new LeadDetailsPage();
+    /**
+     * This method Click on save button.
+     *
+     * @return the LeadDetails page.
+     */
+    public LeadDetails clickSaveButton() {
+        CommonActions.clickElement(saveButton);
+        return new LeadDetails();
     }
 }

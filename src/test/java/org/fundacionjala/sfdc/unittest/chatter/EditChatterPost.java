@@ -28,28 +28,23 @@ public class EditChatterPost {
     
 	@BeforeMethod
 	public void createPost() {
-		loginPage = new LoginPage();
-		mainApp = loginPage.loginAsPrimaryUser();
+		mainApp = new MainApp();
 		tabBar = mainApp.goToTabBar();
 	    chatterHome = tabBar.clickOnChatterTab();
 	    postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
 		postContainer = postForm.clickShareBtn();
-	    
 	}
 	
 	@Test
 	public void editChatterPostTest(){
-		
 		postForm = postContainer.editPost(postContain);
 		postContainer = postForm.editPostTxt(newPostContain).clickSaveBtn();
-		Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");	
-		
-		}
+		Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");
+	}
 		
 	@AfterMethod
 	public void deleteChatterPost() {	
 		postContainer.deletePost(newPostContain);
-			
 	}	
 		
 }
