@@ -12,7 +12,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 /**
  * This class handle the product details.
  */
-public class ProductDetails extends AbstractBasePage {
+public class ProductDetail extends AbstractBasePage {
 
     private static final String CHECKED = "Checked";
 
@@ -82,7 +82,7 @@ public class ProductDetails extends AbstractBasePage {
         try {
             productContainer = driver.findElement(By.linkText(product));
         } catch (WebDriverException e) {
-            loggerManager.addWarnLog(ProductDetails.class.getName(), e.getMessage(), e);
+            loggerManager.addWarnLog(ProductDetail.class.getName(), e.getMessage(), e);
             return false;
         }
         return isElementPresent(productContainer);
@@ -99,7 +99,7 @@ public class ProductDetails extends AbstractBasePage {
             webElement.getText();
             return true;
         } catch (WebDriverException e) {
-            loggerManager.addWarnLog(ProductDetails.class.getName(), e.getMessage(), e);
+            loggerManager.addWarnLog(ProductDetail.class.getName(), e.getMessage(), e);
             return false;
         }
     }
