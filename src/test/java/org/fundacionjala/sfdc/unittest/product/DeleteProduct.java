@@ -3,10 +3,10 @@ package org.fundacionjala.sfdc.unittest.product;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.products.ProductsAbstractPage;
+import org.fundacionjala.sfdc.pages.products.ProductsAbstract;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.NewProductForm;
-import org.fundacionjala.sfdc.pages.products.ProductProfile;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.products.ProductDetails;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -19,12 +19,12 @@ import org.testng.annotations.AfterTest;
 public class DeleteProduct {
 
     //region Objects
-    private ProductsAbstractPage productsHome;
+    private ProductsAbstract productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;
-    private ProductProfile productProfile;
-    private NewProductForm newProductForm;
+    private ProductDetails productProfile;
+    private ProductForm newProductForm;
     private LoginPage loginPage;
     //endregion
 
@@ -50,13 +50,13 @@ public class DeleteProduct {
                 .checkActiveFlag(isActive)
                 .chooseProductFamilyDdl(productFamily)
                 .setDescription(descriptionProduct)
-                .pressSaveBtn();
+                .clickSaveButton();
     }
 
     @Test
     public void DeleteProduct()
     {
-        productProfile.pressDeleteBtn();
+        productProfile.clickDeleteButton();
         Assert.assertFalse(productProfile.isProductDisplayed(productName), "Product Deleted");
     }
 
