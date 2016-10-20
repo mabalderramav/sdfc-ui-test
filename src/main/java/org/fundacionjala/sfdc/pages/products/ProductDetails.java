@@ -14,8 +14,6 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
  */
 public class ProductDetails extends AbstractBasePage {
 
-    private static final String NONE = "None";
-
     private static final String CHECKED = "Checked";
 
     private static final String TITLE = "title";
@@ -126,11 +124,7 @@ public class ProductDetails extends AbstractBasePage {
      * @return String with product family.
      */
     public String getProductFamily() {
-        String result = NONE;
-        if (NONE.equals(CommonActions.getText(productFamilyLabel))) {
-            return result;
-        }
-        return result;
+        return CommonActions.getText(productFamilyLabel);
     }
 
     /**
