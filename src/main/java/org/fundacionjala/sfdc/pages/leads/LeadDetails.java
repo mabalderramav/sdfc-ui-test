@@ -349,11 +349,11 @@ public class LeadDetails extends FormBasePage {
     /**
      * This method click on delete button to delete the Lead.
      *
-     * @return a LeadAbstractPage
+     * @return a Lead
      */
-    public LeadAbstractPage deleteLead() {
+    public Lead deleteLead() {
         CommonActions.deleteMe(driver);
-        return new LeadAbstractPage();
+        return new Lead();
 
     }
 }
