@@ -4,9 +4,9 @@ import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.NewProductForm;
-import org.fundacionjala.sfdc.pages.products.ProductProfile;
-import org.fundacionjala.sfdc.pages.products.ProductsAbstractPage;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.Product;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -19,12 +19,12 @@ import org.testng.annotations.AfterTest;
 public class CreateProduct {
 
     //region Objects
-    private ProductsAbstractPage productsHome;
+    private Product productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;
-    private ProductProfile productProfile;
-    private NewProductForm newProductForm;
+    private ProductDetail productProfile;
+    private ProductForm newProductForm;
     private LoginPage loginPage;
     //endregion
 
@@ -55,10 +55,10 @@ public class CreateProduct {
                 .checkActiveFlag(isActive)
                 .chooseProductFamilyDdl(productFamily)
                 .setDescription(descriptionProduct)
-                .pressSaveBtn();
+                .clickSaveButton();
 
         Assert.assertEquals(productProfile.getProductName(), productName);
-        Assert.assertEquals(productProfile.getProductcode(), productCode);
+        Assert.assertEquals(productProfile.getProductCode(), productCode);
         Assert.assertEquals(productProfile.isActiveFlag(), isActive);
         Assert.assertEquals(productProfile.getProductFamily(), productFamily);
         Assert.assertEquals(productProfile.getDescription(), descriptionProduct);
@@ -68,6 +68,6 @@ public class CreateProduct {
     @AfterTest
     public void afterTest()
     {
-        productProfile.pressDeleteBtn();
+        productProfile.clickDeleteButton();
     }
 }
