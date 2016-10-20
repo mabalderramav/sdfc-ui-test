@@ -20,23 +20,18 @@ public class CreateChatterPost {
 	
     
     private ChatterAbstractPage chatterHome;
-    private MainApp mainApp;
     private TabBar tabBar;
     private PostForm postForm;
     private PostContainer postContainer;
     private String postContain = "TestCreatePost";
-    private LoginPage loginPage;
+	private MainApp mainApp;
     
-    @BeforeTest
-	public void login() {
-    	loginPage = new LoginPage();
-    	mainApp = loginPage.loginAsPrimaryUser();  
-        tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();    
-	}
-	
+
 	@Test
 	public void createChatterPostTest(){
+		mainApp = new MainApp();
+		tabBar = mainApp.goToTabBar();
+		chatterHome = tabBar.clickOnChatterTab();
 		postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
 		postContainer = postForm.clickShareBtn();
 		Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");	
