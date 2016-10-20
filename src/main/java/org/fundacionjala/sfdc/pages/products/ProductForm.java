@@ -111,7 +111,7 @@ public class ProductForm extends AbstractBasePage {
      *
      * @return Return this class.
      */
-    public ProductDetails clickSaveBtn() {
+    public ProductDetails clickSaveButton() {
         CommonActions.clickElement(saveButton);
         return new ProductDetails();
     }
