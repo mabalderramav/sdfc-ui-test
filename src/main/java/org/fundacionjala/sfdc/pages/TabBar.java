@@ -1,9 +1,5 @@
 package org.fundacionjala.sfdc.pages;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
-
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
@@ -11,8 +7,11 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactsAbstractPage;
 import org.fundacionjala.sfdc.pages.leads.LeadAbstractPagePage;
-import org.fundacionjala.sfdc.pages.opportunities.OpportunitiesAbstractPage;
+import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
 import org.fundacionjala.sfdc.pages.products.ProductsAbstract;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Miguel.Pari on 6/17/2015.
@@ -66,9 +65,9 @@ public class TabBar extends AbstractBasePage{
         CommonActions.clickElement(productsTab);
         return new ProductsAbstract();
     }
-    public OpportunitiesAbstractPage clickOnOpportunitiesHome() {
+    public Opportunity clickOnOpportunitiesHome() {
         CommonActions.clickElement(opportunitiesTab);
-        return new OpportunitiesAbstractPage();
+        return new Opportunity();
     }
     public AccountAbstractPage clickOnAccountsHome() {
         CommonActions.clickElement(accountTab);

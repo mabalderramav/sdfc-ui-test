@@ -1,24 +1,25 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Set;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
-
 /**
- * Created by ivan on 26-06-15.
+ * This class represent to a form to create or edit a opportunity
  */
-public class NewOpportunityForm extends AbstractBasePage{
+public class OpportunityForm extends AbstractBasePage {
 
     // to manage window popup
-    private String          mainWindowId;
-    private Set<String>     windows;
+    private String mainWindowId;
+    private Set<String> windows;
 
     //region Locators
 
@@ -43,10 +44,6 @@ public class NewOpportunityForm extends AbstractBasePage{
     @FindBy(xpath = ".//*[@id='opp4_lkwgt']/img")
     @CacheLookup
     private WebElement accountNameLookupIconBtn;
-
-    //@FindBy(id = "opp4_lkwgt")
-    //@CacheLookup
-    //private WebElement accountNameLookupIconBtn;
 
     @FindBy(id = "opp5")
     @CacheLookup
@@ -106,14 +103,14 @@ public class NewOpportunityForm extends AbstractBasePage{
 
     //endregion
 
-    public NewOpportunityForm() {
+    public OpportunityForm() {
         mainWindowId = driver.getWindowHandle();
     }
 
     // TODO: Implement method to switch to popup window
 
     /* Set Opportunity Information */
-    public NewOpportunityForm checkPrivateFlag(boolean flag) {
+    public OpportunityForm checkPrivateFlag(boolean flag) {
 
         if (!privateFlag.isSelected() && flag) {
             privateFlag.click();
@@ -122,7 +119,7 @@ public class NewOpportunityForm extends AbstractBasePage{
         return this;
     }
 
-    public NewOpportunityForm uncheckPrivateFlag(boolean flag) {
+    public OpportunityForm uncheckPrivateFlag(boolean flag) {
 
         if (privateFlag.isSelected() && flag) {
             privateFlag.click();
@@ -131,77 +128,77 @@ public class NewOpportunityForm extends AbstractBasePage{
         return this;
     }
 
-    public NewOpportunityForm setOpportunityName(String opportunityName) {
+    public OpportunityForm setOpportunityName(String opportunityName) {
         opportunityNameTextBox.clear();
         opportunityNameTextBox.sendKeys(opportunityName);
 
         return this;
     }
 
-    public NewOpportunityForm setAccountName(String accountName) {
+    public OpportunityForm setAccountName(String accountName) {
         accountNameTextBox.clear();
         accountNameTextBox.sendKeys(accountName);
 
         return this;
     }
 
-    public NewOpportunityForm chooseTypeDdl(String type) {
+    public OpportunityForm chooseTypeDdl(String type) {
         Select selectBox = new Select(multiSelectType);
         selectBox.selectByVisibleText(type);
 
         return this;
     }
 
-    public NewOpportunityForm chooseLeadSourceDdl(String leadSource) {
+    public OpportunityForm chooseLeadSourceDdl(String leadSource) {
         Select selectBox = new Select(multiSelectLeadSource);
         selectBox.selectByVisibleText(leadSource);
 
         return this;
     }
 
-    public NewOpportunityForm setAmount(String amount) {
+    public OpportunityForm setAmount(String amount) {
         amountTextBox.clear();
         amountTextBox.sendKeys(amount);
 
         return this;
     }
 
-    public NewOpportunityForm setCloseDate(String closeDate) {
+    public OpportunityForm setCloseDate(String closeDate) {
         closeDateTextBox.clear();
         closeDateTextBox.sendKeys(closeDate);
 
         return this;
     }
 
-    public NewOpportunityForm setCurrentCloseDate() {
+    public OpportunityForm setCurrentCloseDate() {
         closeDateTextBox.clear();
         todayLink.click();
 
         return this;
     }
 
-    public NewOpportunityForm setNextStep(String nextStep) {
+    public OpportunityForm setNextStep(String nextStep) {
         nextStepTextBox.clear();
         nextStepTextBox.sendKeys(nextStep);
 
         return this;
     }
 
-    public NewOpportunityForm chooseStageDdl(String stage) {
+    public OpportunityForm chooseStageDdl(String stage) {
         Select selectBox = new Select(multiSelectStage);
         selectBox.selectByVisibleText(stage);
 
         return this;
     }
 
-    public NewOpportunityForm setProbability(String probability) {
+    public OpportunityForm setProbability(String probability) {
         nextStepTextBox.clear();
         nextStepTextBox.sendKeys(probability);
 
         return this;
     }
 
-    public NewOpportunityForm setPrimaryCampaignSource(String primaryCampaignSource) {
+    public OpportunityForm setPrimaryCampaignSource(String primaryCampaignSource) {
         primaryCampaignSourceTextBox.clear();
         primaryCampaignSourceTextBox.sendKeys(primaryCampaignSource);
 
@@ -209,14 +206,14 @@ public class NewOpportunityForm extends AbstractBasePage{
     }
 
     /* Set Additional Information */
-    public NewOpportunityForm setOrderNumber(String orderNumber) {
+    public OpportunityForm setOrderNumber(String orderNumber) {
         orderNumberTextBox.clear();
         orderNumberTextBox.sendKeys(orderNumber);
 
         return this;
     }
 
-    public NewOpportunityForm chooseDeliveryInstallationStatusDdl(String deleveryInstallationStatus) {
+    public OpportunityForm chooseDeliveryInstallationStatusDdl(String deleveryInstallationStatus) {
         Select selectBox = new Select(multiSelectDeliveryInstallationStatus);
         selectBox.selectByVisibleText(deleveryInstallationStatus);
 
@@ -224,7 +221,7 @@ public class NewOpportunityForm extends AbstractBasePage{
     }
 
     /* Description Information */
-    public NewOpportunityForm setDescription(String description) {
+    public OpportunityForm setDescription(String description) {
         descriptionTextArea.clear();
         descriptionTextArea.sendKeys(description);
 
@@ -232,10 +229,10 @@ public class NewOpportunityForm extends AbstractBasePage{
     }
 
     /* Save form */
-    public OpportunityProfile pressSaveBtn() {
+    public OpportunityDetail pressSaveBtn() {
         saveBtn.click();
 
-        return new OpportunityProfile();
+        return new OpportunityDetail();
     }
 
     public LookUpWindow clickAccountNameLookUpIcon() {
@@ -249,4 +246,31 @@ public class NewOpportunityForm extends AbstractBasePage{
 
         return new LookUpWindow();
     }
+
+    /**
+     * Method that to permit set values to create a new Workspace.
+     *
+     * @param values a map to set of the strategy
+     * @return a Map with the values of the workspace created.
+     */
+    public Map<String, Steps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, Steps> strategyMap = new HashMap();
+
+        strategyMap.put("opportunityName", () -> setOpportunityName(String.valueOf(values.get("opportunityName"))));
+        strategyMap.put("type", () -> chooseTypeDdl(String.valueOf(values.get("type"))));
+        strategyMap.put("leadSource", () -> chooseLeadSourceDdl(String.valueOf(values.get("leadSource"))));
+        strategyMap.put("amount", () -> setAmount(String.valueOf(values.get("amount"))));
+        strategyMap.put("nextStep", () -> setNextStep(String.valueOf(values.get("nextStep"))));
+        strategyMap.put("stage", () -> chooseStageDdl(String.valueOf(values.get("stage"))));
+        strategyMap.put("orderNumber", () -> setOrderNumber(String.valueOf(values.get("orderNumber"))));
+        strategyMap.put("deliveryInstallStatus", () -> chooseDeliveryInstallationStatusDdl(String.valueOf(values.get("deliveryInstallStatus"))));
+        strategyMap.put("accountName", () -> setAccountName(String.valueOf(values.get("accountName"))));
+        strategyMap.put("CurrentCloseDate", () -> setCurrentCloseDate());
+        strategyMap.put("PrivateFlag", () -> checkPrivateFlag(Boolean.valueOf(values.get("PrivateFlag"))));
+
+
+        return strategyMap;
+    }
+
+
 }
