@@ -5,12 +5,11 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.objects.Lead;
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.leads.LeadAbstractPage;
+import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 
@@ -18,7 +17,7 @@ import org.fundacionjala.sfdc.pages.leads.LeadForm;
  * This class verify the Creation of Lead.
  */
 public class CreateLead {
-    private LeadAbstractPage leadHomePage;
+    private Lead leadHomePage;
     private MainApp mainApp;
     private TabBar tabBar;
     private LeadDetails leadDetails;
@@ -45,7 +44,7 @@ public class CreateLead {
         leadDetails = leadHomePage.clickNewBtn()
                 .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
                 .clickSaveButton();
-        Lead expectedLead = (Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new Lead());
+        org.fundacionjala.sfdc.framework.objects.Lead expectedLead = (org.fundacionjala.sfdc.framework.objects.Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.Lead());
         Assert.assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
                 + " " + expectedLead.lastName, "Lead not created properly, names does not match");
     }
