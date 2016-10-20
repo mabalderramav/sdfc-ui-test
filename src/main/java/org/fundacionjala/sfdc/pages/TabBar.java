@@ -10,7 +10,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactsAbstractPage;
-import org.fundacionjala.sfdc.pages.leads.LeadAbstractPagePage;
+import org.fundacionjala.sfdc.pages.leads.LeadAbstractPage;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunitiesAbstractPage;
 import org.fundacionjala.sfdc.pages.products.Product;
 
@@ -75,10 +75,10 @@ public class TabBar extends AbstractBasePage{
         return new AccountAbstractPage();
     }
 	
-	public LeadAbstractPagePage clickLead() {
+	public LeadAbstractPage clickLead() {
         CommonActions.clickElement(LeadTab);
 
-        return new LeadAbstractPagePage();
+        return new LeadAbstractPage();
     }
 
 	public ChatterAbstractPage clickOnChatterTab() {

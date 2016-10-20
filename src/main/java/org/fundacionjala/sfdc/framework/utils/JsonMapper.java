@@ -6,7 +6,6 @@ import java.io.IOException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.fundacionjala.sfdc.framework.objects.ElementBase;
-import org.fundacionjala.sfdc.framework.objects.Lead;
 
 /**
  * This class manage the json.
@@ -28,7 +27,7 @@ public final class JsonMapper {
      * @param elementBase Element base object.
      * @return ElementBase objects
      */
-    private static ElementBase getData(final String path, final ElementBase elementBase) {
+    public static ElementBase getData(final String path, final ElementBase elementBase) {
         ElementBase newElementBase = null;
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -37,15 +36,5 @@ public final class JsonMapper {
             loggerManager.addWarnLog(JsonMapper.class.getName(), e.getMessage(), e);
         }
         return newElementBase;
-    }
-
-    /**
-     * This method obtains the lead data the a json.
-     *
-     * @param path Path the lead json.
-     * @return Lead objects.
-     */
-    public static Lead getLeadData(final String path) {
-        return (Lead) JsonMapper.getData(path, new Lead());
     }
 }

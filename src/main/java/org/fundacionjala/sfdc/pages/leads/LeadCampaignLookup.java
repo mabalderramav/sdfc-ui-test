@@ -4,17 +4,28 @@ import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
 import org.fundacionjala.sfdc.pages.lookup.LeadSearchSectionFrame;
 
 /**
- * Created by ccatari on 6/20/2016.
+ * Class to manage the campaign lookup.
  */
 public class LeadCampaignLookup extends CampaignLookup {
 
-    public NewLeadPage selectCampaignWithName(String parentCampaign) {
+    /**
+     * This method select the campaign given a name.
+     *
+     * @param parentCampaign the campaign name to be selected
+     * @return the current Lead form.
+     */
+    public LeadForm selectCampaignWithName(final String parentCampaign) {
         setSearchCampaign(parentCampaign);
         setACampaignFromResults();
-        return new NewLeadPage();
+        return new LeadForm();
     }
 
-    public void setSearchCampaign(String campaign){
+    /**
+     * This method search the campaign by its name.
+     *
+     * @param campaign the campaign name.
+     */
+    public void setSearchCampaign(final String campaign) {
         LeadSearchSectionFrame searchFrame = new LeadSearchSectionFrame();
         searchFrame.searchTheCampaign(campaign);
     }
