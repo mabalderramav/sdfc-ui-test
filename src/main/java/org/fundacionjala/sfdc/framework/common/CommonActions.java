@@ -84,6 +84,17 @@ public final class CommonActions {
     }
 
     /**
+     * This method verify that element is selected.
+     *
+     * @param element WebElement with element.
+     * @return Return true if element is selected.
+     */
+    public static boolean isSelected(final WebElement element) {
+        DriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(element));
+        return element.isSelected();
+    }
+
+    /**
      * This method waits and clickElement the element.
      *
      * @param element Element to wait and clickElement.
