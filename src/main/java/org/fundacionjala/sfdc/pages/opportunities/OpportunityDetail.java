@@ -1,5 +1,11 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -7,14 +13,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.MainApp;
-
 /**
  * Created by ivan on 26-06-15.
  */
-public class OpportunityProfile extends AbstractBasePage{
+public class OpportunityDetail extends AbstractBasePage {
 
     //region Locators
 
@@ -70,15 +72,15 @@ public class OpportunityProfile extends AbstractBasePage{
         return new MainApp();
     }
 
-    public NewOpportunityForm clickEditBtn() {
+    public OpportunityForm clickEditBtn() {
         CommonActions.clickElement(editBtn);
-        return new NewOpportunityForm();
+        return new OpportunityForm();
     }
 
-    public NewOpportunityForm pressEditBtn() {
+    public OpportunityForm pressEditBtn() {
         editBtn.click();
 
-        return new NewOpportunityForm();
+        return new OpportunityForm();
     }
 
     public boolean isPrivateFlag() {
@@ -142,6 +144,19 @@ public class OpportunityProfile extends AbstractBasePage{
         } catch (WebDriverException e) {
             return false;
         }
+    }
+
+
+    public Map<String, AssertsDetails> getStrategyAssertMap() {
+        final Map<String, AssertsDetails> strategyMap = new HashMap();
+
+        strategyMap.put("opportunityName",()-> getOpportunityName().toString());
+        strategyMap.put("stage", ()-> getStage().toString());
+        strategyMap.put("orderNumber", ()-> getOrderNumber().toString());
+        strategyMap.put("deliveryInstallStatus", ()-> getDeliveryInstallation().toString());
+        strategyMap.put("accountName", ()-> getAccountName().toString());
+
+        return strategyMap;
     }
 
 }

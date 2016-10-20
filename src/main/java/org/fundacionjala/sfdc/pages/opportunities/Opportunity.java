@@ -2,7 +2,6 @@ package org.fundacionjala.sfdc.pages.opportunities;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -13,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 /**
  * Created by ivan on 26-06-15.
  */
-public class OpportunitiesAbstractPage extends AbstractBasePage {
+public class Opportunity extends AbstractBasePage {
 
     private WebDriver driver;
     private WebDriverWait wait;
@@ -23,27 +22,27 @@ public class OpportunitiesAbstractPage extends AbstractBasePage {
     WebElement NewButtton;
     private String accountName;
 
-    public OpportunitiesAbstractPage()
+    public Opportunity()
     {
         super();
     }
 
-    public NewOpportunityForm clickNewButton() {
+    public OpportunityForm clickNewButton() {
         CommonActions.clickElement(NewButtton);
 
-        return new NewOpportunityForm();
+        return new OpportunityForm();
     }
 
-    public OpportunityProfile goOpportunityProfile(String url) {
+    public OpportunityDetail goOpportunityProfile(String url) {
         driver.navigate().to(url);
 
-        return new OpportunityProfile();
+        return new OpportunityDetail();
     }
 
-    public OpportunityProfile clickOnAccount(String accountName)
+    public OpportunityDetail clickOnAccount(String accountName)
     {
         driver.findElement(By.linkText(accountName)).click();
-        return new OpportunityProfile();
+        return new OpportunityDetail();
     }
 
 

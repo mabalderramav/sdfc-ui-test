@@ -8,7 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractModalWindow;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
-import org.fundacionjala.sfdc.pages.opportunities.NewOpportunityForm;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
@@ -66,11 +66,11 @@ public class LookUpWindow extends AbstractModalWindow{
         return new NewCampaignForm();
     }
 
-    public NewOpportunityForm clickResultGotoNewOpportunityForm(String text) {
+    public OpportunityForm clickResultGotoNewOpportunityForm(String text) {
         CommonActions.clickElement(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
         driver.switchTo().defaultContent();
 
-        return new NewOpportunityForm();
+        return new OpportunityForm();
     }
 
     public LookUpWindow switchSearchFrame()
