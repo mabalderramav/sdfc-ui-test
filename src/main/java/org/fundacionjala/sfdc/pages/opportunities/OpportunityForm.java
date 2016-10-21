@@ -21,8 +21,6 @@ public class OpportunityForm extends AbstractBasePage {
     private String mainWindowId;
     private Set<String> windows;
 
-    //region Locators
-
     /* Top Button Row */
     @FindBy(name = "save")
     @CacheLookup
@@ -107,19 +105,16 @@ public class OpportunityForm extends AbstractBasePage {
         mainWindowId = driver.getWindowHandle();
     }
 
-    // TODO: Implement method to switch to popup window
 
     /* Set Opportunity Information */
-    public OpportunityForm checkPrivateFlag(boolean flag) {
-
+    public OpportunityForm checkPrivateFlag(final boolean flag) {
         if (!privateFlag.isSelected() && flag) {
             privateFlag.click();
         }
-
         return this;
     }
 
-    public OpportunityForm uncheckPrivateFlag(boolean flag) {
+    public OpportunityForm uncheckPrivateFlag(final boolean flag) {
 
         if (privateFlag.isSelected() && flag) {
             privateFlag.click();
@@ -128,77 +123,72 @@ public class OpportunityForm extends AbstractBasePage {
         return this;
     }
 
-    public OpportunityForm setOpportunityName(String opportunityName) {
+    public OpportunityForm setOpportunityName(final String opportunityName) {
         opportunityNameTextBox.clear();
         opportunityNameTextBox.sendKeys(opportunityName);
 
         return this;
     }
 
-    public OpportunityForm setAccountName(String accountName) {
+    public OpportunityForm setAccountName(final String accountName) {
         accountNameTextBox.clear();
         accountNameTextBox.sendKeys(accountName);
 
         return this;
     }
 
-    public OpportunityForm chooseTypeDdl(String type) {
+    public OpportunityForm chooseTypeDdl(final String type) {
         Select selectBox = new Select(multiSelectType);
         selectBox.selectByVisibleText(type);
 
         return this;
     }
 
-    public OpportunityForm chooseLeadSourceDdl(String leadSource) {
+    public OpportunityForm chooseLeadSourceDdl(final String leadSource) {
         Select selectBox = new Select(multiSelectLeadSource);
         selectBox.selectByVisibleText(leadSource);
-
         return this;
     }
 
-    public OpportunityForm setAmount(String amount) {
+    public OpportunityForm setAmount(final String amount) {
         amountTextBox.clear();
         amountTextBox.sendKeys(amount);
-
         return this;
     }
 
-    public OpportunityForm setCloseDate(String closeDate) {
+    public OpportunityForm setCloseDate(final String closeDate) {
         closeDateTextBox.clear();
         closeDateTextBox.sendKeys(closeDate);
-
         return this;
     }
 
     public OpportunityForm setCurrentCloseDate() {
         closeDateTextBox.clear();
         todayLink.click();
-
         return this;
     }
 
-    public OpportunityForm setNextStep(String nextStep) {
+    public OpportunityForm setNextStep(final String nextStep) {
         nextStepTextBox.clear();
         nextStepTextBox.sendKeys(nextStep);
-
         return this;
     }
 
-    public OpportunityForm chooseStageDdl(String stage) {
+    public OpportunityForm chooseStageDdl(final String stage) {
         Select selectBox = new Select(multiSelectStage);
         selectBox.selectByVisibleText(stage);
 
         return this;
     }
 
-    public OpportunityForm setProbability(String probability) {
+    public OpportunityForm setProbability(final String probability) {
         nextStepTextBox.clear();
         nextStepTextBox.sendKeys(probability);
 
         return this;
     }
 
-    public OpportunityForm setPrimaryCampaignSource(String primaryCampaignSource) {
+    public OpportunityForm setPrimaryCampaignSource(final String primaryCampaignSource) {
         primaryCampaignSourceTextBox.clear();
         primaryCampaignSourceTextBox.sendKeys(primaryCampaignSource);
 
@@ -206,52 +196,70 @@ public class OpportunityForm extends AbstractBasePage {
     }
 
     /* Set Additional Information */
-    public OpportunityForm setOrderNumber(String orderNumber) {
+    public OpportunityForm setOrderNumber(final String orderNumber) {
         orderNumberTextBox.clear();
         orderNumberTextBox.sendKeys(orderNumber);
-
         return this;
     }
 
-    public OpportunityForm chooseDeliveryInstallationStatusDdl(String deleveryInstallationStatus) {
+    /**
+     * This method
+     * @param deleveryInstallationStatus
+     * @return
+     */
+    public OpportunityForm chooseDeliveryInstallationStatusDdl(final String deleveryInstallationStatus) {
         Select selectBox = new Select(multiSelectDeliveryInstallationStatus);
         selectBox.selectByVisibleText(deleveryInstallationStatus);
-
         return this;
     }
 
-    /* Description Information */
-    public OpportunityForm setDescription(String description) {
+    /**
+     * This method sets a description
+     *
+     * @param description a string to sets.
+     * @return a opportunity form.
+     */
+    public OpportunityForm setDescription(final String description) {
         descriptionTextArea.clear();
         descriptionTextArea.sendKeys(description);
-
         return this;
     }
 
-    /* Save form */
+    /**
+     * This method makes click to save button.
+     *
+     * @return Opportunity Detail page object.
+     */
     public OpportunityDetail pressSaveBtn() {
         saveBtn.click();
-
         return new OpportunityDetail();
     }
 
+    /**
+     * This method makes click on account name.
+     *
+     * @return LookUpWindow object.
+     */
     public LookUpWindow clickAccountNameLookUpIcon() {
         CommonActions.clickElement(accountNameLookupIconBtn);
-
-        return new LookUpWindow();
-    }
-
-    public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
-        CommonActions.clickElement(primaryCampaignSourceLookupIconBtn);
-
         return new LookUpWindow();
     }
 
     /**
-     * Method that to permit set values to create a new Workspace.
+     * This method maks click on primary campaingn.
+     *
+     * @returnLookUpWindow object.
+     */
+    public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
+        CommonActions.clickElement(primaryCampaignSourceLookupIconBtn);
+        return new LookUpWindow();
+    }
+
+    /**
+     * Method that to permit set values to create a new Opportunity.
      *
      * @param values a map to set of the strategy
-     * @return a Map with the values of the workspace created.
+     * @return a Map with the values of the opportunity create.
      */
     public Map<String, Steps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, Steps> strategyMap = new HashMap();
@@ -268,9 +276,12 @@ public class OpportunityForm extends AbstractBasePage {
         strategyMap.put("CurrentCloseDate", () -> setCurrentCloseDate());
         strategyMap.put("PrivateFlag", () -> checkPrivateFlag(Boolean.valueOf(values.get("PrivateFlag"))));
 
-
         return strategyMap;
     }
 
 
+    public void fillValues(Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    }
 }

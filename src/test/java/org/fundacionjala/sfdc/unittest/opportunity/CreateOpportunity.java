@@ -58,7 +58,7 @@ public class CreateOpportunity {
     }
 
     /**
-     * This method is a preconditions to create a opportunities
+     * This method is a preconditions to create a opportunities.
      */
     @BeforeTest
     public void BeforeTest() {
@@ -74,7 +74,7 @@ public class CreateOpportunity {
     }
 
     /**
-     * This a test to create a opportunities
+     * This a test to create a opportunities.
      */
     @Test
     public void CreateOpportunity() {
@@ -86,7 +86,7 @@ public class CreateOpportunity {
         opportunityDetail = opportunityForm.pressSaveBtn();
 
         valuesListAssert
-                .forEach(value ->  Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).executeStep()
+                .forEach(value ->  Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).getText()
                         , valuesMapCreate.get(value)) );
     }
 

@@ -63,8 +63,13 @@ public class OpportunityDetail extends AbstractBasePage {
     @CacheLookup
     private WebElement privateFlagImg;
 
-    //endregion
 
+
+    /**
+     * This method makes click on delete button.
+     *
+     * @return main app.
+     */
     public MainApp clickDeteleBtn() {
         CommonActions.clickElement(deleteBtn);
         Alert alert = driver.switchTo().alert();
@@ -72,6 +77,11 @@ public class OpportunityDetail extends AbstractBasePage {
         return new MainApp();
     }
 
+    /**
+     * This method makes a click on edit button.
+     *
+     * @return a opportunity form.
+     */
     public OpportunityForm clickEditBtn() {
         CommonActions.clickElement(editBtn);
         return new OpportunityForm();
@@ -84,77 +94,92 @@ public class OpportunityDetail extends AbstractBasePage {
     }
 
     public boolean isPrivateFlag() {
-        boolean result = false;
         String attributeState = privateFlagImg.getAttribute("title");
-
-        if (attributeState.equals("Checked"))
-        {
-            result = true;
-        }
-
-        return result;
+        return attributeState.equals("Checked");
     }
 
-    //region getters
-
-    //Opportunity Name
+    /**
+     * This method gets the opportunity name.
+     *
+     * @return a string with opportunity name text.
+     */
     public String getOpportunityName() {
         return opportunityNameLabel.getText();
     }
 
-    //Account Name
+    /**
+     * This method gets the account name.
+     *
+     * @return a string with account name text.
+     */
     public String getAccountName() {
         return accountNameLabel.getText();
     }
 
-    //Close Date
+    /**
+     * This method gets the close date.
+     *
+     * @return a string with the close date text.
+     */
     public String getCloseDate() {
         return closeDateLabel.getText();
     }
 
-    //Stage
+    /**
+     * This method gets the stage.
+     *
+     * @return a string with stage text.
+     */
     public String getStage() {
         return stageLabel.getText();
     }
 
-    //Order Number
+    /**
+     * This method gets the order number.
+     *
+     * @return a string with order number text.
+     */
     public String getOrderNumber() {
         return orderNumberLabel.getText();
     }
 
-    //Delivery/Installation Status
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
     public String getDeliveryInstallation() {
         return deliveryInstallLabel.getText();
     }
-    //endregion
-    public boolean isOpportunityDisplayed(String Opportunity) {
-        WebElement opportunityContainer;
-        try {
-            opportunityContainer = driver.findElement(By.linkText(Opportunity));
-        } catch(WebDriverException e) {
-            return false;
-        }
-        return isElementPresent(opportunityContainer);
 
-    }
-    public boolean isElementPresent(WebElement webElement) {
+    /**
+     * This method verify if opportunity is displayed.
+     *
+     * @param Opportunity string with name opportunity.
+     * @return a boolean.
+     */
+    public boolean isOpportunityDisplayed(String Opportunity) {
         try {
-            webElement.getText();
-            return true;
+            driver.findElement(By.linkText(Opportunity));
         } catch (WebDriverException e) {
             return false;
         }
+        return true;
     }
 
-
+    /**
+     * Method that to permit gets texts.
+     *
+     * @return a Map with the values of opportunity edit.
+     */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap();
 
-        strategyMap.put("opportunityName",()-> getOpportunityName().toString());
-        strategyMap.put("stage", ()-> getStage().toString());
-        strategyMap.put("orderNumber", ()-> getOrderNumber().toString());
-        strategyMap.put("deliveryInstallStatus", ()-> getDeliveryInstallation().toString());
-        strategyMap.put("accountName", ()-> getAccountName().toString());
+        strategyMap.put("opportunityName", this::getOpportunityName);
+        strategyMap.put("stage", this::getStage);
+        strategyMap.put("orderNumber", this::getOrderNumber);
+        strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
+        strategyMap.put("accountName", this::getAccountName);
 
         return strategyMap;
     }

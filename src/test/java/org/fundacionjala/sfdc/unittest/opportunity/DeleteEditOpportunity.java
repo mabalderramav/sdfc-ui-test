@@ -64,25 +64,21 @@ public class DeleteEditOpportunity {
     }
 
     /**
-     * This a test to delete a opportunities
+     * This is a test to delete a opportunities
      */
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-
-        valuesMapCreate.keySet()
-                .forEach(step -> opportunityForm.getStrategyStepMap(valuesMapCreate).get(step).executeStep());
-
+        opportunityForm.fillValues(valuesMapCreate);
         opportunityDetail = opportunityForm.pressSaveBtn();
 
         valuesListAssert
-                .forEach(value -> Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).executeStep()
+                .forEach(value -> Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).getText()
                         , valuesMapCreate.get(value)));
-
     }
 
     /**
-     * This a post conditions a opportunities.
+     * This is a post conditions a opportunities.
      */
     @AfterTest
     public void afterTest() {
