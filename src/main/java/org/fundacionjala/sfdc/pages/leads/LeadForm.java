@@ -1,5 +1,9 @@
 package org.fundacionjala.sfdc.pages.leads;
 
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -89,9 +93,10 @@ public class LeadForm extends FormBasePage {
     @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::span/select")
     @CacheLookup
     private WebElement productInterestField;
+
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::input")
     @CacheLookup
-    private WebElement SICcodeField;
+    private WebElement sicCodeField;
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::input")
     @CacheLookup
     private WebElement numLocationsField;
@@ -141,7 +146,7 @@ public class LeadForm extends FormBasePage {
         CommonActions.sendKeys(zipCodeField, leadObject.zipCode);
         CommonActions.sendKeys(countryField, leadObject.country);
         CommonActions.selectItem(productInterestField, leadObject.productInterest);
-        CommonActions.sendKeys(SICcodeField, leadObject.SICCode);
+        CommonActions.sendKeys(sicCodeField, leadObject.SICCode);
         CommonActions.sendKeys(numLocationsField, leadObject.numberLocations);
         CommonActions.sendKeys(currentGeneratorsField, leadObject.currentGenerators);
         CommonActions.selectItem(primaryField, leadObject.primary);
@@ -180,12 +185,14 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method sets the Last name in the field
+     * This method sets the Last name in the field.
      *
      * @param lastName the last name of the Lead.
+     * @return LeadForm object
      */
-    public void setLastNameField(final String lastName) {
+    public LeadForm setLastNameField(final String lastName) {
         CommonActions.sendKeys(lastNameField, lastName);
+        return this;
     }
 
     /**
@@ -201,19 +208,22 @@ public class LeadForm extends FormBasePage {
      * This method sets the company name of the Lead.
      *
      * @param company the company where the lead is working.
+     * @return LeadForm object
      */
-    public void setCompanyField(final String company) {
+    public LeadForm setCompanyField(final String company) {
         CommonActions.sendKeys(companyField, company);
-
+        return this;
     }
 
     /**
      * This method sets the first name of the Lead.
      *
      * @param firstName the first name info.
+     * @return LeadForm object
      */
-    public void setFirstNameField(final String firstName) {
+    public LeadForm setFirstNameField(final String firstName) {
         CommonActions.sendKeys(firstNameField, firstName);
+        return this;
     }
 
     /**
@@ -242,5 +252,14 @@ public class LeadForm extends FormBasePage {
     public LeadDetails clickSaveButton() {
         CommonActions.clickElement(saveButton);
         return new LeadDetails();
+    }
+
+    public Map<String, String> strategyMapInfoLead(final Map<String,String> leadData){
+        Map<String, String> strategyMapData = new HashMap<>();
+        Set<String> keys = leadData.keySet();
+        keys.forEach(key -> {
+            strategyMapData.put(key,leadData.get(key));
+        });
+        return strategyMapData;
     }
 }

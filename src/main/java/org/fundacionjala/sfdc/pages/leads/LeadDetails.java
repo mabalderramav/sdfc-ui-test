@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.leads;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -355,5 +358,12 @@ public class LeadDetails extends FormBasePage {
         CommonActions.deleteMe(driver);
         return new Lead();
 
+    }
+
+    public Map<String, AssertDetailLead> getStrategyAssertLead() {
+        final Map<String, AssertDetailLead> strategyMap = new HashMap();
+        strategyMap.put("fullName", () -> getName());
+        strategyMap.put("company", () -> getCompany());
+        return strategyMap;
     }
 }

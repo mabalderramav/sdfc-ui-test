@@ -1,6 +1,5 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
-import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -12,6 +11,8 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
+
+import static org.testng.Assert.assertEquals;
 
 /**
  * This class verify the Creation of Lead.
@@ -29,9 +30,9 @@ public class CreateLead {
      */
     @BeforeTest
     public void setUp() {
-        loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
-        tabBar = mainApp.goToTabBar();
+        //loginPage = new LoginPage();
+        //mainApp = loginPage.loginAsPrimaryUser();
+        tabBar = new MainApp().goToTabBar();
         leadHomePage = tabBar.clickLead();
         // create campaign
     }
@@ -44,8 +45,9 @@ public class CreateLead {
         leadDetails = leadHomePage.clickNewBtn()
                 .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
                 .clickSaveButton();
-        org.fundacionjala.sfdc.framework.objects.Lead expectedLead = (org.fundacionjala.sfdc.framework.objects.Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.Lead());
-        Assert.assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
+        org.fundacionjala.sfdc.framework.objects.Lead expectedLead =
+                (org.fundacionjala.sfdc.framework.objects.Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.Lead());
+        assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
                 + " " + expectedLead.lastName, "Lead not created properly, names does not match");
     }
 

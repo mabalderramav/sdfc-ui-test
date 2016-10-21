@@ -11,7 +11,7 @@ public class LeadCampaignLookup extends CampaignLookup {
     /**
      * This method select the campaign given a name.
      *
-     * @param parentCampaign the campaign name to be selected
+     * @param parentCampaign the campaign name to be selected.
      * @return the current Lead form.
      */
     public LeadForm selectCampaignWithName(final String parentCampaign) {
