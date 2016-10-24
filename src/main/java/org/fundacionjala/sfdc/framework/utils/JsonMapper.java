@@ -1,13 +1,12 @@
 package org.fundacionjala.sfdc.framework.utils;
 
-import java.io.File;
-import java.io.IOException;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import org.fundacionjala.sfdc.framework.objects.ElementBase;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This class manage the json.

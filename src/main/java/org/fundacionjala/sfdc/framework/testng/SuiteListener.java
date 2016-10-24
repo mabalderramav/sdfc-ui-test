@@ -1,7 +1,6 @@
 package org.fundacionjala.sfdc.framework.testng;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.MainApp;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
 

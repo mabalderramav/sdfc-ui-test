@@ -1,8 +1,5 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -13,6 +10,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by ivan on 26-06-15.
@@ -72,7 +72,6 @@ public class OpportunityDetail extends AbstractBasePage {
     @FindBy(id = "opp2_chkbox")
     @CacheLookup
     private WebElement privateFlagImg;
-
 
 
     /**
@@ -179,6 +178,7 @@ public class OpportunityDetail extends AbstractBasePage {
     public String getTypeText() {
         return typeLabel.getText();
     }
+
     /**
      * This method gets the delivery install.
      *
@@ -187,6 +187,7 @@ public class OpportunityDetail extends AbstractBasePage {
     public String getLeadSource() {
         return leadSourceLabel.getText();
     }
+
     /**
      * This method gets the delivery install.
      *
@@ -206,7 +207,7 @@ public class OpportunityDetail extends AbstractBasePage {
         try {
             driver.findElement(By.linkText(opportunityName)).getText();
             return true;
-        } catch(WebDriverException e) {
+        } catch (WebDriverException e) {
             return false;
         }
     }

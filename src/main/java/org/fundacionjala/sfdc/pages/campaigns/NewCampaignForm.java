@@ -1,12 +1,11 @@
 package org.fundacionjala.sfdc.pages.campaigns;
 
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
-
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.CacheLookup;
+import org.openqa.selenium.support.FindBy;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
@@ -48,22 +47,27 @@ public class NewCampaignForm extends AbstractBasePage {
         CommonActions.sendKeys(CampaingNameField, text);
         return this;
     }
+
     public NewCampaignForm checkActiveCheckbox() {
         CommonActions.check(ActiveCheckbox);
         return this;
     }
+
     public NewCampaignForm selectTypeDropdown(String item) {
         CommonActions.selectItem(TypeDropdown, item);
         return this;
     }
+
     public NewCampaignForm setStartDateField(String date) {
         CommonActions.sendKeys(StartDateField, date);
         return this;
     }
+
     public CampaignLookup clickLookUpIcon() {
         CommonActions.clickElement(LookUpIcon);
         return new CampaignLookup();
     }
+
     public CampaignProfile clickSaveButton() {
         CommonActions.clickElement(SaveButton);
         return new CampaignProfile();

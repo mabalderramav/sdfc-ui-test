@@ -1,17 +1,16 @@
 package org.fundacionjala.sfdc.unittest.product;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
-
 import org.testng.Assert;
+import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.annotations.AfterTest;
 
 /**
  * Created by Ruber Cuellar
@@ -29,16 +28,15 @@ public class CreateProduct {
     //endregion
 
     //region values
-    private String  productName         = "product_001";
-    private String  productCode         = "prod_001";
-    private String  descriptionProduct  = "description Test";
-    private boolean isActive            = true;
-    private String  productFamily       = "None";
+    private String productName = "product_001";
+    private String productCode = "prod_001";
+    private String descriptionProduct = "description Test";
+    private boolean isActive = true;
+    private String productFamily = "None";
     //endregion
 
     @BeforeTest
-    public void BeforeTest()
-    {
+    public void BeforeTest() {
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -46,8 +44,7 @@ public class CreateProduct {
     }
 
     @Test
-    public void CreateProduct()
-    {
+    public void CreateProduct() {
         newProductForm = productsHome.clickNewButton();
         productProfile = newProductForm
                 .setProductName(productName)
@@ -66,8 +63,7 @@ public class CreateProduct {
     }
 
     @AfterTest
-    public void afterTest()
-    {
+    public void afterTest() {
         productProfile.clickDeleteButton();
     }
 }

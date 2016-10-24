@@ -7,6 +7,7 @@ public class ElementBase {
 
     public String description;
 
-    public ElementBase(){}
+    public ElementBase() {
+    }
 
 }
