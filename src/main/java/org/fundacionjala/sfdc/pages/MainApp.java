@@ -7,31 +7,39 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
-public class MainApp extends AbstractBasePage{
+public class MainApp extends AbstractBasePage {
 
     @FindBy(id = "userNavButton")
     @CacheLookup
     private WebElement userBtn;
-    
-    
+
+    @FindBy(css = "#recentItems tr:first-child td a")
+    private WebElement userInformationLink;
+
     @FindBy(linkText = "Logout")
     @CacheLookup
     private WebElement logoutBtn;
 
-    public MainApp clickUserButton(){
-    	CommonActions.clickElement(userBtn);
-    	return this;
+    public MainApp clickUserButton() {
+        CommonActions.clickElement(userBtn);
+        return this;
     }
-    
-    public void clickLogout () {
-    	CommonActions.clickElement(logoutBtn);
+
+    public void clickLogout() {
+        CommonActions.clickElement(logoutBtn);
     }
-    
-   public TabBar goToTabBar() {
-	   return new TabBar();
-   }
-   
-   public void closeMainApp() {
-   		driver.quit();      
-   }
+
+    public TabBar goToTabBar() {
+        return new TabBar();
+    }
+
+    public UserInformationPage clickUserInformationLink(){
+        CommonActions.clickElement(userInformationLink);
+        return new UserInformationPage();
+    }
+
+
+    public void closeMainApp() {
+        driver.quit();
+    }
 }
