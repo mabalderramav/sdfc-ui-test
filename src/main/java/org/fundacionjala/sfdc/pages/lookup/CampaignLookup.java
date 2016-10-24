@@ -10,21 +10,23 @@ public class CampaignLookup extends ModalWindow {
 
     public static final String ALL_CAMPAIGN = "All Campaigns";
 
-    public CampaignLookup(){
+    public CampaignLookup() {
         init();
     }
 
     public CampaignForm selectCampaignWithNameByScope(String parentCampaign, String scope) {
         setSearchCampaignByScope(parentCampaign,scope);
+
         setACampaignFromResults();
         return new CampaignForm();
     }
 
-    public void setSearchCampaignByScope(String campaign, String scope){
+    public void setSearchCampaignByScope(String campaign, String scope) {
         SearchSectionFrame searchFrame = new SearchSectionFrame();
-        searchFrame.searchTheCampaign(campaign,scope);
+        searchFrame.searchTheCampaign(campaign, scope);
     }
-    public void setACampaignFromResults(){
+
+    public void setACampaignFromResults() {
         ListSectionFrame listFrame = new ListSectionFrame();
         listFrame.selectACampaignFromTheList();
         switchToParentWithoutCloseAction();

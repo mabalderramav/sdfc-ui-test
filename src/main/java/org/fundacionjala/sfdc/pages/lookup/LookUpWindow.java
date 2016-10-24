@@ -72,18 +72,15 @@ public class LookUpWindow extends ModalWindow {
         return new OpportunityForm();
     }
 
-    public LookUpWindow switchSearchFrame()
-    {
+    public LookUpWindow switchSearchFrame() {
         driver.switchTo().frame(SearchFrame);
         return this;
     }
 
-    public LookUpWindow switchResultsFrame()
-    {
+    public LookUpWindow switchResultsFrame() {
         driver.switchTo().frame(SearchResultFrame);
         return this;
     }
-
 
 
 }

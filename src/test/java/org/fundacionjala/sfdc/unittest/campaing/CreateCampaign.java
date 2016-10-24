@@ -7,11 +7,14 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
 import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
 import org.fundacionjala.sfdc.utils.Common;
+
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
+
 import java.util.Map;
+
 import java.util.Random;
 
 import static org.testng.Assert.assertEquals;

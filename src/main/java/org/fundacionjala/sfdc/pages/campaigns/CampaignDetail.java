@@ -3,6 +3,7 @@ package org.fundacionjala.sfdc.pages.campaigns;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -11,7 +12,9 @@ import org.openqa.selenium.support.FindBy;
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
+
 public class CampaignDetail extends DetailBase{
+
 
     //region Locators
 
@@ -35,6 +38,7 @@ public class CampaignDetail extends DetailBase{
 
     public Campaigns clickDeleteButton() {
         CommonActions.clickElement(deleteButton);
+
         Alert alert = driver.switchTo().alert();
         alert.accept();
         driver.switchTo().defaultContent();
