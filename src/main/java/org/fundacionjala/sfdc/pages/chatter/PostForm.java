@@ -26,7 +26,7 @@ public class PostForm extends SectionFrame {
     @CacheLookup
     private WebElement saveBtn;
 
-    @FindBy(id = "quickActionFeedBodyInput")
+    @FindBy(css = "body.chatterPublisherRTE.cke_editable")
     @CacheLookup
     private WebElement editTxtArea;
 
@@ -39,7 +39,7 @@ public class PostForm extends SectionFrame {
 
     private String postText;
 
-    public void PostForm() {
+    public PostForm() {
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
     }
 
@@ -71,6 +71,7 @@ public class PostForm extends SectionFrame {
     }
 
     public PostContainer clickSaveBtn() {
+        driver.switchTo().defaultContent();
         CommonActions.clickElement(saveBtn);
         return new PostContainer().setPostTxt(postText);
     }
