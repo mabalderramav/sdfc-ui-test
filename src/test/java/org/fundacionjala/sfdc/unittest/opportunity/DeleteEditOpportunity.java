@@ -6,16 +6,17 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
-import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
+import org.fundacionjala.sfdc.utils.Common;
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
+import org.testng.annotations.*;
 
-import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.valuesListAssert;
-import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.valuesMapCreate;
+import java.util.Map;
+
+import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.OPPORTUNITY_DATA_PATH;
+
 
 /**
  * This class is a test to create a opportunity
@@ -24,19 +25,22 @@ public class DeleteEditOpportunity {
 
     private TabBar tabBar;
     private LoginPage loginPage;
-    private Opportunity opportunityHome;
+    private OpportunityHome opportunityHomeHome;
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
     private AccountAbstractPage accountsHome;
     private NewAccountPage newAccountForm;
     private AccountProfile accountProfile;
     private MainApp mainApp;
-
+    public static final String OPPORTUNITY_DATA_EDIT_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
+    private Map<String,String> valuesMapJson;
+    private Map<String,String> valuesMapEditJson;
     /**
      * This method is a preconditions to create a opportunities
      */
-    @BeforeTest
+    @BeforeMethod
     public void BeforeTest() {
+        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -44,14 +48,14 @@ public class DeleteEditOpportunity {
         accountsHome = tabBar.clickOnAccountsHome();
         newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapCreate.get("accountName"))
+                .setAccountName(valuesMapJson.get("accountName"))
                 .pressSaveBtn();
-        opportunityHome = tabBar.clickOnOpportunitiesHome();
-        opportunityForm = opportunityHome.clickNewButton();
+        opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
+        opportunityForm = opportunityHomeHome.clickNewButton();
 
-        valuesMapCreate.keySet()
-                .forEach(step -> opportunityForm.getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+        opportunityForm.fillTheForm(valuesMapJson);
         opportunityDetail = opportunityForm.pressSaveBtn();
+
     }
 
     /**
@@ -60,7 +64,7 @@ public class DeleteEditOpportunity {
     @Test
     public void DeleteOpportunity() {
         opportunityDetail.clickDeteleBtn();
-        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapCreate.get("accountName")), "Product Deleted");
+        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get("opportunityName")));
     }
 
     /**
@@ -69,22 +73,20 @@ public class DeleteEditOpportunity {
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-        opportunityForm.fillValues(valuesMapCreate);
+        valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        opportunityForm.fillTheForm(valuesMapEditJson);
         opportunityDetail = opportunityForm.pressSaveBtn();
-
-        valuesListAssert
-                .forEach(value -> Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).getText()
-                        , valuesMapCreate.get(value)));
+        new AssertOpportunity().assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
     /**
      * This is a post conditions a opportunities.
      */
-    @AfterTest
+    @AfterMethod
     public void afterTest() {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapCreate.get("accountName"));
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
         mainApp = accountProfile.deleteAccount();
         mainApp.clickUserButton().clickLogout();
     }

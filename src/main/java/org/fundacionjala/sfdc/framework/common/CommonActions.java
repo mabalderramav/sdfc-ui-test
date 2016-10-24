@@ -15,7 +15,7 @@ import org.fundacionjala.sfdc.framework.browser.DriverManager;
  * <p>
  * Updated by Pablo Zubieta on 27/08/2015.
  * This class contains the common procedures to manage Add, and Delete elements from different components:
- * Leads, Campaign, Account, Contact, Opportunity, Products
+ * Leads, Campaign, Account, Contact, OpportunityHome, Products
  */
 public final class CommonActions {
 

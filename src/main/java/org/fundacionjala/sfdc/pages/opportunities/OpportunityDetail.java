@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
@@ -28,37 +29,46 @@ public class OpportunityDetail extends AbstractBasePage {
     @CacheLookup
     private WebElement editBtn;
 
-    //Opportunity Name
     @FindBy(id = "opp3_ileinner")
     @CacheLookup
     private WebElement opportunityNameLabel;
 
-    //Account Name
     @FindBy(id = "opp4_ileinner")
     @CacheLookup
     private WebElement accountNameLabel;
 
-    //Close Date
+    @FindBy(id = "opp5_ileinner")
+    @CacheLookup
+    private WebElement typeLabel;
+
+    @FindBy(id = "opp6_ileinner")
+    @CacheLookup
+    private WebElement leadSourceLabel;
+
+    @FindBy(id = "opp7_ileinner")
+    @CacheLookup
+    private WebElement amountLabel;
+
     @FindBy(id = "opp9_ileinner")
     @CacheLookup
     private WebElement closeDateLabel;
 
-    //Stage
-    @FindBy(id = "opp11_ilecell")
+    @FindBy(id = "opp10_ileinner")
+    @CacheLookup
+    private WebElement nextStepLabel;
+
+    @FindBy(id = "opp11_ileinner")
     @CacheLookup
     private WebElement stageLabel;
 
-    //Order Number
     @FindBy(xpath = "//td[contains(.,'Order Number')]/following::div")
     @CacheLookup
     private WebElement orderNumberLabel;
 
-    //Delivery/Installation Status
     @FindBy(xpath = "//td[contains(.,'Delivery/Installation Status')]/following::div")
     @CacheLookup
     private WebElement deliveryInstallLabel;
 
-    // private Flag
     @FindBy(id = "opp2_chkbox")
     @CacheLookup
     private WebElement privateFlagImg;
@@ -153,19 +163,54 @@ public class OpportunityDetail extends AbstractBasePage {
     }
 
     /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getAmount() {
+        return amountLabel.getText();
+    }
+
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getTypeText() {
+        return typeLabel.getText();
+    }
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getLeadSource() {
+        return leadSourceLabel.getText();
+    }
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getNextStep() {
+        return nextStepLabel.getText();
+    }
+
+    /**
      * This method verify if opportunity is displayed.
      *
-     * @param Opportunity string with name opportunity.
+     * @param opportunityName string with name opportunity.
      * @return a boolean.
      */
-    public boolean isOpportunityDisplayed(String Opportunity) {
+    public boolean isOpportunityDisplayed(String opportunityName) {
         try {
-            driver.findElement(By.linkText(Opportunity));
-        } catch (WebDriverException e) {
+            driver.findElement(By.linkText(opportunityName)).getText();
+            return true;
+        } catch(WebDriverException e) {
             return false;
         }
-        return true;
     }
+
 
     /**
      * Method that to permit gets texts.
@@ -180,8 +225,14 @@ public class OpportunityDetail extends AbstractBasePage {
         strategyMap.put("orderNumber", this::getOrderNumber);
         strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
         strategyMap.put("accountName", this::getAccountName);
+        strategyMap.put("CurrentCloseDate", this::getCloseDate);
+        strategyMap.put("type", this::getTypeText);
+        strategyMap.put("leadSource", this::getLeadSource);
+        strategyMap.put("nextStep", this::getNextStep);
+        strategyMap.put("amount", this::getAmount);
 
         return strategyMap;
     }
+
 
 }

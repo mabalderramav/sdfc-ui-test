@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.pages.contacts;
 
+import org.fundacionjala.sfdc.pages.FormSteps;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -7,10 +8,13 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * Created by Gisela on 6/28/2015.
  */
-public class NewContactForm extends AbstractBasePage{
+public class ContactForm extends AbstractBasePage{
 
     @FindBy(id = "name_salutationcon2")
     @CacheLookup
@@ -76,59 +80,76 @@ public class NewContactForm extends AbstractBasePage{
     @CacheLookup
     WebElement cancelBtn;
 
-    public NewContactForm selectFirstNameCategory(String item) {
+    public ContactForm selectFirstNameCategory(String item) {
         CommonActions.selectItem(firstNameCategoryField, item);
         return this;
     }
 
-    public NewContactForm setContactNameField(String text) {
+    public ContactForm setContactNameField(String text) {
         CommonActions.sendKeys(firstNameField, text);
         return this;
     }
 
-    public NewContactForm setLastName(String text) {
+    public ContactForm setLastName(String text) {
         CommonActions.sendKeys(lastNameField, text);
         return this;
     }
 
-    public NewContactForm setAccountName(String text) {
+    public ContactForm setAccountName(String text) {
         CommonActions.sendKeys(accountNameField, text);
         return this;
     }
 
-    public NewContactForm setTitle(String text) {
+    public ContactForm setTitle(String text) {
         CommonActions.sendKeys(titleField, text);
         return this;
     }
 
-    public NewContactForm setDepartment(String text) {
+    public ContactForm setDepartment(String text) {
         CommonActions.sendKeys(departmentField, text);
         return this;
     }
 
-    public NewContactForm setBirthDate(String date) {
+    public ContactForm setBirthDate(String date) {
         CommonActions.sendKeys(birthDateField, date);
         return this;
     }
-/*
-    public LookUpWindow clickReportTo() {
-        CommonActions.clickElement(reportToField);
-        return new LookUpWindow(Driver);
-    }*/
 
-    public NewContactForm selectLeadSource(String item) {
+    public ContactForm selectLeadSource(String item) {
         CommonActions.selectItem(leadSourceField, item);
         return this;
     }
 
-    public ContactsProfile clickSaveButton() {
+    public ContactsDetail clickSaveButton() {
         CommonActions.clickElement(saveBtn);
-        return new ContactsProfile();
+        return new ContactsDetail();
     }
 
-//    public NewContactForm checkActiveCheckbox() {
-//        CommonActions.check(ActiveCheckbox);
-//        return this;
-//    }
+    /**
+     * Method that to permit set values to create a new OpportunityHome.
+     *
+     * @param values a map to set of the strategy
+     * @return a Map with the values of the opportunity create.
+     */
+    public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, FormSteps> strategyMap = new HashMap();
 
+        strategyMap.put("firstNameCategory", () -> selectFirstNameCategory(String.valueOf(values.get("firstNameCategory"))));
+        strategyMap.put("contactName", () -> setContactNameField(String.valueOf(values.get("contactName"))));
+        strategyMap.put("lastName", () -> setLastName(String.valueOf(values.get("lastName"))));
+        strategyMap.put("title", () -> setTitle(String.valueOf(values.get("title"))));
+        strategyMap.put("department", () -> setDepartment(String.valueOf(values.get("department"))));
+
+        return strategyMap;
+    }
+
+    /**
+     * This method loads data to fill the form for a given Json file.
+     *
+     * @param valuesMapCreate
+     */
+    public void fillTheForm(Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    }
 }

@@ -5,8 +5,8 @@ import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
-import org.fundacionjala.sfdc.pages.contacts.ContactsAbstractPage;
-import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
+import org.fundacionjala.sfdc.pages.contacts.ContactHome;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -57,17 +57,17 @@ public class TabBar extends AbstractBasePage{
         return new CampaignsHome();
     }
 
-    public ContactsAbstractPage clickOnContactsHome() {
+    public ContactHome clickOnContactsHome() {
         CommonActions.clickElement(contactsTab);
-        return new ContactsAbstractPage();
+        return new ContactHome();
     }
     public Product clickOnProductsHome() {
         CommonActions.clickElement(productsTab);
         return new Product();
     }
-    public Opportunity clickOnOpportunitiesHome() {
+    public OpportunityHome clickOnOpportunitiesHome() {
         CommonActions.clickElement(opportunitiesTab);
-        return new Opportunity();
+        return new OpportunityHome();
     }
     public AccountAbstractPage clickOnAccountsHome() {
         CommonActions.clickElement(accountTab);

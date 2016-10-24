@@ -10,7 +10,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * This class represents to opportunity pages.
  */
-public class Opportunity extends AbstractBasePage {
+public class OpportunityHome extends AbstractBasePage {
 
     @FindBy(xpath = "//*[@name='new' and @type='button']")
     @CacheLookup

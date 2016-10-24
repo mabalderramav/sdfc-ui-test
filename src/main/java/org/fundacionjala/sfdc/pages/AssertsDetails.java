@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.pages.opportunities;
+package org.fundacionjala.sfdc.pages;
 
 /**
  * This is a interface to the asserts.
