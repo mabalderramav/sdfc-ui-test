@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
+import org.fundacionjala.sfdc.pages.leads.LeadHome;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -7,24 +8,23 @@ import org.testng.annotations.Test;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 
 import static org.testng.Assert.assertFalse;
 
 /**
- * This class update and delete Lead.
+ * This class update and delete LeadHome.
  */
 public class UpdateDeleteLead {
     private LeadDetails leadDetails;
-    private Lead leadHomePage;
+    private LeadHome leadHomeHomePage;
     @BeforeTest
     public void setUp(){
         LoginPage loginPage = new LoginPage();
         MainApp mainApp = loginPage.loginAsPrimaryUser();
         TabBar tabBar = new MainApp().goToTabBar();
-        leadHomePage = tabBar.clickLead();
-        leadDetails = leadHomePage.clickNewBtn()
+        leadHomeHomePage = tabBar.clickLead();
+        leadDetails = leadHomeHomePage.clickNewBtn()
                 .setFirstNameField("Test Name 01")
                 .setLastNameField("Test LastName")
                 .setCompanyField("Company Test")
@@ -33,7 +33,7 @@ public class UpdateDeleteLead {
     @Test
     public void deleteLead(){
         leadDetails.deleteLead();
-        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
+        assertFalse(leadHomeHomePage.isLeadDisplayed("Test Name 01"));
     }
     @Test void updateLead(){
 

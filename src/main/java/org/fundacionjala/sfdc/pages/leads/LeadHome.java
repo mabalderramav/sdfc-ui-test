@@ -9,12 +9,12 @@ import org.fundacionjala.sfdc.pages.base.ElementFormBasePage;
  * This class holds leads home page elements and inherits from FormBasePage the basic button "new".
  */
 
-public class Lead extends ElementFormBasePage {
+public class LeadHome extends ElementFormBasePage {
 
     /**
-     * This method make a click on the new button to create a new Lead.
+     * This method make a click on the new button to create a new LeadHome.
      *
-     * @return the Form to create a new Lead.
+     * @return the Form to create a new LeadHome.
      */
     public LeadForm clickNewBtn() {
         newElementBtn.click();
@@ -28,4 +28,5 @@ public class Lead extends ElementFormBasePage {
             return false;
         }
     }
+
 }

@@ -4,21 +4,19 @@ import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.leads.Lead;
+import org.fundacionjala.sfdc.pages.leads.LeadBuilder;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
-
-import static org.testng.Assert.assertEquals;
+import org.fundacionjala.sfdc.pages.leads.LeadHome;
 
 /**
- * This class verify the Creation of Lead.
+ * This class verify the Creation of LeadHome.
  */
 public class CreateLead {
-    private Lead leadHomePage;
+    private LeadHome leadHomePage;
     private MainApp mainApp;
     private TabBar tabBar;
     private LeadDetails leadDetails;
@@ -30,29 +28,40 @@ public class CreateLead {
      */
     @BeforeTest
     public void setUp() {
-        //loginPage = new LoginPage();
-        //mainApp = loginPage.loginAsPrimaryUser();
+        loginPage = new LoginPage();
+        mainApp = loginPage.loginAsPrimaryUser();
         tabBar = new MainApp().goToTabBar();
         leadHomePage = tabBar.clickLead();
         // create campaign
     }
 
     /**
-     * This method create a new Lead and make the corresponding assertions.
+     * This method create a new LeadHome and make the corresponding assertions.
      */
     @Test
     public void createLeadTest(){
-        leadDetails = leadHomePage.clickNewBtn()
+      /*  leadDetails = leadHomePage.clickNewBtn()
                 .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
                 .clickSaveButton();
-        org.fundacionjala.sfdc.framework.objects.Lead expectedLead =
-                (org.fundacionjala.sfdc.framework.objects.Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.Lead());
+        org.fundacionjala.sfdc.framework.objects.LeadHome expectedLead =
+                (org.fundacionjala.sfdc.framework.objects.LeadHome)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.LeadHome());
         assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
-                + " " + expectedLead.lastName, "Lead not created properly, names does not match");
+                + " " + expectedLead.lastName, "LeadHome not created properly, names does not match");
+                */
+        String firstName = "Test Name 01";
+        String lastName = "Test LastName";
+        String company = "Company Test";
+        LeadForm leadForm = leadHomePage.clickNewBtn();
+        leadForm = new LeadBuilder()
+                .setFirstName(firstName)
+                .setLastName(lastName)
+                .setCompany(company)
+                .build();
+        leadDetails = leadForm.clickSaveButton();
     }
 
     /**
-     * This method delete the created Lead.
+     * This method delete the created LeadHome.
      */
     @AfterTest
     public void tearDown() {
