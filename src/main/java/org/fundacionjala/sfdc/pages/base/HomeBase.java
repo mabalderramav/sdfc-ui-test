@@ -24,30 +24,21 @@ public abstract class HomeBase extends AbstractBasePage {
      *
      * @return {@link FormBase}
      */
-    public AbstractBasePage clickNewButton() {
-        CommonActions.clickElement(newButton);
-        return new FormBase();
-    }
+    public abstract AbstractBasePage clickNewButton();
 
     /**
      * Clicks on "Create New View" link.
      *
      * @return {@link FormBase}
      */
-    public AbstractBasePage clickCreateNewViewLink() {
-        CommonActions.clickElement(createNewViewLink);
-        return new FormBase();
-    }
+    public abstract AbstractBasePage clickCreateNewViewLink();
 
     /**
      * Clicks on "Edit" link.
      *
      * @return {@link FormBase}
      */
-    public AbstractBasePage clickEditViewLink() {
-        CommonActions.clickElement(editViewLink);
-        return new FormBase();
-    }
+    public abstract AbstractBasePage clickEditViewLink();
 
     /**
      * Search an object within the initial list on the corresponding page.

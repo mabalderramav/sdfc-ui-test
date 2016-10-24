@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.framework.common.CommonActions;
  * This class contains the common procedures to manage Add, and Delete elements from different components:
  * Leads, Campaign, Account, Contact, Opportunity, Products
  */
-public class FormBase extends AbstractBasePage {
+public abstract class FormBase extends AbstractBasePage {
     @FindBy(name = "save")
     protected WebElement saveButton;
 
@@ -33,25 +33,19 @@ public class FormBase extends AbstractBasePage {
      *
      * @return {@link DetailBase}
      */
-    protected AbstractBasePage clickSaveButton() {
-        CommonActions.clickElement(saveButton);
-        return new DetailBase();
-    }
+    public abstract AbstractBasePage clickSaveButton();
 
     /**
      * Clicks on "Save&New" button.
      *
      * @return {@link FormBase}
      */
-    protected AbstractBasePage clickSaveNewButton() {
-        CommonActions.clickElement(saveNewBtn);
-        return new FormBase();
-    }
+    public abstract AbstractBasePage clickSaveNewButton();
 
     /**
      * Clicks on "Cancel" button.
      */
-    protected void clickCancelButton() {
+    public void clickCancelButton() {
         CommonActions.clickElement(cancelBtn);
     }
 

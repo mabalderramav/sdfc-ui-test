@@ -240,4 +240,13 @@ public class LeadForm extends FormBase {
         CommonActions.clickElement(saveButton);
         return new LeadDetails();
     }
+
+    /**
+     * {@link FormBase}
+     */
+    @Override
+    public AbstractBasePage clickSaveNewButton() {
+        CommonActions.clickElement(saveNewBtn);
+        return new LeadForm();
+    }
 }

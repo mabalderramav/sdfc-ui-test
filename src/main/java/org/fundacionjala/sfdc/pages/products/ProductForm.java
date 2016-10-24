@@ -8,17 +8,12 @@ import org.openqa.selenium.support.ui.Select;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
 
 /**
  * This class handle the product form.
  */
-public class ProductForm extends AbstractBasePage {
-
-    private static final String BLANK = "";
-
-    @FindBy(name = "save")
-    @CacheLookup
-    private WebElement saveButton;
+public class ProductForm extends FormBase {
 
     @FindBy(id = "Name")
     @CacheLookup
@@ -107,12 +102,20 @@ public class ProductForm extends AbstractBasePage {
     }
 
     /**
-     * This method doing click on "Save" button.
-     *
-     * @return Return this class.
+     * {@link FormBase}
      */
+    @Override
     public ProductDetail clickSaveButton() {
         CommonActions.clickElement(saveButton);
+        return new ProductDetail();
+    }
+
+    /**
+     * {@link FormBase}
+     */
+    @Override
+    public AbstractBasePage clickSaveNewButton() {
+        CommonActions.clickElement(saveNewBtn);
         return new ProductDetail();
     }
 }
