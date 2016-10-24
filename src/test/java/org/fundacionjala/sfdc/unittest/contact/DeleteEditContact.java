@@ -1,25 +1,25 @@
 package org.fundacionjala.sfdc.unittest.contact;
 
 
+import java.util.Map;
+
+import org.fundacionjala.sfdc.pages.LoginPage;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.contacts.ContactForm;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
+import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
 import org.fundacionjala.sfdc.utils.Common;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
-
-import java.util.Map;
 
 import static org.fundacionjala.sfdc.unittest.contact.CreateContact.CONTACT_DATA_PATH;
 
 
 /**
- * This test is to delete and
+ * This method is a preconditions to edit and delete a contact.
  */
 public class DeleteEditContact {
 
@@ -35,6 +35,9 @@ public class DeleteEditContact {
     private Map<String, String> valuesMapJson;
     private Map<String, String> valuesMapEditJson;
 
+    /**
+     * This method is a preconditions to edit and delete a contact.
+     */
     @BeforeMethod
     public void login() {
         valuesMapJson = Common.getMapJson(CONTACT_DATA_PATH);
@@ -48,6 +51,9 @@ public class DeleteEditContact {
         contactsDetail = contactForm.clickSaveButton();
     }
 
+    /**
+     * This method is to edit a contact.
+     */
     @Test
     public void EditContact() {
         contactForm = contactsDetail.clickEditContact();
@@ -57,6 +63,9 @@ public class DeleteEditContact {
         new AssertContact().assertDetailValues(contactsDetail, valuesMapEditJson);
     }
 
+    /**
+     * This method is to delete a contact.
+     */
     @Test
     public void DeleteContact() {
         contactsDetail.deleteContact();
@@ -64,6 +73,9 @@ public class DeleteEditContact {
                 .concat(COLON).concat(valuesMapJson.get("contactName"))));
     }
 
+    /**
+     * This is a post conditions of a opportunity.
+     */
     @AfterMethod
     public void afterTest() {
         mainApp.clickUserButton().clickLogout();

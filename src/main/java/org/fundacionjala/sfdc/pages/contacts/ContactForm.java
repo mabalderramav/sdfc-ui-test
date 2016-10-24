@@ -1,132 +1,172 @@
 package org.fundacionjala.sfdc.pages.contacts;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-
-import java.util.HashMap;
-import java.util.Map;
-
 /**
- * Created by Gisela on 6/28/2015.
+ * This class represent Contact Form.
  */
-public class ContactForm extends AbstractBasePage{
+public class ContactForm extends AbstractBasePage {
 
     @FindBy(id = "name_salutationcon2")
     @CacheLookup
-    WebElement firstNameCategoryField;
+    private WebElement firstNameCategoryField;
 
-    //@FindBy(xpath = "//input[@id='name_firstcon2']")
     @FindBy(id = "name_firstcon2")
     @CacheLookup
-    WebElement firstNameField;
+    private WebElement firstNameField;
 
-   // @FindBy(xpath = "//input[@id='name_lastcon2']")
     @FindBy(id = "name_lastcon2")
     @CacheLookup
-    WebElement lastNameField;
+    private WebElement lastNameField;
 
-    //@FindBy(xpath = "//input[@id='con4']")
     @FindBy(id = "con4")
     @CacheLookup
-    WebElement accountNameField;
+    private WebElement accountNameField;
 
-    //@FindBy(xpath = "//input[@id='con5']")
     @FindBy(id = "con5")
     @CacheLookup
-    WebElement titleField;
+    private WebElement titleField;
 
-    //@FindBy(xpath = "//input[@id='con6']")
     @FindBy(id = "con6")
     @CacheLookup
-    WebElement departmentField;
+    private WebElement departmentField;
 
-    //@FindBy(xpath = "//input[@data-uidsfdc='39']")
     @FindBy(id = "con7")
     @CacheLookup
-    WebElement birthDateField;
+    private WebElement birthDateField;
 
-    //@FindBy(xpath = "//input[@id='con8']")
     @FindBy(id = "con8")
     @CacheLookup
-    WebElement reportToField;
+    private WebElement reportToField;
 
-    //@FindBy(xpath = "//select[@id='con9']")
     @FindBy(id = "con9")
     @CacheLookup
-    WebElement leadSourceField;
+    private WebElement leadSourceField;
 
-    //@FindBy(xpath = "//input[@id='con10']")
     @FindBy(id = "con10")
     @CacheLookup
-    WebElement phoneField;
+    private WebElement phoneField;
 
-
-    //Button
     @FindBy(xpath = "//input[@tabindex='31']")
-   // @FindBy(id = "//*[@name='save']")
     @CacheLookup
-    WebElement saveBtn;
+    private WebElement saveBtn;
 
     @FindBy(xpath = "//input[@tabindex='32']")
     @CacheLookup
-    WebElement saveNewBtn;
+    private WebElement saveNewBtn;
 
     @FindBy(xpath = "//input[@tabindex='33']")
     @CacheLookup
-    WebElement cancelBtn;
+    private WebElement cancelBtn;
 
-    public ContactForm selectFirstNameCategory(String item) {
+    /**
+     * This method is to select name category.
+     *
+     * @param item a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm selectFirstNameCategory(final String item) {
         CommonActions.selectItem(firstNameCategoryField, item);
         return this;
     }
 
-    public ContactForm setContactNameField(String text) {
+    /**
+     * This method is to select name category.
+     *
+     * @param text a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setContactNameField(final String text) {
         CommonActions.sendKeys(firstNameField, text);
         return this;
     }
 
-    public ContactForm setLastName(String text) {
+    /**
+     * This method is to select name category.
+     *
+     * @param text a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setLastName(final String text) {
         CommonActions.sendKeys(lastNameField, text);
         return this;
     }
 
-    public ContactForm setAccountName(String text) {
+    /**
+     * This method is to select name category.
+     *
+     * @param text a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setAccountName(final String text) {
         CommonActions.sendKeys(accountNameField, text);
         return this;
     }
 
-    public ContactForm setTitle(String text) {
+    /**
+     * This method is to select name category.
+     *
+     * @param text a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setTitle(final String text) {
         CommonActions.sendKeys(titleField, text);
         return this;
     }
 
-    public ContactForm setDepartment(String text) {
+    /**
+     * This method is to select name category.
+     *
+     * @param text a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setDepartment(final String text) {
         CommonActions.sendKeys(departmentField, text);
         return this;
     }
 
-    public ContactForm setBirthDate(String date) {
+    /**
+     * This method is to select name category.
+     *
+     * @param date a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm setBirthDate(final String date) {
         CommonActions.sendKeys(birthDateField, date);
         return this;
     }
 
-    public ContactForm selectLeadSource(String item) {
+    /**
+     * This method is to select name category.
+     *
+     * @param item a string to select.
+     * @return a Contact Form page object.
+     */
+    public ContactForm selectLeadSource(final String item) {
         CommonActions.selectItem(leadSourceField, item);
         return this;
     }
 
+    /**
+     * This method makes click save button.
+     *
+     * @return a Contact Detail page object.
+     */
     public ContactsDetail clickSaveButton() {
         CommonActions.clickElement(saveBtn);
         return new ContactsDetail();
     }
 
     /**
-     * Method that to permit set values to create a new OpportunityHome.
+     * Method that to permit set values to create a new Contact Home.
      *
      * @param values a map to set of the strategy
      * @return a Map with the values of the opportunity create.

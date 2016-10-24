@@ -15,11 +15,9 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by ivan on 26-06-15.
+ * This class represents of the opportunity detail.
  */
 public class OpportunityDetail extends AbstractBasePage {
-
-    //region Locators
 
     @FindBy(name = "del")
     @CacheLookup
@@ -74,7 +72,6 @@ public class OpportunityDetail extends AbstractBasePage {
     private WebElement privateFlagImg;
 
 
-
     /**
      * This method makes click on delete button.
      *
@@ -103,6 +100,11 @@ public class OpportunityDetail extends AbstractBasePage {
         return new OpportunityForm();
     }
 
+    /**
+     * This method compare the title.
+     *
+     * @return a boolean.
+     */
     public boolean isPrivateFlag() {
         String attributeState = privateFlagImg.getAttribute("title");
         return attributeState.equals("Checked");
@@ -179,6 +181,7 @@ public class OpportunityDetail extends AbstractBasePage {
     public String getTypeText() {
         return typeLabel.getText();
     }
+
     /**
      * This method gets the delivery install.
      *
@@ -187,6 +190,7 @@ public class OpportunityDetail extends AbstractBasePage {
     public String getLeadSource() {
         return leadSourceLabel.getText();
     }
+
     /**
      * This method gets the delivery install.
      *
@@ -206,7 +210,7 @@ public class OpportunityDetail extends AbstractBasePage {
         try {
             driver.findElement(By.linkText(opportunityName)).getText();
             return true;
-        } catch(WebDriverException e) {
+        } catch (WebDriverException e) {
             return false;
         }
     }
