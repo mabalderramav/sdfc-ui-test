@@ -8,6 +8,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.FormBasePage;
 
 /**
@@ -360,10 +361,14 @@ public class LeadDetails extends FormBasePage {
 
     }
 
-    public Map<String, AssertDetailLead> getStrategyAssertLead() {
-        final Map<String, AssertDetailLead> strategyMap = new HashMap();
+    public Map<String, AssertsDetails> getStrategyAssertLead() {
+        final Map<String, AssertsDetails> strategyMap = new HashMap();
+
         strategyMap.put("fullName", () -> getName());
         strategyMap.put("company", () -> getCompany());
+        strategyMap.put("company", () -> getCompany());
+        strategyMap.put("company", () -> getCompany());
+
         return strategyMap;
     }
 }

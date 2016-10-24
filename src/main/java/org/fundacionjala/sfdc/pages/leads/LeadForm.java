@@ -2,7 +2,6 @@ package org.fundacionjala.sfdc.pages.leads;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -12,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.framework.objects.Lead;
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBasePage;
 
 /**
@@ -257,12 +257,52 @@ public class LeadForm extends FormBasePage {
         return new LeadDetails();
     }
 
-    public Map<String, String> strategyMapInfoLead(final Map<String,String> leadData){
-        Map<String, String> strategyMapData = new HashMap<>();
-        Set<String> keys = leadData.keySet();
-        keys.forEach(key -> {
-            strategyMapData.put(key,leadData.get(key));
-        });
-        return strategyMapData;
+    public void fillTheForm(Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }
+
+    public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, FormSteps> strategyMap = new HashMap();
+
+        strategyMap.put("nameSalutation", () -> CommonActions.sendKeys(nameSalutationField, String.valueOf(values.get("nameSalutation"))));
+        strategyMap.put("firstName", () -> setFirstNameField(String.valueOf(values.get("firstName"))));
+        strategyMap.put("lastName", () -> setLastNameField(String.valueOf(values.get("lastName"))));
+        strategyMap.put("company", () -> setCompanyField(String.valueOf(values.get("company"))));
+        strategyMap.put("title", () -> CommonActions.sendKeys(titleField, String.valueOf(values.get("title"))));
+        strategyMap.put("leadSource", () -> CommonActions.selectItem(leadSourceField, String.valueOf(values.get("leadSource"))));
+        strategyMap.put("campaign", () -> selectCampaign(String.valueOf(values.get("campaign"))));
+        strategyMap.put("industry", () -> CommonActions.selectItem(industryField, String.valueOf(values.get("industry"))));
+        strategyMap.put("annualRevenue", () -> CommonActions.sendKeys(annualRevenueField, String.valueOf(values.get("annualRevenue"))));
+        strategyMap.put("phone", () -> CommonActions.sendKeys(phoneField, String.valueOf(values.get("phone"))));
+        strategyMap.put("mobile", () -> CommonActions.sendKeys(mobileField, String.valueOf(values.get("mobile"))));
+        strategyMap.put("fax", () -> CommonActions.sendKeys(faxField, String.valueOf(values.get("fax"))));
+
+        strategyMap.put("email", () -> CommonActions.sendKeys(emailField, String.valueOf(values.get("email"))));
+        strategyMap.put("website", () -> CommonActions.sendKeys(websiteField, String.valueOf(values.get("website"))));
+        strategyMap.put("leadStatus", () -> CommonActions.selectItem(leadStatusField, String.valueOf(values.get("leadStatus"))));
+        strategyMap.put("rating", () -> CommonActions.selectItem(ratingField, String.valueOf(values.get("rating"))));
+        strategyMap.put("numEmployees", () -> CommonActions.sendKeys(numEmployeesField, String.valueOf(values.get("numEmployees"))));
+        strategyMap.put("street", () -> CommonActions.sendKeys(streetField, String.valueOf(values.get("street"))));
+        strategyMap.put("city", () -> CommonActions.sendKeys(leadCityField, String.valueOf(values.get("city"))));
+        strategyMap.put("stateProvince", () -> CommonActions.sendKeys(stateField, String.valueOf(values.get("stateProvince"))));
+        strategyMap.put("zipCode", () -> CommonActions.sendKeys(zipCodeField, String.valueOf(values.get("zipCode"))));
+        strategyMap.put("country", () -> CommonActions.sendKeys(countryField, String.valueOf(values.get("country"))));
+        strategyMap.put("productInterest", () -> CommonActions.selectItem(productInterestField, String.valueOf(values.get("productInterest"))));
+        strategyMap.put("SICCode", () -> CommonActions.sendKeys(sicCodeField, String.valueOf(values.get("SICCode"))));
+        strategyMap.put("numberLocations", () -> CommonActions.sendKeys(numLocationsField, String.valueOf(values.get("numberLocations"))));
+        strategyMap.put("currentGenerators", () -> CommonActions.sendKeys(currentGeneratorsField, String.valueOf(values.get("currentGenerators"))));
+        strategyMap.put("primary", () -> CommonActions.selectItem(primaryField, String.valueOf(values.get("primary"))));
+        strategyMap.put("description", () -> CommonActions.sendKeys(descriptionField, String.valueOf(values.get("description"))));
+        strategyMap.put("assignRule", () -> setAssignRule(String.valueOf(values.get("assignRule"))));
+
+        return strategyMap;
+    }
+
+    public void setAssignRule(final String assignRule) {
+        if (leadObject.assignRule == "yes") {
+            CommonActions.check(assignRuleCheck);
+        }
+    }
+
 }
