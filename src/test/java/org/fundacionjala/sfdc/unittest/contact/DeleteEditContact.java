@@ -1,17 +1,17 @@
 package org.fundacionjala.sfdc.unittest.contact;
 
 
+import org.fundacionjala.sfdc.pages.LoginPage;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.contacts.ContactForm;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
+import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
 import org.fundacionjala.sfdc.utils.Common;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
 
 import java.util.Map;
 

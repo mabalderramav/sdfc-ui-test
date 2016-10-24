@@ -1,12 +1,11 @@
 package org.fundacionjala.sfdc.pages.contacts;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +13,7 @@ import java.util.Map;
 /**
  * Created by Gisela on 6/28/2015.
  */
-public class ContactForm extends AbstractBasePage{
+public class ContactForm extends AbstractBasePage {
 
     @FindBy(id = "name_salutationcon2")
     @CacheLookup
@@ -25,7 +24,7 @@ public class ContactForm extends AbstractBasePage{
     @CacheLookup
     WebElement firstNameField;
 
-   // @FindBy(xpath = "//input[@id='name_lastcon2']")
+    // @FindBy(xpath = "//input[@id='name_lastcon2']")
     @FindBy(id = "name_lastcon2")
     @CacheLookup
     WebElement lastNameField;
@@ -68,7 +67,7 @@ public class ContactForm extends AbstractBasePage{
 
     //Button
     @FindBy(xpath = "//input[@tabindex='31']")
-   // @FindBy(id = "//*[@name='save']")
+    // @FindBy(id = "//*[@name='save']")
     @CacheLookup
     WebElement saveBtn;
 

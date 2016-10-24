@@ -1,13 +1,12 @@
 package org.fundacionjala.sfdc.pages.products;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 /**
  * This class handle the product details.

@@ -1,13 +1,12 @@
 package org.fundacionjala.sfdc.pages;
 
 import org.fundacionjala.sfdc.framework.browser.DriverManager;
+import org.fundacionjala.sfdc.framework.utils.Environment;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.utils.Environment;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 public class LoginPage extends AbstractBasePage {
     public static final String baseURL = "https://na24.salesforce.com/";

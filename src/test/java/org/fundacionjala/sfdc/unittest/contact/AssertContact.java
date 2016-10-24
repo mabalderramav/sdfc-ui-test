@@ -3,7 +3,6 @@ package org.fundacionjala.sfdc.unittest.contact;
 import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
 import org.testng.Assert;
 
-
 import java.util.Map;
 
 /**

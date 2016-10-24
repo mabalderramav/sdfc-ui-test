@@ -1,11 +1,10 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 /**
  * Created by Gisela on 6/29/2015.
@@ -34,12 +33,12 @@ public class ChatterAbstractPage extends AbstractBasePage {
     @FindBy(xpath = "//textarea[@data-uidsfdc='126']")
     @CacheLookup
     WebElement commentText;
-   //driver.findElement(By.xpath("//input[@type='button']"));
+    //driver.findElement(By.xpath("//input[@type='button']"));
     //driver.findElement(By.xpath("//input[contains(@id,'ext-gen8')]"));
     @FindBy(xpath = "//input[contains(@id,'ext-gen8')]")
     @CacheLookup
     WebElement CommentButton;
-    
+
     @FindBy(id = "publishereditablearea")
     @CacheLookup
     WebElement textArea;
@@ -69,11 +68,11 @@ public class ChatterAbstractPage extends AbstractBasePage {
         return this;
     }
     */
-    
+
     public PostForm clickPostLnk() {
-    	CommonActions.clickElement(textArea);
+        CommonActions.clickElement(textArea);
         //Actions action = new Actions(driver);
         //action.moveToElement(textArea).build();
-    	return new PostForm();
+        return new PostForm();
     }
 }

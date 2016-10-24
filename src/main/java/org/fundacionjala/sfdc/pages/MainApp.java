@@ -1,11 +1,10 @@
 package org.fundacionjala.sfdc.pages;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 public class MainApp extends AbstractBasePage {
 
@@ -33,7 +32,7 @@ public class MainApp extends AbstractBasePage {
         return new TabBar();
     }
 
-    public UserInformationPage clickUserInformationLink(){
+    public UserInformationPage clickUserInformationLink() {
         CommonActions.clickElement(userInformationLink);
         return new UserInformationPage();
     }

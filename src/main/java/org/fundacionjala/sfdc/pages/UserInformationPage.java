@@ -25,7 +25,7 @@ public class UserInformationPage extends DetailBase {
         return null;
     }
 
-    public String getUserName(){
+    public String getUserName() {
         return CommonActions.getText(userName);
     }
 
