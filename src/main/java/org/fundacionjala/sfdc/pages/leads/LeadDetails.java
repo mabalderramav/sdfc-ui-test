@@ -11,13 +11,13 @@ import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.FormBasePage;
 
 /**
- * Class to manage the Detail of the Lead Page when it was created.
+ * Class to manage the Detail of the LeadHome Page when it was created.
  */
 public class LeadDetails extends FormBasePage {
 
     //region Locators
 
-    /*Lead Information*/
+    /*LeadHome Information*/
     @FindBy(id = "lea1_ileinner")
     @CacheLookup
     private WebElement owner;
@@ -125,7 +125,7 @@ public class LeadDetails extends FormBasePage {
 
 
     /**
-     * Method that gets the Owner that was registered in the creation of Lead.
+     * Method that gets the Owner that was registered in the creation of LeadHome.
      *
      * @return a string that is the Owner data.
      */
@@ -134,16 +134,16 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the Lead Name that was registered in the creation of Lead.
+     * This method gets the LeadHome Name that was registered in the creation of LeadHome.
      *
-     * @return the Lead Name.
+     * @return the LeadHome Name.
      */
     public String getName() {
         return name.getText();
     }
 
     /**
-     * This method gets the Company that was registered in the creation of Lead.
+     * This method gets the Company that was registered in the creation of LeadHome.
      *
      * @return a String that is the company information.
      */
@@ -152,25 +152,25 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the Title of the Lead.
+     * This method gets the Title of the LeadHome.
      *
-     * @return a String that is the Lead Title.
+     * @return a String that is the LeadHome Title.
      */
     public String getTitle() {
         return title.getText();
     }
 
     /**
-     * This method gets the Source info of the Lead.
+     * This method gets the Source info of the LeadHome.
      *
-     * @return a String that is the Source info of the Lead.
+     * @return a String that is the Source info of the LeadHome.
      */
     public String getLeadSource() {
         return leadSource.getText();
     }
 
     /**
-     * This method gets the selected industry for the Lead.
+     * This method gets the selected industry for the LeadHome.
      *
      * @return a String with the industry info.
      */
@@ -179,7 +179,7 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the Annual Revenue info for the Lead.
+     * This method gets the Annual Revenue info for the LeadHome.
      *
      * @return a String with the Anunal Revenue info.
      */
@@ -233,7 +233,7 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the status of the Lead.
+     * This method gets the status of the LeadHome.
      *
      * @return a String with the status info.
      */
@@ -332,7 +332,7 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the name of the user that created the Lead.
+     * This method gets the name of the user that created the LeadHome.
      *
      * @return a String with the user name.
      */
@@ -341,7 +341,7 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method gets the user name that was the last that modify the info of the Lead.
+     * This method gets the user name that was the last that modify the info of the LeadHome.
      *
      * @return a String with the user name.
      */
@@ -350,13 +350,13 @@ public class LeadDetails extends FormBasePage {
     }
 
     /**
-     * This method click on delete button to delete the Lead.
+     * This method click on delete button to delete the LeadHome.
      *
-     * @return a Lead
+     * @return a LeadHome
      */
-    public Lead deleteLead() {
+    public LeadHome deleteLead() {
         CommonActions.deleteMe(driver);
-        return new Lead();
+        return new LeadHome();
 
     }
 

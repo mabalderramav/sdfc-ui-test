@@ -15,7 +15,7 @@ import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.base.FormBasePage;
 
 /**
- * This class represent the Form to create a new Lead.
+ * This class represent the Form to create a new LeadHome.
  */
 public class LeadForm extends FormBasePage {
 
@@ -160,7 +160,7 @@ public class LeadForm extends FormBasePage {
      * This method loads data to fill the form for a given Json file.
      *
      * @param path the path where is the Json file.
-     * @return the Lead form.
+     * @return the LeadHome form.
      */
     public LeadForm fillNewLeadFromJson(final String path) {
         try {
@@ -173,7 +173,7 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method selects the campaign where the Lead is take in account.
+     * This method selects the campaign where the LeadHome is take in account.
      *
      * @param campaignLookupText the campaign name.
      */
@@ -187,7 +187,7 @@ public class LeadForm extends FormBasePage {
     /**
      * This method sets the Last name in the field.
      *
-     * @param lastName the last name of the Lead.
+     * @param lastName the last name of the LeadHome.
      * @return LeadForm object
      */
     public LeadForm setLastNameField(final String lastName) {
@@ -196,16 +196,17 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method sets the Status of the Lead.
+     * This method sets the Status of the LeadHome.
      *
-     * @param status the status of the Lead.
+     * @param status the status of the LeadHome.
      */
-    public void setStatusField(final String status) {
+    public LeadForm setStatusField(final String status) {
         CommonActions.sendKeys(leadStatusField, status);
+        return this;
     }
 
     /**
-     * This method sets the company name of the Lead.
+     * This method sets the company name of the LeadHome.
      *
      * @param company the company where the lead is working.
      * @return LeadForm object
@@ -216,7 +217,7 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method sets the first name of the Lead.
+     * This method sets the first name of the LeadHome.
      *
      * @param firstName the first name info.
      * @return LeadForm object
@@ -227,21 +228,23 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method set the Street of the Lead.
+     * This method set the Street of the LeadHome.
      *
-     * @param street the street info of the Lead.
+     * @param street the street info of the LeadHome.
      */
-    public void setStreetField(final String street) {
+    public LeadForm setStreetField(final String street) {
         CommonActions.sendKeys(streetField, street);
+        return this;
     }
 
     /**
-     * This method set the city of the Lead.
+     * This method set the city of the LeadHome.
      *
-     * @param city the city info of the Lead.
+     * @param city the city info of the LeadHome.
      */
-    public void setLeadCityField(final String city) {
+    public LeadForm setLeadCityField(final String city) {
         CommonActions.sendKeys(leadCityField, city);
+        return this;
     }
 
     /**
