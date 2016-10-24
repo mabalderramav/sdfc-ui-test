@@ -1,69 +1,49 @@
 package org.fundacionjala.sfdc.unittest.product;
 
-import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.utils.Common;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
-import org.testng.annotations.AfterTest;
 
 /**
  * Created by Ruber Cuellar
  */
 public class DeleteProduct {
 
+    private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
+
+    private Map<String, String> valuesMapJson;
+
     //region Objects
-    private ProductHome productsHome;
-    private LookUpWindow lookUpWindow;
+    private ProductHome productHome;
     private MainApp mainApp;
     private TabBar tabBar;
-    private ProductDetail productProfile;
+    private ProductDetail productDetail;
     private ProductForm newProductForm;
-    private LoginPage loginPage;
-    //endregion
-
-    //region values
-    private String  productName         = "product_001";
-    private String  productCode         = "prod_001";
-    private String  descriptionProduct  = "description Test";
-    private boolean isActive            = true;
-    private String  productFamily       = "None";
     //endregion
 
     @BeforeTest
-    public void BeforeTest()
-    {
-        loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
+    public void setup() {
+        valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
+        mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
-        productsHome = tabBar.clickOnProductsHome();
-        newProductForm = productsHome.clickNewButton();
-        productProfile = newProductForm
-                .setProductName(productName)
-                .setProductCode(productCode)
-                .checkActiveFlag(isActive)
-                .chooseProductFamilyDdl(productFamily)
-                .setDescription(descriptionProduct)
-                .clickSaveButton();
+        productHome = tabBar.clickOnProductsHome();
+        newProductForm = productHome.clickNewButton();
+        newProductForm.fillTheForm(valuesMapJson);
+        productDetail = newProductForm.clickSaveButton();
     }
 
     @Test
-    public void DeleteProduct()
-    {
-        productProfile.clickDeleteButton();
-        Assert.assertFalse(productProfile.isProductDisplayed(productName), "ProductHome Deleted");
+    public void deleteProduct() {
+        productDetail.clickDeleteButton();
+        Assert.assertFalse(productDetail.isProductDisplayed(valuesMapJson.get("productName")), "ProductHome Deleted");
     }
-
-    @AfterTest
-    public void afterTest()
-    {
-        mainApp.clickUserButton().clickLogout();
-    }
-
 }
