@@ -1,12 +1,15 @@
 package org.fundacionjala.sfdc.unittest.product;
 
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
+import org.fundacionjala.sfdc.utils.Common;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
@@ -17,17 +20,15 @@ import org.testng.annotations.Test;
  */
 public class EditProduct {
 
-    //region Objects
-    private ProductHome productsHome;
-    private LookUpWindow lookUpWindow;
+    private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
+    private Map<String, String> valuesMapJson;
+    private ProductHome productHome;
     private MainApp mainApp;
     private TabBar tabBar;
-    private ProductDetail productProfile;
+    private ProductDetail productDetail;
     private ProductForm newProductForm;
     private LoginPage loginPage;
-    //endregion
 
-    //region values
     private String productName = "product_001";
     private String productNameUpdated = "product_002";
     private String productCode = "prod_001";
@@ -36,28 +37,34 @@ public class EditProduct {
     private String descriptionProductUpdated = "description Test2";
     private boolean isActive = true;
     private String productFamily = "None";
-    //endregion
 
     @BeforeTest
     public void BeforeTest() {
-        loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
+        valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
+        mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
-        productsHome = tabBar.clickOnProductsHome();
-        newProductForm = productsHome.clickNewButton();
-        productProfile = newProductForm
-                .setProductName(productName)
-                .setProductCode(productCode)
-                .checkActiveFlag(isActive)
-                .chooseProductFamilyDdl(productFamily)
-                .setDescription(descriptionProduct)
-                .clickSaveButton();
+        productHome = tabBar.clickOnProductsHome();
+        newProductForm = productHome.clickNewButton();
+        newProductForm.fillTheForm(valuesMapJson);
+        productDetail = newProductForm.clickSaveButton();
+//        loginPage = new LoginPage();
+//        mainApp = loginPage.loginAsPrimaryUser();
+//        tabBar = mainApp.goToTabBar();
+//        productHome = tabBar.clickOnProductsHome();
+//        newProductForm = productHome.clickNewButton();
+//        productDetail = newProductForm
+//                .setProductName(productName)
+//                .setProductCode(productCode)
+//                .checkActiveFlag(isActive)
+//                .chooseProductFamilyDdl(productFamily)
+//                .setDescription(descriptionProduct)
+//                .clickSaveButton();
     }
 
     @Test
     public void EditProduct() {
-        newProductForm = productProfile.clickEditButton();
-        productProfile = newProductForm
+        newProductForm = productDetail.clickEditButton();
+        productDetail = newProductForm
                 .setProductName(productNameUpdated)
                 .setProductCode(productCodeUpdated)
                 .checkActiveFlag(isActive)
@@ -65,16 +72,16 @@ public class EditProduct {
                 .setDescription(descriptionProductUpdated)
                 .clickSaveButton();
 
-        Assert.assertEquals(productProfile.getProductName(), productNameUpdated);
-        Assert.assertEquals(productProfile.getProductCode(), productCodeUpdated);
-        Assert.assertEquals(productProfile.isActiveFlag(), isActive);
-        Assert.assertEquals(productProfile.getProductFamily(), productFamily);
-        Assert.assertEquals(productProfile.getDescription(), descriptionProductUpdated);
+        Assert.assertEquals(productDetail.getProductName(), productNameUpdated);
+        Assert.assertEquals(productDetail.getProductCode(), productCodeUpdated);
+        Assert.assertEquals(productDetail.isActiveFlag(), isActive);
+        Assert.assertEquals(productDetail.getProductFamily(), productFamily);
+        Assert.assertEquals(productDetail.getDescription(), descriptionProductUpdated);
 
     }
 
     @AfterTest
     public void afterTest() {
-        productProfile.clickDeleteButton();
+        productDetail.clickDeleteButton();
     }
 }

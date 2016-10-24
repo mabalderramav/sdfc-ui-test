@@ -12,7 +12,6 @@ import org.fundacionjala.sfdc.utils.Common;
 
 
 import org.testng.Assert;
-import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -22,7 +21,6 @@ import org.testng.annotations.Test;
 public class DeleteProduct {
 
     private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
-
     private Map<String, String> valuesMapJson;
     private ProductHome productHome;
     private MainApp mainApp;
