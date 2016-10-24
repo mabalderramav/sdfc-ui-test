@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.unittest.contact;
 
+import java.util.Map;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -12,10 +13,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
 /**
- * Created by Ruber Cuellar
+ * This class is a test to create a opportunity
  */
 public class CreateContact {
 
@@ -29,6 +28,9 @@ public class CreateContact {
     private ContactForm contactForm;
     private LoginPage loginPage;
 
+    /**
+     * This method is a preconditions to create a contact.
+     */
     @BeforeTest
     public void login() {
         valuesMapJson = Common.getMapJson(CONTACT_DATA_PATH);
@@ -38,15 +40,20 @@ public class CreateContact {
         contactsHome = tabBar.clickOnContactsHome();
     }
 
+    /**
+     * This a test to create a contact.
+     */
     @Test
     public void createContact() {
         contactForm = contactsHome.clickPostLnk();
         contactForm.fillTheForm(valuesMapJson);
         contactsDetail = contactForm.clickSaveButton();
         new AssertContact().assertDetailValues(contactsDetail, valuesMapJson);
-
     }
 
+    /**
+     * This is a post conditions of a contact.
+     */
     @AfterMethod
     public void afterTest() {
         contactsDetail.deleteContact();

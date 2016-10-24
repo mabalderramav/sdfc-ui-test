@@ -1,5 +1,7 @@
 package org.fundacionjala.sfdc.unittest.opportunity;
 
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -15,13 +17,11 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
 import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.OPPORTUNITY_DATA_PATH;
 
 
 /**
- * This class is a test to create a opportunity
+ * This class is a test to edit and delete of a opportunity.
  */
 public class DeleteEditOpportunity {
 
@@ -39,7 +39,7 @@ public class DeleteEditOpportunity {
     private Map<String, String> valuesMapEditJson;
 
     /**
-     * This method is a preconditions to create a opportunities
+     * This method is a preconditions to edit and delete a opportunity.
      */
     @BeforeMethod
     public void BeforeTest() {
@@ -71,7 +71,7 @@ public class DeleteEditOpportunity {
     }
 
     /**
-     * This is a test to delete a opportunities
+     * This is a test to edit a opportunities
      */
     @Test
     public void EditOpportunity() {

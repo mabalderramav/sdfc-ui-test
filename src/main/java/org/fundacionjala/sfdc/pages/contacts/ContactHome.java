@@ -16,7 +16,13 @@ public class ContactHome extends AbstractBasePage {
     private WebElement newButton;
 
     /**
+<<<<<<< HEAD
+     * This method makes click in post link.
+     *
+     * @return a Contact Form.
+=======
      * @return
+>>>>>>> upstream/develop
      */
     public ContactForm clickPostLnk() {
         CommonActions.clickElement(newButton);

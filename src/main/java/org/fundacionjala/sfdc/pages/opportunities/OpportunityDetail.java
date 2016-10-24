@@ -15,11 +15,9 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by ivan on 26-06-15.
+ * This class represents of the opportunity detail.
  */
 public class OpportunityDetail extends AbstractBasePage {
-
-    //region Locators
 
     @FindBy(name = "del")
     @CacheLookup
@@ -102,6 +100,11 @@ public class OpportunityDetail extends AbstractBasePage {
         return new OpportunityForm();
     }
 
+    /**
+     * This method compare the title.
+     *
+     * @return a boolean.
+     */
     public boolean isPrivateFlag() {
         String attributeState = privateFlagImg.getAttribute("title");
         return attributeState.equals("Checked");
