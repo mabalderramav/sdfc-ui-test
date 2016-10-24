@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
-import org.fundacionjala.sfdc.pages.products.Product;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 /**
  * Created by Ruber Cuellar
@@ -19,7 +19,7 @@ import org.fundacionjala.sfdc.pages.products.Product;
 public class EditProduct {
 
     //region Objects
-    private Product productsHome;
+    private ProductHome productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;

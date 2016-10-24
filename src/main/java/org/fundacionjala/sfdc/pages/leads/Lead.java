@@ -1,20 +1,19 @@
 package org.fundacionjala.sfdc.pages.leads;
 
-import org.fundacionjala.sfdc.pages.base.ElementFormBasePage;
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.HomeBase;
 
 /**
- * This class holds leads home page elements and inherits from FormBasePage the basic button "new"
+ * This class holds leads home page elements and inherits from FormBase the basic button "new"
  */
 
-public class Lead extends ElementFormBasePage {
-
+public class Lead extends HomeBase {
     /**
-     * This method make a click on the new button to create a new Lead.
-     *
-     * @return the Form to create a new Lead.
+     * {@link HomeBase}
      */
-    public LeadForm clickNewBtn() {
-        newElementBtn.click();
+    @Override
+    public LeadForm clickNewButton() {
+        CommonActions.clickElement(newButton);
         return new LeadForm();
     }
 }

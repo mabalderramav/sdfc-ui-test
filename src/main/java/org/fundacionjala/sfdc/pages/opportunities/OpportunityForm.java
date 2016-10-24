@@ -3,14 +3,15 @@ package org.fundacionjala.sfdc.pages.opportunities;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.FormSteps;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
+
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.FormSteps;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 
 /**
  * This class represent to a form to create or edit a opportunity
@@ -90,8 +91,6 @@ public class OpportunityForm extends AbstractBasePage {
     @FindBy(id = "opp14")
     @CacheLookup
     private WebElement descriptionTextArea;
-
-    private Opportunity opportunityObject;
 
     /**
      * This method checks private config.

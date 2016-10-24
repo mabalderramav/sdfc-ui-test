@@ -4,12 +4,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-import org.fundacionjala.sfdc.pages.base.AbstractSectionFrame;
+import org.fundacionjala.sfdc.pages.base.SectionFrame;
 
 /**
  * Created by ccatari on 5/22/2016.
  */
-public class ListSectionFrame extends AbstractSectionFrame {
+public class ListSectionFrame extends SectionFrame {
     @FindBy(className=" dataCell ")
     private WebElement linkToSelect;
 

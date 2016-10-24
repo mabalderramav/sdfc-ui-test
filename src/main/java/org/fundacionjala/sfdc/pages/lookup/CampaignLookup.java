@@ -1,12 +1,12 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.pages.base.AbstractModalWindow;
+import org.fundacionjala.sfdc.pages.base.ModalWindow;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
 
 /**
  * Created by ccatari on 5/22/2016.
  */
-public class CampaignLookup extends AbstractModalWindow {
+public class CampaignLookup extends ModalWindow {
 
     public static final String ALL_CAMPAIGN = "All Campaigns";
 
