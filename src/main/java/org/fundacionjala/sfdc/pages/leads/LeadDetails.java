@@ -8,13 +8,17 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+
 import org.fundacionjala.sfdc.pages.AssertsDetails;
-import org.fundacionjala.sfdc.pages.base.FormBasePage;
+
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
+
 
 /**
  * Class to manage the Detail of the LeadHome Page when it was created.
  */
-public class LeadDetails extends FormBasePage {
+public class LeadDetails extends FormBase {
 
     //region Locators
 
@@ -85,7 +89,7 @@ public class LeadDetails extends FormBasePage {
     private WebElement address;
 
     /*additional information*/
-    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::div")
+    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::div")
     @CacheLookup
     private WebElement productInterest;
 
@@ -370,5 +374,15 @@ public class LeadDetails extends FormBasePage {
         strategyMap.put("company", () -> getCompany());
 
         return strategyMap;
+    }
+
+    @Override
+    public AbstractBasePage clickSaveButton() {
+        return null;
+    }
+
+    @Override
+    public AbstractBasePage clickSaveNewButton() {
+        return null;
     }
 }

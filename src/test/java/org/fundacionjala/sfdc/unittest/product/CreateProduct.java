@@ -6,7 +6,7 @@ import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
-import org.fundacionjala.sfdc.pages.products.Product;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 import org.testng.Assert;
 import org.testng.annotations.BeforeTest;
@@ -19,7 +19,7 @@ import org.testng.annotations.AfterTest;
 public class CreateProduct {
 
     //region Objects
-    private Product productsHome;
+    private ProductHome productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;

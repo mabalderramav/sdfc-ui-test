@@ -3,21 +3,22 @@ package org.fundacionjala.sfdc.pages.leads;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 
-import org.fundacionjala.sfdc.pages.base.ElementFormBasePage;
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.HomeBase;
 
 /**
  * This class holds leads home page elements and inherits from FormBasePage the basic button "new".
  */
 
-public class LeadHome extends ElementFormBasePage {
+public class LeadHome extends HomeBase {
 
     /**
-     * This method make a click on the new button to create a new LeadHome.
-     *
-     * @return the Form to create a new LeadHome.
+     * {@link HomeBase}
      */
-    public LeadForm clickNewBtn() {
-        newElementBtn.click();
+    @Override
+    public LeadForm clickNewButton() {
+        CommonActions.clickElement(newButton);
         return new LeadForm();
     }
     public boolean isLeadDisplayed(String lead) {
@@ -27,6 +28,15 @@ public class LeadHome extends ElementFormBasePage {
         } catch(WebDriverException e) {
             return false;
         }
+    }
+    @Override
+    public AbstractBasePage clickCreateNewViewLink() {
+        return null;
+    }
+
+    @Override
+    public AbstractBasePage clickEditViewLink() {
+        return null;
     }
 
 }

@@ -11,13 +11,17 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.framework.objects.Lead;
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+
 import org.fundacionjala.sfdc.pages.FormSteps;
-import org.fundacionjala.sfdc.pages.base.FormBasePage;
+
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
+
 
 /**
  * This class represent the Form to create a new LeadHome.
  */
-public class LeadForm extends FormBasePage {
+public class LeadForm extends FormBase {
 
     public static final String LEAD_DATA_PATH = "src\\test\\resources\\json\\CreateLeadData.json";
 
@@ -39,9 +43,6 @@ public class LeadForm extends FormBasePage {
     @FindBy(id = "lea16city")
     @CacheLookup
     private WebElement leadCityField;
-    @FindBy(name = "save")
-    @CacheLookup
-    private WebElement saveButton;
     @FindBy(xpath = "//input[@id='lea20']")
     @CacheLookup
     private WebElement campaingLookupField;
@@ -90,7 +91,7 @@ public class LeadForm extends FormBasePage {
     @FindBy(id = "lea16country")
     @CacheLookup
     private WebElement countryField;
-    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::span/select")
+    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::span/select")
     @CacheLookup
     private WebElement productInterestField;
 
@@ -248,10 +249,9 @@ public class LeadForm extends FormBasePage {
     }
 
     /**
-     * This method Click on save button.
-     *
-     * @return the LeadDetails page.
+     * {@link FormBase}
      */
+    @Override
     public LeadDetails clickSaveButton() {
         CommonActions.clickElement(saveButton);
         return new LeadDetails();
@@ -303,6 +303,16 @@ public class LeadForm extends FormBasePage {
         if (leadObject.assignRule == "yes") {
             CommonActions.check(assignRuleCheck);
         }
+    }
+
+
+    /**
+     * {@link FormBase}
+     */
+    @Override
+    public AbstractBasePage clickSaveNewButton() {
+        CommonActions.clickElement(saveNewBtn);
+        return new LeadForm();
     }
 
 }

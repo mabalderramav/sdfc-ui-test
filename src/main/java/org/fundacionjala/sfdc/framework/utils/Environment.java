@@ -6,11 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 /**
  * This class is in charge to set the default  parameters to
  * establishes the connection with pivotal tracker.
  */
 public class Environment {
+
+    private static final Logger LOGGER = LogManager.getLogger(Environment.class);
 
     private static final String CONFIG = "gradle.properties";
 
@@ -26,8 +31,6 @@ public class Environment {
 
     private static Environment environment;
 
-    private static LoggerManager loggerManager = LoggerManager.getInstance();
-
     private Properties properties;
 
     /**
@@ -39,9 +42,10 @@ public class Environment {
             properties = new Properties();
             properties.load(fileReader);
         } catch (FileNotFoundException e) {
-            loggerManager.addWarnLog(Environment.class.getName(), e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
+
         } catch (IOException e) {
-            loggerManager.addWarnLog(Environment.class.getName(), e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
         }
     }
 

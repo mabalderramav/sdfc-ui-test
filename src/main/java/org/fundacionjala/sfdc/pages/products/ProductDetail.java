@@ -1,31 +1,23 @@
 package org.fundacionjala.sfdc.pages.products;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 /**
  * This class handle the product details.
  */
-public class ProductDetail extends AbstractBasePage {
+public class ProductDetail extends DetailBase {
 
     private static final String CHECKED = "Checked";
 
     private static final String TITLE = "title";
 
-    @FindBy(name = "del")
-    @CacheLookup
-    private WebElement deleteButton;
-
-    // edit button
-    @FindBy(name = "edit")
-    @CacheLookup
-    private WebElement editButton;
 
     // product name
     @FindBy(id = "Name_ileinner")
@@ -56,18 +48,16 @@ public class ProductDetail extends AbstractBasePage {
      * This method doing click on "Delete" button.
      */
     public void clickDeleteButton() {
-        CommonActions.clickElement(deleteButton);
+        CommonActions.clickElement(deleteBtn);
         driver.switchTo().alert().accept();
-        driver.switchTo().defaultContent();
     }
 
     /**
-     * This method doing click on "Edit" button.
-     *
-     * @return ProductForm page.
+     * {@link AbstractBasePage}
      */
-    public ProductForm clickEditProduct() {
-        CommonActions.clickElement(editButton);
+    @Override
+    public ProductForm clickEditButton() {
+        CommonActions.clickElement(editBtn);
         return new ProductForm();
     }
 
@@ -75,33 +65,10 @@ public class ProductDetail extends AbstractBasePage {
      * This method verify that product is displayed.
      *
      * @param product String with product.
-     * @return Return true if product is displayed.
+     * @return returns <code>true<code/> if product is displayed.
      */
     public boolean isProductDisplayed(final String product) {
-        WebElement productContainer;
-        try {
-            productContainer = driver.findElement(By.linkText(product));
-        } catch (WebDriverException e) {
-            loggerManager.addWarnLog(ProductDetail.class.getName(), e.getMessage(), e);
-            return false;
-        }
-        return isElementPresent(productContainer);
-    }
-
-    /**
-     * This method verify that element is present.
-     *
-     * @param webElement WebElement with element.
-     * @return Return true if element is present.
-     */
-    private boolean isElementPresent(WebElement webElement) {
-        try {
-            webElement.getText();
-            return true;
-        } catch (WebDriverException e) {
-            loggerManager.addWarnLog(ProductDetail.class.getName(), e.getMessage(), e);
-            return false;
-        }
+        return CommonActions.isElementPresent(driver.findElement(By.linkText(product)));
     }
 
     /**
@@ -110,12 +77,7 @@ public class ProductDetail extends AbstractBasePage {
      * @return Return true if is active.
      */
     public boolean isActiveFlag() {
-        boolean result = false;
-        String attributeState = activeFlagImg.getAttribute(TITLE);
-        if (attributeState.equals(CHECKED)) {
-            result = true;
-        }
-        return result;
+        return CHECKED.equals(activeFlagImg.getAttribute(TITLE));
     }
 
     /**

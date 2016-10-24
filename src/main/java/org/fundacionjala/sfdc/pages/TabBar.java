@@ -12,7 +12,8 @@ import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
-import org.fundacionjala.sfdc.pages.products.Product;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
+
 
 /**
  * Created by Miguel.Pari on 6/17/2015.
@@ -62,9 +63,9 @@ public class TabBar extends AbstractBasePage{
         CommonActions.clickElement(contactsTab);
         return new ContactHome();
     }
-    public Product clickOnProductsHome() {
+    public ProductHome clickOnProductsHome() {
         CommonActions.clickElement(productsTab);
-        return new Product();
+        return new ProductHome();
     }
     public OpportunityHome clickOnOpportunitiesHome() {
         CommonActions.clickElement(opportunitiesTab);
