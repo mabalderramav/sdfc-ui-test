@@ -1,7 +1,7 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
 import org.fundacionjala.sfdc.pages.base.ModalWindow;
-import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 
 /**
  * Created by ccatari on 5/22/2016.
@@ -14,10 +14,10 @@ public class CampaignLookup extends ModalWindow {
         init();
     }
 
-    public NewCampaignForm selectCampaignWithNameByScope(String parentCampaign,String scope) {
+    public CampaignForm selectCampaignWithNameByScope(String parentCampaign, String scope) {
         setSearchCampaignByScope(parentCampaign,scope);
         setACampaignFromResults();
-        return new NewCampaignForm();
+        return new CampaignForm();
     }
 
     public void setSearchCampaignByScope(String campaign, String scope){

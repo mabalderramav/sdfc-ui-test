@@ -1,14 +1,13 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.ModalWindow;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.ModalWindow;
-import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
-import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
@@ -59,11 +58,11 @@ public class LookUpWindow extends ModalWindow {
         return this;
     }
 
-    public NewCampaignForm clickResult(String text) {
+    public CampaignForm clickResult(String text) {
         CommonActions.clickElement(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
         driver.switchTo().defaultContent();
 
-        return new NewCampaignForm();
+        return new CampaignForm();
     }
 
     public OpportunityForm clickResultGotoNewOpportunityForm(String text) {

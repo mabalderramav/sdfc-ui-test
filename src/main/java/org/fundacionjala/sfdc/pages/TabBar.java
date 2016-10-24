@@ -3,7 +3,8 @@ package org.fundacionjala.sfdc.pages;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
+import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
+import org.fundacionjala.sfdc.pages.cases.Cases;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
@@ -51,10 +52,13 @@ public class TabBar extends AbstractBasePage{
     @CacheLookup
     private WebElement opportunitiesTab;
 
+    @FindBy(id = "Case_Tab")
+    @CacheLookup
+    private WebElement casesTab;
 
-    public CampaignsHome clickCampaigns() {
+    public Campaigns clickCampaigns() {
         CommonActions.clickElement(CampaignsTab);
-        return new CampaignsHome();
+        return new Campaigns();
     }
 
     public ContactHome clickOnContactsHome() {
@@ -84,4 +88,9 @@ public class TabBar extends AbstractBasePage{
 		CommonActions.clickElement(chatterTab);
 		return new ChatterAbstractPage();
 	}
+
+    public Cases clickOnCasesTab(){
+        CommonActions.clickElement(casesTab);
+        return new Cases();
+    }
 }

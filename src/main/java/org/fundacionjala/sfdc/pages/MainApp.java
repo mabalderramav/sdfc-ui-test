@@ -30,8 +30,13 @@ public class MainApp extends AbstractBasePage{
    public TabBar goToTabBar() {
 	   return new TabBar();
    }
-   
+
+    public String getUrl() {
+        return driver.getCurrentUrl();
+    }
+
    public void closeMainApp() {
    		driver.quit();      
    }
+
 }
