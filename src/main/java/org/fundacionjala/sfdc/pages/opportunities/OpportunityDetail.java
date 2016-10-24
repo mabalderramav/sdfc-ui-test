@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
@@ -28,43 +29,57 @@ public class OpportunityDetail extends AbstractBasePage {
     @CacheLookup
     private WebElement editBtn;
 
-    //Opportunity Name
     @FindBy(id = "opp3_ileinner")
     @CacheLookup
     private WebElement opportunityNameLabel;
 
-    //Account Name
     @FindBy(id = "opp4_ileinner")
     @CacheLookup
     private WebElement accountNameLabel;
 
-    //Close Date
+    @FindBy(id = "opp5_ileinner")
+    @CacheLookup
+    private WebElement typeLabel;
+
+    @FindBy(id = "opp6_ileinner")
+    @CacheLookup
+    private WebElement leadSourceLabel;
+
+    @FindBy(id = "opp7_ileinner")
+    @CacheLookup
+    private WebElement amountLabel;
+
     @FindBy(id = "opp9_ileinner")
     @CacheLookup
     private WebElement closeDateLabel;
 
-    //Stage
-    @FindBy(id = "opp11_ilecell")
+    @FindBy(id = "opp10_ileinner")
+    @CacheLookup
+    private WebElement nextStepLabel;
+
+    @FindBy(id = "opp11_ileinner")
     @CacheLookup
     private WebElement stageLabel;
 
-    //Order Number
     @FindBy(xpath = "//td[contains(.,'Order Number')]/following::div")
     @CacheLookup
     private WebElement orderNumberLabel;
 
-    //Delivery/Installation Status
     @FindBy(xpath = "//td[contains(.,'Delivery/Installation Status')]/following::div")
     @CacheLookup
     private WebElement deliveryInstallLabel;
 
-    // private Flag
     @FindBy(id = "opp2_chkbox")
     @CacheLookup
     private WebElement privateFlagImg;
 
-    //endregion
 
+
+    /**
+     * This method makes click on delete button.
+     *
+     * @return main app.
+     */
     public MainApp clickDeteleBtn() {
         CommonActions.clickElement(deleteBtn);
         Alert alert = driver.switchTo().alert();
@@ -72,6 +87,11 @@ public class OpportunityDetail extends AbstractBasePage {
         return new MainApp();
     }
 
+    /**
+     * This method makes a click on edit button.
+     *
+     * @return a opportunity form.
+     */
     public OpportunityForm clickEditBtn() {
         CommonActions.clickElement(editBtn);
         return new OpportunityForm();
@@ -84,79 +104,135 @@ public class OpportunityDetail extends AbstractBasePage {
     }
 
     public boolean isPrivateFlag() {
-        boolean result = false;
         String attributeState = privateFlagImg.getAttribute("title");
-
-        if (attributeState.equals("Checked"))
-        {
-            result = true;
-        }
-
-        return result;
+        return attributeState.equals("Checked");
     }
 
-    //region getters
-
-    //Opportunity Name
+    /**
+     * This method gets the opportunity name.
+     *
+     * @return a string with opportunity name text.
+     */
     public String getOpportunityName() {
         return opportunityNameLabel.getText();
     }
 
-    //Account Name
+    /**
+     * This method gets the account name.
+     *
+     * @return a string with account name text.
+     */
     public String getAccountName() {
         return accountNameLabel.getText();
     }
 
-    //Close Date
+    /**
+     * This method gets the close date.
+     *
+     * @return a string with the close date text.
+     */
     public String getCloseDate() {
         return closeDateLabel.getText();
     }
 
-    //Stage
+    /**
+     * This method gets the stage.
+     *
+     * @return a string with stage text.
+     */
     public String getStage() {
         return stageLabel.getText();
     }
 
-    //Order Number
+    /**
+     * This method gets the order number.
+     *
+     * @return a string with order number text.
+     */
     public String getOrderNumber() {
         return orderNumberLabel.getText();
     }
 
-    //Delivery/Installation Status
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
     public String getDeliveryInstallation() {
         return deliveryInstallLabel.getText();
     }
-    //endregion
-    public boolean isOpportunityDisplayed(String Opportunity) {
-        WebElement opportunityContainer;
+
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getAmount() {
+        return amountLabel.getText();
+    }
+
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getTypeText() {
+        return typeLabel.getText();
+    }
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getLeadSource() {
+        return leadSourceLabel.getText();
+    }
+    /**
+     * This method gets the delivery install.
+     *
+     * @return a string with delivery install text.
+     */
+    public String getNextStep() {
+        return nextStepLabel.getText();
+    }
+
+    /**
+     * This method verify if opportunity is displayed.
+     *
+     * @param opportunityName string with name opportunity.
+     * @return a boolean.
+     */
+    public boolean isOpportunityDisplayed(String opportunityName) {
         try {
-            opportunityContainer = driver.findElement(By.linkText(Opportunity));
+            driver.findElement(By.linkText(opportunityName)).getText();
+            return true;
         } catch(WebDriverException e) {
             return false;
         }
-        return isElementPresent(opportunityContainer);
-
-    }
-    public boolean isElementPresent(WebElement webElement) {
-        try {
-            webElement.getText();
-            return true;
-        } catch (WebDriverException e) {
-            return false;
-        }
     }
 
 
+    /**
+     * Method that to permit gets texts.
+     *
+     * @return a Map with the values of opportunity edit.
+     */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap();
 
-        strategyMap.put("opportunityName",()-> getOpportunityName().toString());
-        strategyMap.put("stage", ()-> getStage().toString());
-        strategyMap.put("orderNumber", ()-> getOrderNumber().toString());
-        strategyMap.put("deliveryInstallStatus", ()-> getDeliveryInstallation().toString());
-        strategyMap.put("accountName", ()-> getAccountName().toString());
+        strategyMap.put("opportunityName", this::getOpportunityName);
+        strategyMap.put("stage", this::getStage);
+        strategyMap.put("orderNumber", this::getOrderNumber);
+        strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
+        strategyMap.put("accountName", this::getAccountName);
+        strategyMap.put("CurrentCloseDate", this::getCloseDate);
+        strategyMap.put("type", this::getTypeText);
+        strategyMap.put("leadSource", this::getLeadSource);
+        strategyMap.put("nextStep", this::getNextStep);
+        strategyMap.put("amount", this::getAmount);
 
         return strategyMap;
     }
+
 
 }
