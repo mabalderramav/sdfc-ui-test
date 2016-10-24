@@ -1,15 +1,21 @@
 package org.fundacionjala.sfdc.unittest.opportunity;
 
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.testng.Assert;
 
-import java.util.Map;
-
 /**
- * Created by Pc- Bruno on 10/23/2016.
+ * This class is to assert of opportunities.
  */
 public class AssertOpportunity {
-    public void assertDetailValues(OpportunityDetail opportunityDetail, Map<String, String> valuesMapJson) {
+    /**
+     * This method verify the values in opportunity detail.
+     *
+     * @param opportunityDetail is a object.
+     * @param valuesMapJson     is a map with values of a json file.
+     */
+    public void assertDetailValues(final OpportunityDetail opportunityDetail, final Map<String, String> valuesMapJson) {
         valuesMapJson.keySet()
                 .forEach(value -> Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).getText(),
                         valuesMapJson.get(value)));

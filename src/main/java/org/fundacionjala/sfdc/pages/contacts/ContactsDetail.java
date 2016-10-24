@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.contacts;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -11,14 +14,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * This method represent to contact detail.
  */
 public class ContactsDetail extends AbstractBasePage {
-
 
     @FindBy(id = "con2_ileinner")
     @CacheLookup
@@ -40,30 +39,65 @@ public class ContactsDetail extends AbstractBasePage {
     @CacheLookup
     private WebElement editButton;
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String getNameLabel() {
         return getTopName().length == 3 ? getTopName()[1] : getTopName()[0];
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String getFirstNameCategoryLabel() {
         return getTopName()[0];
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String getLastNameLabel() {
         return getTopName().length == 3 ? getTopName()[2] : getTopName()[1];
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String[] getTopName() {
         return nameLabel.getText().split(" ");
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String getDepartmentLabel() {
         return departmentLabel.getText();
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public String getTitleLabel() {
         return titleLabel.getText();
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public MainApp deleteContact() {
         deleteButton.click();
         Alert javascriptAlert = driver.switchTo().alert();
@@ -71,12 +105,22 @@ public class ContactsDetail extends AbstractBasePage {
         return new MainApp();
     }
 
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
     public ContactForm clickEditContact() {
         CommonActions.clickElement(editButton);
         return new ContactForm();
     }
 
-    public boolean isContactDisplayed(String Contact) {
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
+    public boolean isContactDisplayed(final String Contact) {
         WebElement contactContainer;
         try {
             contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + Contact + "')]"));
@@ -87,7 +131,12 @@ public class ContactsDetail extends AbstractBasePage {
 
     }
 
-    public boolean isElementPresent(WebElement webElement) {
+    /**
+     * This method gets name label
+     *
+     * @return a name label.
+     */
+    public boolean isElementPresent(final WebElement webElement) {
         try {
             webElement.getText();
             return true;
@@ -99,7 +148,7 @@ public class ContactsDetail extends AbstractBasePage {
     /**
      * Method that to permit gets texts.
      *
-     * @return a Map with the values of opportunity edit.
+     * @return a Map with the values of contact edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap();
