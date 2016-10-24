@@ -3,47 +3,49 @@ package org.fundacionjala.sfdc.pages.opportunities;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
- * Created by ivan on 26-06-15.
+ * This class represents to opportunity pages.
  */
-public class Opportunity extends AbstractBasePage {
-
-    private WebDriver driver;
-    private WebDriverWait wait;
+public class OpportunityHome extends AbstractBasePage {
 
     @FindBy(xpath = "//*[@name='new' and @type='button']")
     @CacheLookup
     WebElement NewButtton;
-    private String accountName;
 
-    public Opportunity()
-    {
-        super();
-    }
-
+    /**
+     * This method makes click in new button in opportunity page.
+     *
+     * @return a opportunity form page object.
+     */
     public OpportunityForm clickNewButton() {
         CommonActions.clickElement(NewButtton);
-
         return new OpportunityForm();
     }
 
-    public OpportunityDetail goOpportunityProfile(String url) {
+    /**
+     * This method goes a opportunity detail.
+     *
+     * @param url a string with url of the page.
+     * @return OpportunityDetail page object.
+     */
+    public OpportunityDetail goOpportunityDetail(String url) {
         driver.navigate().to(url);
-
         return new OpportunityDetail();
     }
 
-    public OpportunityDetail clickOnAccount(String accountName)
-    {
+    /**
+     * This method makes click on account link.
+     *
+     * @param accountName a string with name account.
+     * @return OpportunityDetail page object.
+     */
+    public OpportunityDetail clickOnAccount(String accountName) {
         driver.findElement(By.linkText(accountName)).click();
         return new OpportunityDetail();
     }
-
 
 }

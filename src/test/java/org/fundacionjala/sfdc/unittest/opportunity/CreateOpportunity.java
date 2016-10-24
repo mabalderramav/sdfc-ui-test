@@ -1,7 +1,7 @@
 package org.fundacionjala.sfdc.unittest.opportunity;
 
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,10 +11,10 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
-import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
-import org.testng.Assert;
+import org.fundacionjala.sfdc.utils.Common;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -26,69 +26,44 @@ public class CreateOpportunity {
 
     private TabBar tabBar;
     private LoginPage loginPage;
-    private Opportunity opportunityHome;
+    private OpportunityHome opportunityHomeHome;
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
     private AccountAbstractPage accountsHome;
     private NewAccountPage newAccountForm;
     private AccountProfile accountProfile;
     private MainApp mainApp;
-
-    public static final Map<String, String> valuesMapCreate = new HashMap();
-    static {
-        valuesMapCreate.put("opportunityName", "Opp_name1");
-        valuesMapCreate.put("type", "Existing Customer - Replacement");
-        valuesMapCreate.put("CurrentCloseDate", "");
-        valuesMapCreate.put("leadSource", "Partner Referral");
-        valuesMapCreate.put("amount", "100");
-        valuesMapCreate.put("nextStep", "Conquer the world");
-        valuesMapCreate.put("stage", "Needs Analysis");
-        valuesMapCreate.put("orderNumber", "00001");
-        valuesMapCreate.put("deliveryInstallStatus", "Yet to begin");
-        valuesMapCreate.put("accountName", "RuberAccount");
-    }
-
-    public static final List<String> valuesListAssert = new ArrayList();
-    static {
-        valuesListAssert.add("opportunityName");
-        valuesListAssert.add("stage");
-        valuesListAssert.add("orderNumber");
-        valuesListAssert.add("deliveryInstallStatus");
-        valuesListAssert.add("accountName");
-    }
+    public static final String OPPORTUNITY_DATA_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
+    private Map<String, String> valuesMapJson;
 
     /**
-     * This method is a preconditions to create a opportunities
+     * This method is a preconditions to create a opportunities.
      */
     @BeforeTest
     public void BeforeTest() {
+        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapCreate.get("accountName"))
+                .setAccountName(valuesMapJson.get("accountName"))
                 .pressSaveBtn();
-        opportunityHome = tabBar.clickOnOpportunitiesHome();
+        opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
     }
 
     /**
-     * This a test to create a opportunities
+     * This a test to create a opportunities.
      */
     @Test
-    public void CreateOpportunity() {
-        opportunityForm = opportunityHome.clickNewButton();
-
-        valuesMapCreate.keySet()
-                .forEach(step -> opportunityForm.getStrategyStepMap(valuesMapCreate).get(step).executeStep());
-
+    public void createOpportunity() {
+        opportunityForm = opportunityHomeHome.clickNewButton();
+        opportunityForm.fillTheForm(valuesMapJson);
         opportunityDetail = opportunityForm.pressSaveBtn();
-
-        valuesListAssert
-                .forEach(value ->  Assert.assertEquals(opportunityDetail.getStrategyAssertMap().get(value).executeStep()
-                        , valuesMapCreate.get(value)) );
+        new AssertOpportunity().assertDetailValues(opportunityDetail, valuesMapJson);
     }
+
 
     /**
      * This a post conditions a opportunities.
@@ -98,7 +73,7 @@ public class CreateOpportunity {
         mainApp = opportunityDetail.clickDeteleBtn();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapCreate.get("accountName"));
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
         mainApp = accountProfile.deleteAccount();
         mainApp.clickUserButton().clickLogout();
     }

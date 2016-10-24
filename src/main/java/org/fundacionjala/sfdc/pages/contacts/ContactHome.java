@@ -8,24 +8,22 @@ import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 /**
- * Created by Gisela on 6/28/2015.
+ * This class represents to contact pages.
  */
-public class ContactsAbstractPage extends AbstractBasePage {
-
-    //region Locators
-
+public class ContactHome extends AbstractBasePage {
 
     @FindBy(xpath = "//input[@name='new']")
     @CacheLookup
-    WebElement newButton;
-    //endregion
+    private WebElement newButton;
 
-
-    public NewContactForm clickPostLnk() {
+    /**
+     *
+     * @return
+     */
+    public ContactForm clickPostLnk() {
         CommonActions.clickElement(newButton);
-        return new NewContactForm();
+        return new ContactForm();
     }
-
 
 
 }
