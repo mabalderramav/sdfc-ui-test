@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.IOException;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import org.fundacionjala.sfdc.framework.objects.ElementBase;
 
@@ -12,7 +14,7 @@ import org.fundacionjala.sfdc.framework.objects.ElementBase;
  */
 public final class JsonMapper {
 
-    private static final LoggerManager loggerManager = LoggerManager.getInstance();
+    private static final Logger LOGGER = LogManager.getLogger(JsonMapper.class);
 
     /**
      * Constructor private.
@@ -33,7 +35,7 @@ public final class JsonMapper {
             ObjectMapper mapper = new ObjectMapper();
             newElementBase = mapper.readValue(new File(path), elementBase.getClass());
         } catch (IOException e) {
-            loggerManager.addWarnLog(JsonMapper.class.getName(), e.getMessage(), e);
+            LOGGER.warn(e.getMessage(), e);
         }
         return newElementBase;
     }

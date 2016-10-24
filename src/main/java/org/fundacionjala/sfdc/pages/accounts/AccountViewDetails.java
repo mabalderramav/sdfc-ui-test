@@ -1,16 +1,15 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
-import org.fundacionjala.sfdc.pages.base.ViewDetailsPage;
-
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.Select;
 
-public class AccountViewDetails extends ViewDetailsPage{
-	 
+import org.fundacionjala.sfdc.pages.base.DetailBase;
+
+public class AccountViewDetails extends DetailBase {
+
     @SuppressWarnings("finally")
-	public Boolean existColumnName(String value)
-    {
+    public Boolean existColumnName(String value) {
         Boolean result = false;
         try {
             driver.findElement(By.cssSelector("[title='" + value + "']"));
@@ -21,9 +20,9 @@ public class AccountViewDetails extends ViewDetailsPage{
             return result;
         }
     }
+
     @SuppressWarnings("finally")
-	public Boolean existViewName(String value)
-    {
+    public Boolean existViewName(String value) {
         Boolean result = false;
         try {
             Select select = new Select(driver.findElement(By.className("title")));

@@ -6,14 +6,14 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractModalWindow;
+import org.fundacionjala.sfdc.pages.base.ModalWindow;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class LookUpWindow extends AbstractModalWindow{
+public class LookUpWindow extends ModalWindow {
 
 
     @FindBy(xpath = "//div[@class='pBody']/select")

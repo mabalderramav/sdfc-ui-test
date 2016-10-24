@@ -11,7 +11,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.pages.leads.Lead;
-import org.fundacionjala.sfdc.pages.products.Product;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 /**
  * Created by Miguel.Pari on 6/17/2015.
@@ -61,9 +61,9 @@ public class TabBar extends AbstractBasePage{
         CommonActions.clickElement(contactsTab);
         return new ContactHome();
     }
-    public Product clickOnProductsHome() {
+    public ProductHome clickOnProductsHome() {
         CommonActions.clickElement(productsTab);
-        return new Product();
+        return new ProductHome();
     }
     public OpportunityHome clickOnOpportunitiesHome() {
         CommonActions.clickElement(opportunitiesTab);

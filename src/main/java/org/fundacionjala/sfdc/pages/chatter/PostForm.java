@@ -8,10 +8,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractSectionFrame;
+import org.fundacionjala.sfdc.pages.base.SectionFrame;
 
 
-public class PostForm extends AbstractSectionFrame{
+public class PostForm extends SectionFrame {
 
 	
 	@FindBy(id = "cke_26_contents")

@@ -5,12 +5,12 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.FormBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
 
 /**
  * Class to manage the Detail of the Lead Page when it was created.
  */
-public class LeadDetails extends FormBasePage {
+public class LeadDetails extends FormBase {
 
     //region Locators
 
@@ -81,7 +81,7 @@ public class LeadDetails extends FormBasePage {
     private WebElement address;
 
     /*additional information*/
-    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::div")
+    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::div")
     @CacheLookup
     private WebElement productInterest;
 

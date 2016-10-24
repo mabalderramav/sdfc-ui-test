@@ -86,7 +86,7 @@ public class ProductForm extends AbstractBasePage {
     public ProductForm chooseProductFamilyDdl(String productFamily) {
         wait.until(ExpectedConditions.elementToBeClickable(multiSelectProductFamily));
         Select selectBox = new Select(multiSelectProductFamily);
-        if (productFamily.equals(BLANK)) {
+        if (productFamily.isEmpty()) {
             int index = 0;
             selectBox.selectByIndex(index);
         } else {

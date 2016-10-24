@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.unittest.product;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.products.Product;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
@@ -19,7 +19,7 @@ import org.testng.annotations.AfterTest;
 public class DeleteProduct {
 
     //region Objects
-    private Product productsHome;
+    private ProductHome productsHome;
     private LookUpWindow lookUpWindow;
     private MainApp mainApp;
     private TabBar tabBar;
@@ -57,7 +57,7 @@ public class DeleteProduct {
     public void DeleteProduct()
     {
         productProfile.clickDeleteButton();
-        Assert.assertFalse(productProfile.isProductDisplayed(productName), "Product Deleted");
+        Assert.assertFalse(productProfile.isProductDisplayed(productName), "ProductHome Deleted");
     }
 
     @AfterTest

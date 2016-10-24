@@ -41,7 +41,7 @@ public class CreateLead {
      */
     @Test
     public void createLeadTest(){
-        leadDetails = leadHomePage.clickNewBtn()
+        leadDetails = leadHomePage.clickNewButton()
                 .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
                 .clickSaveButton();
         org.fundacionjala.sfdc.framework.objects.Lead expectedLead = (org.fundacionjala.sfdc.framework.objects.Lead)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.Lead());

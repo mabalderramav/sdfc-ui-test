@@ -5,19 +5,21 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import org.fundacionjala.sfdc.framework.browser.DriverManager;
-import org.fundacionjala.sfdc.framework.utils.LoggerManager;
 
-
+/**
+ * This base page abstract class.
+ */
 public abstract class AbstractBasePage {
 
     protected WebDriver driver;
     protected WebDriverWait wait;
-    protected LoggerManager loggerManager;
 
+    /**
+     * This builds initialize the AbstractBasePage.
+     */
     public AbstractBasePage() {
         driver = DriverManager.getInstance().getDriver();
         wait = DriverManager.getInstance().getWait();
-        loggerManager = LoggerManager.getInstance();
         PageFactory.initElements(driver, this);
     }
 }

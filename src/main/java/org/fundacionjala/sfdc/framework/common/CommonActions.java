@@ -1,9 +1,8 @@
 package org.fundacionjala.sfdc.framework.common;
 
-import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
@@ -19,6 +18,7 @@ import org.fundacionjala.sfdc.framework.browser.DriverManager;
  */
 public final class CommonActions {
 
+    private static final Logger LOGGER = LogManager.getLogger(CommonActions.class);
 
     /**
      * Constructor private.
@@ -72,6 +72,22 @@ public final class CommonActions {
     }
 
     /**
+     * Selects the value by comboBox.
+     *
+     * @param webElement the webElement to be edited.
+     * @param value      the value to select within the webElement.
+     */
+    public static void selectItemByVisibleText(final WebElement webElement, final String value) {
+        try {
+            DriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(webElement));
+            Select comboBox = new Select(webElement);
+            comboBox.selectByVisibleText(value);
+        } catch (WebDriverException e) {
+            LOGGER.warn("The value " + value + "couldn't be selected", e);
+        }
+    }
+
+    /**
      * This method waits and check the element.
      *
      * @param element Element to wait and check.
@@ -117,6 +133,40 @@ public final class CommonActions {
         deleteElementBtn.click();
         Alert deleteAlert = driver.switchTo().alert();
         deleteAlert.accept();
+    }
+
+    /**
+     * Search an object within the initial list on the corresponding page.
+     *
+     * @param linkText the string value for search on the page object.
+     * @return a boolean value, true or false.
+     */
+    public static Boolean existElementByLinkText(final String linkText) {
+        Boolean result;
+        try {
+            DriverManager.getInstance().getDriver().findElement(By.linkText(linkText));
+            result = true;
+        } catch (WebDriverException e) {
+            LOGGER.warn(e.getMessage(), e);
+            result = false;
+        }
+        return result;
+    }
+
+    /**
+     * This method verify that element is present.
+     *
+     * @param webElement WebElement with element.
+     * @return Return true if element is present.
+     */
+    public static boolean isElementPresent(final WebElement webElement) {
+        try {
+            getText(webElement);
+            return true;
+        } catch (WebDriverException e) {
+            LOGGER.warn(e.getMessage(), e);
+            return false;
+        }
     }
 
 }
