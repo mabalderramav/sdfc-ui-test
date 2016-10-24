@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 public class LoginPage extends AbstractBasePage {
     public static final String baseURL = "https://na24.salesforce.com/";
-   
+
     @FindBy(id = "username")
     @CacheLookup
     WebElement userNameField;
