@@ -1,10 +1,9 @@
 package org.fundacionjala.sfdc.pages.base;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
 
 /**
  * Created by Pablo Zubieta on 27/08/2015.

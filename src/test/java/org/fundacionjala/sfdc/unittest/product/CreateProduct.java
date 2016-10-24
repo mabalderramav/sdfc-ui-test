@@ -4,9 +4,10 @@ import java.util.Map;
 
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
+
 import org.fundacionjala.sfdc.utils.Common;
 
 import org.testng.annotations.AfterTest;

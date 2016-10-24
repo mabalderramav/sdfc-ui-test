@@ -8,7 +8,7 @@ public abstract class SectionFrame extends AbstractBasePage {
     /**
      * Returns to the current window.
      */
-    public void returnRoot(){
+    public void returnRoot() {
         String currentWindow = driver.getWindowHandle();
         driver.switchTo().window(currentWindow);
     }
@@ -16,7 +16,7 @@ public abstract class SectionFrame extends AbstractBasePage {
     /**
      * Returns to the content by default window.
      */
-    public void returnDefault(){
+    public void returnDefault() {
         driver.switchTo().defaultContent();
     }
 }

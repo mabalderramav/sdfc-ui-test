@@ -1,11 +1,10 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.Select;
-
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 public class AccountViewDetails extends DetailBase {
 

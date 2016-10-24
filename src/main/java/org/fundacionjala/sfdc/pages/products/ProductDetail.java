@@ -3,10 +3,10 @@ package org.fundacionjala.sfdc.pages.products;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
@@ -75,7 +75,7 @@ public class ProductDetail extends DetailBase {
 
         strategyMap.put("productName", this::getProductName);
         strategyMap.put("productCode", this::getProductCode);
-        strategyMap.put("isActive", this:: isActiveFlagString);
+        strategyMap.put("isActive", this::isActiveFlagString);
         strategyMap.put("productFamily", this::getProductFamily);
         strategyMap.put("descriptionProduct", this::getDescription);
         return strategyMap;
@@ -100,7 +100,7 @@ public class ProductDetail extends DetailBase {
         return CHECKED.equals(activeFlagImg.getAttribute(TITLE));
     }
 
-    public String isActiveFlagString(){
+    public String isActiveFlagString() {
         return String.valueOf(isActiveFlag());
     }
 

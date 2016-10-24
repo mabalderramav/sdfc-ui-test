@@ -1,11 +1,10 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
+import org.fundacionjala.sfdc.pages.base.SectionFrame;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
-
-import org.fundacionjala.sfdc.pages.base.SectionFrame;
 
 /**
  * Created by ccatari on 5/22/2016.
@@ -20,27 +19,32 @@ public class SearchSectionFrame extends SectionFrame {
     @FindBy(name = "go")
     private WebElement searchButton;
 
-    public SearchSectionFrame(){
+    public SearchSectionFrame() {
         driver.switchTo().frame(0);
         ExpectedConditions.frameToBeAvailableAndSwitchToIt(searchSection);
     }
-    public void setScope(String scope){
+
+    public void setScope(String scope) {
         scopeRequired(scope);
     }
-    public void setCampaign(String campaign){
+
+    public void setCampaign(String campaign) {
         setCampaignName(campaign);
         clickSearch();
         returnRoot();
     }
+
     public void searchTheCampaign(String parentCampaign, String scope) {
         setScope(scope);
         setCampaign(parentCampaign);
     }
-    public void scopeRequired(String scope){
-        if(scope!=null) {
+
+    public void scopeRequired(String scope) {
+        if (scope != null) {
             setCampaignScope(scope);
         }
     }
+
     public void clickSearch() {
         wait.until(ExpectedConditions.visibilityOf(this.searchButton));
         searchButton.click();

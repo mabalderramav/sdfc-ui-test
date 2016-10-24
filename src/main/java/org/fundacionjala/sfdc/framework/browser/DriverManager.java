@@ -1,11 +1,10 @@
 package org.fundacionjala.sfdc.framework.browser;
 
-import java.util.concurrent.TimeUnit;
-
+import org.fundacionjala.sfdc.framework.utils.Environment;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import org.fundacionjala.sfdc.framework.utils.Environment;
+import java.util.concurrent.TimeUnit;
 
 public class DriverManager {
 
