@@ -18,7 +18,7 @@ public abstract class DetailBase extends AbstractBasePage {
     @CacheLookup
     protected WebElement editBtn;
 
-    @FindBy(name = "delete")
+    @FindBy(name = "del")
     @CacheLookup
     protected WebElement deleteBtn;
 
