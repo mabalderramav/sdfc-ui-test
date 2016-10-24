@@ -12,6 +12,7 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.utils.Common;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

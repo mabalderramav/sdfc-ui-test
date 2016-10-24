@@ -1,7 +1,5 @@
 {
-  "productName" : "product_002",
-  "productCode" : "prod_002",
-  "descriptionProduct" : "description Test2",
-  "isActive" : "true",
-  "productFamily" : "None"
+  "productName": "product_002",
+  "productCode": "prod_002",
+  "descriptionProduct": "description Test2"
 }

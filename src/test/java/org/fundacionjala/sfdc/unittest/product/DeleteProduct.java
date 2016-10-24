@@ -22,11 +22,7 @@ public class DeleteProduct {
 
     private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
     private Map<String, String> valuesMapJson;
-    private ProductHome productHome;
-    private MainApp mainApp;
-    private TabBar tabBar;
     private ProductDetail productDetail;
-    private ProductForm newProductForm;
 
     /**
      * This method is Before setup.
@@ -34,10 +30,10 @@ public class DeleteProduct {
     @BeforeTest
     public void setup() {
         valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
-        productHome = tabBar.clickOnProductsHome();
-        newProductForm = productHome.clickNewButton();
+        MainApp mainApp = new MainApp();
+        TabBar tabBar = mainApp.goToTabBar();
+        ProductHome productHome = tabBar.clickOnProductsHome();
+        ProductForm newProductForm = productHome.clickNewButton();
         newProductForm.fillTheForm(valuesMapJson);
         productDetail = newProductForm.clickSaveButton();
     }
