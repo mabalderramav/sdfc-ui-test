@@ -12,10 +12,15 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class Common {
 
     /**
+<<<<<<< HEAD
      * This method gets a map of jason file.
      *
      * @param path is the string with the path of a json file.
      * @return a map.
+=======
+     * @param path
+     * @return
+>>>>>>> upstream/develop
      */
     public static Map getMapJson(final String path) {
         Map valuesMap = null;

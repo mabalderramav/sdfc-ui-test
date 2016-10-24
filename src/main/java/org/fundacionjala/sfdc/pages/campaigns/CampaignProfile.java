@@ -1,18 +1,17 @@
 package org.fundacionjala.sfdc.pages.campaigns;
 
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-
 /**
  * Created by Miguel.Pari on 6/24/2015.
  */
-public class CampaignProfile extends AbstractBasePage{
+public class CampaignProfile extends AbstractBasePage {
 
     //region Locators
 
@@ -30,8 +29,7 @@ public class CampaignProfile extends AbstractBasePage{
         return CampaingNameLabel.getText();
     }
 
-    public CampaignsHome clickDeleteButton()
-    {
+    public CampaignsHome clickDeleteButton() {
         CommonActions.clickElement(DeleteButton);
         Alert alert = driver.switchTo().alert();
         alert.accept();
@@ -39,8 +37,7 @@ public class CampaignProfile extends AbstractBasePage{
         return new CampaignsHome();
     }
 
-    public String getUrl()
-    {
+    public String getUrl() {
         return driver.getCurrentUrl();
     }
 

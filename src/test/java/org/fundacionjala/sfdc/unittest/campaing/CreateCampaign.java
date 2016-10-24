@@ -1,11 +1,5 @@
 package org.fundacionjala.sfdc.unittest.campaing;
 
-import java.util.Random;
-
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -13,6 +7,11 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignProfile;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
 import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import java.util.Random;
 
 import static org.testng.Assert.assertEquals;
 

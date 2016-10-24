@@ -1,6 +1,5 @@
 package org.fundacionjala.sfdc.unittest.contact;
 
-
 import java.util.Map;
 
 import org.fundacionjala.sfdc.pages.LoginPage;

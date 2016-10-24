@@ -1,8 +1,5 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -13,6 +10,9 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This class represents of the opportunity detail.

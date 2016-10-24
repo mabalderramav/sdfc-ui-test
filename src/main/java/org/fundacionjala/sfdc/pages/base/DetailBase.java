@@ -1,10 +1,9 @@
 package org.fundacionjala.sfdc.pages.base;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.common.CommonActions;
 
 public abstract class DetailBase extends AbstractBasePage {
     @FindBy(className = "topName")
@@ -19,7 +18,7 @@ public abstract class DetailBase extends AbstractBasePage {
     @CacheLookup
     protected WebElement editBtn;
 
-    @FindBy(name = "delete")
+    @FindBy(name = "del")
     @CacheLookup
     protected WebElement deleteBtn;
 

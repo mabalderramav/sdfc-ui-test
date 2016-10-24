@@ -1,10 +1,9 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 /**
  * Created by ivan on 30-06-15.

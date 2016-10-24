@@ -1,11 +1,15 @@
 package org.fundacionjala.sfdc.pages.products;
 
-import org.openqa.selenium.By;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
@@ -62,13 +66,29 @@ public class ProductDetail extends DetailBase {
     }
 
     /**
+     * Method that to permit gets texts.
+     *
+     * @return a Map with the values of opportunity edit.
+     */
+    public Map<String, AssertsDetails> getStrategyAssertMap() {
+        final Map<String, AssertsDetails> strategyMap = new HashMap();
+
+        strategyMap.put("productName", this::getProductName);
+        strategyMap.put("productCode", this::getProductCode);
+        strategyMap.put("isActive", this::isActiveFlagString);
+        strategyMap.put("productFamily", this::getProductFamily);
+        strategyMap.put("descriptionProduct", this::getDescription);
+        return strategyMap;
+    }
+
+    /**
      * This method verify that product is displayed.
      *
      * @param product String with product.
      * @return returns <code>true<code/> if product is displayed.
      */
     public boolean isProductDisplayed(final String product) {
-        return CommonActions.isElementPresent(driver.findElement(By.linkText(product)));
+        return CommonActions.existElementByLinkText(product);
     }
 
     /**
@@ -78,6 +98,10 @@ public class ProductDetail extends DetailBase {
      */
     public boolean isActiveFlag() {
         return CHECKED.equals(activeFlagImg.getAttribute(TITLE));
+    }
+
+    public String isActiveFlagString() {
+        return String.valueOf(isActiveFlag());
     }
 
     /**
