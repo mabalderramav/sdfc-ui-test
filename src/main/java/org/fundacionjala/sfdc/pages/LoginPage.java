@@ -8,9 +8,11 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import java.util.concurrent.TimeUnit;
+
 public class LoginPage extends AbstractBasePage {
     public static final String baseURL = "https://na24.salesforce.com/";
-
+    public static final int DURATION = 3;
     @FindBy(id = "username")
     @CacheLookup
     WebElement userNameField;
@@ -80,6 +82,8 @@ public class LoginPage extends AbstractBasePage {
     public MainApp loginOtherUser(final String userName, final String password) {
         MainApp homePage;
         try {
+            driver.manage().timeouts().implicitlyWait(DURATION, TimeUnit.SECONDS);
+            wait.withTimeout(DURATION, TimeUnit.SECONDS);
             homePage = new MainApp();
             if (!homePage.clickUserInformationLink().getUserName()
                     .equals(userName)) {
@@ -89,6 +93,9 @@ public class LoginPage extends AbstractBasePage {
         } catch (WebDriverException e) {
             DriverManager.getInstance().getDriver().get(Environment.getInstance().getBaseUrl());
             homePage = loginAs(userName, password);
+        } finally {
+            driver.manage().timeouts().implicitlyWait(Environment.getInstance().getTimeout(), TimeUnit.SECONDS);
+            wait.withTimeout(Environment.getInstance().getTimeout(), TimeUnit.SECONDS);
         }
         return homePage;
     }
