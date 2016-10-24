@@ -7,24 +7,17 @@ import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 /**
  * This class handle the product details.
  */
-public class ProductDetail extends AbstractBasePage {
+public class ProductDetail extends DetailBase {
 
     private static final String CHECKED = "Checked";
 
     private static final String TITLE = "title";
 
-    @FindBy(name = "del")
-    @CacheLookup
-    private WebElement deleteButton;
-
-    // edit button
-    @FindBy(name = "edit")
-    @CacheLookup
-    private WebElement editButton;
 
     // product name
     @FindBy(id = "Name_ileinner")
@@ -55,17 +48,16 @@ public class ProductDetail extends AbstractBasePage {
      * This method doing click on "Delete" button.
      */
     public void clickDeleteButton() {
-        CommonActions.clickElement(deleteButton);
+        CommonActions.clickElement(deleteBtn);
         driver.switchTo().alert().accept();
     }
 
     /**
-     * This method doing click on "Edit" button.
-     *
-     * @return {@link ProductForm}
+     * {@link AbstractBasePage}
      */
-    public ProductForm clickEditProduct() {
-        CommonActions.clickElement(editButton);
+    @Override
+    public ProductForm clickEditButton() {
+        CommonActions.clickElement(editBtn);
         return new ProductForm();
     }
 

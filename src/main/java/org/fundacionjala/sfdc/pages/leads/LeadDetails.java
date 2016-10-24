@@ -5,6 +5,7 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
 
 /**
@@ -355,5 +356,15 @@ public class LeadDetails extends FormBase {
         CommonActions.deleteMe(driver);
         return new Lead();
 
+    }
+
+    @Override
+    public AbstractBasePage clickSaveButton() {
+        return null;
+    }
+
+    @Override
+    public AbstractBasePage clickSaveNewButton() {
+        return null;
     }
 }

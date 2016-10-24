@@ -6,7 +6,7 @@ import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 
-public class DetailBase extends AbstractBasePage {
+public abstract class DetailBase extends AbstractBasePage {
     @FindBy(className = "topName")
     @CacheLookup
     protected WebElement objectNameText;
@@ -50,8 +50,5 @@ public class DetailBase extends AbstractBasePage {
      *
      * @return {@link AbstractBasePage}
      */
-    public AbstractBasePage clickEditButton() {
-        CommonActions.clickElement(editBtn);
-        return new FormBase();
-    }
+    public abstract AbstractBasePage clickEditButton();
 }

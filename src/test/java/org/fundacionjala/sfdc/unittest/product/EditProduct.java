@@ -57,7 +57,7 @@ public class EditProduct {
 
     @Test
     public void EditProduct() {
-        newProductForm = productProfile.clickEditProduct();
+        newProductForm = productProfile.clickEditButton();
         productProfile = newProductForm
                 .setProductName(productNameUpdated)
                 .setProductCode(productCodeUpdated)
