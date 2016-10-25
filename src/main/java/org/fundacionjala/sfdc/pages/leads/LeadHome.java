@@ -1,14 +1,18 @@
 package org.fundacionjala.sfdc.pages.leads;
 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriverException;
+
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
 
 /**
- * This class holds leads home page elements and inherits from FormBase the basic button "new"
+ * This class holds leads home page elements and inherits from FormBasePage the basic button "new".
  */
 
-public class Lead extends HomeBase {
+public class LeadHome extends HomeBase {
+
     /**
      * {@link HomeBase}
      */
@@ -17,7 +21,14 @@ public class Lead extends HomeBase {
         CommonActions.clickElement(newButton);
         return new LeadForm();
     }
-
+    public boolean isLeadDisplayed(String lead) {
+        try {
+            String leadContainer = driver.findElement(By.linkText(lead)).getText();
+            return true;
+        } catch(WebDriverException e) {
+            return false;
+        }
+    }
     @Override
     public AbstractBasePage clickCreateNewViewLink() {
         return null;
@@ -27,4 +38,5 @@ public class Lead extends HomeBase {
     public AbstractBasePage clickEditViewLink() {
         return null;
     }
+
 }
