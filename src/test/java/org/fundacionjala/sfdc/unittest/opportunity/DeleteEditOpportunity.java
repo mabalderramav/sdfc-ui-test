@@ -18,9 +18,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.OPPORTUNITY_DATA_PATH;
-
-
 /**
  * This class is a test to edit and delete of a opportunity.
  */
@@ -44,7 +41,7 @@ public class DeleteEditOpportunity {
      */
     @BeforeMethod
     public void BeforeTest() {
-        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
+        valuesMapJson = Common.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -58,7 +55,7 @@ public class DeleteEditOpportunity {
         opportunityForm = opportunityHomeHome.clickNewButton();
 
         opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.pressSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveBtn();
 
     }
 
@@ -79,8 +76,8 @@ public class DeleteEditOpportunity {
         opportunityForm = opportunityDetail.clickEditBtn();
         valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
-        opportunityDetail = opportunityForm.pressSaveBtn();
-        new AssertOpportunity().assertDetailValues(opportunityDetail, valuesMapEditJson);
+        opportunityDetail = opportunityForm.clickSaveBtn();
+        AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
     /**

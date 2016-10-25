@@ -1,36 +1,32 @@
 package org.fundacionjala.sfdc.unittest.opportunity;
 
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
+import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
-import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.utils.Common;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.Map;
-
 /**
  * This class is a test to create a opportunity
  */
 public class CreateOpportunity {
 
+    static final String OPPORTUNITY_DATA_PATH = "opportunity/CreateOpportunityData.json";
     private TabBar tabBar;
-    private LoginPage loginPage;
-    private OpportunityHome opportunityHomeHome;
-    private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
     private AccountAbstractPage accountsHome;
-    private NewAccountPage newAccountForm;
     private AccountProfile accountProfile;
     private MainApp mainApp;
-    public static final String OPPORTUNITY_DATA_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
     private Map<String, String> valuesMapJson;
 
     /**
@@ -39,15 +35,14 @@ public class CreateOpportunity {
     @BeforeTest
     public void BeforeTest() {
         valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
-        loginPage = new LoginPage();
+        LoginPage loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        newAccountForm = accountsHome.clickNewButton();
+        NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
                 .setAccountName(valuesMapJson.get("accountName"))
                 .pressSaveBtn();
-        opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
     }
 
     /**
@@ -55,10 +50,30 @@ public class CreateOpportunity {
      */
     @Test
     public void createOpportunity() {
-        opportunityForm = opportunityHomeHome.clickNewButton();
-        opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.pressSaveBtn();
-        new AssertOpportunity().assertDetailValues(opportunityDetail, valuesMapJson);
+        OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
+
+        //Option 1
+//        opportunityDetail = opportunityHome.clickNewButton()
+//                .setOpportunityName("Test")
+//                .setOrderNumber("")
+//                .clickSaveBtn();
+
+        // Option 2
+//        opportunityForm.fillTheForm(valuesMapJson);
+//        opportunityDetail = opportunityForm.clickSaveBtn();
+
+        // Option 3
+        // Builder.
+//
+
+        Opportunity opportunity = new Opportunity.OpportunityBuilder("test", "newField")
+                .setOpportunityType("")
+                .setAccountName("")
+                .setPrice(3)
+                .build();
+        opportunityDetail = opportunity.createOpportunity();
+
+        AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapJson);
     }
 
 

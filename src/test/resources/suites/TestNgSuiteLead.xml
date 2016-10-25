@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="1">
+    <listeners>
+        <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener" />
+    </listeners>
+    <test name="Lead">
+        <classes>
+            <class name="org.fundacionjala.sfdc.unittest.lead.CreateLead"/>
+        </classes>
+    </test>
+</suite>
