@@ -11,8 +11,8 @@ import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 import org.fundacionjala.sfdc.utils.Common;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
@@ -35,7 +35,7 @@ public class CreateProduct {
     /**
      * This method is Before setup.
      */
-    @BeforeTest
+    @BeforeMethod
     public void setup() {
         valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
         final MainApp mainApp = new MainApp();
@@ -70,7 +70,7 @@ public class CreateProduct {
     /**
      * This method is executed after scenario.
      */
-    @AfterTest
+    @AfterMethod
     public void tearDown() {
         productDetail.clickDeleteButton();
     }
