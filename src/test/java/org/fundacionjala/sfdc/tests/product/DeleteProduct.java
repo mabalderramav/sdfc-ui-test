@@ -1,19 +1,19 @@
-package org.fundacionjala.sfdc.unittest.product;
+package org.fundacionjala.sfdc.tests.product;
 
 
 import java.util.Map;
 
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import org.fundacionjala.sfdc.framework.utils.Common;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
-import org.fundacionjala.sfdc.utils.Common;
 
-
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
+import static org.testng.Assert.assertFalse;
 
 /**
  * This class handle deleted a product.
@@ -21,7 +21,9 @@ import org.testng.annotations.Test;
 public class DeleteProduct {
 
     private static final String PRODUCT_DATA_PATH = "product/CreateProductData.json";
+
     private Map<String, String> valuesMapJson;
+
     private ProductDetail productDetail;
 
     /**
@@ -44,6 +46,7 @@ public class DeleteProduct {
     @Test
     public void deleteProduct() {
         productDetail.clickDeleteButton();
-        Assert.assertFalse(productDetail.isProductDisplayed(valuesMapJson.get("productName")), "ProductHome Deleted");
+        assertFalse(productDetail.isProductDisplayed(valuesMapJson.get("productName")),
+                "ProductHome Deleted");
     }
 }

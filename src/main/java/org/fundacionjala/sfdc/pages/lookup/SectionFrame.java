@@ -1,8 +1,7 @@
-package org.fundacionjala.sfdc.pages.base;
+package org.fundacionjala.sfdc.pages.lookup;
 
-/**
- * Created by ccatari on 5/22/2016.
- */
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
 public abstract class SectionFrame extends AbstractBasePage {
 
     /**

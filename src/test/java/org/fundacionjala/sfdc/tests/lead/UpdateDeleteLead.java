@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.lead;
+package org.fundacionjala.sfdc.tests.lead;
 
 import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.testng.annotations.AfterClass;

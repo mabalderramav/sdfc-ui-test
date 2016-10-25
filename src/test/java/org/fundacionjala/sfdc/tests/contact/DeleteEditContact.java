@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.contact;
+package org.fundacionjala.sfdc.tests.contact;
 
 import java.util.Map;
 
@@ -8,13 +8,13 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.contacts.ContactForm;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
-import org.fundacionjala.sfdc.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.Common;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import static org.fundacionjala.sfdc.unittest.contact.CreateContact.CONTACT_DATA_PATH;
+import static org.fundacionjala.sfdc.tests.contact.CreateContact.CONTACT_DATA_PATH;
 
 
 /**

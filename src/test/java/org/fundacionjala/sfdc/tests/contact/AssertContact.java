@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.contact;
+package org.fundacionjala.sfdc.tests.contact;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.lead;
+package org.fundacionjala.sfdc.tests.lead;
 
 import java.util.Map;
 

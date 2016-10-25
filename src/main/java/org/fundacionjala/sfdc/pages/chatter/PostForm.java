@@ -1,7 +1,7 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.SectionFrame;
+import org.fundacionjala.sfdc.pages.lookup.SectionFrame;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;

@@ -1,22 +1,18 @@
-package org.fundacionjala.sfdc.unittest.product;
+package org.fundacionjala.sfdc.tests.product;
 
 import java.util.Map;
-
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.Product;
-import org.fundacionjala.sfdc.pages.products.ProductDetail;
-import org.fundacionjala.sfdc.pages.products.ProductForm;
-import org.fundacionjala.sfdc.pages.products.ProductHome;
-import org.fundacionjala.sfdc.utils.Common;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-/**
- * Created by Ruber Cuellar
- */
+import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
+
 public class EditProduct {
 
     private static final String PRODUCT_DATA_PATH = "product/CreateProductData.json";
@@ -29,7 +25,7 @@ public class EditProduct {
 
     private ProductDetail productDetail;
 
-    private ProductForm newProductForm;
+    private ProductForm productForm;
 
     @BeforeMethod
     public void setup() {
@@ -37,28 +33,27 @@ public class EditProduct {
         MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
         ProductHome productHome = tabBar.clickOnProductsHome();
-        newProductForm = productHome.clickNewButton();
-        newProductForm.fillTheForm(valuesMapJson);
-        productDetail = newProductForm.clickSaveButton();
+        productForm = productHome.clickNewButton();
+        productForm.fillTheForm(valuesMapJson);
+        productDetail = productForm.clickSaveButton();
+        productForm = productDetail.clickEditButton();
     }
 
     @Test
     public void editProductWithJson() {
-        newProductForm = productDetail.clickEditButton();
         Map<String, String> valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
-        newProductForm.fillTheForm(valuesMapEditJson);
-        productDetail = newProductForm.clickSaveButton();
+        productForm.fillTheForm(valuesMapEditJson);
+        productDetail = productForm.clickSaveButton();
         AssertProduct.assertDetailValues(productDetail, valuesMapEditJson);
     }
 
     @Test
     public void editProduct() {
-        productDetail.clickEditButton();
-        Product product = new Product.ProductBuilder(NAME_TEST)
+        productForm = new ProductForm.ProductBuilder(NAME_TEST)
                 .setDescription(DESCRIPTION_TEST)
                 .build();
-        productDetail = product.createProduct();
-        AssertProduct.assertDetailValues(productDetail, product.getValuesMap());
+        productDetail = productForm.saveProduct();
+        AssertProduct.assertDetailValues(productDetail, productForm.getValuesMap());
     }
 
     @AfterMethod

@@ -2,16 +2,18 @@ package org.fundacionjala.sfdc.framework.common;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.fundacionjala.sfdc.framework.browser.DriverManager;
-import org.openqa.selenium.*;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import org.fundacionjala.sfdc.framework.browser.DriverManager;
+
 
 /**
- * Created by Miguel.Pari on 6/24/2015.
- * <p>
- * Updated by Pablo Zubieta on 27/08/2015.
  * This class contains the common procedures to manage Add, and Delete elements from different components:
  * Leads, Campaign, Account, Contact, OpportunityHome, Products
  */
@@ -35,17 +37,20 @@ public final class CommonActions {
         element.click();
     }
 
-
     /**
      * This method waits and fill the element.
      *
      * @param element Element to wait and fill.
-     * @param text    text to fill.
+     * @param value    value to fill.
      */
-    public static void sendKeys(final WebElement element, final String text) {
+    public static void sendKeys(final WebElement element, final String value) {
+        if (value == null) {
+            //throw new IllegalArgumentException("");
+            //Logger.warn()
+        }
         DriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(element));
         element.clear();
-        element.sendKeys(text);
+        element.sendKeys(value);
     }
 
     /**

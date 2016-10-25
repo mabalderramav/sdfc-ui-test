@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.opportunity;
+package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 

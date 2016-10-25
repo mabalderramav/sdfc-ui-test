@@ -1,12 +1,12 @@
-package org.fundacionjala.sfdc.pages.base;
+package org.fundacionjala.sfdc.pages.lookup;
 
 import java.util.LinkedList;
 import java.util.Set;
 
-/**
- * Created by ccatari on 5/22/2016.
- */
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
 public class ModalWindow extends AbstractBasePage {
+
     private LinkedList<String> windowsList;
 
     /**
@@ -14,7 +14,7 @@ public class ModalWindow extends AbstractBasePage {
      */
     public void init() {
         Set<String> windowsHandleSet = driver.getWindowHandles();
-        this.windowsList = new LinkedList<String>(windowsHandleSet);
+        this.windowsList = new LinkedList<>(windowsHandleSet);
         driver.switchTo().window(this.windowsList.getLast());
     }
 

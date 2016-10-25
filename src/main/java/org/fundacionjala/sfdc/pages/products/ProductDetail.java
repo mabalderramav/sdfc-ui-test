@@ -3,15 +3,14 @@ package org.fundacionjala.sfdc.pages.products;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 /**
@@ -22,7 +21,6 @@ public class ProductDetail extends DetailBase {
     private static final String CHECKED = "Checked";
 
     private static final String TITLE = "title";
-
 
     // product name
     @FindBy(id = "Name_ileinner")
@@ -54,12 +52,12 @@ public class ProductDetail extends DetailBase {
      */
     public void clickDeleteButton() {
         CommonActions.clickElement(deleteBtn);
-        wait.until(ExpectedConditions.alertIsPresent());
-        driver.switchTo().alert().accept();
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
     }
 
     /**
-     * {@link AbstractBasePage}
+     * {@inheritDoc}
      */
     @Override
     public ProductForm clickEditButton() {
@@ -73,11 +71,11 @@ public class ProductDetail extends DetailBase {
      * @return a Map with the values of opportunity edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
-        final Map<String, AssertsDetails> strategyMap = new HashMap();
+        final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
         strategyMap.put("productName", this::getProductName);
         strategyMap.put("productCode", this::getProductCode);
-        strategyMap.put("isActive", this::isActiveFlagString);
+        strategyMap.put("isActive", () -> String.valueOf(isActiveFlag()));
         strategyMap.put("productFamily", this::getProductFamily);
         strategyMap.put("descriptionProduct", this::getDescription);
         return strategyMap;
@@ -100,10 +98,6 @@ public class ProductDetail extends DetailBase {
      */
     public boolean isActiveFlag() {
         return CHECKED.equals(activeFlagImg.getAttribute(TITLE));
-    }
-
-    public String isActiveFlagString() {
-        return String.valueOf(isActiveFlag());
     }
 
     /**

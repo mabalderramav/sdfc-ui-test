@@ -1,6 +1,5 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.pages.base.SectionFrame;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;

@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.campaing;
+package org.fundacionjala.sfdc.tests.campaing;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;

@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.chatter;
+package org.fundacionjala.sfdc.tests.chatter;
 
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;

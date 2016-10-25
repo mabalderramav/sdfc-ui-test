@@ -1,19 +1,17 @@
-package org.fundacionjala.sfdc.unittest.product;
+package org.fundacionjala.sfdc.tests.product;
 
 import java.util.Map;
-
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.Product;
-import org.fundacionjala.sfdc.pages.products.ProductDetail;
-import org.fundacionjala.sfdc.pages.products.ProductForm;
-import org.fundacionjala.sfdc.pages.products.ProductHome;
-
-import org.fundacionjala.sfdc.utils.Common;
 
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 /**
  * This class handle create a new product.
@@ -26,7 +24,7 @@ public class CreateProduct {
 
     private static final String DESCRIPTION_TEST = "description test";
 
-    private ProductHome productHome;
+    private ProductForm productForm;
 
     private Map<String, String> valuesMapJson;
 
@@ -40,7 +38,8 @@ public class CreateProduct {
         valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
         final MainApp mainApp = new MainApp();
         final TabBar tabBar = mainApp.goToTabBar();
-        productHome = tabBar.clickOnProductsHome();
+        final ProductHome productHome = tabBar.clickOnProductsHome();
+        productForm = productHome.clickNewButton();
     }
 
     /**
@@ -48,9 +47,8 @@ public class CreateProduct {
      */
     @Test
     public void createProductWithJson() {
-        final ProductForm newProductForm = productHome.clickNewButton();
-        newProductForm.fillTheForm(valuesMapJson);
-        productDetail = newProductForm.clickSaveButton();
+        productForm.fillTheForm(valuesMapJson);
+        productDetail = productForm.clickSaveButton();
         AssertProduct.assertDetailValues(productDetail, valuesMapJson);
     }
 
@@ -59,12 +57,11 @@ public class CreateProduct {
      */
     @Test
     public void createProduct() {
-        productHome.clickNewButton();
-        Product product = new Product.ProductBuilder(NAME_TEST)
+        productForm = new ProductForm.ProductBuilder(NAME_TEST)
                 .setDescription(DESCRIPTION_TEST)
                 .build();
-        productDetail = product.createProduct();
-        AssertProduct.assertDetailValues(productDetail, product.getValuesMap());
+        productDetail = productForm.saveProduct();
+        AssertProduct.assertDetailValues(productDetail, productForm.getValuesMap());
     }
 
     /**

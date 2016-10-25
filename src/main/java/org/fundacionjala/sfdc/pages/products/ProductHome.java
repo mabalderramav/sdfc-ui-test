@@ -10,7 +10,7 @@ import org.fundacionjala.sfdc.pages.base.HomeBase;
 public class ProductHome extends HomeBase {
 
     /**
-     * {@link HomeBase}
+     * {@inheritDoc}
      */
     public ProductForm clickNewButton() {
         CommonActions.clickElement(newButton);
@@ -18,7 +18,7 @@ public class ProductHome extends HomeBase {
     }
 
     /**
-     * {@link HomeBase}
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickCreateNewViewLink() {
@@ -27,7 +27,7 @@ public class ProductHome extends HomeBase {
     }
 
     /**
-     * {@link HomeBase}
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickEditViewLink() {

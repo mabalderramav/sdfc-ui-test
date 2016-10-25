@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.opportunity;
+package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
 import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
-import org.fundacionjala.sfdc.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.Common;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;

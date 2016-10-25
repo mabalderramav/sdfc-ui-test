@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.lead;
+package org.fundacionjala.sfdc.tests.lead;
 
 
 import java.util.Map;
@@ -14,9 +14,7 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
-import org.fundacionjala.sfdc.utils.Common;
-
-import org.testng.Assert;
+import org.fundacionjala.sfdc.framework.utils.Common;
 
 /**
  * This class verify the Creation of LeadHome.

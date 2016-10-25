@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.product;
+package org.fundacionjala.sfdc.tests.product;
 
 import java.util.Map;
 
