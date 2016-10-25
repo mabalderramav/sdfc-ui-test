@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
@@ -9,21 +12,15 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * This class represent to a form to create or edit a opportunity
  */
 public class OpportunityForm extends AbstractBasePage {
 
-
-    /* Top Button Row */
     @FindBy(name = "save")
     @CacheLookup
     private WebElement saveBtn;
 
-    /* OpportunityHome Information */
     @FindBy(id = "opp2")
     @CacheLookup
     private WebElement privateFlag;
@@ -285,7 +282,7 @@ public class OpportunityForm extends AbstractBasePage {
      *
      * @return OpportunityHome Detail page object.
      */
-    public OpportunityDetail pressSaveBtn() {
+    public OpportunityDetail clickSaveBtn() {
         saveBtn.click();
         return new OpportunityDetail();
     }
