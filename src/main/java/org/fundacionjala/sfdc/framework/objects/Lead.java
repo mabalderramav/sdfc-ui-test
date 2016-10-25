@@ -46,6 +46,7 @@ public class Lead extends ElementBase {
     //public String description;
     public String assignRule;
 
-    public Lead(){}
+    public Lead() {
+    }
 
 }

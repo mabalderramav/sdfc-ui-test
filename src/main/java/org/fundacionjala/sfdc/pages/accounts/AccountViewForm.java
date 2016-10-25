@@ -1,15 +1,14 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.FormBase;
-
 
 public class AccountViewForm extends FormBase {
-	@FindBy(id = "fname")
+    @FindBy(id = "fname")
     @CacheLookup
     private WebElement viewNameText;
 
@@ -48,9 +47,9 @@ public class AccountViewForm extends FormBase {
     }
 
     public AccountViewForm setViewUniqueNameText(String uniqueName) {
-    	viewUniqueNameText.sendKeys(uniqueName);
+        viewUniqueNameText.sendKeys(uniqueName);
         return this;
-    }    
+    }
 
     public AccountViewForm setMyAccounts() {
         myAccountsRadioButton.click();

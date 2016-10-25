@@ -1,25 +1,27 @@
 package org.fundacionjala.sfdc.unittest.opportunity;
 
+import java.util.Map;
+
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
-import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.utils.Common;
 import org.testng.Assert;
-import org.testng.annotations.*;
-
-import java.util.Map;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.OPPORTUNITY_DATA_PATH;
 
 
 /**
- * This class is a test to create a opportunity
+ * This class is a test to edit and delete of a opportunity.
  */
 public class DeleteEditOpportunity {
 
@@ -33,10 +35,11 @@ public class DeleteEditOpportunity {
     private AccountProfile accountProfile;
     private MainApp mainApp;
     public static final String OPPORTUNITY_DATA_EDIT_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
-    private Map<String,String> valuesMapJson;
-    private Map<String,String> valuesMapEditJson;
+    private Map<String, String> valuesMapJson;
+    private Map<String, String> valuesMapEditJson;
+
     /**
-     * This method is a preconditions to create a opportunities
+     * This method is a preconditions to edit and delete a opportunity.
      */
     @BeforeMethod
     public void BeforeTest() {
@@ -68,7 +71,7 @@ public class DeleteEditOpportunity {
     }
 
     /**
-     * This is a test to delete a opportunities
+     * This is a test to edit a opportunities
      */
     @Test
     public void EditOpportunity() {

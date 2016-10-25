@@ -15,7 +15,9 @@ public class Campaign {
     private String expectedResponse;
     private String numSent;
     private String parentCampaign;
-    public Campaign(){}
+
+    public Campaign() {
+    }
 
     public void setCampaignName(String campaignName) {
         this.campaignName = campaignName;

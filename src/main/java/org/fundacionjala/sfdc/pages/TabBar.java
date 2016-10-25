@@ -10,15 +10,17 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
+
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
 
 
+
 /**
  * Created by Miguel.Pari on 6/17/2015.
  */
-public class TabBar extends AbstractBasePage{
+public class TabBar extends AbstractBasePage {
     //region Locators
 
     @FindBy(xpath = "//*[@id='Campaign_Tab']/*[contains(.,'Campaigns')]")
@@ -63,27 +65,29 @@ public class TabBar extends AbstractBasePage{
         CommonActions.clickElement(contactsTab);
         return new ContactHome();
     }
+
     public ProductHome clickOnProductsHome() {
         CommonActions.clickElement(productsTab);
         return new ProductHome();
     }
+
     public OpportunityHome clickOnOpportunitiesHome() {
         CommonActions.clickElement(opportunitiesTab);
         return new OpportunityHome();
     }
+
     public AccountAbstractPage clickOnAccountsHome() {
         CommonActions.clickElement(accountTab);
         return new AccountAbstractPage();
     }
-	
+
 	public LeadHome clickLead() {
         CommonActions.clickElement(LeadTab);
-
         return new LeadHome();
     }
 
-	public ChatterAbstractPage clickOnChatterTab() {
-		CommonActions.clickElement(chatterTab);
-		return new ChatterAbstractPage();
-	}
+    public ChatterAbstractPage clickOnChatterTab() {
+        CommonActions.clickElement(chatterTab);
+        return new ChatterAbstractPage();
+    }
 }

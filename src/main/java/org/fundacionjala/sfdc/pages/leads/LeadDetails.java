@@ -12,6 +12,7 @@ import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
+
 /**
  * Class to manage the Detail of the LeadHome Page when it was created.
  */

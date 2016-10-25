@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
+
 import java.util.Map;
 
 import org.testng.annotations.AfterTest;
@@ -11,8 +12,11 @@ import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
+
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
 import org.fundacionjala.sfdc.utils.Common;
+
+import org.testng.Assert;
 
 /**
  * This class verify the Creation of LeadHome.
@@ -29,7 +33,6 @@ public class CreateLead {
 
     /**
      * This method execute the preconditions to make the validation to the creation of lead.
-     *
      */
     @BeforeTest
     public void setUp() {
@@ -50,7 +53,6 @@ public class CreateLead {
         leadForm.fillTheForm(valuesMapJson);
         leadDetails = leadForm.clickSaveButton();
         new AssertLead().assertDetailValues(leadDetails, valuesMapJson);
-
 
     }
 
