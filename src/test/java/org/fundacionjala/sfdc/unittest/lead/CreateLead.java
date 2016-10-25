@@ -27,7 +27,7 @@ public class CreateLead {
     private TabBar tabBar;
     private LeadDetails leadDetails;
     private LoginPage loginPage;
-    private static final String LEAD_DATA_PATH = "src/test/resources/json/lead/CreateLeadData.json";
+    public static final String LEAD_DATA_PATH = "lead/CreateLeadData.json";
     private Map<String, String> valuesMapJson;
 
 
