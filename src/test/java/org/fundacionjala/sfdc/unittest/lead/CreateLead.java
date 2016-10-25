@@ -23,7 +23,7 @@ public class CreateLead {
     private TabBar tabBar;
     private LeadDetails leadDetails;
     private LoginPage loginPage;
-    public static final String LEAD_DATA_PATH = "src/test/resources/json/lead/CreateLeadData.json";
+    private static final String LEAD_DATA_PATH = "src/test/resources/json/lead/CreateLeadData.json";
     private Map<String, String> valuesMapJson;
 
 
@@ -45,27 +45,7 @@ public class CreateLead {
      */
     @Test
     public void createLeadTest(){
-/*
-        leadDetails = leadHomePage.clickNewButton()
-
-                .fillNewLeadFromJson(LeadForm.LEAD_DATA_PATH)
-                .clickSaveButton();
-        org.fundacionjala.sfdc.framework.objects.LeadHome expectedLead =
-                (org.fundacionjala.sfdc.framework.objects.LeadHome)JsonMapper.getData(LeadForm.LEAD_DATA_PATH,new org.fundacionjala.sfdc.framework.objects.LeadHome());
-        assertEquals(leadDetails.getName(), expectedLead.nameSalutation + " " + expectedLead.firstName
-                + " " + expectedLead.lastName, "LeadHome not created properly, names does not match");
-                */
-//        String firstName = "Test Name 01";
-//        String lastName = "Test LastName";
-//        String company = "Company Test";
-//        LeadForm leadForm = leadHomePage.clickNewBtn();
-//        leadForm = new LeadBuilder()
-//                .setFirstName(firstName)
-//                .setLastName(lastName)
-//                .setCompany(company)
-//                .build();
-//        leadDetails = leadForm.clickSaveButton();
-        LeadForm leadForm = leadHomePage.clickNewBtn();
+        LeadForm leadForm = leadHomePage.clickNewButton();
         valuesMapJson = Common.getMapJson(LEAD_DATA_PATH);
         leadForm.fillTheForm(valuesMapJson);
         leadDetails = leadForm.clickSaveButton();
@@ -79,7 +59,7 @@ public class CreateLead {
      */
     @AfterTest
     public void tearDown() {
-        leadDetails.deleteLead();
+       leadDetails.deleteLead();
     }
 }
 

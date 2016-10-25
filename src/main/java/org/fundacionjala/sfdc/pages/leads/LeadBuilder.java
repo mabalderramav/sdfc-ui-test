@@ -1,7 +1,5 @@
 package org.fundacionjala.sfdc.pages.leads;
 
-import org.fundacionjala.sfdc.framework.objects.Lead;
-
 /**
  * Created by LuLy on 23/10/2016.
  */
@@ -9,11 +7,11 @@ public class LeadBuilder {
 
     private LeadForm leadForm;
 
-    public LeadBuilder(){
+    public LeadBuilder(String lastName,String companyName){
         leadForm = new LeadForm();
     }
-    public LeadForm build(){
-        return leadForm;
+    public LeadDetails build(){
+        return new LeadDetails();
     }
     public LeadBuilder setFirstName(String firstName){
         leadForm.setFirstNameField(firstName);

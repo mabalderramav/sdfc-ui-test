@@ -1,7 +1,6 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
-import org.fundacionjala.sfdc.pages.leads.LeadHome;
-import org.testng.annotations.AfterTest;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -9,7 +8,9 @@ import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
+import org.fundacionjala.sfdc.pages.leads.LeadHome;
 
+import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertFalse;
 
 /**
@@ -17,14 +18,18 @@ import static org.testng.Assert.assertFalse;
  */
 public class UpdateDeleteLead {
     private LeadDetails leadDetails;
-    private LeadHome leadHomeHomePage;
+    private LeadHome leadHomePage;
+
+    /**
+     * This method execute the preconditions to make the validation for update and delete test.
+     */
     @BeforeTest
     public void setUp(){
         LoginPage loginPage = new LoginPage();
         MainApp mainApp = loginPage.loginAsPrimaryUser();
         TabBar tabBar = new MainApp().goToTabBar();
-        leadHomeHomePage = tabBar.clickLead();
-        leadDetails = leadHomeHomePage.clickNewBtn()
+        leadHomePage = tabBar.clickLead();
+        leadDetails = leadHomePage.clickNewButton()
                 .setFirstNameField("Test Name 01")
                 .setLastNameField("Test LastName")
                 .setCompanyField("Company Test")
@@ -33,12 +38,17 @@ public class UpdateDeleteLead {
     @Test
     public void deleteLead(){
         leadDetails.deleteLead();
-        assertFalse(leadHomeHomePage.isLeadDisplayed("Test Name 01"));
+        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
     }
     @Test void updateLead(){
+        String companyNameEdited = "ComapnyName UPDATED";
+        leadDetails = leadDetails.clickEditButton()
+                .setCompanyField(companyNameEdited)
+                .clickSaveButton();
+        assertEquals(companyNameEdited,leadDetails.getCompany());
 
     }
-    @AfterTest
+    @AfterClass
     public void tearDown(){
 
     }

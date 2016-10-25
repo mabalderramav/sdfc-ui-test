@@ -9,11 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.framework.objects.Lead;
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-
 import org.fundacionjala.sfdc.pages.FormSteps;
-
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
 
@@ -23,11 +19,10 @@ import org.fundacionjala.sfdc.pages.base.FormBase;
  */
 public class LeadForm extends FormBase {
 
-    public static final String LEAD_DATA_PATH = "src\\test\\resources\\json\\CreateLeadData.json";
-
     @FindBy(id = "name_lastlea2")
     @CacheLookup
     private WebElement lastNameField;
+
     @FindBy(id = "lea13")
     @CacheLookup
     private WebElement leadStatusField;
@@ -46,9 +41,11 @@ public class LeadForm extends FormBase {
     @FindBy(xpath = "//input[@id='lea20']")
     @CacheLookup
     private WebElement campaingLookupField;
+
     @FindBy(id = "name_salutationlea2")
     @CacheLookup
     private WebElement nameSalutationField;
+
     @FindBy(id = "lea4")
     @CacheLookup
     private WebElement titleField;
@@ -91,7 +88,8 @@ public class LeadForm extends FormBase {
     @FindBy(id = "lea16country")
     @CacheLookup
     private WebElement countryField;
-    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::span/select")
+
+    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::span/select")
     @CacheLookup
     private WebElement productInterestField;
 
@@ -116,62 +114,6 @@ public class LeadForm extends FormBase {
     private WebElement assignRuleCheck;
     @FindBy(id = "lea20_lkwgt")
     private WebElement campaignIcon;
-
-    private Lead leadObject;
-
-    /**
-     * This method fill the Form with the information of the Json.
-     */
-    public void fillTheForm() {
-        CommonActions.sendKeys(lastNameField, leadObject.lastName);
-        CommonActions.sendKeys(companyField, leadObject.company);
-        CommonActions.selectItem(leadStatusField, leadObject.leadStatus);
-        //CommonActions.sendKeys(campaingLookupField, leadObject.campaignLookup);
-        selectCampaign(leadObject.campaignLookup);
-        CommonActions.selectItem(nameSalutationField, leadObject.nameSalutation);
-        CommonActions.sendKeys(firstNameField, leadObject.firstName);
-        CommonActions.sendKeys(titleField, leadObject.title);
-        CommonActions.selectItem(leadSourceField, leadObject.leadSource);
-        CommonActions.selectItem(industryField, leadObject.industry);
-        CommonActions.sendKeys(annualRevenueField, leadObject.annualRevenue);
-        CommonActions.sendKeys(phoneField, leadObject.phone);
-        CommonActions.sendKeys(mobileField, leadObject.mobile);
-        CommonActions.sendKeys(faxField, leadObject.fax);
-        CommonActions.sendKeys(emailField, leadObject.email);
-        CommonActions.sendKeys(websiteField, leadObject.website);
-        CommonActions.selectItem(ratingField, leadObject.rating);
-        CommonActions.sendKeys(numEmployeesField, leadObject.numEmployees);
-        CommonActions.sendKeys(streetField, leadObject.street);
-        CommonActions.sendKeys(leadCityField, leadObject.city);
-        CommonActions.sendKeys(stateField, leadObject.stateProvince);
-        CommonActions.sendKeys(zipCodeField, leadObject.zipCode);
-        CommonActions.sendKeys(countryField, leadObject.country);
-        CommonActions.selectItem(productInterestField, leadObject.productInterest);
-        CommonActions.sendKeys(sicCodeField, leadObject.SICCode);
-        CommonActions.sendKeys(numLocationsField, leadObject.numberLocations);
-        CommonActions.sendKeys(currentGeneratorsField, leadObject.currentGenerators);
-        CommonActions.selectItem(primaryField, leadObject.primary);
-        CommonActions.sendKeys(descriptionField, leadObject.description);
-        if (leadObject.assignRule == "yes") {
-            CommonActions.check(assignRuleCheck);
-        }
-    }
-
-    /**
-     * This method loads data to fill the form for a given Json file.
-     *
-     * @param path the path where is the Json file.
-     * @return the LeadHome form.
-     */
-    public LeadForm fillNewLeadFromJson(final String path) {
-        try {
-            leadObject = (Lead) JsonMapper.getData(path, new Lead());
-            fillTheForm();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return this;
-    }
 
     /**
      * This method selects the campaign where the LeadHome is take in account.
@@ -257,21 +199,32 @@ public class LeadForm extends FormBase {
         return new LeadDetails();
     }
 
+    /**
+     * Method to fill the form given a Json file.
+     *
+     * @param valuesMapCreate Map with the Json values.
+     */
     public void fillTheForm(Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }
 
+    /**
+     * Method to Map the Json Values data.
+     *
+     * @param values Map with the information to be mapped.
+     * @return a Map with the corresponding values.
+     */
     public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap();
 
-        strategyMap.put("nameSalutation", () -> CommonActions.sendKeys(nameSalutationField, String.valueOf(values.get("nameSalutation"))));
+        strategyMap.put("nameSalutation", () -> CommonActions.selectItem(nameSalutationField, String.valueOf(values.get("nameSalutation"))));
         strategyMap.put("firstName", () -> setFirstNameField(String.valueOf(values.get("firstName"))));
         strategyMap.put("lastName", () -> setLastNameField(String.valueOf(values.get("lastName"))));
         strategyMap.put("company", () -> setCompanyField(String.valueOf(values.get("company"))));
         strategyMap.put("title", () -> CommonActions.sendKeys(titleField, String.valueOf(values.get("title"))));
         strategyMap.put("leadSource", () -> CommonActions.selectItem(leadSourceField, String.valueOf(values.get("leadSource"))));
-        strategyMap.put("campaign", () -> selectCampaign(String.valueOf(values.get("campaign"))));
+        strategyMap.put("campaignLookup", () -> selectCampaign(String.valueOf(values.get("campaignLookup"))));
         strategyMap.put("industry", () -> CommonActions.selectItem(industryField, String.valueOf(values.get("industry"))));
         strategyMap.put("annualRevenue", () -> CommonActions.sendKeys(annualRevenueField, String.valueOf(values.get("annualRevenue"))));
         strategyMap.put("phone", () -> CommonActions.sendKeys(phoneField, String.valueOf(values.get("phone"))));
@@ -288,11 +241,13 @@ public class LeadForm extends FormBase {
         strategyMap.put("stateProvince", () -> CommonActions.sendKeys(stateField, String.valueOf(values.get("stateProvince"))));
         strategyMap.put("zipCode", () -> CommonActions.sendKeys(zipCodeField, String.valueOf(values.get("zipCode"))));
         strategyMap.put("country", () -> CommonActions.sendKeys(countryField, String.valueOf(values.get("country"))));
+
         strategyMap.put("productInterest", () -> CommonActions.selectItem(productInterestField, String.valueOf(values.get("productInterest"))));
         strategyMap.put("SICCode", () -> CommonActions.sendKeys(sicCodeField, String.valueOf(values.get("SICCode"))));
         strategyMap.put("numberLocations", () -> CommonActions.sendKeys(numLocationsField, String.valueOf(values.get("numberLocations"))));
         strategyMap.put("currentGenerators", () -> CommonActions.sendKeys(currentGeneratorsField, String.valueOf(values.get("currentGenerators"))));
         strategyMap.put("primary", () -> CommonActions.selectItem(primaryField, String.valueOf(values.get("primary"))));
+
         strategyMap.put("description", () -> CommonActions.sendKeys(descriptionField, String.valueOf(values.get("description"))));
         strategyMap.put("assignRule", () -> setAssignRule(String.valueOf(values.get("assignRule"))));
 
@@ -300,7 +255,7 @@ public class LeadForm extends FormBase {
     }
 
     public void setAssignRule(final String assignRule) {
-        if (leadObject.assignRule == "yes") {
+        if (assignRule == "yes") {
             CommonActions.check(assignRuleCheck);
         }
     }

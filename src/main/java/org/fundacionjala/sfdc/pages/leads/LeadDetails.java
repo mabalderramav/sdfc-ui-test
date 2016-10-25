@@ -3,22 +3,19 @@ package org.fundacionjala.sfdc.pages.leads;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
-
 import org.fundacionjala.sfdc.pages.AssertsDetails;
-
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.FormBase;
-
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 /**
  * Class to manage the Detail of the LeadHome Page when it was created.
  */
-public class LeadDetails extends FormBase {
+public class LeadDetails extends DetailBase {
 
     //region Locators
 
@@ -26,108 +23,82 @@ public class LeadDetails extends FormBase {
     @FindBy(id = "lea1_ileinner")
     @CacheLookup
     private WebElement owner;
-
     @FindBy(id = "lea2_ileinner")
     @CacheLookup
     private WebElement name;
-
     @FindBy(id = "lea3_ileinner")
     @CacheLookup
     private WebElement company;
-
     @FindBy(id = "lea4_ileinner")
     @CacheLookup
     private WebElement title;
-
     @FindBy(id = "lea5_ileinner")
     @CacheLookup
     private WebElement leadSource;
-
     @FindBy(id = "lea6_ileinner")
     @CacheLookup
     private WebElement industry;
-
     @FindBy(id = "lea7_ileinner")
     @CacheLookup
     private WebElement annualRevenue;
-
     @FindBy(id = "lea8_ileinner")
     @CacheLookup
     private WebElement phone;
-
     @FindBy(id = "lea9_ileinner")
     @CacheLookup
     private WebElement mobile;
-
     @FindBy(id = "lea10_ileinner")
     @CacheLookup
     private WebElement fax;
-
     @FindBy(id = "lea11_ileinner")
     @CacheLookup
     private WebElement email;
-
     @FindBy(id = "lea12_ileinner")
     @CacheLookup
     private WebElement website;
-
     @FindBy(id = "lea13_ileinner")
     @CacheLookup
     private WebElement leadStatus;
-
     @FindBy(id = "lea14_ileinner")
     @CacheLookup
     private WebElement rating;
-
     @FindBy(id = "lea15_ileinner")
     @CacheLookup
     private WebElement numEmployees;
-
     /*Address Information*/
     @FindBy(id = "lea16_ileinner")
     @CacheLookup
     private WebElement address;
-
     /*additional information*/
-    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::div")
+    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::div")
     @CacheLookup
     private WebElement productInterest;
-
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::div")
     @CacheLookup
     private WebElement sicCode;
-
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::div")
     @CacheLookup
     private WebElement numLocations;
-
     @FindBy(xpath = "//td[contains(.,'Current Generator')]/following::div")
     @CacheLookup
     private WebElement currentGenerators;
-
     @FindBy(xpath = "//td[contains(.,'Primary')]/following::div")
     @CacheLookup
     private WebElement primary;
-
     /*Others*/
     @FindBy(id = "lea17_ileinner")
     @CacheLookup
     private WebElement description;
-
     @FindBy(id = "lea20")
     @CacheLookup
     private WebElement campaign;
-
     @FindBy(id = "CreatedBy_ileinner")
     @CacheLookup
     private WebElement createdBy;
-
     @FindBy(id = "LastModifiedBy_ileinner")
     @CacheLookup
     private WebElement lastModifiedBy;
-
     //endregion
-
 
     /**
      * Method that gets the Owner that was registered in the creation of LeadHome.
@@ -332,8 +303,10 @@ public class LeadDetails extends FormBase {
      *
      * @return a String with the campaign name.
      */
-    public String getCampaign() {
-        return campaign.getText();
+    public String getCampaign(String campaignName) {
+        String text = driver.findElement(By.xpath("//a[contains(.,\'" + campaignName + "\')]")).getText();
+        return driver.findElement(By.xpath("//a[contains(.," + campaignName + ")]")).getText();
+        //return campaign.getText();
     }
 
     /**
@@ -362,27 +335,53 @@ public class LeadDetails extends FormBase {
     public LeadHome deleteLead() {
         CommonActions.deleteMe(driver);
         return new LeadHome();
-
     }
 
-    public Map<String, AssertsDetails> getStrategyAssertLead() {
+    /**
+     * method that load the Strategy Map to make the assertions.
+     *
+     * @param valuesMapJson Json Map with the information.
+     * @return the Map with the values to make assertions.
+     */
+    public Map<String, AssertsDetails> getStrategyAssertLead(Map<String, String> valuesMapJson) {
         final Map<String, AssertsDetails> strategyMap = new HashMap();
 
-        strategyMap.put("fullName", () -> getName());
-        strategyMap.put("company", () -> getCompany());
-        strategyMap.put("company", () -> getCompany());
-        strategyMap.put("company", () -> getCompany());
+        strategyMap.put("fullName", this::getName);
+        strategyMap.put("company", this::getCompany);
+        strategyMap.put("title", this::getTitle);
+        strategyMap.put("leadSource", this::getLeadSource);
+        // strategyMap.put("campaignLookup", () -> getCampaign(valuesMapJson.get("campaignLookup")));
+        strategyMap.put("industry", this::getIndustry);
+        //strategyMap.put("annualRevenue", this::getAnnualRevenue);
+        strategyMap.put("phone", this::getPhone);
+        strategyMap.put("mobile", this::getMobile);
+        strategyMap.put("fax", this::getFax);
+
+        strategyMap.put("email", this::getEmail);
+        strategyMap.put("website", this::getWebsite);
+        strategyMap.put("leadStatus", this::getLeadStatus);
+        strategyMap.put("rating", this::getRating);
+        strategyMap.put("numEmployees", this::getNumEmployees);
+        strategyMap.put("address", this::getAddress);
+//        strategyMap.put("city", () -> getAddress());
+//        strategyMap.put("stateProvince", () -> getAddress());
+//        strategyMap.put("zipCode", () -> getAddress() );
+//        strategyMap.put("country", () ->getAddress());
+
+        strategyMap.put("productInterest", this::getProductInterest);
+        strategyMap.put("SICCode", this::getSicCode);
+        strategyMap.put("numberLocations", this::getNumLocations);
+        strategyMap.put("currentGenerators", this::getCurrentGenerators);
+        strategyMap.put("primary", this::getPrimary);
+
+        strategyMap.put("description", this::getDescription);
 
         return strategyMap;
     }
 
     @Override
-    public AbstractBasePage clickSaveButton() {
-        return null;
-    }
-
-    @Override
-    public AbstractBasePage clickSaveNewButton() {
-        return null;
+    public LeadForm clickEditButton() {
+        CommonActions.clickElement(editBtn);
+        return new LeadForm();
     }
 }
