@@ -10,20 +10,13 @@ import org.openqa.selenium.support.FindBy;
  * Created by Gisela on 6/29/2015.
  */
 public class ChatterAbstractPage extends AbstractBasePage {
-    //private WebDriver Driver;
-    //WebDriverWait wait;
-
-    //region Locators
-
 
     @FindBy(xpath = "//textarea[@id='publishereditablearea']")
     @CacheLookup
     WebElement publisheredArea;
 
-
     @FindBy(id = "publishersharebutton")
     WebElement shareButton;
-    //endregion
 
     @FindBy(xpath = "//a[@onclick='chatter.getFeed().showCommentBoxViaAnchor(this);']")
     @CacheLookup

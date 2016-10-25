@@ -9,7 +9,6 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-
 public class PostContainer extends AbstractBasePage {
 
 
@@ -20,9 +19,14 @@ public class PostContainer extends AbstractBasePage {
     @FindBy(linkText = "Edit")
     @CacheLookup
     private WebElement editOptn;
-    private WebElement actionMenu;
     private String postText;
 
+    /**
+     * Deletes a determined post.
+     *
+     * @param postTxt Is the post text used to identify the
+     *                publication to be deleted.
+     */
     public void deletePost(String postTxt) {
         clickActionMenu(postTxt);
         CommonActions.clickElement(deleteOptn);
@@ -31,6 +35,12 @@ public class PostContainer extends AbstractBasePage {
 
     }
 
+    /**
+     * Edits a determined post.
+     * @param postTxt Is the post text used to identify the
+     *                publication to be edited.
+     * @return {@link PostForm}
+     */
     public PostForm editPost(String postTxt) {
         clickActionMenu(postTxt);
         CommonActions.clickElement(editOptn);
@@ -38,8 +48,14 @@ public class PostContainer extends AbstractBasePage {
 
     }
 
+    /**
+     * Makes click on the action menu of a determined post.
+     * @param postTxt Is the post text used to identify the
+     *                publication to click its action menu.
+     */
     public void clickActionMenu(String postTxt) {
-        actionMenu = driver.findElement(By.xpath("//span[contains(.,'" + postTxt + "')]/ancestor::div[@class='feeditembody']/following::a[@class='zen-trigger feeditemActionMenuButton']"));
+        WebElement actionMenu = driver.findElement(By
+                .xpath("//span[contains(.,'" + postTxt + "')]/ancestor::div[@class='feeditembody']/following::a[@class='zen-trigger feeditemActionMenuButton']"));
         CommonActions.clickElement(actionMenu);
     }
 
