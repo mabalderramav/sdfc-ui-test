@@ -2,13 +2,13 @@ package org.fundacionjala.sfdc.framework.objects;
 
 /**
  * Created by Pablo Zubieta on 01/09/2015.
- * Object that represents a Lead, holding all regarding information to create a new lead.
+ * Object that represents a LeadHome, holding all regarding information to create a new lead.
  * It will be filled by the JsonMapper object.
  */
 
 public class Lead extends ElementBase {
 
-    /*Lead Information*/
+    /*LeadHome Information*/
     public String nameSalutation;
     public String firstName;
     public String lastName;

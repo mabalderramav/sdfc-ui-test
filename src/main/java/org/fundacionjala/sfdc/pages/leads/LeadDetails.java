@@ -1,128 +1,108 @@
 package org.fundacionjala.sfdc.pages.leads;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.FormBase;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
+
+
 /**
- * Class to manage the Detail of the Lead Page when it was created.
+ * Class to manage the Detail of the LeadHome Page when it was created.
  */
-public class LeadDetails extends FormBase {
+public class LeadDetails extends DetailBase {
 
     //region Locators
 
-    /*Lead Information*/
+    /*LeadHome Information*/
     @FindBy(id = "lea1_ileinner")
     @CacheLookup
     private WebElement owner;
-
     @FindBy(id = "lea2_ileinner")
     @CacheLookup
     private WebElement name;
-
     @FindBy(id = "lea3_ileinner")
     @CacheLookup
     private WebElement company;
-
     @FindBy(id = "lea4_ileinner")
     @CacheLookup
     private WebElement title;
-
     @FindBy(id = "lea5_ileinner")
     @CacheLookup
     private WebElement leadSource;
-
     @FindBy(id = "lea6_ileinner")
     @CacheLookup
     private WebElement industry;
-
     @FindBy(id = "lea7_ileinner")
     @CacheLookup
     private WebElement annualRevenue;
-
     @FindBy(id = "lea8_ileinner")
     @CacheLookup
     private WebElement phone;
-
     @FindBy(id = "lea9_ileinner")
     @CacheLookup
     private WebElement mobile;
-
     @FindBy(id = "lea10_ileinner")
     @CacheLookup
     private WebElement fax;
-
     @FindBy(id = "lea11_ileinner")
     @CacheLookup
     private WebElement email;
-
     @FindBy(id = "lea12_ileinner")
     @CacheLookup
     private WebElement website;
-
     @FindBy(id = "lea13_ileinner")
     @CacheLookup
     private WebElement leadStatus;
-
     @FindBy(id = "lea14_ileinner")
     @CacheLookup
     private WebElement rating;
-
     @FindBy(id = "lea15_ileinner")
     @CacheLookup
     private WebElement numEmployees;
-
     /*Address Information*/
     @FindBy(id = "lea16_ileinner")
     @CacheLookup
     private WebElement address;
-
     /*additional information*/
-    @FindBy(xpath = "//td[contains(.,'ProductHome Interest')]/following::div")
+    @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::div")
     @CacheLookup
     private WebElement productInterest;
-
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::div")
     @CacheLookup
     private WebElement sicCode;
-
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::div")
     @CacheLookup
     private WebElement numLocations;
-
     @FindBy(xpath = "//td[contains(.,'Current Generator')]/following::div")
     @CacheLookup
     private WebElement currentGenerators;
-
     @FindBy(xpath = "//td[contains(.,'Primary')]/following::div")
     @CacheLookup
     private WebElement primary;
-
     /*Others*/
     @FindBy(id = "lea17_ileinner")
     @CacheLookup
     private WebElement description;
-
     @FindBy(id = "lea20")
     @CacheLookup
     private WebElement campaign;
-
     @FindBy(id = "CreatedBy_ileinner")
     @CacheLookup
     private WebElement createdBy;
-
     @FindBy(id = "LastModifiedBy_ileinner")
     @CacheLookup
     private WebElement lastModifiedBy;
-
     //endregion
 
-
     /**
-     * Method that gets the Owner that was registered in the creation of Lead.
+     * Method that gets the Owner that was registered in the creation of LeadHome.
      *
      * @return a string that is the Owner data.
      */
@@ -131,16 +111,16 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method gets the Lead Name that was registered in the creation of Lead.
+     * This method gets the LeadHome Name that was registered in the creation of LeadHome.
      *
-     * @return the Lead Name.
+     * @return the LeadHome Name.
      */
     public String getName() {
         return name.getText();
     }
 
     /**
-     * This method gets the Company that was registered in the creation of Lead.
+     * This method gets the Company that was registered in the creation of LeadHome.
      *
      * @return a String that is the company information.
      */
@@ -149,25 +129,25 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method gets the Title of the Lead.
+     * This method gets the Title of the LeadHome.
      *
-     * @return a String that is the Lead Title.
+     * @return a String that is the LeadHome Title.
      */
     public String getTitle() {
         return title.getText();
     }
 
     /**
-     * This method gets the Source info of the Lead.
+     * This method gets the Source info of the LeadHome.
      *
-     * @return a String that is the Source info of the Lead.
+     * @return a String that is the Source info of the LeadHome.
      */
     public String getLeadSource() {
         return leadSource.getText();
     }
 
     /**
-     * This method gets the selected industry for the Lead.
+     * This method gets the selected industry for the LeadHome.
      *
      * @return a String with the industry info.
      */
@@ -176,7 +156,7 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method gets the Annual Revenue info for the Lead.
+     * This method gets the Annual Revenue info for the LeadHome.
      *
      * @return a String with the Anunal Revenue info.
      */
@@ -230,7 +210,7 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method gets the status of the Lead.
+     * This method gets the status of the LeadHome.
      *
      * @return a String with the status info.
      */
@@ -324,12 +304,14 @@ public class LeadDetails extends FormBase {
      *
      * @return a String with the campaign name.
      */
-    public String getCampaign() {
-        return campaign.getText();
+    public String getCampaign(String campaignName) {
+        String text = driver.findElement(By.xpath("//a[contains(.,\'" + campaignName + "\')]")).getText();
+        return driver.findElement(By.xpath("//a[contains(.," + campaignName + ")]")).getText();
+        //return campaign.getText();
     }
 
     /**
-     * This method gets the name of the user that created the Lead.
+     * This method gets the name of the user that created the LeadHome.
      *
      * @return a String with the user name.
      */
@@ -338,7 +320,7 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method gets the user name that was the last that modify the info of the Lead.
+     * This method gets the user name that was the last that modify the info of the LeadHome.
      *
      * @return a String with the user name.
      */
@@ -347,23 +329,60 @@ public class LeadDetails extends FormBase {
     }
 
     /**
-     * This method click on delete button to delete the Lead.
+     * This method click on delete button to delete the LeadHome.
      *
-     * @return a Lead
+     * @return a LeadHome
      */
-    public Lead deleteLead() {
+    public LeadHome deleteLead() {
         CommonActions.deleteMe(driver);
-        return new Lead();
+        return new LeadHome();
+    }
 
+    /**
+     * method that load the Strategy Map to make the assertions.
+     *
+     * @param valuesMapJson Json Map with the information.
+     * @return the Map with the values to make assertions.
+     */
+    public Map<String, AssertsDetails> getStrategyAssertLead(Map<String, String> valuesMapJson) {
+        final Map<String, AssertsDetails> strategyMap = new HashMap();
+
+        strategyMap.put("fullName", this::getName);
+        strategyMap.put("company", this::getCompany);
+        strategyMap.put("title", this::getTitle);
+        strategyMap.put("leadSource", this::getLeadSource);
+        // strategyMap.put("campaignLookup", () -> getCampaign(valuesMapJson.get("campaignLookup")));
+        strategyMap.put("industry", this::getIndustry);
+        //strategyMap.put("annualRevenue", this::getAnnualRevenue);
+        strategyMap.put("phone", this::getPhone);
+        strategyMap.put("mobile", this::getMobile);
+        strategyMap.put("fax", this::getFax);
+
+        strategyMap.put("email", this::getEmail);
+        strategyMap.put("website", this::getWebsite);
+        strategyMap.put("leadStatus", this::getLeadStatus);
+        strategyMap.put("rating", this::getRating);
+        strategyMap.put("numEmployees", this::getNumEmployees);
+        strategyMap.put("address", this::getAddress);
+//        strategyMap.put("city", () -> getAddress());
+//        strategyMap.put("stateProvince", () -> getAddress());
+//        strategyMap.put("zipCode", () -> getAddress() );
+//        strategyMap.put("country", () ->getAddress());
+
+        strategyMap.put("productInterest", this::getProductInterest);
+        strategyMap.put("SICCode", this::getSicCode);
+        strategyMap.put("numberLocations", this::getNumLocations);
+        strategyMap.put("currentGenerators", this::getCurrentGenerators);
+        strategyMap.put("primary", this::getPrimary);
+
+        strategyMap.put("description", this::getDescription);
+
+        return strategyMap;
     }
 
     @Override
-    public AbstractBasePage clickSaveButton() {
-        return null;
-    }
-
-    @Override
-    public AbstractBasePage clickSaveNewButton() {
-        return null;
+    public LeadForm clickEditButton() {
+        CommonActions.clickElement(editBtn);
+        return new LeadForm();
     }
 }
