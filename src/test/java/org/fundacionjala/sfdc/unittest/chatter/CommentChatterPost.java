@@ -12,40 +12,30 @@ import org.testng.annotations.Test;
 
 public class CommentChatterPost {
 
-    private ChatterAbstractPage chatterHome;
-    private MainApp mainApp;
-    private TabBar tabBar;
-    private PostForm postForm;
-    private PostForm commentForm;
-    private PostContainer comment;
+    private static final String POST_CONTAIN = "TestCommentPost";
     private PostContainer postContainer;
-    private String postContain = "TestCommentPost";
-    private String commentContain = "TestComment";
-
 
     @BeforeMethod
-    public void createPost() {
-
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();
-        postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
+    public void setUp() {
+        MainApp mainApp = new MainApp();
+        TabBar tabBar = mainApp.goToTabBar();
+        ChatterAbstractPage chatterHome = tabBar.clickOnChatterTab();
+        PostForm postForm = chatterHome.clickPostLnk().setPostTxt(POST_CONTAIN);
         postContainer = postForm.clickShareBtn();
-
     }
 
     @Test
     public void commentChatterPostTest() {
-        commentForm = postContainer.clickCommentLkn(postContain);
-        commentForm.setCommentTxt(commentContain, postContain);
-        comment = commentForm.clickCommentBtn();
+        PostForm commentForm = postContainer.clickCommentLkn(POST_CONTAIN);
+        final String commentContain = "TestComment";
+        commentForm.setCommentTxt(commentContain, POST_CONTAIN);
+        PostContainer comment = commentForm.clickCommentBtn();
         Assert.assertTrue(comment.isPostDisplayed(), "Chatter Comment Displayed");
     }
 
     @AfterMethod
     public void deleteChatterPost() {
-        postContainer.deletePost(postContain);
-
+        postContainer.deletePost(POST_CONTAIN);
     }
 
 }

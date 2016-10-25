@@ -1,6 +1,5 @@
 package org.fundacionjala.sfdc.unittest.chatter;
 
-import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
@@ -16,34 +15,30 @@ import org.testng.annotations.Test;
  */
 public class EditChatterPost {
 
-    private ChatterAbstractPage chatterHome;
-    private MainApp mainApp;
-    private TabBar tabBar;
+    private final static String POST_CONTAIN = "TestEditPost";
+    private final static String NEW_POST_CONTAIN = "TestPost123";
     private PostForm postForm;
     private PostContainer postContainer;
-    private LoginPage loginPage;
-    private String postContain = "TestEditPost";
-    private String newPostContain = "TestPost123";
 
     @BeforeMethod
-    public void createPost() {
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();
-        postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
+    public void setUp() {
+        MainApp mainApp = new MainApp();
+        TabBar tabBar = mainApp.goToTabBar();
+        ChatterAbstractPage chatterHome = tabBar.clickOnChatterTab();
+        postForm = chatterHome.clickPostLnk().setPostTxt(POST_CONTAIN);
         postContainer = postForm.clickShareBtn();
     }
 
     @Test
     public void editChatterPostTest() {
-        postForm = postContainer.editPost(postContain);
-        postContainer = postForm.editPostTxt(newPostContain).clickSaveBtn();
+        postForm = postContainer.editPost(POST_CONTAIN);
+        postContainer = postForm.editPostTxt(NEW_POST_CONTAIN).clickSaveBtn();
         Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");
     }
 
     @AfterMethod
     public void deleteChatterPost() {
-        postContainer.deletePost(newPostContain);
+        postContainer.deletePost(NEW_POST_CONTAIN);
     }
 
 }

@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener"/>
     </listeners>
-    <test name="Regression1">
+    <test name="Chatter tests">
         <classes>
             <class name="org.fundacionjala.sfdc.unittest.chatter.CreateChatterPost"/>
             <class name="org.fundacionjala.sfdc.unittest.chatter.EditChatterPost"/>

@@ -62,7 +62,7 @@ public final class CommonActions {
      * This method waits and select the item.
      *
      * @param element Element to wait.
-     * @param item    Item to selected.
+     * @param item    Item to be selected.
      */
     public static void selectItem(final WebElement element, final String item) {
         DriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(element));
