@@ -13,7 +13,7 @@ import org.openqa.selenium.support.ui.Select;
  * <p>
  * Updated by Pablo Zubieta on 27/08/2015.
  * This class contains the common procedures to manage Add, and Delete elements from different components:
- * Leads, Campaign, Account, Contact, OpportunityHome, Products
+ * Leads, Campaign, Account, Contact, ContractHome, Products
  */
 public final class CommonActions {
 

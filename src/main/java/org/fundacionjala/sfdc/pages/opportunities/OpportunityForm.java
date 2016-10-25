@@ -280,7 +280,7 @@ public class OpportunityForm extends AbstractBasePage {
     /**
      * This method makes click to save button.
      *
-     * @return OpportunityHome Detail page object.
+     * @return ContractHome Detail page object.
      */
     public OpportunityDetail clickSaveBtn() {
         saveBtn.click();
@@ -308,7 +308,7 @@ public class OpportunityForm extends AbstractBasePage {
     }
 
     /**
-     * Method that to permit set values to create a new OpportunityHome.
+     * Method that to permit set values to create a new ContractHome.
      *
      * @param values a map to set of the strategy
      * @return a Map with the values of the opportunity create.
