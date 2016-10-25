@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -10,9 +13,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents of the opportunity detail.
@@ -222,7 +222,7 @@ public class OpportunityDetail extends AbstractBasePage {
      * @return a Map with the values of opportunity edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
-        final Map<String, AssertsDetails> strategyMap = new HashMap();
+        final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
         strategyMap.put("opportunityName", this::getOpportunityName);
         strategyMap.put("stage", this::getStage);
