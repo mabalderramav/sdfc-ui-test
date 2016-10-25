@@ -1,6 +1,7 @@
 package org.fundacionjala.sfdc.pages.base;
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;

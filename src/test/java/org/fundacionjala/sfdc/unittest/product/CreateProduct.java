@@ -21,9 +21,7 @@ public class CreateProduct {
 
     private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
 
-    //region Objects
     private ProductHome productHome;
-    //endregion
 
     private Map<String, String> valuesMapJson;
     private ProductDetail productDetail;
@@ -47,7 +45,7 @@ public class CreateProduct {
         final ProductForm newProductForm = productHome.clickNewButton();
         newProductForm.fillTheForm(valuesMapJson);
         productDetail = newProductForm.clickSaveButton();
-        new AssertProduct().assertDetailValues(productDetail, valuesMapJson);
+        AssertProduct.assertDetailValues(productDetail, valuesMapJson);
     }
 
     /**

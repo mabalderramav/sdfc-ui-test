@@ -42,7 +42,7 @@ public class EditProduct {
         Map<String, String> valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         newProductForm.fillTheForm(valuesMapEditJson);
         productDetail = newProductForm.clickSaveButton();
-        new AssertProduct().assertDetailValues(productDetail, valuesMapEditJson);
+        AssertProduct.assertDetailValues(productDetail, valuesMapEditJson);
     }
 
     @AfterTest
