@@ -126,7 +126,7 @@ public class ProductForm extends FormBase {
     }
 
     /**
-     * Method that to permit set values to create a new OpportunityHome.
+     * Method that to permit set values to create a new ContractHome.
      *
      * @param values a map to set of the strategy
      * @return a Map with the values of the opportunity create.

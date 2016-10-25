@@ -30,7 +30,7 @@ public class OpportunityHome extends AbstractBasePage {
      * This method goes a opportunity detail.
      *
      * @param url a string with url of the page.
-     * @return OpportunityDetail page object.
+     * @return ContractDetail page object.
      */
     public OpportunityDetail goOpportunityDetail(String url) {
         driver.navigate().to(url);
@@ -41,7 +41,7 @@ public class OpportunityHome extends AbstractBasePage {
      * This method makes click on account link.
      *
      * @param accountName a string with name account.
-     * @return OpportunityDetail page object.
+     * @return ContractDetail page object.
      */
     public OpportunityDetail clickOnAccount(String accountName) {
         driver.findElement(By.linkText(accountName)).click();
