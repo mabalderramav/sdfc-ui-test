@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.products.Product;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
@@ -19,11 +20,9 @@ import org.testng.annotations.Test;
  */
 public class CreateProduct {
 
-    private static final String PRODUCT_DATA_PATH = "src/test/resources/json/product/CreateProductData.json";
+    private static final String PRODUCT_DATA_PATH = "product/CreateProductData.json";
 
-    //region Objects
     private ProductHome productHome;
-    //endregion
 
     private Map<String, String> valuesMapJson;
     private ProductDetail productDetail;
@@ -40,14 +39,27 @@ public class CreateProduct {
     }
 
     /**
+     * This method that is created a new product with json.
+     */
+    @Test
+    public void createProductWithJson() {
+        final ProductForm newProductForm = productHome.clickNewButton();
+        newProductForm.fillTheForm(valuesMapJson);
+        productDetail = newProductForm.clickSaveButton();
+        AssertProduct.assertDetailValues(productDetail, valuesMapJson);
+    }
+
+    /**
      * This method that is created a new product.
      */
     @Test
     public void createProduct() {
-        final ProductForm newProductForm = productHome.clickNewButton();
-        newProductForm.fillTheForm(valuesMapJson);
-        productDetail = newProductForm.clickSaveButton();
-        new AssertProduct().assertDetailValues(productDetail, valuesMapJson);
+        productHome.clickNewButton();
+        Product product = new Product.ProductBuilder("nameTest")
+                .setDescription("description test")
+                .build();
+        productDetail = product.createProduct();
+        AssertProduct.assertDetailValues(productDetail, product.getValuesMap());
     }
 
     /**

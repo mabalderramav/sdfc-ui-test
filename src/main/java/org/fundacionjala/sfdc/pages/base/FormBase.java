@@ -20,7 +20,6 @@ public abstract class FormBase extends AbstractBasePage {
     @FindBy(name = "cancel")
     protected WebElement cancelBtn;
 
-    //Calendar
     @FindBy(id = "calMonthPicker")
     protected WebElement monthPicker;
 
