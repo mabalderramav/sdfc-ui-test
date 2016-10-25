@@ -14,12 +14,13 @@ public class Lead {
         this.leadBuilder = leadBuilder;
     }
 
-    public LeadDetails createLead(){
+    public LeadDetails createLead() {
         LeadForm leadForm = new LeadForm();
         leadForm.fillTheForm(leadBuilder.getStrategyMap());
         return leadForm.clickSaveButton();
     }
-    public static class LeadBuilder{
+
+    public static class LeadBuilder {
         /*LeadHome Information*/
         private String nameSalutation;
         private String firstName;
@@ -61,7 +62,7 @@ public class Lead {
         private Map<String, String> strategyMap;
 
 
-        public LeadBuilder(final String lastName,final String company) {
+        public LeadBuilder(final String lastName, final String company) {
             strategyMap = new HashMap<>();
             this.lastName = lastName;
             this.company = company;
@@ -69,37 +70,37 @@ public class Lead {
 
         public LeadBuilder setNameSalutation(String nameSalutation) {
             this.nameSalutation = nameSalutation;
-            strategyMap.put("nameSalutation",nameSalutation);
+            strategyMap.put("nameSalutation", nameSalutation);
             return this;
         }
 
         public LeadBuilder setFirstName(String firstName) {
             this.firstName = firstName;
-            strategyMap.put("firstName",firstName);
+            strategyMap.put("firstName", firstName);
             return this;
         }
 
         public LeadBuilder setLastName(String lastName) {
             this.lastName = lastName;
-            strategyMap.put("lastName",lastName);
+            strategyMap.put("lastName", lastName);
             return this;
         }
 
         public LeadBuilder setCompany(String company) {
             this.company = company;
-            strategyMap.put("company",company);
+            strategyMap.put("company", company);
             return this;
         }
 
         public LeadBuilder setTitle(String title) {
             this.title = title;
-            strategyMap.put("title",title);
+            strategyMap.put("title", title);
             return this;
         }
 
         public LeadBuilder setLeadSource(String leadSource) {
             this.leadSource = leadSource;
-            strategyMap.put("leadSource",leadSource);
+            strategyMap.put("leadSource", leadSource);
             return this;
         }
 
@@ -111,139 +112,141 @@ public class Lead {
 
         public LeadBuilder setCampaignLookup(String campaignLookup) {
             this.campaignLookup = campaignLookup;
-            strategyMap.put("campaignLookup",campaignLookup);
+            strategyMap.put("campaignLookup", campaignLookup);
             return this;
         }
 
         public LeadBuilder setIndustry(String industry) {
             this.industry = industry;
-            strategyMap.put("industry",industry);
+            strategyMap.put("industry", industry);
             return this;
         }
 
         public LeadBuilder setAnnualRevenue(String annualRevenue) {
             this.annualRevenue = annualRevenue;
-            strategyMap.put("annualRevenue",annualRevenue);
+            strategyMap.put("annualRevenue", annualRevenue);
             return this;
         }
 
         public LeadBuilder setPhone(String phone) {
             this.phone = phone;
-            strategyMap.put("phone",phone);
+            strategyMap.put("phone", phone);
             return this;
         }
 
         public LeadBuilder setMobile(String mobile) {
             this.mobile = mobile;
-            strategyMap.put("mobile",mobile);
+            strategyMap.put("mobile", mobile);
             return this;
         }
 
         public LeadBuilder setFax(String fax) {
             this.fax = fax;
-            strategyMap.put("fax",fax);
+            strategyMap.put("fax", fax);
             return this;
         }
 
         public LeadBuilder setEmail(String email) {
             this.email = email;
-            strategyMap.put("email",email);
+            strategyMap.put("email", email);
             return this;
         }
 
         public LeadBuilder setWebsite(String website) {
             this.website = website;
-            strategyMap.put("website",website);
+            strategyMap.put("website", website);
             return this;
         }
 
         public LeadBuilder setLeadStatus(String leadStatus) {
             this.leadStatus = leadStatus;
-            strategyMap.put("leadStatus",leadStatus);
+            strategyMap.put("leadStatus", leadStatus);
             return this;
         }
 
         public LeadBuilder setRating(String rating) {
             this.rating = rating;
-            strategyMap.put("rating",rating);
+            strategyMap.put("rating", rating);
             return this;
         }
 
         public LeadBuilder setNumEmployees(String numEmployees) {
             this.numEmployees = numEmployees;
-            strategyMap.put("numEmployees",numEmployees);
+            strategyMap.put("numEmployees", numEmployees);
             return this;
         }
 
         public LeadBuilder setStreet(String street) {
             this.street = street;
-            strategyMap.put("street",street);
+            strategyMap.put("street", street);
             return this;
         }
 
         public LeadBuilder setCity(String city) {
             this.city = city;
-            strategyMap.put("city",city);
+            strategyMap.put("city", city);
             return this;
         }
 
         public LeadBuilder setStateProvince(String stateProvince) {
             this.stateProvince = stateProvince;
-            strategyMap.put("stateProvince",stateProvince);
+            strategyMap.put("stateProvince", stateProvince);
             return this;
         }
 
         public LeadBuilder setZipCode(String zipCode) {
             this.zipCode = zipCode;
-            strategyMap.put("zipCode",zipCode);
+            strategyMap.put("zipCode", zipCode);
             return this;
         }
 
         public LeadBuilder setCountry(String country) {
             this.country = country;
-            strategyMap.put("country",country);
+            strategyMap.put("country", country);
             return this;
         }
 
         public LeadBuilder setProductInterest(String productInterest) {
             this.productInterest = productInterest;
-            strategyMap.put("productInterest",productInterest);
+            strategyMap.put("productInterest", productInterest);
             return this;
         }
 
         public LeadBuilder setSICCode(String SICCode) {
             this.SICCode = SICCode;
-            strategyMap.put("SICCode",SICCode);
+            strategyMap.put("SICCode", SICCode);
             return this;
         }
 
         public LeadBuilder setNumberLocations(String numberLocations) {
             this.numberLocations = numberLocations;
-            strategyMap.put("numberLocations",numberLocations);
+            strategyMap.put("numberLocations", numberLocations);
             return this;
         }
 
         public LeadBuilder setCurrentGenerators(String currentGenerators) {
             this.currentGenerators = currentGenerators;
-            strategyMap.put("currentGenerators",currentGenerators);
+            strategyMap.put("currentGenerators", currentGenerators);
             return this;
         }
 
         public LeadBuilder setPrimary(String primary) {
             this.primary = primary;
-            strategyMap.put("primary",primary);
+            strategyMap.put("primary", primary);
             return this;
         }
 
         public LeadBuilder setAssignRule(String assignRule) {
             this.assignRule = assignRule;
-            strategyMap.put("assignRule",assignRule);
+            strategyMap.put("assignRule", assignRule);
             return this;
         }
-        public Map<String,String> getStrategyMap(){
+
+        public Map<String, String> getStrategyMap() {
             return strategyMap;
         }
-        public Lead build(){
+
+        public Lead build() {
             return new Lead(this);
         }
     }
