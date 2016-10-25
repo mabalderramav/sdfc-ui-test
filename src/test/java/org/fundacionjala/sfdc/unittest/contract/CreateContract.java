@@ -1,5 +1,12 @@
 package org.fundacionjala.sfdc.unittest.contract;
 
+import java.util.Map;
+
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -9,12 +16,6 @@ import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
-import org.fundacionjala.sfdc.utils.Common;
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
-import java.util.Map;
 
 /**
  * This class is a test to create a opportunity
@@ -38,7 +39,7 @@ public class CreateContract {
      */
     @BeforeTest
     public void BeforeTest() {
-        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();

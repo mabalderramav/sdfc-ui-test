@@ -5,10 +5,10 @@
     </listeners>
     <test name="Chatter tests">
         <classes>
-            <class name="org.fundacionjala.sfdc.unittest.chatter.CreateChatterPost"/>
-            <class name="org.fundacionjala.sfdc.unittest.chatter.EditChatterPost"/>
-            <class name="org.fundacionjala.sfdc.unittest.chatter.CommentChatterPost"/>
-            <class name="org.fundacionjala.sfdc.unittest.chatter.DeleteChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.CommentChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.DeleteChatterPost"/>
         </classes>
     </test>
 </suite>

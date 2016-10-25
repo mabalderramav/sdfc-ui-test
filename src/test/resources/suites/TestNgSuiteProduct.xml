@@ -5,9 +5,9 @@
     </listeners>
     <test name="Regression1">
         <classes>
-            <class name="org.fundacionjala.sfdc.unittest.product.EditProduct"/>
-            <class name="org.fundacionjala.sfdc.unittest.product.DeleteProduct"/>
-            <class name="org.fundacionjala.sfdc.unittest.product.CreateProduct"/>
+            <class name="org.fundacionjala.sfdc.tests.product.EditProduct"/>
+            <class name="org.fundacionjala.sfdc.tests.product.DeleteProduct"/>
+            <class name="org.fundacionjala.sfdc.tests.product.CreateProduct"/>
         </classes>
     </test>
 </suite>

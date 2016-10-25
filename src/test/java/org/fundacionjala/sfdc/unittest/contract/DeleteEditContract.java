@@ -1,5 +1,13 @@
 package org.fundacionjala.sfdc.unittest.contract;
 
+import java.util.Map;
+
+import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -9,15 +17,6 @@ import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
-import org.fundacionjala.sfdc.utils.Common;
-import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Map;
-
-import static org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity.OPPORTUNITY_DATA_PATH;
 
 /**
  * This class is a test to edit and delete of a opportunity.
@@ -42,7 +41,7 @@ public class DeleteEditContract {
      */
     @BeforeMethod
     public void BeforeTest() {
-        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -56,7 +55,7 @@ public class DeleteEditContract {
         opportunityForm = opportunityHomeHome.clickNewButton();
 
         opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.pressSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveBtn();
 
     }
 
@@ -75,10 +74,10 @@ public class DeleteEditContract {
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-        valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
-        opportunityDetail = opportunityForm.pressSaveBtn();
-        new AssertContract().assertDetailValues(opportunityDetail, valuesMapEditJson);
+        opportunityDetail = opportunityForm.clickSaveBtn();
+        AssertContract.assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
     /**

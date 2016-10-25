@@ -1,9 +1,8 @@
 package org.fundacionjala.sfdc.pages.contracts;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
