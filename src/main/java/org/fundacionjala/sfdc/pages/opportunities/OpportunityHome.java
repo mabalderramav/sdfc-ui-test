@@ -1,6 +1,6 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

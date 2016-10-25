@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -41,7 +41,7 @@ public class DeleteEditOpportunity {
      */
     @BeforeMethod
     public void BeforeTest() {
-        valuesMapJson = Common.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -74,7 +74,7 @@ public class DeleteEditOpportunity {
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-        valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
         opportunityDetail = opportunityForm.clickSaveBtn();
         AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapEditJson);

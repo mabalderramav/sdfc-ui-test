@@ -7,7 +7,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -41,7 +41,7 @@ public class DeleteEditContract {
      */
     @BeforeMethod
     public void BeforeTest() {
-        valuesMapJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
@@ -74,7 +74,7 @@ public class DeleteEditContract {
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-        valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
         opportunityDetail = opportunityForm.clickSaveBtn();
         AssertContract.assertDetailValues(opportunityDetail, valuesMapEditJson);

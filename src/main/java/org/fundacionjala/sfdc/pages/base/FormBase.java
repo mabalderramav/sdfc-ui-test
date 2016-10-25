@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.pages.base;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 
 /**
  * This class contains the common procedures to manage Add, and Delete elements from different components:

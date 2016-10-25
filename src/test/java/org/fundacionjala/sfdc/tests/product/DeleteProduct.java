@@ -6,7 +6,7 @@ import java.util.Map;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
@@ -31,7 +31,7 @@ public class DeleteProduct {
      */
     @BeforeMethod
     public void setup() {
-        valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(PRODUCT_DATA_PATH);
         MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
         ProductHome productHome = tabBar.clickOnProductsHome();

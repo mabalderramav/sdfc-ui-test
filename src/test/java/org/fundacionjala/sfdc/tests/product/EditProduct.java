@@ -6,7 +6,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
@@ -29,7 +29,7 @@ public class EditProduct {
 
     @BeforeMethod
     public void setup() {
-        Map<String, String> valuesMapJson = Common.getMapJson(PRODUCT_DATA_PATH);
+        Map<String, String> valuesMapJson = JsonMapper.getMapJson(PRODUCT_DATA_PATH);
         MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
         ProductHome productHome = tabBar.clickOnProductsHome();
@@ -41,7 +41,7 @@ public class EditProduct {
 
     @Test
     public void editProductWithJson() {
-        Map<String, String> valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         productForm.fillTheForm(valuesMapEditJson);
         productDetail = productForm.clickSaveButton();
         AssertProduct.assertDetailValues(productDetail, valuesMapEditJson);

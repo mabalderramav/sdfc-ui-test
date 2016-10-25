@@ -8,7 +8,7 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.contacts.ContactForm;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -33,7 +33,7 @@ public class CreateContact {
      */
     @BeforeTest
     public void login() {
-        valuesMapJson = Common.getMapJson(CONTACT_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(CONTACT_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();

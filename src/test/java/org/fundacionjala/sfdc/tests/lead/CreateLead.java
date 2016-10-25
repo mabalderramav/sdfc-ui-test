@@ -14,7 +14,7 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
-import org.fundacionjala.sfdc.framework.utils.Common;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 
 /**
  * This class verify the Creation of LeadHome.
@@ -47,7 +47,7 @@ public class CreateLead {
     @Test
     public void createLeadTest(){
         LeadForm leadForm = leadHomePage.clickNewButton();
-        valuesMapJson = Common.getMapJson(LEAD_DATA_PATH);
+        valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
         leadForm.fillTheForm(valuesMapJson);
         leadDetails = leadForm.clickSaveButton();
         new AssertLead().assertDetailValues(leadDetails, valuesMapJson);
