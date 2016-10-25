@@ -22,9 +22,14 @@ public class CreateProduct {
 
     private static final String PRODUCT_DATA_PATH = "product/CreateProductData.json";
 
+    private static final String NAME_TEST = "nameTest";
+
+    private static final String DESCRIPTION_TEST = "description test";
+
     private ProductHome productHome;
 
     private Map<String, String> valuesMapJson;
+
     private ProductDetail productDetail;
 
     /**
@@ -55,8 +60,8 @@ public class CreateProduct {
     @Test
     public void createProduct() {
         productHome.clickNewButton();
-        Product product = new Product.ProductBuilder("nameTest")
-                .setDescription("description test")
+        Product product = new Product.ProductBuilder(NAME_TEST)
+                .setDescription(DESCRIPTION_TEST)
                 .build();
         productDetail = product.createProduct();
         AssertProduct.assertDetailValues(productDetail, product.getValuesMap());
