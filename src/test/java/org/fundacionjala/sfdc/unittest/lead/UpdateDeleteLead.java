@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.unittest.lead;
 
+import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -42,9 +43,12 @@ public class UpdateDeleteLead {
     }
     @Test void updateLead(){
         String companyNameEdited = "ComapnyName UPDATED";
-        leadDetails = leadDetails.clickEditButton()
-                .setCompanyField(companyNameEdited)
-                .clickSaveButton();
+        Lead lead = new Lead.LeadBuilder("Last name Edited",companyNameEdited)
+                .setFirstName("Edited firstName")
+                .setCountry("Argentina")
+                .build();
+        leadDetails = lead.createLead();
+
         assertEquals(companyNameEdited,leadDetails.getCompany());
 
     }
