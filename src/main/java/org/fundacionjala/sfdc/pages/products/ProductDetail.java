@@ -6,6 +6,7 @@ import java.util.Map;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 
 import org.fundacionjala.sfdc.framework.common.CommonActions;
@@ -53,6 +54,7 @@ public class ProductDetail extends DetailBase {
      */
     public void clickDeleteButton() {
         CommonActions.clickElement(deleteBtn);
+        wait.until(ExpectedConditions.alertIsPresent());
         driver.switchTo().alert().accept();
     }
 
