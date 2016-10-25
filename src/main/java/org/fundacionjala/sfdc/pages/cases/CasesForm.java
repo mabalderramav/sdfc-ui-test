@@ -78,32 +78,25 @@ public class CasesForm extends AbstractBasePage {
     public void setSubjectText(String subject) {
         CommonActions.clearTextField(subjectTextField);
         CommonActions.sendKeys(subjectTextField,subject);
-       // subjectTextField.clear();
-       // subjectTextField.sendKeys(subject);
     }
 
     public void setDescriptionText(String description) {
         CommonActions.clearTextField(descriptionTextField);
         CommonActions.sendKeys(descriptionTextField,description);
-       // descriptionTextField.clear();
-       // descriptionTextField.sendKeys(description);
+
     }
 
     public void clickOnTypeComboBox() {
        CommonActions.clickElement(typeComboBox);
-        //typeComboBox.click();
     }
 
     public void clickOnCaseReasonComboBox() {
         CommonActions.clickElement(caseReasonComboBox);
-      //  caseReasonComboBox.click();
     }
 
     public void setInternalDescription(String internalDescription) {
         CommonActions.clearTextField(internalCommentsTextField);
         CommonActions.sendKeys(internalCommentsTextField,internalDescription);
-       // internalCommentsTextField.clear();
-       // internalCommentsTextField.sendKeys(internalDescription);
     }
 
     public void clickOnProductComboBox() {
@@ -118,12 +111,9 @@ public class CasesForm extends AbstractBasePage {
 
         CommonActions.clearTextField(engineeringNumberTextField);
         CommonActions.sendKeys(engineeringNumberTextField,number);
-//        engineeringNumberTextField.clear();
-//        engineeringNumberTextField.sendKeys(number);
     }
 
     public void clickOnSLAViolationComboBox() {
        CommonActions.clickElement(slaViolation);
-        //slaViolation.click();
     }
 }

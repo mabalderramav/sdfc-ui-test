@@ -41,10 +41,8 @@ public class CreateCampaign {
         mainApp = loginPage.loginAsPrimaryUser();
         campaignParent = "Parent" + new Random().nextInt(9999);
         campaigns = mainApp.goToTabBar().clickCampaigns();
-
         campaignForm = campaigns
                 .clickNewButton();
-
         campaignDetail = campaignForm
                 .setCampaingNameField(campaignParent)
                 .checkActiveCheckbox()
@@ -55,8 +53,7 @@ public class CreateCampaign {
     @Test(groups = {"smoke", "acceptance"})
     public void createCampaing() {
         campaigns = mainApp.goToTabBar().clickCampaigns();
-        campaignForm = campaigns
-                .clickNewButton();
+        campaignForm = campaigns.clickNewButton();
         campaignForm.fillTheForm(valuesMapJson);
         lookUpWindow = campaignForm.setDate(10, 24, 2016).checkActiveCheckbox().clickLookUpIcon();
         campaignForm = lookUpWindow.selectCampaignWithNameByScope(campaignParent, CampaignLookup.ALL_CAMPAIGN);
@@ -69,7 +66,6 @@ public class CreateCampaign {
     public void afterTest() {
         campaigns = campaignDetail
                 .clickDeleteButton();
-
         campaignDetail = campaigns
                 .goCampaingProfile(campaingParantUrl);
 

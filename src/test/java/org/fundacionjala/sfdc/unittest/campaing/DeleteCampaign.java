@@ -18,7 +18,7 @@ import static org.testng.Assert.assertFalse;
 public class DeleteCampaign {
 
 
-    public static final String CAMPAIGN_NAME = "Test Borrar";
+    public static final String CAMPAIGN_NAME = "Test For Delete";
     private Campaigns campaigns;
     private CampaignForm campaignForm;
     private CampaignDetail campaignDetail;
