@@ -18,6 +18,9 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
+
 /**
  * This class is a test to edit and delete of a opportunity.
  */
@@ -45,7 +48,7 @@ public class DeleteEditOpportunity {
         accountsHome = tabBar.clickOnAccountsHome();
         NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapJson.get("accountName"))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
                 .pressSaveBtn();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
@@ -60,7 +63,7 @@ public class DeleteEditOpportunity {
     @Test
     public void DeleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get("opportunityName")));
+        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.VALUE)));
     }
 
     /**
@@ -83,7 +86,7 @@ public class DeleteEditOpportunity {
     public void afterTest() {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.VALUE));
         mainApp = accountProfile.deleteAccount();
     }
 

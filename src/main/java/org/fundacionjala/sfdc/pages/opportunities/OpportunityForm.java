@@ -12,6 +12,9 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.*;
+
+
 /**
  * This class represent to a form to create or edit a opportunity
  */
@@ -83,6 +86,18 @@ public class OpportunityForm extends FormBase {
     @FindBy(id = "opp14")
     @CacheLookup
     private WebElement descriptionTextArea;
+
+    private OpportunityBuilder opportunityBuilder;
+    private Map<String, String> valuesMap;
+
+    public OpportunityForm() {
+        super();
+    }
+
+    private OpportunityForm(OpportunityBuilder opportunityBuilder) {
+        valuesMap = new HashMap<>();
+        this.opportunityBuilder = opportunityBuilder;
+    }
 
     /**
      * {@link FormBase}
@@ -221,6 +236,7 @@ public class OpportunityForm extends FormBase {
 
     /**
      * This method sets a probability to opportunity/
+     *
      * @param probability a string to set.
      * @return {@link OpportunityForm}.
      */
@@ -230,8 +246,9 @@ public class OpportunityForm extends FormBase {
     }
 
     /**
-     * This method sets a probability to opportunity/
-     * @param primaryCampaignSource
+     * This method sets a probability to opportunity.
+     *
+     * @param primaryCampaignSource is a string value to set.
      * @return {@link OpportunityForm}.
      */
     public OpportunityForm setPrimaryCampaignSource(final String primaryCampaignSource) {
@@ -251,6 +268,7 @@ public class OpportunityForm extends FormBase {
         return this;
     }
 
+
     /**
      * This method chooses install status.
      *
@@ -262,7 +280,6 @@ public class OpportunityForm extends FormBase {
         selectBox.selectByVisibleText(deleveryInstallationStatus);
         return this;
     }
-
 
     /**
      * This method sets a description
@@ -276,8 +293,6 @@ public class OpportunityForm extends FormBase {
     }
 
     /**
-
-
      * This method makes click on account name.
      *
      * @return {@link LookUpWindow}.
@@ -298,34 +313,138 @@ public class OpportunityForm extends FormBase {
     }
 
     /**
+     * This method loads data to fill the form for a given Json file.
+     */
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    }
+
+    /**
      * Method that to permit set values to create a new ContractHome.
      *
      * @param values a map to set of the strategy
      * @return a Map with the values of the opportunity create.
      */
-    public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
-        final Map<String, FormSteps> strategyMap = new HashMap();
+    private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("opportunityName", () -> setOpportunityName(String.valueOf(values.get("opportunityName"))));
-        strategyMap.put("type", () -> chooseTypeDdl(String.valueOf(values.get("type"))));
-        strategyMap.put("leadSource", () -> chooseLeadSourceDdl(String.valueOf(values.get("leadSource"))));
-        strategyMap.put("amount", () -> setAmount(String.valueOf(values.get("amount"))));
-        strategyMap.put("nextStep", () -> setNextStep(String.valueOf(values.get("nextStep"))));
-        strategyMap.put("stage", () -> chooseStageDdl(String.valueOf(values.get("stage"))));
-        strategyMap.put("orderNumber", () -> setOrderNumber(String.valueOf(values.get("orderNumber"))));
-        strategyMap.put("deliveryInstallStatus", () -> chooseDeliveryInstallationStatusDdl(String.valueOf(values.get("deliveryInstallStatus"))));
-        strategyMap.put("accountName", () -> setAccountName(String.valueOf(values.get("accountName"))));
-        strategyMap.put("currentCloseDate", () -> setCloseDate(String.valueOf(values.get("currentCloseDate"))));
-        strategyMap.put("PrivateFlag", () -> checkPrivateFlag(Boolean.valueOf(values.get("PrivateFlag"))));
+        strategyMap.put(OPPORTUNITY_NAME.VALUE, () -> setOpportunityName(values.get(OPPORTUNITY_NAME.VALUE)));
+        strategyMap.put(TYPE.VALUE, () -> chooseTypeDdl(values.get(TYPE.VALUE)));
+        strategyMap.put(LEAD_SOURCE.VALUE, () -> chooseLeadSourceDdl(values.get(LEAD_SOURCE.VALUE)));
+        strategyMap.put(AMOUNT.VALUE, () -> setAmount(values.get(AMOUNT.VALUE)));
+        strategyMap.put(NEXT_STEP.VALUE, () -> setNextStep(values.get(NEXT_STEP.VALUE)));
+        strategyMap.put(STAGE.VALUE, () -> chooseStageDdl(values.get(STAGE.VALUE)));
+        strategyMap.put(ORDER_NUMBER.VALUE, () -> setOrderNumber(values.get(ORDER_NUMBER.VALUE)));
+        strategyMap.put(DELIVERY_INSTALL_STATUS.VALUE,
+                () -> chooseDeliveryInstallationStatusDdl(values.get(DELIVERY_INSTALL_STATUS.VALUE)));
+        strategyMap.put(ACCOUNT_NAME.VALUE, () -> setAccountName(values.get(ACCOUNT_NAME.VALUE)));
+        strategyMap.put(CURRENT_CLOSE_DATE.VALUE, () -> setCloseDate(values.get(CURRENT_CLOSE_DATE.VALUE)));
+        strategyMap.put(PRIVATE_FLAG.VALUE, () -> checkPrivateFlag(Boolean.parseBoolean(values.get(PRIVATE_FLAG.VALUE))));
 
         return strategyMap;
     }
 
     /**
-     * This method loads data to fill the form for a given Json file.
+     * This method fill the form in opportunity form.
+     *
+     * @return {@link OpportunityDetail}.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
-        valuesMapCreate.keySet()
-                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    public OpportunityDetail saveOpportunity() {
+        valuesMap = opportunityBuilder.getStrategyMap();
+        fillTheForm(valuesMap);
+        return clickSaveButton();
+    }
+
+    /**
+     * This method gets a map with values builded.
+     *
+     * @return a map.
+     */
+    public Map<String, String> getValuesMap() {
+        return valuesMap;
+    }
+
+    public static class OpportunityBuilder {
+        private String accountName;
+        private String type;
+        private String amount;
+        private String opportunityName;
+        private String closeDate;
+        private String stage;
+
+        private Map<String, String> strategyMap;
+
+        /**
+         * This method gets a opportunity form.
+         *
+         * @return {@link OpportunityForm}.
+         */
+        public OpportunityForm build() {
+            return new OpportunityForm(this);
+        }
+
+        /**
+         * This method construct builds the steps required.
+         *
+         * @param opportunityName  a string value to set.
+         * @param currentCloseDate a string value to set.
+         * @param stage            a string value to set.
+         */
+        public OpportunityBuilder(final String opportunityName, final String currentCloseDate,
+                                  final String stage) {
+            strategyMap = new HashMap<>();
+            strategyMap.put(OPPORTUNITY_NAME.VALUE, opportunityName);
+            strategyMap.put(CURRENT_CLOSE_DATE.VALUE, currentCloseDate);
+            strategyMap.put(STAGE.VALUE, stage);
+            this.opportunityName = opportunityName;
+            this.closeDate = currentCloseDate;
+            this.stage = stage;
+        }
+
+        /**
+         * This method sets account name in opportunity.
+         *
+         * @param accountName a string value to set
+         * @return {@link OpportunityBuilder}
+         */
+        public OpportunityBuilder setAccountName(final String accountName) {
+            this.accountName = accountName;
+            strategyMap.put(ACCOUNT_NAME.VALUE, accountName);
+            return this;
+        }
+
+        /**
+         * This method sets amount in opportunity.
+         *
+         * @param type a string value to set.
+         * @return {@link OpportunityBuilder}
+         */
+        public OpportunityBuilder setType(final String type) {
+            this.type = type;
+            strategyMap.put(TYPE.VALUE, type);
+            return this;
+        }
+
+        /**
+         * This method sets amount in opportunity.
+         *
+         * @param amount a string value to set.
+         * @return {@link OpportunityBuilder}
+         */
+        public OpportunityBuilder setAmount(final String amount) {
+            this.amount = amount;
+            strategyMap.put(AMOUNT.VALUE, amount);
+            return this;
+        }
+
+        /**
+         * This method set the strategyMap product.
+         *
+         * @return a map with values set on "opportunity" form.
+         */
+        public Map<String, String> getStrategyMap() {
+            return strategyMap;
+        }
     }
 }
