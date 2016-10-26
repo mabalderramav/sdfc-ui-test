@@ -34,8 +34,6 @@ public class CreateLead {
      */
     @BeforeTest
     public void setUp() {
-//        loginPage = new LoginPage();
-//        mainApp = loginPage.loginAsPrimaryUser();
         tabBar = new MainApp().goToTabBar();
         leadHomePage = tabBar.clickLead();
         // create campaign
