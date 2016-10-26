@@ -10,9 +10,9 @@ import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
-import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
-import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
+import org.fundacionjala.sfdc.pages.accounts.AccountForm;
+import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
+import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
@@ -27,9 +27,9 @@ public class CreateContract {
     private OpportunityHome opportunityHomeHome;
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
-    private AccountAbstractPage accountsHome;
-    private NewAccountPage newAccountForm;
-    private AccountProfile accountProfile;
+    private AccountHome accountsHome;
+    private AccountForm newAccountForm;
+    private AccountDetail accountProfile;
     private MainApp mainApp;
     public static final String OPPORTUNITY_DATA_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
     private Map<String, String> valuesMapJson;
@@ -47,7 +47,7 @@ public class CreateContract {
         newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
                 .setAccountName(valuesMapJson.get("accountName"))
-                .pressSaveBtn();
+                .clickSaveButton();
         opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
     }
 
@@ -72,7 +72,7 @@ public class CreateContract {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
-        mainApp = accountProfile.deleteAccount();
+        mainApp = accountProfile.clickDeleteButton();
         mainApp.clickUserButton().clickLogout();
     }
 }

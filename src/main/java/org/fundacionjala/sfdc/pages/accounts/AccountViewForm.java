@@ -1,12 +1,17 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.FormBase;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import org.fundacionjala.sfdc.pages.base.FormBase;
 
+/**
+ * It is the account base page, abstract class.
+ *
+ * {@link FormBase}
+ */
 public class AccountViewForm extends FormBase {
     @FindBy(id = "fname")
     @CacheLookup
@@ -40,29 +45,51 @@ public class AccountViewForm extends FormBase {
     @CacheLookup
     private WebElement selectedFields;
 
-
+    /**
+     * This method set the view account name in the text field.
+     *
+     * @param viewName String with the view name.
+     * @return Return this class.
+     */
     public AccountViewForm setViewNameText(String viewName) {
-        viewNameText.sendKeys(viewName);
+        CommonActions.sendKeys(viewNameText, viewName);
         return this;
     }
 
+    /**
+     * This method set the unique view account name.
+     *
+     * @param uniqueName String with the unique view name.
+     * @return Return this class.
+     */
     public AccountViewForm setViewUniqueNameText(String uniqueName) {
-        viewUniqueNameText.sendKeys(uniqueName);
+        CommonActions.sendKeys(viewUniqueNameText, uniqueName);
         return this;
     }
 
+    /**
+     * This method set the accounts who will be able to see this view.
+     *
+     * @return Return this class.
+     */
     public AccountViewForm setMyAccounts() {
-        myAccountsRadioButton.click();
+        CommonActions.clickElement(myAccountsRadioButton);
         return this;
     }
 
+    /**
+     * {@link AccountForm}
+     */
     @Override
-    public AbstractBasePage clickSaveButton() {
-        return null;
+    public AccountForm clickSaveButton() {
+        return new AccountForm();
     }
 
+    /**
+     * {@link AccountForm}
+     */
     @Override
-    public AbstractBasePage clickSaveNewButton() {
-        return null;
+    public AccountForm clickSaveNewButton() {
+        return new AccountForm();
     }
 }
