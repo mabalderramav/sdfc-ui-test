@@ -209,16 +209,16 @@ public class OpportunityDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put(OPPORTUNITY_NAME.VALUE, this::getOpportunityName);
-        strategyMap.put(STAGE.VALUE, this::getStage);
-        strategyMap.put(ORDER_NUMBER.VALUE, this::getOrderNumber);
-        strategyMap.put(DELIVERY_INSTALL_STATUS.VALUE, this::getDeliveryInstallation);
-        strategyMap.put(ACCOUNT_NAME.VALUE, this::getAccountName);
-        strategyMap.put(CURRENT_CLOSE_DATE.VALUE, this::getCloseDate);
-        strategyMap.put(TYPE.VALUE, this::getTypeText);
-        strategyMap.put(LEAD_SOURCE.VALUE, this::getLeadSource);
-        strategyMap.put(NEXT_STEP.VALUE, this::getNextStep);
-        strategyMap.put(AMOUNT.VALUE, this::getAmount);
+        strategyMap.put(OPPORTUNITY_NAME.value, this::getOpportunityName);
+        strategyMap.put(STAGE.value, this::getStage);
+        strategyMap.put(ORDER_NUMBER.value, this::getOrderNumber);
+        strategyMap.put(DELIVERY_INSTALL_STATUS.value, this::getDeliveryInstallation);
+        strategyMap.put(ACCOUNT_NAME.value, this::getAccountName);
+        strategyMap.put(CURRENT_CLOSE_DATE.value, this::getCloseDate);
+        strategyMap.put(TYPE.value, this::getTypeText);
+        strategyMap.put(LEAD_SOURCE.value, this::getLeadSource);
+        strategyMap.put(NEXT_STEP.value, this::getNextStep);
+        strategyMap.put(AMOUNT.value, this::getAmount);
 
         return strategyMap;
     }
