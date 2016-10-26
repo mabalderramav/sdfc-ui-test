@@ -3,12 +3,16 @@ package org.fundacionjala.sfdc.pages.lookup;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
 
 /**
- * Created by ccatari on 5/22/2016.
+ * This class handle campaign lookup.
  */
 public class CampaignLookup extends ModalWindow {
 
     public static final String ALL_CAMPAIGN = "All Campaigns";
 
+
+    /**
+     * Constructor 
+     */
     public CampaignLookup() {
         init();
     }
