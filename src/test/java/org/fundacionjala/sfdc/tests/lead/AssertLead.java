@@ -10,6 +10,7 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
  * Class to manage the assertions for Lead Page.
  */
 public class AssertLead {
+
     /**
      * Method to make the assertions.
      *
@@ -27,28 +28,54 @@ public class AssertLead {
     /**
      * Method to give a format the Json, according this new Json is built according the details Page.
      *
-     * @param valuesMapJson Original Json.
+     * @param valuesMap Original Json.
      * @return the new Json that was formatted.
      */
-    public Map<String, String> formatJson(Map<String, String> valuesMapJson) {
-        String fullName = valuesMapJson.get("nameSalutation") + " " + valuesMapJson.get("firstName") + " " + valuesMapJson.get("lastName");
-        String address = valuesMapJson.get("street") + "\n" + valuesMapJson.get("city") + ", " + valuesMapJson.get("stateProvince") + " " + valuesMapJson.get("zipCode") + "\n" + valuesMapJson.get("country");
-        valuesMapJson.put("fullName", fullName);
-        valuesMapJson.put("address", address);
+    public Map<String, String> formatJson(final Map<String, String> valuesMap) {
+        String fullName = valuesMap.get("nameSalutation") + " "
+                + valuesMap.get("firstName") + " "
+                + valuesMap.get("lastName");
+        fullName = formatString(fullName);
 
-        valuesMapJson.remove("nameSalutation");
-        valuesMapJson.remove("firstName");
-        valuesMapJson.remove("lastName");
-        valuesMapJson.remove("campaignLookup");
+        String address =
+                valuesMap.get("street") + "\n"
+                        + valuesMap.get("city")
+                        + ", " + valuesMap.get("stateProvince")
+                        + " " + valuesMap.get("zipCode")
+                        + "\n" + valuesMap.get("country");
+        address = formatString(address);
 
-        valuesMapJson.remove("street");
-        valuesMapJson.remove("city");
-        valuesMapJson.remove("stateProvince");
-        valuesMapJson.remove("zipCode");
-        valuesMapJson.remove("country");
+        valuesMap.put("fullName", fullName);
+        valuesMap.put("address", address);
 
-        valuesMapJson.remove("annualRevenue");
-        valuesMapJson.remove("assignRule");
-        return valuesMapJson;
+        valuesMap.remove("nameSalutation");
+        valuesMap.remove("firstName");
+        valuesMap.remove("lastName");
+        valuesMap.remove("campaignLookup");
+
+        valuesMap.remove("street");
+        valuesMap.remove("city");
+        valuesMap.remove("stateProvince");
+        valuesMap.remove("zipCode");
+        valuesMap.remove("country");
+
+        valuesMap.remove("annualRevenue");
+        valuesMap.remove("assignRule");
+
+        return valuesMap;
+    }
+
+    /**
+     * Method that give a format to a string.
+     *
+     * @param value String with the value data.
+     * @return the string formatted.
+     */
+    private String formatString(final String value) {
+        String result = value.replaceAll("null", "").trim();
+        if (result.startsWith(",")) {
+            result = result.replaceAll(",", "").trim();
+        }
+        return result.trim();
     }
 }

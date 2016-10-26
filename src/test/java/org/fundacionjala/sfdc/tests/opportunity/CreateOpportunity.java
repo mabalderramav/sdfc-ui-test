@@ -2,19 +2,23 @@ package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 
-import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
-import org.fundacionjala.sfdc.pages.opportunities.Opportunity;
+
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.*;
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
+
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.*;
+
 
 /**
  * This class is a test to create a opportunity
@@ -26,7 +30,6 @@ public class CreateOpportunity {
     private OpportunityDetail opportunityDetail;
     private AccountAbstractPage accountsHome;
     private AccountProfile accountProfile;
-    private MainApp mainApp;
     private Map<String, String> valuesMapJson;
 
     /**
@@ -35,13 +38,12 @@ public class CreateOpportunity {
     @BeforeTest
     public void BeforeTest() {
         valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_PATH);
-        LoginPage loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
+        final MainApp mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapJson.get("accountName"))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
                 .pressSaveBtn();
     }
 
@@ -51,42 +53,28 @@ public class CreateOpportunity {
     @Test
     public void createOpportunity() {
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
+        OpportunityForm opportunityForm = opportunityHome.clickNewButton();
 
-        //Option 1
-//        opportunityDetail = opportunityHome.clickNewButton()
-//                .setOpportunityName("Test")
-//                .setOrderNumber("")
-//                .clickSaveBtn();
-
-        // Option 2
-//        opportunityForm.fillTheForm(valuesMapJson);
-//        opportunityDetail = opportunityForm.clickSaveBtn();
-
-        // Option 3
-        // Builder.
-//
-
-        Opportunity opportunity = new Opportunity.OpportunityBuilder("test", "newField")
-                .setOpportunityType("")
-                .setAccountName("")
-                .setPrice(3)
+        opportunityForm = new OpportunityForm.OpportunityBuilder(
+                valuesMapJson.get(OPPORTUNITY_NAME.VALUE),
+                valuesMapJson.get(CURRENT_CLOSE_DATE.VALUE),
+                valuesMapJson.get(STAGE.VALUE))
+                .setType(valuesMapJson.get(TYPE.VALUE))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
                 .build();
-        opportunityDetail = opportunity.createOpportunity();
-
-        AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapJson);
+        opportunityDetail = opportunityForm.saveOpportunity();
+        AssertOpportunity.assertDetailValues(opportunityDetail, opportunityForm.getValuesMap());
     }
-
 
     /**
      * This a post conditions a opportunities.
      */
     @AfterTest
     public void afterTest() {
-        mainApp = opportunityDetail.clickDeteleBtn();
+        MainApp mainApp = opportunityDetail.clickDeleteButton();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
-        mainApp = accountProfile.deleteAccount();
-        mainApp.clickUserButton().clickLogout();
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.VALUE));
+        accountProfile.deleteAccount();
     }
 }

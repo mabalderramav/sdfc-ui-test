@@ -19,7 +19,7 @@ public class UserInformationPage extends AbstractBasePage {
 
     @FindBy(css = "table.detailList tr:nth-child(4) td.col02")
     private WebElement userName;
-
+    
     public String getUserName() {
         return CommonActions.getText(userName);
     }

@@ -58,7 +58,7 @@ public class CreateContract {
     public void createOpportunity() {
         opportunityForm = opportunityHomeHome.clickNewButton();
         opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.clickSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveButton();
         //new AssertContract().assertDetailValues(opportunityDetail, valuesMapJson);
     }
 
@@ -68,7 +68,7 @@ public class CreateContract {
      */
     @AfterTest
     public void afterTest() {
-        mainApp = opportunityDetail.clickDeteleBtn();
+        mainApp = opportunityDetail.clickDeleteButton();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));

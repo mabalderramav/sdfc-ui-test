@@ -1,7 +1,7 @@
 {
   "opportunityName": "Opp_name2",
   "type": "Existing Customer - Replacement",
-  "CurrentCloseDate": "11/01/2016",
+  "currentCloseDate": "11/01/2016",
   "leadSource": "Partner Referral",
   "amount": "1000",
   "nextStep": "Conquer the world 5",

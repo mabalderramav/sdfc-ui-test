@@ -42,7 +42,7 @@ public class CreateLead {
     }
 
     /**
-     * This method create a new LeadHome and make the corresponding assertions.
+     * This method create a new Lead and make the corresponding assertions.
      */
     @Test
     public void createLeadTest(){
@@ -55,11 +55,11 @@ public class CreateLead {
     }
 
     /**
-     * This method delete the created LeadHome.
+     * This method delete the created Lead.
      */
     @AfterTest
     public void tearDown() {
-       leadDetails.deleteLead();
+       leadDetails.clickDeleteButton();
     }
 }
 
