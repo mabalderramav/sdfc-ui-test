@@ -25,6 +25,11 @@ public class UserInformationPage extends DetailBase {
         return null;
     }
 
+    @Override
+    public AbstractBasePage clickDeleteButton() {
+        return null;
+    }
+
     public String getUserName() {
         return CommonActions.getText(userName);
     }

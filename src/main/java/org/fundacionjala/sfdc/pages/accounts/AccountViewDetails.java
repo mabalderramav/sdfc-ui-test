@@ -39,4 +39,9 @@ public class AccountViewDetails extends DetailBase {
     public AbstractBasePage clickEditButton() {
         return null;
     }
+
+    @Override
+    public AbstractBasePage clickDeleteButton() {
+        return null;
+    }
 }
