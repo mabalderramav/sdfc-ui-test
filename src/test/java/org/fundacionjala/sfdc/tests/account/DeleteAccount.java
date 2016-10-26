@@ -14,27 +14,28 @@ import org.testng.annotations.Test;
 import java.util.Map;
 
 /**
- * Created by Pablo Zubieta on 04/09/2015.
+ * Created by erickaviraca on 10/24/2016.
  */
-public class CreateAccount {
+public class DeleteAccount {
+    /**
+     * This test is to edit and delete an account.
+     */
+    public static final String COLON = ", ";
     private AccountHome accountHome;
-    private AccountDetail accountDetail;
-    private AccountForm accountForm;
     private MainApp mainApp;
     private TabBar tabBar;
+    private AccountDetail accountDetail;
+    private AccountForm accountForm;
+
     public static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
     private Map<String, String> valuesMapJson;
 
     @BeforeMethod
-    public void setUp() {
+    public void login() {
         valuesMapJson = JsonMapper.getMapJson(ACCOUNT_DATA_PATH);
         mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
         accountHome = tabBar.clickOnAccountsHome();
-    }
-
-    @Test
-    public void createAccount(){
         accountForm = accountHome.clickNewButton();
         accountForm.fillTheForm(valuesMapJson);
         accountDetail = accountForm.clickSaveButton();
@@ -43,8 +44,11 @@ public class CreateAccount {
                         valuesMapJson.get(value)));
     }
 
-    @AfterMethod
-    public void afterTest() {
+    @Test
+    public void DeleteAccount() {
         accountDetail.clickDeleteButton();
+        Assert.assertFalse(accountDetail.isAccountDisplayed(valuesMapJson.get("accountName")
+                .concat(COLON).concat(valuesMapJson.get("accountName"))));
     }
+
 }
