@@ -30,8 +30,8 @@ public class AssertLead {
      * @param valuesMap Original Json.
      * @return the new Json that was formatted.
      */
-    public Map<String, String> formatJson(Map<String, String> valuesMap) {
-        String fullName = valuesMap.get("nameSalutation")+" "
+    public Map<String, String> formatJson(final Map<String, String> valuesMap) {
+        String fullName = valuesMap.get("nameSalutation") + " "
                 + valuesMap.get("firstName") + " "
                 + valuesMap.get("lastName");
         fullName = formatString(fullName);
@@ -45,7 +45,7 @@ public class AssertLead {
         address = formatString(address);
 
         valuesMap.put("fullName", fullName);
-        //valuesMap.put("address", address);
+        valuesMap.put("address", address);
 
         valuesMap.remove("nameSalutation");
         valuesMap.remove("firstName");
@@ -63,12 +63,18 @@ public class AssertLead {
 
         return valuesMap;
     }
-    private String formatString(String value){
+
+    /**
+     * Method that give a format to a string.
+     *
+     * @param value String with the value data.
+     * @return the string formatted.
+     */
+    private String formatString(final String value) {
         String result = value.replaceAll("null", "").trim();
-        if(result.startsWith(",")){
-            result = result.replaceAll(",","").trim();
+        if (result.startsWith(",")) {
+            result = result.replaceAll(",", "").trim();
         }
         return result.trim();
     }
-
 }
