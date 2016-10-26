@@ -2,27 +2,36 @@ package org.fundacionjala.sfdc.pages.opportunities;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.HomeBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
 
 /**
  * This class represents to opportunity pages.
  */
-public class OpportunityHome extends AbstractBasePage {
-
-    @FindBy(xpath = "//*[@name='new' and @type='button']")
-    @CacheLookup
-    WebElement NewButtton;
-
+public class OpportunityHome extends HomeBase {
     /**
-     * This method makes click in new button in opportunity page.
-     *
-     * @return a opportunity form page object.
+     * {@link HomeBase}
      */
     public OpportunityForm clickNewButton() {
-        CommonActions.clickElement(NewButtton);
+        CommonActions.clickElement(newButton);
+        return new OpportunityForm();
+    }
+
+    /**
+     * {@link HomeBase}
+     */
+    @Override
+    public AbstractBasePage clickCreateNewViewLink() {
+        CommonActions.clickElement(createNewViewLink);
+        return new OpportunityForm();
+    }
+
+    /**
+     * {@link HomeBase}
+     */
+    @Override
+    public AbstractBasePage clickEditViewLink() {
+        CommonActions.clickElement(editViewLink);
         return new OpportunityForm();
     }
 

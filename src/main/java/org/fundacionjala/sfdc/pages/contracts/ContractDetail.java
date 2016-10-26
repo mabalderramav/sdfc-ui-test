@@ -1,8 +1,12 @@
 package org.fundacionjala.sfdc.pages.contracts;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -10,9 +14,6 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * This class represents of the contract detail.
@@ -102,7 +103,12 @@ public class ContractDetail extends DetailBase {
         return new ContractForm();
     }
 
-     /**
+    @Override
+    public AbstractBasePage clickDeleteButton() {
+        return null;
+    }
+
+    /**
      * This method gets the account name.
      *
      * @return a string with account name text.

@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
 import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -15,23 +15,19 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * This class represent to a form to create or edit a opportunity
  */
-public class OpportunityForm extends AbstractBasePage {
-
-    @FindBy(name = "save")
-    @CacheLookup
-    private WebElement saveBtn;
+public class OpportunityForm extends FormBase {
 
     @FindBy(id = "opp2")
     @CacheLookup
-    private WebElement privateFlag;
+    private WebElement activeFlagCheckBox;
 
     @FindBy(id = "opp3")
     @CacheLookup
-    private WebElement opportunityNameTextBox;
+    private WebElement opportunityNameTextField;
 
     @FindBy(id = "opp4")
     @CacheLookup
-    private WebElement accountNameTextBox;
+    private WebElement accountNameTextField;
 
     @FindBy(xpath = ".//*[@id='opp4_lkwgt']/img")
     @CacheLookup
@@ -39,19 +35,19 @@ public class OpportunityForm extends AbstractBasePage {
 
     @FindBy(id = "opp5")
     @CacheLookup
-    private WebElement multiSelectType;
+    private WebElement selectTypeCheckBox;
 
     @FindBy(id = "opp6")
     @CacheLookup
-    private WebElement multiSelectLeadSource;
+    private WebElement selectLeadSourceCheckBox;
 
     @FindBy(id = "opp7")
     @CacheLookup
-    private WebElement amountTextBox;
+    private WebElement amountTextField;
 
     @FindBy(id = "opp9")
     @CacheLookup
-    private WebElement closeDateTextBox;
+    private WebElement closeDateField;
 
     @FindBy(xpath = "//input[@id='opp9']/following::a")
     @CacheLookup
@@ -59,11 +55,11 @@ public class OpportunityForm extends AbstractBasePage {
 
     @FindBy(id = "opp10")
     @CacheLookup
-    private WebElement nextStepTextBox;
+    private WebElement nextStepTextField;
 
     @FindBy(id = "opp11")
     @CacheLookup
-    private WebElement multiSelectStage;
+    private WebElement selectStageField;
 
     @FindBy(id = "opp12")
     @CacheLookup
@@ -89,30 +85,33 @@ public class OpportunityForm extends AbstractBasePage {
     private WebElement descriptionTextArea;
 
     /**
-     * This method checks private config.
-     *
-     * @param flag is a boolean.
-     * @return a opportunity form.
+     * {@link FormBase}
      */
-    public OpportunityForm checkPrivateFlag(final boolean flag) {
-        if (!privateFlag.isSelected() && flag) {
-            privateFlag.click();
-        }
-        return this;
+    @Override
+    public OpportunityDetail clickSaveButton() {
+        CommonActions.clickElement(saveButton);
+        return new OpportunityDetail();
     }
 
     /**
-     * This method unchecks private config.
-     *
-     * @param flag is a boolean.
-     * @return a opportunity form.
+     * {@link FormBase}
      */
-    public OpportunityForm uncheckPrivateFlag(final boolean flag) {
+    @Override
+    public OpportunityDetail clickSaveNewButton() {
+        CommonActions.clickElement(saveNewBtn);
+        return new OpportunityDetail();
+    }
 
-        if (privateFlag.isSelected() && flag) {
-            privateFlag.click();
+    /**
+     * This method checks in.
+     *
+     * @param flag Boolean with flag.
+     * @return {@link OpportunityForm}.
+     */
+    public OpportunityForm checkPrivateFlag(final boolean flag) {
+        if (!CommonActions.isSelected(activeFlagCheckBox) && flag) {
+            CommonActions.clickElement(activeFlagCheckBox);
         }
-
         return this;
     }
 
@@ -120,12 +119,10 @@ public class OpportunityForm extends AbstractBasePage {
      * This method sets a opportunity name.
      *
      * @param opportunityName is a boolean.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setOpportunityName(final String opportunityName) {
-        opportunityNameTextBox.clear();
-        opportunityNameTextBox.sendKeys(opportunityName);
-
+        CommonActions.sendKeys(opportunityNameTextField, opportunityName);
         return this;
     }
 
@@ -133,12 +130,10 @@ public class OpportunityForm extends AbstractBasePage {
      * This method sets a account name.
      *
      * @param accountName is a string name.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setAccountName(final String accountName) {
-        accountNameTextBox.clear();
-        accountNameTextBox.sendKeys(accountName);
-
+        CommonActions.sendKeys(accountNameTextField, accountName);
         return this;
     }
 
@@ -146,10 +141,10 @@ public class OpportunityForm extends AbstractBasePage {
      * This method sets a type.
      *
      * @param type is a string type.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm chooseTypeDdl(final String type) {
-        Select selectBox = new Select(multiSelectType);
+        Select selectBox = new Select(selectTypeCheckBox);
         selectBox.selectByVisibleText(type);
 
         return this;
@@ -159,10 +154,10 @@ public class OpportunityForm extends AbstractBasePage {
      * This method chooses leadSource.
      *
      * @param leadSource is a string type.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm chooseLeadSourceDdl(final String leadSource) {
-        Select selectBox = new Select(multiSelectLeadSource);
+        Select selectBox = new Select(selectLeadSourceCheckBox);
         selectBox.selectByVisibleText(leadSource);
         return this;
     }
@@ -171,11 +166,10 @@ public class OpportunityForm extends AbstractBasePage {
      * Thid method  sets amount.
      *
      * @param amount a string to set.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setAmount(final String amount) {
-        amountTextBox.clear();
-        amountTextBox.sendKeys(amount);
+        CommonActions.sendKeys(amountTextField, amount);
         return this;
     }
 
@@ -183,21 +177,20 @@ public class OpportunityForm extends AbstractBasePage {
      * This method  sets a close date
      *
      * @param closeDate a string to set.
-     * @return a opportunity form..
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setCloseDate(final String closeDate) {
-        closeDateTextBox.clear();
-        closeDateTextBox.sendKeys(closeDate);
+        CommonActions.sendKeys(closeDateField, closeDate);
         return this;
     }
 
     /**
      * This method sets a close date by default.
      *
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setCurrentCloseDate() {
-        closeDateTextBox.clear();
+        closeDateField.clear();
         todayLink.click();
         return this;
     }
@@ -206,11 +199,11 @@ public class OpportunityForm extends AbstractBasePage {
      * This method sets next step.
      *
      * @param nextStep is a string.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm setNextStep(final String nextStep) {
-        nextStepTextBox.clear();
-        nextStepTextBox.sendKeys(nextStep);
+        nextStepTextField.clear();
+        nextStepTextField.sendKeys(nextStep);
         return this;
     }
 
@@ -218,26 +211,31 @@ public class OpportunityForm extends AbstractBasePage {
      * This method selects a stage.
      *
      * @param stage is a string to select.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}.
      */
     public OpportunityForm chooseStageDdl(final String stage) {
-        Select selectBox = new Select(multiSelectStage);
+        Select selectBox = new Select(selectStageField);
         selectBox.selectByVisibleText(stage);
-
         return this;
     }
 
+    /**
+     * This method sets a probability to opportunity/
+     * @param probability a string to set.
+     * @return {@link OpportunityForm}.
+     */
     public OpportunityForm setProbability(final String probability) {
-        nextStepTextBox.clear();
-        nextStepTextBox.sendKeys(probability);
-
+        CommonActions.sendKeys(nextStepTextField, probability);
         return this;
     }
 
+    /**
+     * This method sets a probability to opportunity/
+     * @param primaryCampaignSource
+     * @return {@link OpportunityForm}.
+     */
     public OpportunityForm setPrimaryCampaignSource(final String primaryCampaignSource) {
-        primaryCampaignSourceTextBox.clear();
-        primaryCampaignSourceTextBox.sendKeys(primaryCampaignSource);
-
+        CommonActions.sendKeys(primaryCampaignSourceTextBox, primaryCampaignSource);
         return this;
     }
 
@@ -245,7 +243,7 @@ public class OpportunityForm extends AbstractBasePage {
      * This method is to add information.
      *
      * @param orderNumber is a string to add.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}
      */
     public OpportunityForm setOrderNumber(final String orderNumber) {
         orderNumberTextBox.clear();
@@ -257,7 +255,7 @@ public class OpportunityForm extends AbstractBasePage {
      * This method chooses install status.
      *
      * @param deleveryInstallationStatus a string to choose.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}
      */
     public OpportunityForm chooseDeliveryInstallationStatusDdl(final String deleveryInstallationStatus) {
         Select selectBox = new Select(multiSelectDeliveryInstallationStatus);
@@ -265,32 +263,24 @@ public class OpportunityForm extends AbstractBasePage {
         return this;
     }
 
+
     /**
      * This method sets a description
      *
      * @param description a string to sets.
-     * @return a opportunity form.
+     * @return {@link OpportunityForm}
      */
     public OpportunityForm setDescription(final String description) {
-        descriptionTextArea.clear();
-        descriptionTextArea.sendKeys(description);
+        CommonActions.sendKeys(descriptionTextArea, description);
         return this;
     }
 
     /**
-     * This method makes click to save button.
-     *
-     * @return ContractHome Detail page object.
-     */
-    public OpportunityDetail clickSaveBtn() {
-        saveBtn.click();
-        return new OpportunityDetail();
-    }
 
-    /**
+
      * This method makes click on account name.
      *
-     * @return LookUpWindow object.
+     * @return {@link LookUpWindow}.
      */
     public LookUpWindow clickAccountNameLookUpIcon() {
         CommonActions.clickElement(accountNameLookupIconBtn);
@@ -298,9 +288,9 @@ public class OpportunityForm extends AbstractBasePage {
     }
 
     /**
-     * This method maks click on primary campaingn.
+     * This method marks click on primary campaingn.
      *
-     * @returnLookUpWindow object.
+     * @return {@link LookUpWindow}.
      */
     public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
         CommonActions.clickElement(primaryCampaignSourceLookupIconBtn);
@@ -325,7 +315,7 @@ public class OpportunityForm extends AbstractBasePage {
         strategyMap.put("orderNumber", () -> setOrderNumber(String.valueOf(values.get("orderNumber"))));
         strategyMap.put("deliveryInstallStatus", () -> chooseDeliveryInstallationStatusDdl(String.valueOf(values.get("deliveryInstallStatus"))));
         strategyMap.put("accountName", () -> setAccountName(String.valueOf(values.get("accountName"))));
-        strategyMap.put("CurrentCloseDate", () -> setCloseDate(String.valueOf(values.get("CurrentCloseDate"))));
+        strategyMap.put("currentCloseDate", () -> setCloseDate(String.valueOf(values.get("currentCloseDate"))));
         strategyMap.put("PrivateFlag", () -> checkPrivateFlag(Boolean.valueOf(values.get("PrivateFlag"))));
 
         return strategyMap;
@@ -333,8 +323,6 @@ public class OpportunityForm extends AbstractBasePage {
 
     /**
      * This method loads data to fill the form for a given Json file.
-     *
-     * @param valuesMapCreate
      */
     public void fillTheForm(Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()

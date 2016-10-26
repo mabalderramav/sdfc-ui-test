@@ -55,7 +55,7 @@ public class DeleteEditContract {
         opportunityForm = opportunityHomeHome.clickNewButton();
 
         opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.clickSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveButton();
 
     }
 
@@ -64,7 +64,7 @@ public class DeleteEditContract {
      */
     @Test
     public void DeleteOpportunity() {
-        opportunityDetail.clickDeteleBtn();
+        opportunityDetail.clickDeleteButton();
         Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get("opportunityName")));
     }
 
@@ -73,10 +73,10 @@ public class DeleteEditContract {
      */
     @Test
     public void EditOpportunity() {
-        opportunityForm = opportunityDetail.clickEditBtn();
+        opportunityForm = opportunityDetail.clickEditButton();
         valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
-        opportunityDetail = opportunityForm.clickSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveButton();
         AssertContract.assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
