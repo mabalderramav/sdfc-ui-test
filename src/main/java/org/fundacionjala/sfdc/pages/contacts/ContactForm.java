@@ -72,7 +72,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param item a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm selectFirstNameCategory(final String item) {
         CommonActions.selectItem(firstNameCategoryField, item);
@@ -83,7 +83,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return @return {@link ContactForm}.
      */
     public ContactForm setContactNameField(final String text) {
         CommonActions.sendKeys(firstNameField, text);
@@ -94,7 +94,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setLastName(final String text) {
         CommonActions.sendKeys(lastNameField, text);
@@ -105,7 +105,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setAccountName(final String text) {
         CommonActions.sendKeys(accountNameField, text);
@@ -116,7 +116,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setTitle(final String text) {
         CommonActions.sendKeys(titleField, text);
@@ -127,7 +127,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setDepartment(final String text) {
         CommonActions.sendKeys(departmentField, text);
@@ -138,7 +138,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param date a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setBirthDate(final String date) {
         CommonActions.sendKeys(birthDateField, date);
@@ -149,7 +149,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param item a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm selectLeadSource(final String item) {
         CommonActions.selectItem(leadSourceField, item);
@@ -159,7 +159,7 @@ public class ContactForm extends AbstractBasePage {
     /**
      * This method makes click save button.
      *
-     * @return a Contact Detail page object.
+     * @return {@link ContactsDetail}.
      */
     public ContactsDetail clickSaveButton() {
         CommonActions.clickElement(saveBtn);
