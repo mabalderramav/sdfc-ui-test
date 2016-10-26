@@ -38,8 +38,6 @@ public class UpdateDeleteLead {
      */
     @BeforeMethod
     public void setUp() {
-//        LoginPage loginPage = new LoginPage();
-//        MainApp mainApp = loginPage.loginAsPrimaryUser();
         valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
         TabBar tabBar = new MainApp().goToTabBar();
         leadHomePage = tabBar.clickLead();
