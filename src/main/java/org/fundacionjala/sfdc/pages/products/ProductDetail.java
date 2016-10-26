@@ -3,6 +3,7 @@ package org.fundacionjala.sfdc.pages.products;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.fundacionjala.sfdc.pages.MainApp;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -50,10 +51,11 @@ public class ProductDetail extends DetailBase {
     /**
      * This method doing click on "Delete" button.
      */
-    public void clickDeleteButton() {
+    public MainApp clickDeleteButton() {
         CommonActions.clickElement(deleteBtn);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
+        return new MainApp();
     }
 
     /**

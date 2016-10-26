@@ -3,6 +3,7 @@ package org.fundacionjala.sfdc.pages.leads;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -384,5 +385,10 @@ public class LeadDetails extends DetailBase {
     public LeadForm clickEditButton() {
         CommonActions.clickElement(editBtn);
         return new LeadForm();
+    }
+
+    @Override
+    public AbstractBasePage clickDeleteButton() {
+        return null;
     }
 }
