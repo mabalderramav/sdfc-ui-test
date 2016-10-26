@@ -1,16 +1,19 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
+import org.openqa.selenium.By;
+
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
-import org.openqa.selenium.By;
 
 /**
  * This class represents to opportunity pages.
  */
 public class OpportunityHome extends HomeBase {
+
     /**
-     * {@link HomeBase}
+     * This method makes click on new button.
+     * @return {@link OpportunityForm}
      */
     public OpportunityForm clickNewButton() {
         CommonActions.clickElement(newButton);
@@ -18,7 +21,7 @@ public class OpportunityHome extends HomeBase {
     }
 
     /**
-     * {@link HomeBase}
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickCreateNewViewLink() {
@@ -27,7 +30,7 @@ public class OpportunityHome extends HomeBase {
     }
 
     /**
-     * {@link HomeBase}
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickEditViewLink() {

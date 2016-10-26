@@ -1,11 +1,11 @@
 package org.fundacionjala.sfdc.pages;
 
+import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
@@ -91,11 +91,11 @@ public class TabBar extends AbstractBasePage {
     /**
      * This method makes click on Accounts tab.
      *
-     * @return {@link AccountAbstractPage}
+     * @return {@link AccountHome}
      */
-    public AccountAbstractPage clickOnAccountsHome() {
+    public AccountHome clickOnAccountsHome() {
         CommonActions.clickElement(accountTab);
-        return new AccountAbstractPage();
+        return new AccountHome();
     }
 
     /**

@@ -4,9 +4,9 @@ import java.util.Map;
 
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
-import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
-import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
+import org.fundacionjala.sfdc.pages.accounts.AccountHome;
+import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
+import org.fundacionjala.sfdc.pages.accounts.AccountForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
@@ -30,8 +30,8 @@ public class DeleteEditOpportunity {
     private TabBar tabBar;
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
-    private AccountAbstractPage accountsHome;
-    private AccountProfile accountProfile;
+    private AccountHome accountsHome;
+    private AccountDetail accountProfile;
     private MainApp mainApp;
     private Map<String, String> valuesMapJson;
 
@@ -46,10 +46,10 @@ public class DeleteEditOpportunity {
         tabBar = mainApp.goToTabBar();
 
         accountsHome = tabBar.clickOnAccountsHome();
-        NewAccountPage newAccountForm = accountsHome.clickNewButton();
+        AccountForm newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
                 .setAccountName(valuesMapJson.get(ACCOUNT_NAME.value))
-                .pressSaveBtn();
+                .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
 
@@ -87,7 +87,7 @@ public class DeleteEditOpportunity {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
         accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.value));
-        mainApp = accountProfile.deleteAccount();
+        mainApp = accountProfile.clickDeleteButton();
     }
 
 }
