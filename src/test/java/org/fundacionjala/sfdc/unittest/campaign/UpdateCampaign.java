@@ -1,10 +1,10 @@
-package org.fundacionjala.sfdc.unittest.campaing;
+package org.fundacionjala.sfdc.unittest.campaign;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
-import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -17,7 +17,7 @@ import static org.testng.Assert.assertEquals;
 public class UpdateCampaign {
 
     public static final String PARA_BORRAR = "campaign to be updated";
-    private Campaigns campaigns;
+    private CampaignsHome campaigns;
     private CampaignForm campaignForm;
     private CampaignDetail campaignDetail;
     private MainApp mainApp;

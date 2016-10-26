@@ -1,10 +1,10 @@
-package org.fundacionjala.sfdc.unittest.campaing;
+package org.fundacionjala.sfdc.unittest.campaign;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
-import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -19,7 +19,7 @@ public class DeleteCampaign {
 
 
     public static final String CAMPAIGN_NAME = "Test For Delete";
-    private Campaigns campaigns;
+    private CampaignsHome campaigns;
     private CampaignForm campaignForm;
     private CampaignDetail campaignDetail;
     private MainApp mainApp;

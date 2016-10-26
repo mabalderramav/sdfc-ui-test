@@ -31,11 +31,21 @@ public class CampaignForm extends FormBase {
 
     @FindBy(id = "cpn2")
     @CacheLookup
-    WebElement TypeDropdown;
+    WebElement typeDropdown;
+
+    @FindBy(id = "cpn3")
+    @CacheLookup
+    WebElement statusDropdown;
+
 
     @FindBy(id = "cpn5")
     @CacheLookup
     WebElement startDateField;
+
+
+    @FindBy(id = "cpn6")
+    @CacheLookup
+    WebElement endDateField;
 
     @FindBy(id = "Parent")
     @CacheLookup
@@ -57,6 +67,12 @@ public class CampaignForm extends FormBase {
     @CacheLookup
     WebElement allCampaigns;
 
+    @FindBy(id = "cpn8")
+    @CacheLookup
+    WebElement revenueTextField;
+
+
+
 
     //endregion
 
@@ -71,12 +87,25 @@ public class CampaignForm extends FormBase {
     }
 
     public CampaignForm selectTypeDropdown(String item) {
-        CommonActions.selectItem(TypeDropdown, item);
+        CommonActions.selectItem(typeDropdown, item);
         return this;
     }
 
+    public CampaignForm selectStatusDropdown(String item) {
+        CommonActions.selectItem(statusDropdown, item);
+        return this;
+    }
+
+
+
     public CampaignForm setStartDateField(String date) {
         CommonActions.sendKeys(startDateField, date);
+        return this;
+    }
+
+    private CampaignForm setEndDateField(String endDate) {
+        CommonActions.sendKeys(endDateField,endDate);
+        CommonActions.clickElement(CampaingNameField);
         return this;
     }
 
@@ -129,10 +158,21 @@ public class CampaignForm extends FormBase {
     public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap();
         strategyMap.put("campaignName", () -> setCampaingNameField(String.valueOf(values.get("campaignName"))));
+        strategyMap.put("active", this::checkActiveCheckbox);
         strategyMap.put("typeDropDown", () -> selectTypeDropdown(String.valueOf(values.get("typeDropDown"))));
+        strategyMap.put("statusDropDown", () -> selectStatusDropdown(String.valueOf(values.get("statusDropDown"))));
+        strategyMap.put("startDate", () -> setStartDateField(String.valueOf(values.get("startDate"))));
+        strategyMap.put("endDate", () -> setEndDateField(String.valueOf(values.get("endDate"))));
+        strategyMap.put("revenue", () -> setRevenue(String.valueOf(values.get("revenue"))));
         return strategyMap;
     }
 
+
+
+    public void setRevenue(String quantity){
+        CommonActions.clearTextField(revenueTextField);
+        CommonActions.sendKeys(revenueTextField,quantity);
+    }
 
     /**
      * This method loads data to fill the form for a given Json file.
@@ -143,6 +183,8 @@ public class CampaignForm extends FormBase {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }
+
+
 
 
 }

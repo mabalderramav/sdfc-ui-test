@@ -1,4 +1,9 @@
 {
-  "campaignName": "Test105",
-  "typeDropDown": "Email"
+ "campaignName": "ALDO",
+ "active": "Checked"
+//  "typeDropDown": "Email",
+//  "statusDropDown": "In Progress",
+//  "startDate": "10/25/2015",
+//  "endDate": "10/27/2015",
+//  "revenue": " 1000"
 }

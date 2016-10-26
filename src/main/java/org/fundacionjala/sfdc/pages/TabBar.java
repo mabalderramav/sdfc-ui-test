@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.pages;
 
+import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -7,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
 import org.fundacionjala.sfdc.pages.cases.Cases;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
@@ -24,7 +24,7 @@ import org.fundacionjala.sfdc.pages.products.ProductHome;
 public class TabBar extends AbstractBasePage {
     //region Locators
 
-    @FindBy(xpath = "//*[@id='Campaign_Tab']/*[contains(.,'Campaigns')]")
+    @FindBy(id = "Campaign_Tab")
     @CacheLookup
     WebElement CampaignsTab;
 
@@ -60,9 +60,9 @@ public class TabBar extends AbstractBasePage {
     @CacheLookup
     private WebElement casesTab;
 
-    public Campaigns clickCampaigns() {
+    public CampaignsHome clickCampaigns() {
         CommonActions.clickElement(CampaignsTab);
-        return new Campaigns();
+        return new CampaignsHome();
     }
 
     public ContactHome clickOnContactsHome() {

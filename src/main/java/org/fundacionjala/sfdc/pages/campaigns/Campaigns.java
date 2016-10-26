@@ -1,50 +1,82 @@
 package org.fundacionjala.sfdc.pages.campaigns;
 
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+/**
+ * Created by AlvaroDaza on 10/25/2016.
+ */
+public class Campaigns {
 
-import java.util.List;
+    private Campaigns.ProductBuilder productBuilder;
 
+    private Map<String, String> valuesMap;
 
-public class Campaigns extends AbstractBasePage {
-
-    //region Locators
-
-    @FindBy(xpath = "//*[@name='new' and @type='button']")
-    @CacheLookup
-    WebElement newButtton;
-
-    @FindBy(className = "hotListElement")
-    @CacheLookup
-    WebElement allCampaigns;
-
-
-    //endregion
-
-    public CampaignForm clickNewButton() {
-        CommonActions.clickElement(newButtton);
-        return new CampaignForm();
+    public Campaigns(Campaigns.ProductBuilder productBuilder) {
+        valuesMap = new HashMap<>();
+        this.productBuilder = productBuilder;
     }
 
-    public CampaignDetail goCampaingProfile(String url) {
-        driver.navigate().to(url);
-        return new CampaignDetail();
+    public CampaignDetail createCampaign() {
+        CampaignForm campaignForm = new CampaignForm();
+        valuesMap = productBuilder.getStrategyMap();
+        campaignForm.fillTheForm(valuesMap);
+        return campaignForm.clickSaveButton();
     }
 
-    public boolean existCampaign(String campaignName) {
-        List<WebElement> campaigns = allCampaigns.findElements(By.className("dataCell"));
-        return campaigns.stream().filter(x -> x.equals(campaignName)).findAny().isPresent();
-
+    public Map<String, String> getValuesMap() {
+        return valuesMap;
     }
 
-    public MainApp goToHomePage(String homeUrl) {
-        driver.navigate().to(homeUrl);
-        return new MainApp();
+
+    public static class ProductBuilder {
+        private String name;
+        private String revenue;
+     //   private String description;
+     //   private Boolean active;
+      //  private String family;
+
+        private Map<String, String> strategyMap;
+
+        public Campaigns build() {
+            return new Campaigns(this);
+        }
+
+        public ProductBuilder(final String name) {
+            strategyMap = new HashMap<>();
+            strategyMap.put("campaignName", name);
+            this.name = name;
+        }
+
+        public Campaigns.ProductBuilder setRevenue(String revenue) {
+            strategyMap.put("revenue", revenue);
+            this.revenue = revenue;
+            return this;
+        }
+
+//        public Product.ProductBuilder setDescription(String description) {
+//            strategyMap.put("descriptionProduct", description);
+//            this.description = description;
+//            return this;
+//        }
+//
+//        public Product.ProductBuilder setActive(Boolean active) {
+//            strategyMap.put("isActive", String.valueOf(active));
+//            this.active = active;
+//            return this;
+//        }
+//
+//        public Product.ProductBuilder setFamily(String family) {
+//            strategyMap.put("productFamily", family);
+//            this.family = family;
+//            return this;
+//        }
+//
+        public Map<String, String> getStrategyMap() {
+        return strategyMap;
+       }
     }
+
+
+
 }
