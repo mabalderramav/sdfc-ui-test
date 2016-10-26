@@ -12,6 +12,36 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
 
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.ANNUAL_REVENUE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.ASSIGN_RULE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CAMPAIGN;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CITY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.COMPANY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.COUNTRY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CURRENT_GENERATORS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.DESCRIPTION;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.EMAIL;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.FAX;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.FIRST_NAME;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.INDUSTRY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.LAST_NAME;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.LEAD_SOURCE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.LEAD_STATUS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.MOBILE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.NAME_SALUTATION;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.NUMBER_LOCATIONS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.NUM_EMPLOYEES;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PHONE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PRIMARY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PRODUCT_INTEREST;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.RATING;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.SICCODE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.STATE_PROVINCE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.STREET;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.TITLE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.WEBSITE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.ZIP_CODE;
+
 
 /**
  * This class represent the Form to create a new LeadHome.
@@ -160,7 +190,7 @@ public class LeadForm extends FormBase {
     }
 
     /**
-     * Method that save the Lead Form.
+     * Method that save the LeadFields Form.
      *
      * @return {@link LeadDetails}.
      */
@@ -263,7 +293,7 @@ public class LeadForm extends FormBase {
      * @param assignRule if this data is "yes" the field is checked
      */
     public void setAssignRule(final String assignRule) {
-        if (assignRule.equals("yes")) {
+        if (String.valueOf(assignRule).equals("yes")) {
             CommonActions.check(assignRuleCheckBox);
         }
     }
@@ -279,7 +309,7 @@ public class LeadForm extends FormBase {
     }
 
     /**
-     * Method to sets the values to create a new Lead.
+     * Method to sets the values to create a new LeadFields.
      *
      * @param values Map with the information to be mapped.
      * @return a Map with the corresponding values.
@@ -287,44 +317,44 @@ public class LeadForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("nameSalutation", () -> CommonActions.selectItem(nameSalutationSelect,
-                values.get("nameSalutation")));
-        strategyMap.put("firstName", () -> setFirstNameTextField(values.get("firstName")));
-        strategyMap.put("lastName", () -> setLastNameTextField(values.get("lastName")));
-        strategyMap.put("company", () -> setCompanyTextField(values.get("company")));
-        strategyMap.put("title", () -> CommonActions.sendKeys(titleField, values.get("title")));
-        strategyMap.put("leadSource", () -> CommonActions.selectItem(leadSourceSelect, values.get("leadSource")));
-        strategyMap.put("campaignLookup", () -> selectCampaign(values.get("campaignLookup")));
-        strategyMap.put("industry", () -> CommonActions.selectItem(industrySelect, values.get("industry")));
-        strategyMap.put("annualRevenue", () -> CommonActions.sendKeys(annualRevenueTextField,
-                values.get("annualRevenue")));
-        strategyMap.put("phone", () -> CommonActions.sendKeys(phoneTextField, values.get("phone")));
-        strategyMap.put("mobile", () -> CommonActions.sendKeys(mobileTextField, values.get("mobile")));
-        strategyMap.put("fax", () -> CommonActions.sendKeys(faxTextField, values.get("fax")));
+        strategyMap.put(NAME_SALUTATION.toString(), () -> CommonActions.selectItem(nameSalutationSelect,
+                values.get(NAME_SALUTATION.toString())));
+        strategyMap.put(FIRST_NAME.toString(), () -> setFirstNameTextField(values.get(FIRST_NAME.toString())));
+        strategyMap.put(LAST_NAME.toString(), () -> setLastNameTextField(values.get(LAST_NAME.toString())));
+        strategyMap.put(COMPANY.toString(), () -> setCompanyTextField(values.get(COMPANY.toString())));
+        strategyMap.put(TITLE.toString(), () -> CommonActions.sendKeys(titleField, values.get(TITLE.toString())));
+        strategyMap.put(LEAD_SOURCE.toString(), () -> CommonActions.selectItem(leadSourceSelect, values.get(LEAD_SOURCE.toString())));
+        strategyMap.put(CAMPAIGN.toString(), () -> CommonActions.sendKeys(campaingTextField,values.get(CAMPAIGN.toString())));
+        strategyMap.put(INDUSTRY.toString(), () -> CommonActions.selectItem(industrySelect, values.get(INDUSTRY.toString())));
+        strategyMap.put(ANNUAL_REVENUE.toString(), () -> CommonActions.sendKeys(annualRevenueTextField,
+                values.get(ANNUAL_REVENUE.toString())));
+        strategyMap.put(PHONE.toString(), () -> CommonActions.sendKeys(phoneTextField, values.get(PHONE.toString())));
+        strategyMap.put(MOBILE.toString(), () -> CommonActions.sendKeys(mobileTextField, values.get(MOBILE.toString())));
+        strategyMap.put(FAX.toString(), () -> CommonActions.sendKeys(faxTextField, values.get(FAX.toString())));
 
-        strategyMap.put("email", () -> CommonActions.sendKeys(emailTextField, values.get("email")));
-        strategyMap.put("website", () -> CommonActions.sendKeys(websiteTextField, values.get("website")));
-        strategyMap.put("leadStatus", () -> CommonActions.selectItem(leadStatustTextField, values.get("leadStatus")));
-        strategyMap.put("rating", () -> CommonActions.selectItem(ratingTextField, values.get("rating")));
-        strategyMap.put("numEmployees", () -> CommonActions.sendKeys(numEmployeesTextField,
-                values.get("numEmployees")));
-        strategyMap.put("street", () -> CommonActions.sendKeys(streetTextField, values.get("street")));
-        strategyMap.put("city", () -> CommonActions.sendKeys(cityTextField, values.get("city")));
-        strategyMap.put("stateProvince", () -> CommonActions.sendKeys(stateTextField, values.get("stateProvince")));
-        strategyMap.put("zipCode", () -> CommonActions.sendKeys(zipCodeTextField, values.get("zipCode")));
-        strategyMap.put("country", () -> CommonActions.sendKeys(countryTextField, values.get("country")));
+        strategyMap.put(EMAIL.toString(), () -> CommonActions.sendKeys(emailTextField, values.get(EMAIL.toString())));
+        strategyMap.put(WEBSITE.toString(), () -> CommonActions.sendKeys(websiteTextField, values.get(WEBSITE.toString())));
+        strategyMap.put(LEAD_STATUS.toString(), () -> CommonActions.selectItem(leadStatustTextField, values.get(LEAD_STATUS.toString())));
+        strategyMap.put(RATING.toString(), () -> CommonActions.selectItem(ratingTextField, values.get(RATING.toString())));
+        strategyMap.put(NUM_EMPLOYEES.toString(), () -> CommonActions.sendKeys(numEmployeesTextField,
+                values.get(NUM_EMPLOYEES.toString())));
+        strategyMap.put(STREET.toString(), () -> CommonActions.sendKeys(streetTextField, values.get(STREET.toString())));
+        strategyMap.put(CITY.toString(), () -> CommonActions.sendKeys(cityTextField, values.get(CITY.toString())));
+        strategyMap.put(STATE_PROVINCE.toString(), () -> CommonActions.sendKeys(stateTextField, values.get(STATE_PROVINCE.toString())));
+        strategyMap.put(ZIP_CODE.toString(), () -> CommonActions.sendKeys(zipCodeTextField, values.get(ZIP_CODE.toString())));
+        strategyMap.put(COUNTRY.toString(), () -> CommonActions.sendKeys(countryTextField, values.get(COUNTRY.toString())));
 
-        strategyMap.put("productInterest", () -> CommonActions.selectItem(productInterestSelect,
-                values.get("productInterest")));
-        strategyMap.put("SICCode", () -> CommonActions.sendKeys(sicCodeTextField, values.get("SICCode")));
-        strategyMap.put("numberLocations", () -> CommonActions.sendKeys(numLocationsTextField,
-                values.get("numberLocations")));
-        strategyMap.put("currentGenerators", () -> CommonActions.sendKeys(currentGeneratorsTextField,
-                values.get("currentGenerators")));
-        strategyMap.put("primary", () -> CommonActions.selectItem(primarySelect, values.get("primary")));
+        strategyMap.put(PRODUCT_INTEREST.toString(), () -> CommonActions.selectItem(productInterestSelect,
+                values.get(PRODUCT_INTEREST.toString())));
+        strategyMap.put(SICCODE.toString(), () -> CommonActions.sendKeys(sicCodeTextField, values.get(SICCODE.toString())));
+        strategyMap.put(NUMBER_LOCATIONS.toString(), () -> CommonActions.sendKeys(numLocationsTextField,
+                values.get(NUMBER_LOCATIONS.toString())));
+        strategyMap.put(CURRENT_GENERATORS.toString(), () -> CommonActions.sendKeys(currentGeneratorsTextField,
+                values.get(CURRENT_GENERATORS.toString())));
+        strategyMap.put(PRIMARY.toString(), () -> CommonActions.selectItem(primarySelect, values.get(PRIMARY.toString())));
 
-        strategyMap.put("description", () -> CommonActions.sendKeys(descriptionTextArea, values.get("description")));
-        strategyMap.put("assignRule", () -> setAssignRule(values.get("assignRule")));
+        strategyMap.put(DESCRIPTION.toString(), () -> CommonActions.sendKeys(descriptionTextArea, values.get(DESCRIPTION.toString())));
+        strategyMap.put(ASSIGN_RULE.toString(), () -> setAssignRule(values.get(ASSIGN_RULE.toString())));
 
         return strategyMap;
     }
@@ -359,7 +389,6 @@ public class LeadForm extends FormBase {
         private String title;
         private String leadSource;
         private String campaign;
-        private String campaignLookup;
         private String industry;
         private String annualRevenue;
         private String phone;
@@ -392,7 +421,7 @@ public class LeadForm extends FormBase {
         private Map<String, String> strategyMap;
 
         /**
-         * Constructor that set the required values for the Lead Form.
+         * Constructor that set the required values for the LeadFields Form.
          *
          * @param lastName Last Name required value.
          * @param company  company data.
@@ -401,19 +430,19 @@ public class LeadForm extends FormBase {
             strategyMap = new HashMap<>();
             this.lastName = lastName;
             this.company = company;
-            strategyMap.put("lastName", lastName);
-            strategyMap.put("company", company);
+            strategyMap.put(LAST_NAME.toString(), lastName);
+            strategyMap.put(COMPANY.toString(), company);
         }
 
         /**
-         * Method that set the Salutation for the Lead.
+         * Method that set the Salutation for the LeadFields.
          *
          * @param nameSalutation Salutation info.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setNameSalutation(final String nameSalutation) {
             this.nameSalutation = nameSalutation;
-            strategyMap.put("nameSalutation", nameSalutation);
+            strategyMap.put(NAME_SALUTATION.toString(), nameSalutation);
             return this;
         }
 
@@ -425,7 +454,7 @@ public class LeadForm extends FormBase {
          */
         public LeadBuilder setFirstName(final String firstName) {
             this.firstName = firstName;
-            strategyMap.put("firstName", firstName);
+            strategyMap.put(FIRST_NAME.toString(), firstName);
             return this;
         }
 
@@ -437,277 +466,271 @@ public class LeadForm extends FormBase {
          */
         public LeadBuilder setLastName(final String lastName) {
             this.lastName = lastName;
-            strategyMap.put("lastName", lastName);
+            strategyMap.put(LAST_NAME.toString(), lastName);
             return this;
         }
 
         /**
-         * Method that set the Lead company.
+         * Method that set the LeadFields company.
          *
          * @param company String with the company info.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setCompany(final String company) {
             this.company = company;
-            strategyMap.put("company", company);
+            strategyMap.put(COMPANY.toString(), company);
             return this;
         }
 
         /**
-         * Method that sets the Lead title data.
+         * Method that sets the LeadFields title data.
          *
          * @param title String with the title info.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setTitle(final String title) {
             this.title = title;
-            strategyMap.put("title", title);
+            strategyMap.put(TITLE.toString(), title);
             return this;
         }
 
         /**
-         * Method that sets the Lead source info.
+         * Method that sets the LeadFields source info.
          *
          * @param leadSource String with the source info.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setLeadSource(final String leadSource) {
             this.leadSource = leadSource;
-            strategyMap.put("leadSource", leadSource);
+            strategyMap.put(LEAD_SOURCE.toString(), leadSource);
             return this;
         }
 
-       /* public LeadBuilder setCampaign(String campaign) {
-            this.campaign = campaign;
-            strategyMap.put("campaign",campaign);
-            return this;
-        }*/
-
         /**
-         * Method that sets the Lead campaign.
+         * Method that sets the LeadFields campaign.
          *
-         * @param campaignLookup String with the Campaign name.
+         * @param campaign String with the Campaign name.
          * @return {@link LeadBuilder}
          */
-        public LeadBuilder setCampaignLookup(final String campaignLookup) {
-            this.campaignLookup = campaignLookup;
-            strategyMap.put("campaignLookup", campaignLookup);
+        public LeadBuilder setCampaign(final String campaign) {
+            this.campaign = campaign;
+            strategyMap.put(CAMPAIGN.toString(), campaign);
             return this;
         }
 
         /**
-         * Method that sets the Lead industry.
+         * Method that sets the LeadFields industry.
          *
          * @param industry String with the industry data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setIndustry(final String industry) {
             this.industry = industry;
-            strategyMap.put("industry", industry);
+            strategyMap.put(INDUSTRY.toString(), industry);
             return this;
         }
 
         /**
-         * Method that sets the Lead Annual Revenue info.
+         * Method that sets the LeadFields Annual Revenue info.
          *
          * @param annualRevenue String with the annual revenue data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setAnnualRevenue(final String annualRevenue) {
             this.annualRevenue = annualRevenue;
-            strategyMap.put("annualRevenue", annualRevenue);
+            strategyMap.put(ANNUAL_REVENUE.toString(), annualRevenue);
             return this;
         }
 
         /**
-         * Method that sets the Lead phone number.
+         * Method that sets the LeadFields phone number.
          *
          * @param phone String with the phone data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setPhone(final String phone) {
             this.phone = phone;
-            strategyMap.put("phone", phone);
+            strategyMap.put(PHONE.toString(), phone);
             return this;
         }
 
         /**
-         * Method that sets the Lead mobile number.
+         * Method that sets the LeadFields mobile number.
          *
          * @param mobile String with the phone data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setMobile(final String mobile) {
             this.mobile = mobile;
-            strategyMap.put("mobile", mobile);
+            strategyMap.put(MOBILE.toString(), mobile);
             return this;
         }
 
         /**
-         * Method that sets the Lead Fax number.
+         * Method that sets the LeadFields Fax number.
          *
          * @param fax String with the fax data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setFax(final String fax) {
             this.fax = fax;
-            strategyMap.put("fax", fax);
+            strategyMap.put(FAX.toString(), fax);
             return this;
         }
 
         /**
-         * Method that sets the Lead Email info.
+         * Method that sets the LeadFields Email info.
          *
          * @param email String with the email data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setEmail(final String email) {
             this.email = email;
-            strategyMap.put("email", email);
+            strategyMap.put(EMAIL.toString(), email);
             return this;
         }
 
         /**
-         * Method that sets the Lead website.
+         * Method that sets the LeadFields website.
          *
          * @param website String with the website data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setWebsite(final String website) {
             this.website = website;
-            strategyMap.put("website", website);
+            strategyMap.put(WEBSITE.toString(), website);
             return this;
         }
 
         /**
-         * Method that sets the Lead status.
+         * Method that sets the LeadFields status.
          *
          * @param leadStatus String with the status data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setLeadStatus(final String leadStatus) {
             this.leadStatus = leadStatus;
-            strategyMap.put("leadStatus", leadStatus);
+            strategyMap.put(LEAD_STATUS.toString(), leadStatus);
             return this;
         }
 
         /**
-         * Method that sets the Lead rating.
+         * Method that sets the LeadFields rating.
          *
          * @param rating String with the Rating data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setRating(final String rating) {
             this.rating = rating;
-            strategyMap.put("rating", rating);
+            strategyMap.put(RATING.toString(), rating);
             return this;
         }
 
         /**
-         * Method that sets the Lead employee number.
+         * Method that sets the LeadFields employee number.
          *
          * @param numEmployees String with the employee data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setNumEmployees(final String numEmployees) {
             this.numEmployees = numEmployees;
-            strategyMap.put("numEmployees", numEmployees);
+            strategyMap.put(NUM_EMPLOYEES.toString(), numEmployees);
             return this;
         }
 
         /**
-         * Method that sets the Lead street.
+         * Method that sets the LeadFields street.
          *
          * @param street String with the street data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setStreet(final String street) {
             this.street = street;
-            strategyMap.put("street", street);
+            strategyMap.put(STREET.toString(), street);
             return this;
         }
 
         /**
-         * Method that sets the Lead city.
+         * Method that sets the LeadFields city.
          *
          * @param city String with the city data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setCity(final String city) {
             this.city = city;
-            strategyMap.put("city", city);
+            strategyMap.put(CITY.toString(), city);
             return this;
         }
 
         /**
-         * Method that sets the Lead State or Province.
+         * Method that sets the LeadFields State or Province.
          *
          * @param stateProvince String with the state/province data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setStateProvince(final String stateProvince) {
             this.stateProvince = stateProvince;
-            strategyMap.put("stateProvince", stateProvince);
+            strategyMap.put(STATE_PROVINCE.toString(), stateProvince);
             return this;
         }
 
         /**
-         * Method that sets the Lead Zip code.
+         * Method that sets the LeadFields Zip code.
          *
          * @param zipCode String with the zip code data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setZipCode(final String zipCode) {
             this.zipCode = zipCode;
-            strategyMap.put("zipCode", zipCode);
+            strategyMap.put(ZIP_CODE.toString(), zipCode);
             return this;
         }
 
         /**
-         * Method that sets the Lead country.
+         * Method that sets the LeadFields country.
          *
          * @param country String with the country data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setCountry(final String country) {
             this.country = country;
-            strategyMap.put("country", country);
+            strategyMap.put(COUNTRY.toString(), country);
             return this;
         }
 
         /**
-         * Method that sets the Lead product interest.
+         * Method that sets the LeadFields product interest.
          *
          * @param productInterest String with the product interest data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setProductInterest(final String productInterest) {
             this.productInterest = productInterest;
-            strategyMap.put("productInterest", productInterest);
+            strategyMap.put(PRODUCT_INTEREST.toString(), productInterest);
             return this;
         }
 
         /**
-         * Method that sets the Lead sic code.
+         * Method that sets the LeadFields sic code.
          *
          * @param sicCode String with the sic code data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setSICCode(final String sicCode) {
             this.SICCode = sicCode;
-            strategyMap.put("sicCode", sicCode);
+            strategyMap.put(SICCODE.toString(), sicCode);
             return this;
         }
 
         /**
-         * Method that sets the Lead number locations.
+         * Method that sets the LeadFields number locations.
          *
          * @param numberLocations String with the number locations data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setNumberLocations(final String numberLocations) {
             this.numberLocations = numberLocations;
-            strategyMap.put("numberLocations", numberLocations);
+            strategyMap.put(NUMBER_LOCATIONS.toString(), numberLocations);
             return this;
         }
 
@@ -719,31 +742,31 @@ public class LeadForm extends FormBase {
          */
         public LeadBuilder setCurrentGenerators(final String currentGenerators) {
             this.currentGenerators = currentGenerators;
-            strategyMap.put("currentGenerators", currentGenerators);
+            strategyMap.put(CURRENT_GENERATORS.toString(), currentGenerators);
             return this;
         }
 
         /**
-         * Method that sets the Lead primary.
+         * Method that sets the LeadFields primary.
          *
          * @param primary String with the primary data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setPrimary(final String primary) {
             this.primary = primary;
-            strategyMap.put("primary", primary);
+            strategyMap.put(PRIMARY.toString(), primary);
             return this;
         }
 
         /**
-         * Method that sets the Lead description.
+         * Method that sets the LeadFields description.
          *
          * @param description String with the description data.
          * @return {@link LeadBuilder}
          */
         public LeadBuilder setDescription(final String description) {
             this.description = description;
-            strategyMap.put("description", description);
+            strategyMap.put(DESCRIPTION.toString(), description);
             return this;
         }
 
@@ -755,7 +778,7 @@ public class LeadForm extends FormBase {
          */
         public LeadBuilder setAssignRule(final String assignRule) {
             this.assignRule = assignRule;
-            strategyMap.put("assignRule", assignRule);
+            strategyMap.put(ASSIGN_RULE.toString(), assignRule);
             return this;
         }
 
@@ -769,7 +792,7 @@ public class LeadForm extends FormBase {
         }
 
         /**
-         * Method that build the Lead.
+         * Method that build the LeadFields.
          *
          * @return {@link LeadForm}
          */
