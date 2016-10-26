@@ -1,8 +1,5 @@
 package org.fundacionjala.sfdc.pages.leads;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriverException;
-
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
@@ -14,29 +11,40 @@ import org.fundacionjala.sfdc.pages.base.HomeBase;
 public class LeadHome extends HomeBase {
 
     /**
-     * {@link HomeBase}
+     * This method verify if the Deleted Lead is displayed in the page.
+     *
+     * @param lead the name of the Lead.
+     * @return <code>true<code/> if Lead is displayed.
+     */
+    public boolean isLeadDisplayed(String lead) {
+        return CommonActions.existElementByLinkText(lead);
+    }
+
+    /**
+     * {@inheritDoc}
      */
     @Override
     public LeadForm clickNewButton() {
         CommonActions.clickElement(newButton);
         return new LeadForm();
     }
-    public boolean isLeadDisplayed(String lead) {
-        try {
-            String leadContainer = driver.findElement(By.linkText(lead)).getText();
-            return true;
-        } catch(WebDriverException e) {
-            return false;
-        }
-    }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AbstractBasePage clickCreateNewViewLink() {
-        return null;
+        CommonActions.clickElement(createNewViewLink);
+        return new LeadForm();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AbstractBasePage clickEditViewLink() {
-        return null;
+        CommonActions.clickElement(editViewLink);
+        return new LeadForm();
     }
 
 }
