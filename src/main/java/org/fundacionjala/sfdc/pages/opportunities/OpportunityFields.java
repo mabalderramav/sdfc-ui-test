@@ -16,15 +16,15 @@ public enum OpportunityFields {
     PRIVATE_FLAG("privateFlag"),
     OPPORTUNITY_NAME("opportunityName");
 
-    public final String VALUE;
+    public final String value;
 
     /**
      * This construct sets a string to the enums.
      *
-     * @param VALUE is a string of the enum.
+     * @param value is a string of the enum.
      */
-    OpportunityFields(final String VALUE) {
-        this.VALUE = VALUE;
+    OpportunityFields(final String value) {
+        this.value = value;
     }
 
 }

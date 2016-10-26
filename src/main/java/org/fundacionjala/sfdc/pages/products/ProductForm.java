@@ -2,6 +2,7 @@ package org.fundacionjala.sfdc.pages.products;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringJoiner;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -14,6 +15,8 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
+
+import static org.fundacionjala.sfdc.pages.products.Product.*;
 
 /**
  * This class handle the product form.
@@ -179,11 +182,11 @@ public class ProductForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("productName", () -> setProductName(values.get("productName")));
-        strategyMap.put("productCode", () -> setProductCode(values.get("productCode")));
-        strategyMap.put("isActive", () -> checkActiveFlag(Boolean.parseBoolean(values.get("isActive"))));
-        strategyMap.put("productFamily", () -> chooseProductFamilyDdl(values.get("productFamily")));
-        strategyMap.put("descriptionProduct", () -> setDescription(values.get("descriptionProduct")));
+        strategyMap.put(NAME.toString(), () -> setProductName(values.get(NAME.toString())));
+        strategyMap.put(CODE.toString(), () -> setProductCode(values.get(CODE.toString())));
+        strategyMap.put(ACTIVE.toString(), () -> checkActiveFlag(Boolean.parseBoolean(values.get(ACTIVE.toString()))));
+        strategyMap.put(FAMILY.toString(), () -> chooseProductFamilyDdl(values.get(FAMILY.toString())));
+        strategyMap.put(DESCRIPTION.toString(), () -> setDescription(values.get(DESCRIPTION.toString())));
 
         return strategyMap;
     }
@@ -216,7 +219,7 @@ public class ProductForm extends FormBase {
          */
         public ProductBuilder(final String name) {
             strategyMap = new HashMap<>();
-            strategyMap.put("productName", name);
+            strategyMap.put(NAME.toString(), name);
             this.name = name;
         }
 
@@ -227,7 +230,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setCode(final String code) {
-            strategyMap.put("productCode", code);
+            strategyMap.put(CODE.toString(), code);
             this.code = code;
             return this;
         }
@@ -239,7 +242,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setDescription(final String description) {
-            strategyMap.put("descriptionProduct", description);
+            strategyMap.put(DESCRIPTION.toString(), description);
             this.description = description;
             return this;
         }
@@ -251,7 +254,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setActive(final Boolean active) {
-            strategyMap.put("isActive", String.valueOf(active));
+            strategyMap.put(ACTIVE.toString(), String.valueOf(active));
             this.active = active;
             return this;
         }
@@ -263,7 +266,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setFamily(final String family) {
-            strategyMap.put("productFamily", family);
+            strategyMap.put(FAMILY.toString(), family);
             this.family = family;
             return this;
         }

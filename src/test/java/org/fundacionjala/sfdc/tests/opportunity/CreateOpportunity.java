@@ -9,7 +9,6 @@ import org.fundacionjala.sfdc.pages.accounts.AccountProfile;
 import org.fundacionjala.sfdc.pages.accounts.NewAccountPage;
 
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
-import org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.*;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
@@ -43,7 +42,7 @@ public class CreateOpportunity {
         accountsHome = tabBar.clickOnAccountsHome();
         NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.value))
                 .pressSaveBtn();
     }
 
@@ -56,11 +55,11 @@ public class CreateOpportunity {
         OpportunityForm opportunityForm = opportunityHome.clickNewButton();
 
         opportunityForm = new OpportunityForm.OpportunityBuilder(
-                valuesMapJson.get(OPPORTUNITY_NAME.VALUE),
-                valuesMapJson.get(CURRENT_CLOSE_DATE.VALUE),
-                valuesMapJson.get(STAGE.VALUE))
-                .setType(valuesMapJson.get(TYPE.VALUE))
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
+                valuesMapJson.get(OPPORTUNITY_NAME.value),
+                valuesMapJson.get(CURRENT_CLOSE_DATE.value),
+                valuesMapJson.get(STAGE.value))
+                .setType(valuesMapJson.get(TYPE.value))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.value))
                 .build();
         opportunityDetail = opportunityForm.saveOpportunity();
         AssertOpportunity.assertDetailValues(opportunityDetail, opportunityForm.getValuesMap());
@@ -74,7 +73,7 @@ public class CreateOpportunity {
         MainApp mainApp = opportunityDetail.clickDeleteButton();
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.VALUE));
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.value));
         accountProfile.deleteAccount();
     }
 }
