@@ -50,4 +50,11 @@ public abstract class DetailBase extends AbstractBasePage {
      * @return {@link AbstractBasePage}
      */
     public abstract AbstractBasePage clickEditButton();
+
+    /**
+     * Clicks on "delete" button.
+     *
+     * @return {@link AbstractBasePage}
+     */
+    public abstract AbstractBasePage clickDeleteButton();
 }

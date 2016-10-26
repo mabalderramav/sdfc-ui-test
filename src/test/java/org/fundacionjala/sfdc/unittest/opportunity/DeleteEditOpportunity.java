@@ -2,7 +2,6 @@ package org.fundacionjala.sfdc.unittest.opportunity;
 
 import java.util.Map;
 
-import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
@@ -12,7 +11,6 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.utils.Common;
-
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -23,18 +21,14 @@ import org.testng.annotations.Test;
  */
 public class DeleteEditOpportunity {
 
+    private static final String OPPORTUNITY_DATA_EDIT_PATH = "opportunity/EditOpportunityData.json";
     private TabBar tabBar;
-    private LoginPage loginPage;
-    private OpportunityHome opportunityHomeHome;
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
     private AccountAbstractPage accountsHome;
-    private NewAccountPage newAccountForm;
     private AccountProfile accountProfile;
     private MainApp mainApp;
-    public static final String OPPORTUNITY_DATA_EDIT_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
     private Map<String, String> valuesMapJson;
-    private Map<String, String> valuesMapEditJson;
 
     /**
      * This method is a preconditions to edit and delete a opportunity.
@@ -42,21 +36,19 @@ public class DeleteEditOpportunity {
     @BeforeMethod
     public void BeforeTest() {
         valuesMapJson = Common.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
-        loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
+        mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
 
         accountsHome = tabBar.clickOnAccountsHome();
-        newAccountForm = accountsHome.clickNewButton();
+        NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
                 .setAccountName(valuesMapJson.get("accountName"))
                 .pressSaveBtn();
-        opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
-        opportunityForm = opportunityHomeHome.clickNewButton();
+        OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
+        opportunityForm = opportunityHome.clickNewButton();
 
         opportunityForm.fillTheForm(valuesMapJson);
-        opportunityDetail = opportunityForm.clickSaveBtn();
-
+        opportunityDetail = opportunityForm.clickSaveButton();
     }
 
     /**
@@ -74,9 +66,9 @@ public class DeleteEditOpportunity {
     @Test
     public void EditOpportunity() {
         opportunityForm = opportunityDetail.clickEditBtn();
-        valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
+        Map<String, String> valuesMapEditJson = Common.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
-        opportunityDetail = opportunityForm.clickSaveBtn();
+        opportunityDetail = opportunityForm.clickSaveButton();
         AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
@@ -89,7 +81,6 @@ public class DeleteEditOpportunity {
         accountsHome = tabBar.clickOnAccountsHome();
         accountProfile = accountsHome.clickOnAccount(valuesMapJson.get("accountName"));
         mainApp = accountProfile.deleteAccount();
-        mainApp.clickUserButton().clickLogout();
     }
 
 }

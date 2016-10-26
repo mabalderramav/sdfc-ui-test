@@ -6,7 +6,7 @@ import java.util.Map;
 import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -17,15 +17,7 @@ import org.openqa.selenium.support.FindBy;
 /**
  * This class represents of the opportunity detail.
  */
-public class OpportunityDetail extends AbstractBasePage {
-
-    @FindBy(name = "del")
-    @CacheLookup
-    private WebElement deleteBtn;
-
-    @FindBy(name = "edit")
-    @CacheLookup
-    private WebElement editBtn;
+public class OpportunityDetail extends DetailBase {
 
     @FindBy(id = "opp3_ileinner")
     @CacheLookup
@@ -71,27 +63,24 @@ public class OpportunityDetail extends AbstractBasePage {
     @CacheLookup
     private WebElement privateFlagImg;
 
+    /**
+     * {@link DetailBase}
+     */
+    @Override
+    public OpportunityForm clickEditButton() {
+        CommonActions.clickElement(editBtn);
+        return new OpportunityForm();
+    }
 
     /**
-     * This method makes click on delete button.
-     *
-     * @return main app.
+     * {@link DetailBase}
      */
-    public MainApp clickDeteleBtn() {
+    @Override
+    public MainApp clickDeleteButton() {
         CommonActions.clickElement(deleteBtn);
         Alert alert = driver.switchTo().alert();
         alert.accept();
         return new MainApp();
-    }
-
-    /**
-     * This method makes a click on edit button.
-     *
-     * @return a opportunity form.
-     */
-    public OpportunityForm clickEditBtn() {
-        CommonActions.clickElement(editBtn);
-        return new OpportunityForm();
     }
 
     public OpportunityForm pressEditBtn() {
@@ -229,7 +218,7 @@ public class OpportunityDetail extends AbstractBasePage {
         strategyMap.put("orderNumber", this::getOrderNumber);
         strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
         strategyMap.put("accountName", this::getAccountName);
-        strategyMap.put("CurrentCloseDate", this::getCloseDate);
+        strategyMap.put("currentCloseDate", this::getCloseDate);
         strategyMap.put("type", this::getTypeText);
         strategyMap.put("leadSource", this::getLeadSource);
         strategyMap.put("nextStep", this::getNextStep);
@@ -237,6 +226,5 @@ public class OpportunityDetail extends AbstractBasePage {
 
         return strategyMap;
     }
-
 
 }
