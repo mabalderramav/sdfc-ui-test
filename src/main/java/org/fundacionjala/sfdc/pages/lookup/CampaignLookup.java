@@ -5,12 +5,16 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 
 
 /**
- * Created by ccatari on 5/22/2016.
+ * This class handle campaign lookup.
  */
 public class CampaignLookup extends ModalWindow {
 
     public static final String ALL_CAMPAIGN = "All Campaigns";
 
+
+    /**
+     * Constructor that call the parent constructor.
+     */
     public CampaignLookup() {
         init();
     }
@@ -27,6 +31,9 @@ public class CampaignLookup extends ModalWindow {
         searchFrame.searchTheCampaign(campaign, scope);
     }
 
+    /**
+     *
+     */
     public void setACampaignFromResults() {
         ListSectionFrame listFrame = new ListSectionFrame();
         listFrame.selectACampaignFromTheList();
