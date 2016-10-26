@@ -19,7 +19,7 @@ public class CampaignLookup extends ModalWindow {
 
 
     /**
-     * 
+     *
      */
     public void setACampaignFromResults() {
         ListSectionFrame listFrame = new ListSectionFrame();

@@ -61,7 +61,7 @@ public class CreateCampaign {
                 .setStartDateField("6/24/2015")
                 .clickLookUpIcon();
 
-        newCampaignForm = lookUpWindow.selectCampaignWithNameByScope(campaignParent, CampaignLookup.ALL_CAMPAIGN);
+        //newCampaignForm = lookUpWindow.selectCampaignWithNameByScope(campaignParent, CampaignLookup.ALL_CAMPAIGN);
 
 
         campaignProfile = newCampaignForm.clickSaveButton();
