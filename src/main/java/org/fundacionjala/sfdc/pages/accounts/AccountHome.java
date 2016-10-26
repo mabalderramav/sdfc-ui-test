@@ -47,4 +47,7 @@ public class AccountHome  extends HomeBase {
         return new AccountForm();
     }
 
+    public AccountDetail clickOnAccount(String accountName) {
+        return new AccountDetail();
+    }
 }

@@ -3,7 +3,6 @@ package org.fundacionjala.sfdc.pages.products;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fundacionjala.sfdc.pages.MainApp;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -13,6 +12,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
+
+import static org.fundacionjala.sfdc.pages.products.Product.*;
 
 /**
  * This class handle the product details.
@@ -49,13 +50,14 @@ public class ProductDetail extends DetailBase {
     private WebElement productFamilyLabel;
 
     /**
-     * This method doing click on "Delete" button.
+     * {@inheritDoc}
      */
-    public MainApp clickDeleteButton() {
+    @Override
+    public ProductHome clickDeleteButton() {
         CommonActions.clickElement(deleteBtn);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        return new MainApp();
+        return new ProductHome();
     }
 
     /**
@@ -74,12 +76,11 @@ public class ProductDetail extends DetailBase {
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
-
-        strategyMap.put("productName", this::getProductName);
-        strategyMap.put("productCode", this::getProductCode);
-        strategyMap.put("isActive", () -> String.valueOf(isActiveFlag()));
-        strategyMap.put("productFamily", this::getProductFamily);
-        strategyMap.put("descriptionProduct", this::getDescription);
+        strategyMap.put(NAME.toString(), this::getProductName);
+        strategyMap.put(CODE.toString(), this::getProductCode);
+        strategyMap.put(ACTIVE.toString(), () -> String.valueOf(isActiveFlag()));
+        strategyMap.put(FAMILY.toString(), this::getProductFamily);
+        strategyMap.put(DESCRIPTION.toString(), this::getDescription);
         return strategyMap;
     }
 
