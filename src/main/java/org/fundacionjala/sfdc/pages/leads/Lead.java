@@ -9,6 +9,7 @@ import java.util.Map;
 public class Lead {
 
     private LeadBuilder leadBuilder;
+    private Map<String,String> mapValues;
 
     public Lead(LeadBuilder leadBuilder) {
         this.leadBuilder = leadBuilder;
@@ -16,11 +17,18 @@ public class Lead {
 
     public LeadDetails createLead() {
         LeadForm leadForm = new LeadForm();
-        leadForm.fillTheForm(leadBuilder.getStrategyMap());
+        mapValues = leadBuilder.getStrategyMap();
+        leadForm.fillTheForm(mapValues);
+        mapValues.put("address",leadBuilder.getAddress().trim());
         return leadForm.clickSaveButton();
     }
 
-    public static class LeadBuilder {
+    public Map<String,String> getLeadValues(){
+        return mapValues;
+    }
+
+    public static class LeadBuilder{
+
         /*LeadHome Information*/
         private String nameSalutation;
         private String firstName;
@@ -60,12 +68,16 @@ public class Lead {
         private String assignRule;
 
         private Map<String, String> strategyMap;
+        private StringBuilder address;
 
 
         public LeadBuilder(final String lastName, final String company) {
             strategyMap = new HashMap<>();
             this.lastName = lastName;
             this.company = company;
+            strategyMap.put("lastName",lastName);
+            strategyMap.put("company",company);
+            address = new StringBuilder();
         }
 
         public LeadBuilder setNameSalutation(String nameSalutation) {
@@ -178,31 +190,44 @@ public class Lead {
 
         public LeadBuilder setStreet(String street) {
             this.street = street;
-            strategyMap.put("street", street);
+            address.append(street);
+            strategyMap.put("street",street);
             return this;
         }
 
         public LeadBuilder setCity(String city) {
             this.city = city;
-            strategyMap.put("city", city);
+            address.append("\n");
+            address.append(city);
+            strategyMap.put("city",city);
+
             return this;
         }
 
         public LeadBuilder setStateProvince(String stateProvince) {
             this.stateProvince = stateProvince;
-            strategyMap.put("stateProvince", stateProvince);
+            address.append(", ");
+            address.append(stateProvince);
+            strategyMap.put("stateProvince",stateProvince);
+
             return this;
         }
 
         public LeadBuilder setZipCode(String zipCode) {
             this.zipCode = zipCode;
-            strategyMap.put("zipCode", zipCode);
+            address.append(" ");
+            address.append(zipCode);
+            strategyMap.put("zipCode",zipCode);
+
             return this;
         }
 
         public LeadBuilder setCountry(String country) {
             this.country = country;
-            strategyMap.put("country", country);
+            address.append("\n");
+            address.append(country);
+            strategyMap.put("country",country);
+
             return this;
         }
 
@@ -212,9 +237,10 @@ public class Lead {
             return this;
         }
 
-        public LeadBuilder setSICCode(String SICCode) {
-            this.SICCode = SICCode;
-            strategyMap.put("SICCode", SICCode);
+        public LeadBuilder setSICCode(String sicCode) {
+            this.SICCode = sicCode;
+            strategyMap.put("SICCode",sicCode);
+
             return this;
         }
 
@@ -240,6 +266,15 @@ public class Lead {
             this.assignRule = assignRule;
             strategyMap.put("assignRule", assignRule);
             return this;
+        }
+
+        public String getAddress(){
+            String formattedAddress = address.toString();
+            if(formattedAddress.startsWith(",")){
+                formattedAddress = formattedAddress.replaceAll(",","").trim();
+            }
+
+           return formattedAddress;
         }
 
         public Map<String, String> getStrategyMap() {

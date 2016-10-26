@@ -1,18 +1,16 @@
 package org.fundacionjala.sfdc.tests.lead;
 
-import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.leads.Lead;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
+import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
-
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertFalse;
 
 /**
  * This class update and delete LeadHome.
@@ -24,7 +22,7 @@ public class UpdateDeleteLead {
     /**
      * This method execute the preconditions to make the validation for update and delete test.
      */
-    @BeforeTest
+    @BeforeMethod
     public void setUp(){
         LoginPage loginPage = new LoginPage();
         MainApp mainApp = loginPage.loginAsPrimaryUser();
@@ -36,24 +34,28 @@ public class UpdateDeleteLead {
                 .setCompanyField("Company Test")
                 .clickSaveButton();
     }
-    @Test
-    public void deleteLead(){
-        leadDetails.deleteLead();
-        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
-    }
+//    @Test
+//    public void deleteLead(){
+//        leadDetails.deleteLead();
+//        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
+//    }
     @Test void updateLead(){
-        String companyNameEdited = "ComapnyName UPDATED";
+        String companyNameEdited = "CompanyName UPDATED";
+        LeadForm leadForm = leadDetails.clickEditButton();
         Lead lead = new Lead.LeadBuilder("Last name Edited",companyNameEdited)
                 .setFirstName("Edited firstName")
+                .setCity("CITY")
+                .setStateProvince("State Province")
+                .setZipCode("ZIP CODE")
                 .setCountry("Argentina")
                 .build();
         leadDetails = lead.createLead();
 
-        assertEquals(companyNameEdited,leadDetails.getCompany());
+        new AssertLead().assertDetailValues(leadDetails,lead.getLeadValues());
 
     }
     @AfterClass
     public void tearDown(){
-
+        //leadDetails.deleteLead();
     }
 }
