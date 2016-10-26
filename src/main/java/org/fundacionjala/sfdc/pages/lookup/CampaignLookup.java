@@ -1,6 +1,8 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
+
+import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+
 
 /**
  * This class handle campaign lookup.
@@ -17,6 +19,17 @@ public class CampaignLookup extends ModalWindow {
         init();
     }
 
+    public CampaignForm selectCampaignWithNameByScope(String parentCampaign, String scope) {
+        setSearchCampaignByScope(parentCampaign,scope);
+
+        setACampaignFromResults();
+        return new CampaignForm();
+    }
+
+    public void setSearchCampaignByScope(String campaign, String scope) {
+        SearchSectionFrame searchFrame = new SearchSectionFrame();
+        searchFrame.searchTheCampaign(campaign, scope);
+    }
 
     /**
      *
