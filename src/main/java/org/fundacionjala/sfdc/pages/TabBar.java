@@ -8,7 +8,6 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.accounts.AccountAbstractPage;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.cases.Cases;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 
@@ -88,7 +87,6 @@ public class TabBar extends AbstractBasePage {
 	public LeadHome clickLead() {
         CommonActions.clickElement(LeadTab);
         return new LeadHome();
-
     }
 
     public ChatterAbstractPage clickOnChatterTab() {
@@ -96,8 +94,4 @@ public class TabBar extends AbstractBasePage {
         return new ChatterAbstractPage();
     }
 
-    public Cases clickOnCasesTab() {
-        CommonActions.clickElement(casesTab);
-        return new Cases();
-    }
 }

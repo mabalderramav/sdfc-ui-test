@@ -5,9 +5,10 @@
     </listeners>
     <test name="Create Campaign">
         <classes>
-            <!--<class name="org.fundacionjala.sfdc.unittest.product.EditProduct"/>-->
-            <!--<class name="org.fundacionjala.sfdc.unittest.product.DeleteProduct"/>-->
-            <class name="org.fundacionjala.sfdc.unittest.campaign.CreateCampaign"/>
+
+            <!--<class name="org.fundacionjala.sfdc.tests.campaign.CreateCampaign"/>-->
+            <class name="org.fundacionjala.sfdc.tests.campaign.UpdateCampaign"/>
+            <!--<class name="org.fundacionjala.sfdc.tests.campaign.DeleteCampaign"/>-->
         </classes>
     </test>
 </suite>

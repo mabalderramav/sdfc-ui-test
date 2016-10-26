@@ -16,140 +16,166 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Miguel.Pari on 6/24/2015.
+ * This class is in charge to manage the elements of the page.
  */
 public class CampaignForm extends FormBase {
 
-    //region Locators
-
     @FindBy(id = "cpn1")
     @CacheLookup
-    WebElement CampaingNameField;
+    private WebElement campaingNameField;
 
     @FindBy(id = "cpn16")
     @CacheLookup
-    WebElement ActiveCheckbox;
+    private WebElement activeCheckbox;
 
     @FindBy(id = "cpn2")
     @CacheLookup
-    WebElement typeDropdown;
+    private WebElement typeDropdown;
 
     @FindBy(id = "cpn3")
     @CacheLookup
-    WebElement statusDropdown;
-
+    private WebElement statusDropdown;
 
     @FindBy(id = "cpn5")
     @CacheLookup
-    WebElement startDateField;
-
+    private WebElement startDateField;
 
     @FindBy(id = "cpn6")
     @CacheLookup
-    WebElement endDateField;
+    private WebElement endDateField;
 
     @FindBy(id = "Parent")
     @CacheLookup
-    WebElement ParentCampaing;
+    private WebElement parentCampaing;
 
     @FindBy(id = "Parent_lkwgt")
     @CacheLookup
-    WebElement LookUpIcon;
+    private WebElement lookUpIcon;
 
     @FindBy(name = "save")
     @CacheLookup
-    WebElement SaveButton;
+    private WebElement saveButton;
 
     @FindBy(css = "a[tabindex=\"5\"]")
     @CacheLookup
-    WebElement dateLink;
+    private WebElement dateLink;
 
     @FindBy(className = "hotListElement")
     @CacheLookup
-    WebElement allCampaigns;
+    private WebElement allCampaigns;
 
     @FindBy(id = "cpn8")
     @CacheLookup
-    WebElement revenueTextField;
+    private WebElement revenueTextField;
 
-
-
-
-    //endregion
-
-    public CampaignForm setCampaingNameField(String text) {
-        CommonActions.sendKeys(CampaingNameField, text);
+    /**
+     * set name of the campaign.
+     *
+     * @param text String whit the name.
+     * @return return Campaign Form.
+     */
+    public CampaignForm setCampaingNameField(final String text) {
+        CommonActions.sendKeys(campaingNameField, text);
         return this;
     }
 
+    /**
+     * set the check Box.
+     *
+     * @return Campaign Form.
+     */
     public CampaignForm checkActiveCheckbox() {
-        CommonActions.check(ActiveCheckbox);
+        CommonActions.check(activeCheckbox);
         return this;
     }
 
-    public CampaignForm selectTypeDropdown(String item) {
+    /**
+     * set the Type drop down.
+     *
+     * @param item String whit the value.
+     * @return Campaign Form.
+     */
+    public CampaignForm selectTypeDropdown(final String item) {
         CommonActions.selectItem(typeDropdown, item);
         return this;
     }
 
-    public CampaignForm selectStatusDropdown(String item) {
+    /**
+     * set the status drop down.
+     *
+     * @param item String whit the value.
+     * @return Campaign Form.
+     */
+    public CampaignForm selectStatusDropdown(final String item) {
         CommonActions.selectItem(statusDropdown, item);
         return this;
     }
 
-
-
-    public CampaignForm setStartDateField(String date) {
+    /**
+     * set the start date of the campaign.
+     *
+     * @param date String whit the date.
+     * @return Campaign Form.
+     */
+    public CampaignForm setStartDateField(final String date) {
         CommonActions.sendKeys(startDateField, date);
         return this;
     }
 
-    private CampaignForm setEndDateField(String endDate) {
-        CommonActions.sendKeys(endDateField,endDate);
-        CommonActions.clickElement(CampaingNameField);
+    /**
+     * set the end date of the campaign.
+     *
+     * @param endDate String whit the date.
+     * @return Campaign Form.
+     */
+    private CampaignForm setEndDateField(final String endDate) {
+        CommonActions.sendKeys(endDateField, endDate);
+        CommonActions.clickElement(campaingNameField);
         return this;
     }
 
+    /**
+     * click on the look up icon.
+     *
+     * @return Campaign Form.
+     */
     public CampaignLookup clickLookUpIcon() {
-        CommonActions.clickElement(LookUpIcon);
+        CommonActions.clickElement(lookUpIcon);
         return new CampaignLookup();
     }
-//    public CampaignDetail clickSaveButton() {
-//        CommonActions.clickElement(SaveButton);
-//        return new CampaignDetail();
-//    }
 
+    /**
+     * click on save button.
+     *
+     * @return Campaign Form.
+     */
     @Override
     public CampaignDetail clickSaveButton() {
-        CommonActions.clickElement(SaveButton);
+        CommonActions.clickElement(saveButton);
         return new CampaignDetail();
     }
 
+    /**
+     * click save/new button.
+     *
+     * @return abstract page.
+     */
     @Override
     public AbstractBasePage clickSaveNewButton() {
-
         return null;
     }
 
-    public CampaignForm clickOnStartDate() {
-        CommonActions.clickElement(dateLink);
-        return new CampaignForm();
-    }
-
-//    public CampaignForm setDate(final Integer month,
-//                                final Integer day,
-//                                final Integer year) {
-//        CommonActions.clickElement(startDateField);
-//        selectDatePicker(month, day, year);
-//        return new CampaignForm();
-//    }
-
-
-    public boolean campaingUpdate(String campaignUpdated) {
+    /**
+     * find the campaign created.
+     *
+     * @param campaignUpdated String whit the name of the campaign.
+     * @return Boolean
+     */
+    public boolean campaingUpdate(final String campaignUpdated) {
         List<WebElement> campaigns = allCampaigns.findElements(By.className("dataCell"));
         return campaigns.stream().filter(x -> x.equals(campaignUpdated)).findAny().isPresent();
-
     }
+
     /**
      * Method that to permit set values to create a new OpportunityHome.
      *
@@ -168,24 +194,25 @@ public class CampaignForm extends FormBase {
         return strategyMap;
     }
 
-
-
-    public void setRevenue(String quantity){
+    /**
+     * set the quantity.
+     *
+     * @param quantity String whit the quantity.
+     */
+    public void setRevenue(final String quantity) {
         CommonActions.clearTextField(revenueTextField);
-        CommonActions.sendKeys(revenueTextField,quantity);
+        CommonActions.sendKeys(revenueTextField, quantity);
     }
 
     /**
      * This method loads data to fill the form for a given Json file.
      *
-     * @param valuesMapCreate
+     * @param valuesMapCreate  Map
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }
-
-
 
 
 }

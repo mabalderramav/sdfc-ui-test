@@ -1,4 +1,4 @@
-package org.fundacionjala.sfdc.unittest.campaign;
+package org.fundacionjala.sfdc.tests.campaign;
 
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.junit.Assert;
