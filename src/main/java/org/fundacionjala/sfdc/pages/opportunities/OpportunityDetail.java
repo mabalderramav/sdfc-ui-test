@@ -14,6 +14,8 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.*;
+
 /**
  * This class represents of the opportunity detail.
  */
@@ -83,12 +85,6 @@ public class OpportunityDetail extends DetailBase {
         return new MainApp();
     }
 
-    public OpportunityForm pressEditBtn() {
-        editBtn.click();
-
-        return new OpportunityForm();
-    }
-
     /**
      * This method compare the title.
      *
@@ -147,34 +143,34 @@ public class OpportunityDetail extends DetailBase {
     /**
      * This method gets the delivery install.
      *
-     * @return a string with delivery install text.
+     * @return a string with delivery install label
      */
     public String getDeliveryInstallation() {
         return deliveryInstallLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the amount label.
      *
-     * @return a string with delivery install text.
+     * @return a string with amount label.
      */
     public String getAmount() {
         return amountLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the type label.
      *
-     * @return a string with delivery install text.
+     * @return a string with type label.
      */
     public String getTypeText() {
         return typeLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the lead source label.
      *
-     * @return a string with delivery install text.
+     * @return a string with lead source label.
      */
     public String getLeadSource() {
         return leadSourceLabel.getText();
@@ -213,16 +209,16 @@ public class OpportunityDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("opportunityName", this::getOpportunityName);
-        strategyMap.put("stage", this::getStage);
-        strategyMap.put("orderNumber", this::getOrderNumber);
-        strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
-        strategyMap.put("accountName", this::getAccountName);
-        strategyMap.put("currentCloseDate", this::getCloseDate);
-        strategyMap.put("type", this::getTypeText);
-        strategyMap.put("leadSource", this::getLeadSource);
-        strategyMap.put("nextStep", this::getNextStep);
-        strategyMap.put("amount", this::getAmount);
+        strategyMap.put(OPPORTUNITY_NAME.value, this::getOpportunityName);
+        strategyMap.put(STAGE.value, this::getStage);
+        strategyMap.put(ORDER_NUMBER.value, this::getOrderNumber);
+        strategyMap.put(DELIVERY_INSTALL_STATUS.value, this::getDeliveryInstallation);
+        strategyMap.put(ACCOUNT_NAME.value, this::getAccountName);
+        strategyMap.put(CURRENT_CLOSE_DATE.value, this::getCloseDate);
+        strategyMap.put(TYPE.value, this::getTypeText);
+        strategyMap.put(LEAD_SOURCE.value, this::getLeadSource);
+        strategyMap.put(NEXT_STEP.value, this::getNextStep);
+        strategyMap.put(AMOUNT.value, this::getAmount);
 
         return strategyMap;
     }

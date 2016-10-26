@@ -6,7 +6,7 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.Map;
@@ -26,7 +26,7 @@ public class DeleteCampaign {
     /**
      * Setup de test creating a campaign.
      */
-    @BeforeTest()
+    @BeforeMethod()
     public void setup() {
         valuesMapJson = JsonMapper.getMapJson(CAMPAIGN_DATA_PATH);
         final MainApp mainApp = new MainApp();

@@ -4,6 +4,7 @@ import java.util.Map;
 
 import org.testng.Assert;
 
+import org.fundacionjala.sfdc.pages.products.Product;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 
 /**
@@ -16,9 +17,15 @@ final class AssertProduct {
     private AssertProduct() {
     }
 
+    /**
+     * This method doing the assertion.
+     *
+     * @param productDetail {@inheritDoc}
+     * @param valuesMapJson Map the fields with values.
+     */
     static void assertDetailValues(ProductDetail productDetail, Map<String, String> valuesMapJson) {
         valuesMapJson.keySet()
-                .forEach(value -> Assert.assertEquals(productDetail.getStrategyAssertMap().get(value).getText(),
-                        valuesMapJson.get(value)));
+                .forEach(value -> Assert.assertEquals(productDetail.getStrategyAssertMap().get(value.toUpperCase()).getText(),
+                        valuesMapJson.get(value.toUpperCase())));
     }
 }

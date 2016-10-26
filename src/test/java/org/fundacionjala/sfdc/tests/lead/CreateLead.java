@@ -34,15 +34,13 @@ public class CreateLead {
      */
     @BeforeTest
     public void setUp() {
-        loginPage = new LoginPage();
-        mainApp = loginPage.loginAsPrimaryUser();
         tabBar = new MainApp().goToTabBar();
         leadHomePage = tabBar.clickLead();
         // create campaign
     }
 
     /**
-     * This method create a new LeadHome and make the corresponding assertions.
+     * This method create a new LeadFields and make the corresponding assertions.
      */
     @Test
     public void createLeadTest(){
@@ -55,11 +53,11 @@ public class CreateLead {
     }
 
     /**
-     * This method delete the created LeadHome.
+     * This method delete the created LeadFields.
      */
     @AfterTest
     public void tearDown() {
-       leadDetails.deleteLead();
+       leadDetails.clickDeleteButton();
     }
 }
 

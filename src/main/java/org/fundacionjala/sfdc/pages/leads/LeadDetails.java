@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.pages.leads;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -12,6 +12,27 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
+
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.ADDRESS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.COMPANY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CURRENT_GENERATORS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.DESCRIPTION;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.EMAIL;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.FAX;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.FULL_NAME;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.INDUSTRY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.LEAD_SOURCE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.LEAD_STATUS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.MOBILE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.NUMBER_LOCATIONS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.NUM_EMPLOYEES;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PHONE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PRIMARY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.PRODUCT_INTEREST;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.RATING;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.SICCODE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.TITLE;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.WEBSITE;
 
 
 /**
@@ -24,82 +45,102 @@ public class LeadDetails extends DetailBase {
     /*LeadHome Information*/
     @FindBy(id = "lea1_ileinner")
     @CacheLookup
-    private WebElement owner;
+    private WebElement ownerLabel;
+
     @FindBy(id = "lea2_ileinner")
     @CacheLookup
-    private WebElement name;
+    private WebElement nameLabel;
+
     @FindBy(id = "lea3_ileinner")
     @CacheLookup
-    private WebElement company;
+    private WebElement companyLabel;
+
     @FindBy(id = "lea4_ileinner")
     @CacheLookup
-    private WebElement title;
+    private WebElement titleLabel;
+
     @FindBy(id = "lea5_ileinner")
     @CacheLookup
-    private WebElement leadSource;
+    private WebElement leadSourceLabel;
+
     @FindBy(id = "lea6_ileinner")
     @CacheLookup
-    private WebElement industry;
+    private WebElement industryLabel;
+
     @FindBy(id = "lea7_ileinner")
     @CacheLookup
-    private WebElement annualRevenue;
+    private WebElement annualRevenueLabel;
+
     @FindBy(id = "lea8_ileinner")
     @CacheLookup
-    private WebElement phone;
+    private WebElement phoneLabel;
+
     @FindBy(id = "lea9_ileinner")
     @CacheLookup
-    private WebElement mobile;
+    private WebElement mobileLabel;
+
     @FindBy(id = "lea10_ileinner")
     @CacheLookup
-    private WebElement fax;
+    private WebElement faxLabel;
+
     @FindBy(id = "lea11_ileinner")
     @CacheLookup
-    private WebElement email;
+    private WebElement emailLabel;
+
     @FindBy(id = "lea12_ileinner")
     @CacheLookup
-    private WebElement website;
+    private WebElement websiteLabel;
+
     @FindBy(id = "lea13_ileinner")
     @CacheLookup
-    private WebElement leadStatus;
+    private WebElement leadStatusLabel;
+
     @FindBy(id = "lea14_ileinner")
     @CacheLookup
-    private WebElement rating;
+    private WebElement ratingLabel;
+
     @FindBy(id = "lea15_ileinner")
     @CacheLookup
-    private WebElement numEmployees;
+    private WebElement numEmployeesLabel;
+
     /*Address Information*/
     @FindBy(id = "lea16_ileinner")
     @CacheLookup
-    private WebElement address;
+    private WebElement addressLabel;
+
     /*additional information*/
     @FindBy(xpath = "//td[contains(.,'Product Interest')]/following::div")
     @CacheLookup
-    private WebElement productInterest;
+    private WebElement productInterestLabel;
+
     @FindBy(xpath = "//td[contains(.,'SIC Code')]/following::div")
     @CacheLookup
-    private WebElement sicCode;
+    private WebElement sicCodeLabel;
+
     @FindBy(xpath = "//td[contains(.,'Number of Locations')]/following::div")
     @CacheLookup
-    private WebElement numLocations;
+    private WebElement numLocationsLabel;
+
     @FindBy(xpath = "//td[contains(.,'Current Generator')]/following::div")
     @CacheLookup
-    private WebElement currentGenerators;
+    private WebElement currentGeneratorsLabel;
+
     @FindBy(xpath = "//td[contains(.,'Primary')]/following::div")
     @CacheLookup
-    private WebElement primary;
+    private WebElement primaryLabel;
+
     /*Others*/
     @FindBy(id = "lea17_ileinner")
     @CacheLookup
-    private WebElement description;
-    @FindBy(id = "lea20")
-    @CacheLookup
-    private WebElement campaign;
+    private WebElement descriptionLabel;
+
     @FindBy(id = "CreatedBy_ileinner")
     @CacheLookup
-    private WebElement createdBy;
+    private WebElement createdByLabel;
+
     @FindBy(id = "LastModifiedBy_ileinner")
     @CacheLookup
-    private WebElement lastModifiedBy;
+    private WebElement lastModifiedByLabel;
     //endregion
 
     /**
@@ -107,8 +148,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a string that is the Owner data.
      */
-    public String getOwner() {
-        return owner.getText();
+    public String getOwnerLabel() {
+        return ownerLabel.getText();
     }
 
     /**
@@ -116,8 +157,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return the LeadHome Name.
      */
-    public String getName() {
-        return name.getText();
+    public String getNameLabel() {
+        return nameLabel.getText();
     }
 
     /**
@@ -125,8 +166,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String that is the company information.
      */
-    public String getCompany() {
-        return company.getText();
+    public String getCompanyLabel() {
+        return companyLabel.getText();
     }
 
     /**
@@ -134,8 +175,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String that is the LeadHome Title.
      */
-    public String getTitle() {
-        return title.getText();
+    public String getTitleLabel() {
+        return titleLabel.getText();
     }
 
     /**
@@ -143,8 +184,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String that is the Source info of the LeadHome.
      */
-    public String getLeadSource() {
-        return leadSource.getText();
+    public String getLeadSourceLabel() {
+        return leadSourceLabel.getText();
     }
 
     /**
@@ -152,17 +193,17 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the industry info.
      */
-    public String getIndustry() {
-        return industry.getText();
+    public String getIndustryLabel() {
+        return industryLabel.getText();
     }
 
     /**
      * This method gets the Annual Revenue info for the LeadHome.
      *
-     * @return a String with the Anunal Revenue info.
+     * @return a String with the Annual Revenue info.
      */
-    public String getAnnualRevenue() {
-        return annualRevenue.getText();
+    public String getAnnualRevenueLabel() {
+        return annualRevenueLabel.getText();
     }
 
     /**
@@ -170,17 +211,17 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Phone number.
      */
-    public String getPhone() {
-        return phone.getText();
+    public String getPhoneLabel() {
+        return phoneLabel.getText();
     }
 
     /**
      * This method gets the Mobile number.
      *
-     * @return a String with the Phone number.
+     * @return a String with the Mobile number.
      */
-    public String getMobile() {
-        return mobile.getText();
+    public String getMobileLabel() {
+        return mobileLabel.getText();
     }
 
     /**
@@ -188,8 +229,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Fax number.
      */
-    public String getFax() {
-        return fax.getText();
+    public String getFaxLabel() {
+        return faxLabel.getText();
     }
 
     /**
@@ -197,8 +238,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Email data.
      */
-    public String getEmail() {
-        return email.getText();
+    public String getEmailLabel() {
+        return emailLabel.getText();
     }
 
     /**
@@ -206,8 +247,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the website info.
      */
-    public String getWebsite() {
-        return website.getText();
+    public String getWebsiteLabel() {
+        return websiteLabel.getText();
     }
 
     /**
@@ -215,8 +256,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the status info.
      */
-    public String getLeadStatus() {
-        return leadStatus.getText();
+    public String getLeadStatusLabel() {
+        return leadStatusLabel.getText();
     }
 
     /**
@@ -224,8 +265,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Rating info.
      */
-    public String getRating() {
-        return rating.getText();
+    public String getRatingLabel() {
+        return ratingLabel.getText();
     }
 
     /**
@@ -233,8 +274,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the number of the employees.
      */
-    public String getNumEmployees() {
-        return numEmployees.getText();
+    public String getNumEmployeesLabel() {
+        return numEmployeesLabel.getText();
     }
 
     /**
@@ -242,8 +283,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Address info.
      */
-    public String getAddress() {
-        return address.getText();
+    public String getAddressLabel() {
+        return addressLabel.getText();
     }
 
     /**
@@ -251,8 +292,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the Products interest info.
      */
-    public String getProductInterest() {
-        return productInterest.getText();
+    public String getProductInterestLabel() {
+        return productInterestLabel.getText();
     }
 
     /**
@@ -260,8 +301,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the SIC code.
      */
-    public String getSicCode() {
-        return sicCode.getText();
+    public String getSicCodeLabel() {
+        return sicCodeLabel.getText();
     }
 
     /**
@@ -269,8 +310,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the number of locations info.
      */
-    public String getNumLocations() {
-        return numLocations.getText();
+    public String getNumLocationsLabel() {
+        return numLocationsLabel.getText();
     }
 
     /**
@@ -278,8 +319,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the current generator.
      */
-    public String getCurrentGenerators() {
-        return currentGenerators.getText();
+    public String getCurrentGeneratorsLabel() {
+        return currentGeneratorsLabel.getText();
     }
 
     /**
@@ -287,8 +328,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the primary info.
      */
-    public String getPrimary() {
-        return primary.getText();
+    public String getPrimaryLabel() {
+        return primaryLabel.getText();
     }
 
     /**
@@ -296,8 +337,8 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the description info.
      */
-    public String getDescription() {
-        return description.getText();
+    public String getDescriptionLabel() {
+        return descriptionLabel.getText();
     }
 
     /**
@@ -306,18 +347,16 @@ public class LeadDetails extends DetailBase {
      * @return a String with the campaign name.
      */
     public String getCampaign(String campaignName) {
-        String text = driver.findElement(By.xpath("//a[contains(.,\'" + campaignName + "\')]")).getText();
         return driver.findElement(By.xpath("//a[contains(.," + campaignName + ")]")).getText();
-        //return campaign.getText();
     }
 
     /**
-     * This method gets the name of the user that created the LeadHome.
+     * This method gets the nameLabel of the user that created the LeadHome.
      *
      * @return a String with the user name.
      */
-    public String getCreatedBy() {
-        return createdBy.getText();
+    public String getCreatedByLabel() {
+        return createdByLabel.getText();
     }
 
     /**
@@ -325,19 +364,10 @@ public class LeadDetails extends DetailBase {
      *
      * @return a String with the user name.
      */
-    public String getLastModifiedBy() {
-        return lastModifiedBy.getText();
+    public String getLastModifiedByLabel() {
+        return lastModifiedByLabel.getText();
     }
 
-    /**
-     * This method click on delete button to delete the LeadHome.
-     *
-     * @return a LeadHome
-     */
-    public LeadHome deleteLead() {
-        CommonActions.deleteMe(driver);
-        return new LeadHome();
-    }
 
     /**
      * method that load the Strategy Map to make the assertions.
@@ -348,47 +378,52 @@ public class LeadDetails extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertLead(Map<String, String> valuesMapJson) {
         final Map<String, AssertsDetails> strategyMap = new HashMap();
 
-        strategyMap.put("fullName", this::getName);
-        strategyMap.put("company", this::getCompany);
-        strategyMap.put("title", this::getTitle);
-        strategyMap.put("leadSource", this::getLeadSource);
-        // strategyMap.put("campaignLookup", () -> getCampaign(valuesMapJson.get("campaignLookup")));
-        strategyMap.put("industry", this::getIndustry);
-        //strategyMap.put("annualRevenue", this::getAnnualRevenue);
-        strategyMap.put("phone", this::getPhone);
-        strategyMap.put("mobile", this::getMobile);
-        strategyMap.put("fax", this::getFax);
+        strategyMap.put(FULL_NAME.toString(), this::getNameLabel);
+        strategyMap.put(COMPANY.toString(), this::getCompanyLabel);
+        strategyMap.put(TITLE.toString(), this::getTitleLabel);
+        strategyMap.put(LEAD_SOURCE.toString(), this::getLeadSourceLabel);
+        // strategyMap.put(CAMPAIGN.toString(), () -> getCampaign(valuesMapJson.get("campaignLookup")));
+        strategyMap.put(INDUSTRY.toString(), this::getIndustryLabel);
+        //strategyMap.put(ANNUAL_REVENUE.toString(), this::getAnnualRevenueLabel);
+        strategyMap.put(PHONE.toString(), this::getPhoneLabel);
+        strategyMap.put(MOBILE.toString(), this::getMobileLabel);
+        strategyMap.put(FAX.toString(), this::getFaxLabel);
 
-        strategyMap.put("email", this::getEmail);
-        strategyMap.put("website", this::getWebsite);
-        strategyMap.put("leadStatus", this::getLeadStatus);
-        strategyMap.put("rating", this::getRating);
-        strategyMap.put("numEmployees", this::getNumEmployees);
-        strategyMap.put("address", this::getAddress);
-//        strategyMap.put("city", () -> getAddress());
-//        strategyMap.put("stateProvince", () -> getAddress());
-//        strategyMap.put("zipCode", () -> getAddress() );
-//        strategyMap.put("country", () ->getAddress());
+        strategyMap.put(EMAIL.toString(), this::getEmailLabel);
+        strategyMap.put(WEBSITE.toString(), this::getWebsiteLabel);
+        strategyMap.put(LEAD_STATUS.toString(), this::getLeadStatusLabel);
+        strategyMap.put(RATING.toString(), this::getRatingLabel);
+        strategyMap.put(NUM_EMPLOYEES.toString(), this::getNumEmployeesLabel);
+        strategyMap.put(ADDRESS.toString(), this::getAddressLabel);
 
-        strategyMap.put("productInterest", this::getProductInterest);
-        strategyMap.put("SICCode", this::getSicCode);
-        strategyMap.put("numberLocations", this::getNumLocations);
-        strategyMap.put("currentGenerators", this::getCurrentGenerators);
-        strategyMap.put("primary", this::getPrimary);
+        strategyMap.put(PRODUCT_INTEREST.toString(), this::getProductInterestLabel);
+        strategyMap.put(SICCODE.toString(), this::getSicCodeLabel);
+        strategyMap.put(NUMBER_LOCATIONS.toString(), this::getNumLocationsLabel);
+        strategyMap.put(CURRENT_GENERATORS.toString(), this::getCurrentGeneratorsLabel);
+        strategyMap.put(PRIMARY.toString(), this::getPrimaryLabel);
 
-        strategyMap.put("description", this::getDescription);
+        strategyMap.put(DESCRIPTION.toString(), this::getDescriptionLabel);
 
         return strategyMap;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public LeadForm clickEditButton() {
         CommonActions.clickElement(editBtn);
         return new LeadForm();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
-    public AbstractBasePage clickDeleteButton() {
-        return null;
+    public LeadHome clickDeleteButton() {
+        CommonActions.clickElement(deleteBtn);
+        Alert alert = driver.switchTo().alert();
+        alert.accept();
+        return new LeadHome();
     }
 }

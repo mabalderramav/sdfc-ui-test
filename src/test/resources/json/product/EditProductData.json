@@ -1,5 +1,5 @@
 {
-  "productName": "product_002",
-  "productCode": "prod_002",
-  "descriptionProduct": "description Test2"
+  "NAME": "product_002",
+  "CODE": "prod_002",
+  "DESCRIPTION": "description Test2"
 }

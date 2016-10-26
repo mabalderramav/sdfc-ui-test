@@ -12,6 +12,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
  */
 public final class JsonMapper {
 
+    private static final String SRC_TEST_RESOURCES_JSON = "src/test/resources/json/";
+
     private JsonMapper() {
     }
 
@@ -21,10 +23,10 @@ public final class JsonMapper {
      * @param path is the string with the path of a json file.
      * @return a map.
      */
-    public static Map<String,String> getMapJson(final String path) {
-        Map<String,String> valuesMap = new HashMap<>();
+    public static Map<String, String> getMapJson(final String path) {
+        Map<String, String> valuesMap = new HashMap<>();
         try {
-            valuesMap = new ObjectMapper().readValue(new File("src/test/resources/json/".concat(path)), Map.class);
+            valuesMap = new ObjectMapper().readValue(new File(SRC_TEST_RESOURCES_JSON.concat(path)), Map.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
