@@ -329,18 +329,18 @@ public class OpportunityForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put(OPPORTUNITY_NAME.VALUE, () -> setOpportunityName(values.get(OPPORTUNITY_NAME.VALUE)));
-        strategyMap.put(TYPE.VALUE, () -> chooseTypeDdl(values.get(TYPE.VALUE)));
-        strategyMap.put(LEAD_SOURCE.VALUE, () -> chooseLeadSourceDdl(values.get(LEAD_SOURCE.VALUE)));
-        strategyMap.put(AMOUNT.VALUE, () -> setAmount(values.get(AMOUNT.VALUE)));
-        strategyMap.put(NEXT_STEP.VALUE, () -> setNextStep(values.get(NEXT_STEP.VALUE)));
-        strategyMap.put(STAGE.VALUE, () -> chooseStageDdl(values.get(STAGE.VALUE)));
-        strategyMap.put(ORDER_NUMBER.VALUE, () -> setOrderNumber(values.get(ORDER_NUMBER.VALUE)));
-        strategyMap.put(DELIVERY_INSTALL_STATUS.VALUE,
-                () -> chooseDeliveryInstallationStatusDdl(values.get(DELIVERY_INSTALL_STATUS.VALUE)));
-        strategyMap.put(ACCOUNT_NAME.VALUE, () -> setAccountName(values.get(ACCOUNT_NAME.VALUE)));
-        strategyMap.put(CURRENT_CLOSE_DATE.VALUE, () -> setCloseDate(values.get(CURRENT_CLOSE_DATE.VALUE)));
-        strategyMap.put(PRIVATE_FLAG.VALUE, () -> checkPrivateFlag(Boolean.parseBoolean(values.get(PRIVATE_FLAG.VALUE))));
+        strategyMap.put(OPPORTUNITY_NAME.value, () -> setOpportunityName(values.get(OPPORTUNITY_NAME.value)));
+        strategyMap.put(TYPE.value, () -> chooseTypeDdl(values.get(TYPE.value)));
+        strategyMap.put(LEAD_SOURCE.value, () -> chooseLeadSourceDdl(values.get(LEAD_SOURCE.value)));
+        strategyMap.put(AMOUNT.value, () -> setAmount(values.get(AMOUNT.value)));
+        strategyMap.put(NEXT_STEP.value, () -> setNextStep(values.get(NEXT_STEP.value)));
+        strategyMap.put(STAGE.value, () -> chooseStageDdl(values.get(STAGE.value)));
+        strategyMap.put(ORDER_NUMBER.value, () -> setOrderNumber(values.get(ORDER_NUMBER.value)));
+        strategyMap.put(DELIVERY_INSTALL_STATUS.value,
+                () -> chooseDeliveryInstallationStatusDdl(values.get(DELIVERY_INSTALL_STATUS.value)));
+        strategyMap.put(ACCOUNT_NAME.value, () -> setAccountName(values.get(ACCOUNT_NAME.value)));
+        strategyMap.put(CURRENT_CLOSE_DATE.value, () -> setCloseDate(values.get(CURRENT_CLOSE_DATE.value)));
+        strategyMap.put(PRIVATE_FLAG.value, () -> checkPrivateFlag(Boolean.parseBoolean(values.get(PRIVATE_FLAG.value))));
 
         return strategyMap;
     }
@@ -394,9 +394,9 @@ public class OpportunityForm extends FormBase {
         public OpportunityBuilder(final String opportunityName, final String currentCloseDate,
                                   final String stage) {
             strategyMap = new HashMap<>();
-            strategyMap.put(OPPORTUNITY_NAME.VALUE, opportunityName);
-            strategyMap.put(CURRENT_CLOSE_DATE.VALUE, currentCloseDate);
-            strategyMap.put(STAGE.VALUE, stage);
+            strategyMap.put(OPPORTUNITY_NAME.value, opportunityName);
+            strategyMap.put(CURRENT_CLOSE_DATE.value, currentCloseDate);
+            strategyMap.put(STAGE.value, stage);
             this.opportunityName = opportunityName;
             this.closeDate = currentCloseDate;
             this.stage = stage;
@@ -410,7 +410,7 @@ public class OpportunityForm extends FormBase {
          */
         public OpportunityBuilder setAccountName(final String accountName) {
             this.accountName = accountName;
-            strategyMap.put(ACCOUNT_NAME.VALUE, accountName);
+            strategyMap.put(ACCOUNT_NAME.value, accountName);
             return this;
         }
 
@@ -422,7 +422,7 @@ public class OpportunityForm extends FormBase {
          */
         public OpportunityBuilder setType(final String type) {
             this.type = type;
-            strategyMap.put(TYPE.VALUE, type);
+            strategyMap.put(TYPE.value, type);
             return this;
         }
 
@@ -434,7 +434,7 @@ public class OpportunityForm extends FormBase {
          */
         public OpportunityBuilder setAmount(final String amount) {
             this.amount = amount;
-            strategyMap.put(AMOUNT.VALUE, amount);
+            strategyMap.put(AMOUNT.value, amount);
             return this;
         }
 

@@ -48,7 +48,7 @@ public class DeleteEditOpportunity {
         accountsHome = tabBar.clickOnAccountsHome();
         NewAccountPage newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.VALUE))
+                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.value))
                 .pressSaveBtn();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
@@ -63,7 +63,7 @@ public class DeleteEditOpportunity {
     @Test
     public void DeleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.VALUE)));
+        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.value)));
     }
 
     /**
@@ -86,7 +86,7 @@ public class DeleteEditOpportunity {
     public void afterTest() {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.VALUE));
+        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.value));
         mainApp = accountProfile.deleteAccount();
     }
 
