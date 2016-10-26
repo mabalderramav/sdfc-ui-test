@@ -1,6 +1,6 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -10,20 +10,13 @@ import org.openqa.selenium.support.FindBy;
  * Created by Gisela on 6/29/2015.
  */
 public class ChatterAbstractPage extends AbstractBasePage {
-    //private WebDriver Driver;
-    //WebDriverWait wait;
-
-    //region Locators
-
 
     @FindBy(xpath = "//textarea[@id='publishereditablearea']")
     @CacheLookup
     WebElement publisheredArea;
 
-
     @FindBy(id = "publishersharebutton")
     WebElement shareButton;
-    //endregion
 
     @FindBy(xpath = "//a[@onclick='chatter.getFeed().showCommentBoxViaAnchor(this);']")
     @CacheLookup

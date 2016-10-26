@@ -9,3 +9,4 @@ drivers/
 gradlew
 gradlew.bat
 /cucumber-html-report/
+/classes/

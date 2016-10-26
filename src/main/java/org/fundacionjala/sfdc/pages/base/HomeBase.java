@@ -1,11 +1,11 @@
 package org.fundacionjala.sfdc.pages.base;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 public abstract class HomeBase extends AbstractBasePage {
+
     @FindBy(name = "new")
     @CacheLookup
     protected WebElement newButton;
@@ -38,14 +38,4 @@ public abstract class HomeBase extends AbstractBasePage {
      * @return {@link FormBase}
      */
     public abstract AbstractBasePage clickEditViewLink();
-
-    /**
-     * Search an object within the initial list on the corresponding page.
-     *
-     * @param value the string value for search on the page object.
-     * @return a boolean value, true or false.
-     */
-    public Boolean existByLinkText(final String value) {
-        return CommonActions.existElementByLinkText(value);
-    }
 }

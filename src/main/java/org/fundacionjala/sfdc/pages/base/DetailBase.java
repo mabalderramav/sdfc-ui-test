@@ -1,11 +1,13 @@
 package org.fundacionjala.sfdc.pages.base;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+
 public abstract class DetailBase extends AbstractBasePage {
+
     @FindBy(className = "topName")
     @CacheLookup
     protected WebElement objectNameText;

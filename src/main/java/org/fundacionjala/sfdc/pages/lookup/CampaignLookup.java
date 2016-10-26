@@ -1,6 +1,5 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.pages.base.ModalWindow;
 import org.fundacionjala.sfdc.pages.campaigns.NewCampaignForm;
 
 /**
