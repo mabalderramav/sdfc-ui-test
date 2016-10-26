@@ -1,7 +1,6 @@
 package org.fundacionjala.sfdc.tests.lead;
 
 
-import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -10,7 +9,10 @@ import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
+import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
+
+import static org.testng.AssertJUnit.assertFalse;
 
 /**
  * This class update and delete LeadHome.
@@ -24,7 +26,7 @@ public class UpdateDeleteLead {
      * This method execute the preconditions to make the validation for update and delete test.
      */
     @BeforeMethod
-    public void setUp(){
+    public void setUp() {
         LoginPage loginPage = new LoginPage();
         MainApp mainApp = loginPage.loginAsPrimaryUser();
         TabBar tabBar = new MainApp().goToTabBar();
@@ -36,17 +38,25 @@ public class UpdateDeleteLead {
                 .setCompanyTextField("Company Test")
                 .clickSaveButton();
     }
-//    @Test
-//    public void deleteLead(){
-//        leadDetails.deleteLead();
-//        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
-//    }
-    @Test void updateLead(){
+
+    /**
+     * This test verify the delete process of Lead.
+     */
+    @Test
+    public void deleteLead() {
+        leadDetails.clickDeleteButton();
+        assertFalse(leadHomePage.isLeadDisplayed("Test Name 01"));
+    }
+
+    /**
+     * This test update the created Lead and make the corresponding assertions.
+     */
+    @Test
+    void updateLead() {
 
         String companyNameEdited = "ComapnyName UPDATED";
         leadDetails.clickEditButton();
-        leadForm = new LeadForm.LeadBuilder("Last name Edited",companyNameEdited)
-
+        leadForm = new LeadForm.LeadBuilder("Last name Edited", companyNameEdited)
                 .setFirstName("Edited firstName")
                 .setCity("CITY")
                 .setStateProvince("State Province")
@@ -54,10 +64,14 @@ public class UpdateDeleteLead {
                 .setCountry("Argentina")
                 .build();
         leadDetails = leadForm.saveLead();
-        new AssertLead().assertDetailValues(leadDetails,leadForm.getLeadValues());
+        new AssertLead().assertDetailValues(leadDetails, leadForm.getLeadValues());
     }
+
+    /**
+     * This method delete the created Lead.
+     */
     @AfterClass
-    public void tearDown(){
-        leadDetails.deleteLead();
+    public void tearDown() {
+        leadDetails.clickDeleteButton();
     }
 }

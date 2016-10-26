@@ -10,6 +10,7 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
  * Class to manage the assertions for Lead Page.
  */
 public class AssertLead {
+
     /**
      * Method to make the assertions.
      *
