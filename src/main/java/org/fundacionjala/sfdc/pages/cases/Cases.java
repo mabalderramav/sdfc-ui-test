@@ -1,7 +1,6 @@
 package org.fundacionjala.sfdc.pages.cases;
 
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,12 +20,5 @@ public class Cases extends AbstractBasePage {
     private WebElement NewButtton;
     private String accountName;
 
-    public Cases()
-    {
-        super();
-    }
-    public CasesForm clickNewButton() {
-        CommonActions.clickElement(NewButtton);
-        return new CasesForm();
-    }
+
 }

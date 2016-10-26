@@ -1,41 +1,34 @@
 package org.fundacionjala.sfdc.framework.utils;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.fundacionjala.sfdc.framework.objects.ElementBase;
-
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- * This class manage the json.
+ * This class is to methods commons i the steps.
  */
 public final class JsonMapper {
 
-    private static final Logger LOGGER = LogManager.getLogger(JsonMapper.class);
-
-    /**
-     * Constructor private.
-     */
     private JsonMapper() {
     }
 
     /**
-     * This method obtains the data the a json.
+     * This method gets a map of jason file.
      *
-     * @param path        Path the json.
-     * @param elementBase Element base object.
-     * @return ElementBase objects
+     * @param path is the string with the path of a json file.
+     * @return a map.
      */
-    public static ElementBase getData(final String path, final ElementBase elementBase) {
-        ElementBase newElementBase = null;
+    public static Map<String,String> getMapJson(final String path) {
+        Map<String,String> valuesMap = new HashMap<>();
         try {
-            ObjectMapper mapper = new ObjectMapper();
-            newElementBase = mapper.readValue(new File(path), elementBase.getClass());
+            valuesMap = new ObjectMapper().readValue(new File("src/test/resources/json/".concat(path)), Map.class);
         } catch (IOException e) {
-            LOGGER.warn(e.getMessage(), e);
+            e.printStackTrace();
         }
-        return newElementBase;
+        return valuesMap;
     }
+
 }

@@ -1,7 +1,7 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
-import org.fundacionjala.sfdc.pages.base.ModalWindow;
+
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.openqa.selenium.By;

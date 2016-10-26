@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.framework.testng;
 
+import org.fundacionjala.sfdc.framework.browser.DriverManager;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.testng.ISuite;
 import org.testng.ISuiteListener;
@@ -14,6 +15,6 @@ public class SuiteListener implements ISuiteListener {
 
     @Override
     public void onFinish(ISuite suite) {
-
+        DriverManager.getInstance().getDriver().quit();
     }
 }

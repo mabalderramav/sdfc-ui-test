@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.pages.contacts;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.WebElement;

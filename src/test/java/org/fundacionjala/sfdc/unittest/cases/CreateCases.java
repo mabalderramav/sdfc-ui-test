@@ -33,7 +33,7 @@ public class CreateCases {
         mainApp = loginPage.loginAsPrimaryUser();
         tabBar = mainApp.goToTabBar();
         casesAbstractPage = tabBar.clickOnCasesTab();
-        newCasesForm = casesAbstractPage.clickNewButton();
+      //  newCasesForm = casesAbstractPage.clickNewButton();
 
     }
 

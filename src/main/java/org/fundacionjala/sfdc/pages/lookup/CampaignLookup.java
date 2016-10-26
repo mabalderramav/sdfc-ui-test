@@ -1,7 +1,8 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
-import org.fundacionjala.sfdc.pages.base.ModalWindow;
+
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+
 
 /**
  * Created by ccatari on 5/22/2016.

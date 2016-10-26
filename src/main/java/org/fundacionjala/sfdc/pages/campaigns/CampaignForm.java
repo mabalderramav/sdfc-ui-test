@@ -1,6 +1,7 @@
 package org.fundacionjala.sfdc.pages.campaigns;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
@@ -135,13 +136,13 @@ public class CampaignForm extends FormBase {
         return new CampaignForm();
     }
 
-    public CampaignForm setDate(final Integer month,
-                                final Integer day,
-                                final Integer year) {
-        CommonActions.clickElement(startDateField);
-        selectDatePicker(month, day, year);
-        return new CampaignForm();
-    }
+//    public CampaignForm setDate(final Integer month,
+//                                final Integer day,
+//                                final Integer year) {
+//        CommonActions.clickElement(startDateField);
+//        selectDatePicker(month, day, year);
+//        return new CampaignForm();
+//    }
 
 
     public boolean campaingUpdate(String campaignUpdated) {

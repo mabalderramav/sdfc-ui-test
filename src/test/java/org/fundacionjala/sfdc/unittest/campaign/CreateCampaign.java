@@ -1,5 +1,6 @@
 package org.fundacionjala.sfdc.unittest.campaign;
 
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -7,7 +8,6 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
-import org.fundacionjala.sfdc.utils.Common;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -24,6 +24,7 @@ public class CreateCampaign {
     private CampaignLookup lookUpWindow;
     private CampaignDetail campaignDetail;
     private String campaignParent;
+    private JsonMapper jsonMapper;
     public static final String CAMPAIGN_DATA_PATH = "campaign/CreateCampaignData.json";
 
 
@@ -32,7 +33,7 @@ public class CreateCampaign {
 
     @BeforeTest()
     public void setup() {
-        valuesMapJson = Common.getMapJson(CAMPAIGN_DATA_PATH);
+        valuesMapJson = jsonMapper.getMapJson(CAMPAIGN_DATA_PATH);
         final MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
         campaignParent = "Parent" + new Random().nextInt(9999);
