@@ -1,6 +1,6 @@
 package org.fundacionjala.sfdc.pages.opportunities;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
 import org.openqa.selenium.By;
@@ -39,7 +39,7 @@ public class OpportunityHome extends HomeBase {
      * This method goes a opportunity detail.
      *
      * @param url a string with url of the page.
-     * @return OpportunityDetail page object.
+     * @return ContractDetail page object.
      */
     public OpportunityDetail goOpportunityDetail(String url) {
         driver.navigate().to(url);
@@ -50,7 +50,7 @@ public class OpportunityHome extends HomeBase {
      * This method makes click on account link.
      *
      * @param accountName a string with name account.
-     * @return OpportunityDetail page object.
+     * @return ContractDetail page object.
      */
     public OpportunityDetail clickOnAccount(String accountName) {
         driver.findElement(By.linkText(accountName)).click();

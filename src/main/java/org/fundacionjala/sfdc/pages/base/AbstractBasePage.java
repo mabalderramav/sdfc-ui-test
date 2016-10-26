@@ -1,9 +1,10 @@
 package org.fundacionjala.sfdc.pages.base;
 
-import org.fundacionjala.sfdc.framework.browser.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.fundacionjala.sfdc.framework.browser.DriverManager;
 
 /**
  * This base page abstract class.
@@ -11,6 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class AbstractBasePage {
 
     protected WebDriver driver;
+
     protected WebDriverWait wait;
 
     /**

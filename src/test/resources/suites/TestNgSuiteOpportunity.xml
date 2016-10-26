@@ -6,7 +6,7 @@
     <test name="Regression1">
         <classes>
             <!--<class name="org.fundacionjala.sfdc.unittest.opportunity.DeleteEditOpportunity"/>-->
-            <class name="org.fundacionjala.sfdc.unittest.opportunity.CreateOpportunity"/>
+            <class name="org.fundacionjala.sfdc.tests.opportunity.CreateOpportunity"/>
         </classes>
     </test>
 </suite>

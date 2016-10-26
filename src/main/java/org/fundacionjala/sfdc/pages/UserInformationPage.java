@@ -1,6 +1,6 @@
 package org.fundacionjala.sfdc.pages;
 
-import org.fundacionjala.sfdc.framework.common.CommonActions;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.WebElement;
@@ -22,6 +22,11 @@ public class UserInformationPage extends DetailBase {
     @Override
     public AbstractBasePage clickEditButton() {
         CommonActions.clickElement(editBtn);
+        return null;
+    }
+
+    @Override
+    public AbstractBasePage clickDeleteButton() {
         return null;
     }
 
