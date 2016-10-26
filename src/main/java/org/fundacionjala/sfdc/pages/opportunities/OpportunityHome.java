@@ -13,6 +13,7 @@ public class OpportunityHome extends HomeBase {
 
     /**
      * This method makes click on new button.
+     *
      * @return {@link OpportunityForm}
      */
     public OpportunityForm clickNewButton() {
@@ -44,7 +45,7 @@ public class OpportunityHome extends HomeBase {
      * @param url a string with url of the page.
      * @return ContractDetail page object.
      */
-    public OpportunityDetail goOpportunityDetail(String url) {
+    public OpportunityDetail goOpportunityDetail(final String url) {
         driver.navigate().to(url);
         return new OpportunityDetail();
     }
@@ -55,7 +56,7 @@ public class OpportunityHome extends HomeBase {
      * @param accountName a string with name account.
      * @return ContractDetail page object.
      */
-    public OpportunityDetail clickOnAccount(String accountName) {
+    public OpportunityDetail clickOnAccount(final String accountName) {
         driver.findElement(By.linkText(accountName)).click();
         return new OpportunityDetail();
     }
