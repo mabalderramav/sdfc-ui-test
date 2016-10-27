@@ -15,6 +15,7 @@ import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
+import org.fundacionjala.sfdc.tests.Asserts;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.CURRENT_CLOSE_DATE;
@@ -45,7 +46,7 @@ public class CreateOpportunity {
         AccountHome accountsHome = tabBar.clickOnAccountsHome();
         AccountForm newAccountForm = accountsHome.clickNewButton();
         accountDetail = newAccountForm
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
+                .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.getValue()))
                 .clickSaveButton();
     }
 
@@ -65,7 +66,7 @@ public class CreateOpportunity {
                 .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
                 .build();
         opportunityDetail = opportunityForm.saveOpportunity();
-        AssertOpportunity.assertDetailValues(opportunityDetail, opportunityForm.getValuesMap());
+        Asserts.assertDetailValues(opportunityDetail, opportunityForm.getValuesMap());
     }
 
     /**

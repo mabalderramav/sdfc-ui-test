@@ -1,10 +1,13 @@
 package org.fundacionjala.sfdc.pages.base;
 
+import java.util.Map;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
 
 /**
  * Class that represents the details options.
@@ -62,4 +65,11 @@ public abstract class DetailBase extends AbstractBasePage {
      * @return {@link AbstractBasePage}
      */
     public abstract AbstractBasePage clickDeleteButton();
+
+    /**
+     * Method that load the Strategy Map to make the assertions.
+     * @return the Map with the values to make assertions.
+     */
+    public abstract Map<String, AssertsDetails> getStrategyAssertMap();
+
 }
