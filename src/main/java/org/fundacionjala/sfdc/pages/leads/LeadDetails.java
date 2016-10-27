@@ -367,11 +367,10 @@ public class LeadDetails extends DetailBase {
 
 
     /**
-     * method that load the Strategy Map to make the assertions.
-     *
-     * @return the Map with the values to make assertions.
+     * {@inheritDoc}
      */
-    public Map<String, AssertsDetails> getStrategyAssertLead() {
+    @Override
+    public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
         strategyMap.put(FULL_NAME.toString(), this::getNameLabel);
