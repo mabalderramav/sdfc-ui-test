@@ -1,11 +1,14 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
-import org.fundacionjala.sfdc.pages.MainApp;
+import java.util.Map;
+
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.support.ui.Select;
 
+import org.fundacionjala.sfdc.pages.AssertsDetails;
+import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
@@ -69,4 +72,10 @@ public class AccountViewDetail extends DetailBase {
         javascriptAlert.accept();
         return new MainApp();
     }
+
+    @Override
+    public Map<String, AssertsDetails> getStrategyAssertMap() {
+        return null;
+    }
+
 }

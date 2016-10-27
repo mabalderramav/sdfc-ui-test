@@ -4,7 +4,7 @@ import java.util.Map;
 
 import org.testng.Assert;
 
-import org.fundacionjala.sfdc.pages.leads.LeadDetails;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ADDRESS;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ANNUAL_REVENUE;
@@ -28,14 +28,14 @@ public class AssertLead {
     /**
      * Method to make the assertions.
      *
-     * @param leadDetail    {@link LeadDetails}
+     * @param leadDetail    {@link DetailBase}
      * @param valuesMapJson Json values to be asserts.
      */
-    public void assertDetailValues(final LeadDetails leadDetail, final Map<String, String> valuesMapJson) {
+    public void assertDetailValues(final DetailBase leadDetail, final Map<String, String> valuesMapJson) {
         Map<String, String> formatJson = formatJson(valuesMapJson);
 
         formatJson.keySet()
-                .forEach(value -> Assert.assertEquals(leadDetail.getStrategyAssertLead().get(value).getText(),
+                .forEach(value -> Assert.assertEquals(leadDetail.getStrategyAssertMap().get(value).getText(),
                         valuesMapJson.get(value)));
     }
 

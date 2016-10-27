@@ -12,6 +12,7 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
+import org.fundacionjala.sfdc.tests.Asserts;
 
 /**
  * This class handle create a new product.
@@ -49,7 +50,7 @@ public class CreateProduct {
     public void createProductWithJson() {
         productForm.fillTheForm(valuesMapJson);
         productDetail = productForm.clickSaveButton();
-        AssertProduct.assertDetailValues(productDetail, valuesMapJson);
+        Asserts.assertDetailValues(productDetail, valuesMapJson);
     }
 
     /**
@@ -61,7 +62,7 @@ public class CreateProduct {
                 .setDescription(DESCRIPTION_TEST)
                 .build();
         productDetail = productForm.saveProduct();
-        AssertProduct.assertDetailValues(productDetail, productForm.getValuesMap());
+        Asserts.assertDetailValues(productDetail, productForm.getValuesMap());
     }
 
     /**

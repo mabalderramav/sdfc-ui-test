@@ -15,6 +15,7 @@ import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
+import org.fundacionjala.sfdc.tests.Asserts;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
@@ -78,7 +79,7 @@ public class DeleteEditOpportunity {
 
         opportunityForm.fillTheForm(valuesMapEditJson);
         opportunityDetail = opportunityForm.clickSaveButton();
-        AssertOpportunity.assertDetailValues(opportunityDetail, valuesMapEditJson);
+        Asserts.assertDetailValues(opportunityDetail, valuesMapEditJson);
     }
 
     /**
