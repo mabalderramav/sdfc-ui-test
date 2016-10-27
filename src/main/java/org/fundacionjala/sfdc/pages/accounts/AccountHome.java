@@ -44,7 +44,7 @@ public class AccountHome extends HomeBase {
      * @return {@AccountDetail}
      */
     public AccountDetail clickOnAccount(final String accountName) {
-
+        CommonActions.clickElement(driver.findElement(By.linkText(accountName)));
         return new AccountDetail();
     }
 
