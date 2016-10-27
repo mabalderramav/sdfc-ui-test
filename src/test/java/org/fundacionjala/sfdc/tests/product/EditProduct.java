@@ -12,7 +12,8 @@ import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
-import org.fundacionjala.sfdc.tests.Asserts;
+
+import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
 
 /**
  * Class to verify the edition of product.
@@ -54,7 +55,7 @@ public class EditProduct {
         Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         productForm.fillTheForm(valuesMapEditJson);
         productDetail = productForm.clickSaveButton();
-        Asserts.assertDetailValues(productDetail, valuesMapEditJson);
+        assertDetailValues(productDetail, valuesMapEditJson);
     }
 
     /**
@@ -66,7 +67,7 @@ public class EditProduct {
                 .setDescription(DESCRIPTION_TEST)
                 .build();
         productDetail = productForm.saveProduct();
-        Asserts.assertDetailValues(productDetail, productForm.getValuesMap());
+        assertDetailValues(productDetail, productForm.getValuesMap());
     }
 
     /**
