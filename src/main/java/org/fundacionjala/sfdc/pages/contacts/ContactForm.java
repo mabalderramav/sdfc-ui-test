@@ -10,6 +10,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.CONTACT_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.DEPARTMENT;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.FIRST_NAME_CATEGORY;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LAST_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.TITLE;
+
 /**
  * This class represent Contact Form.
  */
@@ -178,12 +184,12 @@ public class ContactForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("firstNameCategory",
-                () -> selectFirstNameCategory(String.valueOf(values.get("firstNameCategory"))));
-        strategyMap.put("contactName", () -> setContactNameField(String.valueOf(values.get("contactName"))));
-        strategyMap.put("lastName", () -> setLastName(String.valueOf(values.get("lastName"))));
-        strategyMap.put("title", () -> setTitle(String.valueOf(values.get("title"))));
-        strategyMap.put("department", () -> setDepartment(String.valueOf(values.get("department"))));
+        strategyMap.put(FIRST_NAME_CATEGORY.getValue(),
+                () -> selectFirstNameCategory(values.get(FIRST_NAME_CATEGORY.getValue())));
+        strategyMap.put(CONTACT_NAME.getValue(), () -> setContactNameField(values.get(CONTACT_NAME.getValue())));
+        strategyMap.put(LAST_NAME.getValue(), () -> setLastName(values.get(LAST_NAME.getValue())));
+        strategyMap.put(TITLE.getValue(), () -> setTitle(values.get(TITLE.getValue())));
+        strategyMap.put(DEPARTMENT.getValue(), () -> setDepartment(values.get(DEPARTMENT.getValue())));
 
         return strategyMap;
     }

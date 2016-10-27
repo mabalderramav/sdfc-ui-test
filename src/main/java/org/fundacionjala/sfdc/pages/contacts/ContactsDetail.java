@@ -14,6 +14,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.CONTACT_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.DEPARTMENT;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.FIRST_NAME_CATEGORY;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LAST_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.TITLE;
+
 /**
  * This method represent to contact detail.
  */
@@ -155,11 +161,11 @@ public class ContactsDetail extends AbstractBasePage {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
 
-        strategyMap.put("contactName", this::getNameLabel);
-        strategyMap.put("firstNameCategory", this::getFirstNameCategoryLabel);
-        strategyMap.put("lastName", this::getLastNameLabel);
-        strategyMap.put("title", this::getTitleLabel);
-        strategyMap.put("department", this::getDepartmentLabel);
+        strategyMap.put(CONTACT_NAME.getValue(), this::getNameLabel);
+        strategyMap.put(FIRST_NAME_CATEGORY.getValue(), this::getFirstNameCategoryLabel);
+        strategyMap.put(LAST_NAME.getValue(), this::getLastNameLabel);
+        strategyMap.put(TITLE.getValue(), this::getTitleLabel);
+        strategyMap.put(DEPARTMENT.getValue(), this::getDepartmentLabel);
         return strategyMap;
     }
 

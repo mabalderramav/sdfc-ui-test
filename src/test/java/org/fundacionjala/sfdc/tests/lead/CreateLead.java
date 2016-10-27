@@ -15,6 +15,8 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
 
+import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
+
 /**
  * This class verify the Creation of LeadHome.
  */
@@ -47,7 +49,7 @@ public class CreateLead {
         valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
         leadForm.fillTheForm(valuesMapJson);
         leadDetails = leadForm.clickSaveButton();
-        new AssertLead().assertDetailValues(leadDetails, valuesMapJson);
+        assertDetailValues(leadDetails, leadForm.formatJson(valuesMapJson));
 
     }
 
