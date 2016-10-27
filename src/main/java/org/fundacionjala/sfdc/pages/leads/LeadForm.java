@@ -331,7 +331,7 @@ public class LeadForm extends FormBase {
         strategyMap.put(LEAD_SOURCE.toString(),
                 () -> CommonActions.selectItem(leadSourceSelect, values.get(LEAD_SOURCE.toString())));
         strategyMap.put(CAMPAIGN.toString(),
-                () -> CommonActions.sendKeys(campaingTextField, values.get(CAMPAIGN.toString())));
+                () -> CommonActions.selectItem(campaingTextField, values.get(CAMPAIGN.toString())));
         strategyMap.put(INDUSTRY.toString(),
                 () -> CommonActions.selectItem(industrySelect, values.get(INDUSTRY.toString())));
         strategyMap.put(ANNUAL_REVENUE.toString(),
