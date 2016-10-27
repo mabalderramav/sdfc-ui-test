@@ -47,7 +47,7 @@ public class DeleteEditContract {
         accountsHome = tabBar.clickOnAccountsHome();
         AccountForm accountForm = accountsHome.clickNewButton();
         accountDetail = accountForm
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.toString()))
+                .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.toString()))
                 .clickSaveButton();
 
         ContractHome contractHome = tabBar.clickOnContractHome();
