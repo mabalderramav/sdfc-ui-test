@@ -11,6 +11,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
+import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
 
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ANNUAL_REVENUE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ASSIGN_RULE;
@@ -217,7 +218,7 @@ public class LeadForm extends FormBase {
     private void selectCampaign(final String campaignLookupText) {
         wait.until(ExpectedConditions.elementToBeClickable(this.campaignIcon));
         campaignIcon.click();
-        LeadCampaignLookup campaignLookup = new LeadCampaignLookup();
+        CampaignLookup campaignLookup = new CampaignLookup();
         campaignLookup.selectCampaignWithName(campaignLookupText);
     }
 

@@ -1,9 +1,8 @@
 package org.fundacionjala.sfdc.pages.contracts;
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -262,36 +261,6 @@ public class ContractForm extends AbstractBasePage {
     public ContractDetail clickSaveBtn() {
         saveBtn.click();
         return new ContractDetail();
-    }
-
-    /**
-     * This method makes click on account name.
-     *
-     * @return {@link LookUpWindow}.
-     */
-    public LookUpWindow clickAccountNameLoopIcon() {
-        CommonActions.clickElement(accountNameLoopIconBtn);
-        return new LookUpWindow();
-    }
-
-    /**
-     * This method makes click on customer signed by loop icon.
-     *
-     * @return {@link LookUpWindow}.
-     */
-    public LookUpWindow clickCustomerSignedByLoopIcon() {
-        CommonActions.clickElement(customerSignedByLoopBtn);
-        return new LookUpWindow();
-    }
-
-    /**
-     * This method makes click on company signed by loop icon.
-     *
-     * @return {@link LookUpWindow}.
-     */
-    public LookUpWindow clickCompanySignedByLoopIcon() {
-        CommonActions.clickElement(companySignedByLoopIcon);
-        return new LookUpWindow();
     }
 
     /**

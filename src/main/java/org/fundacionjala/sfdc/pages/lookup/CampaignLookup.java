@@ -2,6 +2,7 @@ package org.fundacionjala.sfdc.pages.lookup;
 
 
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+import org.fundacionjala.sfdc.pages.leads.LeadForm;
 
 
 /**
@@ -20,13 +21,12 @@ public class CampaignLookup extends ModalWindow {
     }
 
     public CampaignForm selectCampaignWithNameByScope(String parentCampaign, String scope) {
-        setSearchCampaignByScope(parentCampaign,scope);
-
+        setSearchCampaignByScope(parentCampaign, scope);
         setACampaignFromResults();
         return new CampaignForm();
     }
 
-    public void setSearchCampaignByScope(String campaign, String scope) {
+    private void setSearchCampaignByScope(String campaign, String scope) {
         SearchSectionFrame searchFrame = new SearchSectionFrame();
         searchFrame.searchTheCampaign(campaign, scope);
     }
@@ -34,9 +34,31 @@ public class CampaignLookup extends ModalWindow {
     /**
      *
      */
-    public void setACampaignFromResults() {
+    private void setACampaignFromResults() {
         ListSectionFrame listFrame = new ListSectionFrame();
         listFrame.selectACampaignFromTheList();
         switchToParentWithoutCloseAction();
+    }
+
+    /**
+     * This method select the campaign given a name.
+     *
+     * @param parentCampaign the campaign name to be selected.
+     * @return the current LeadHome form.
+     */
+    public LeadForm selectCampaignWithName(final String parentCampaign) {
+        setSearchCampaign(parentCampaign);
+        setACampaignFromResults();
+        return new LeadForm();
+    }
+
+    /**
+     * This method search the campaign by its name.
+     *
+     * @param campaign the campaign name.
+     */
+    private void setSearchCampaign(final String campaign) {
+        SearchSectionFrame searchFrame = new SearchSectionFrame();
+        searchFrame.searchTheCampaign(campaign);
     }
 }

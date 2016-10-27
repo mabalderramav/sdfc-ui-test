@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.AMOUNT;
@@ -110,6 +109,7 @@ public class OpportunityForm extends FormBase {
 
     /**
      * Constructor that initialize the values.
+     *
      * @param opportunityBuilder the builder class.
      */
     private OpportunityForm(final OpportunityBuilder opportunityBuilder) {
@@ -308,26 +308,6 @@ public class OpportunityForm extends FormBase {
     public OpportunityForm setDescription(final String description) {
         CommonActions.sendKeys(descriptionTextArea, description);
         return this;
-    }
-
-    /**
-     * This method makes click on account name.
-     *
-     * @return {@link LookUpWindow}.
-     */
-    public LookUpWindow clickAccountNameLookUpIcon() {
-        CommonActions.clickElement(accountNameLookupIconBtn);
-        return new LookUpWindow();
-    }
-
-    /**
-     * This method marks click on primary campaingn.
-     *
-     * @return {@link LookUpWindow}.
-     */
-    public LookUpWindow clickPrimaryCampaignSrcLookUpIcon() {
-        CommonActions.clickElement(primaryCampaignSourceLookupIconBtn);
-        return new LookUpWindow();
     }
 
     /**
