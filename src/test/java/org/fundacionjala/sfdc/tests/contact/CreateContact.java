@@ -13,10 +13,9 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 /**
- * This class is a test to create a opportunity
+ * This class is a test to create a contact.
  */
 public class CreateContact {
-
 
     static final String CONTACT_DATA_PATH = "contact/CreateContactData.json";
     private ContactHome contactsHome;
@@ -27,7 +26,7 @@ public class CreateContact {
      * This method is a preconditions to create a contact.
      */
     @BeforeMethod
-    public void login() {
+    public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(CONTACT_DATA_PATH);
         final MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
@@ -39,10 +38,10 @@ public class CreateContact {
      */
     @Test
     public void createContact() {
-        ContactForm contactForm = contactsHome.clickPostLnk();
+        ContactForm contactForm = contactsHome.clickNewButton();
         contactForm.fillTheForm(valuesMapJson);
         contactsDetail = contactForm.clickSaveButton();
-        new AssertContact().assertDetailValues(contactsDetail, valuesMapJson);
+        AssertContact.assertDetailValues(contactsDetail, valuesMapJson);
     }
 
     /**
