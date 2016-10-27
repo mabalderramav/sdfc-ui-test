@@ -20,7 +20,7 @@ public class ContactHome extends AbstractBasePage {
      *
      * @return {@link ContactForm}.
      */
-    public ContactForm clickPostLnk() {
+    public ContactForm clickNewButton() {
         CommonActions.clickElement(newButton);
         return new ContactForm();
     }

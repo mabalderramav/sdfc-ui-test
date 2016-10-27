@@ -2,10 +2,6 @@ package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 
-import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeTest;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -15,6 +11,9 @@ import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.CURRENT_CLOSE_DATE;
@@ -31,21 +30,20 @@ public class CreateOpportunity {
     static final String OPPORTUNITY_DATA_PATH = "opportunity/CreateOpportunityData.json";
     private TabBar tabBar;
     private OpportunityDetail opportunityDetail;
-    private AccountHome accountsHome;
-    private AccountDetail accountProfile;
+    private AccountDetail accountDetail;
     private Map<String, String> valuesMapJson;
 
     /**
      * This method is a preconditions to create a opportunities.
      */
-    @BeforeTest
-    public void BeforeTest() {
+    @BeforeMethod
+    public void beforeTest() {
         valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_PATH);
-        final MainApp mainApp = new MainApp();
+        MainApp mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
-        accountsHome = tabBar.clickOnAccountsHome();
+        AccountHome accountsHome = tabBar.clickOnAccountsHome();
         AccountForm newAccountForm = accountsHome.clickNewButton();
-        accountProfile = newAccountForm
+        accountDetail = newAccountForm
                 .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
                 .clickSaveButton();
     }
@@ -72,12 +70,10 @@ public class CreateOpportunity {
     /**
      * This a post conditions a opportunities.
      */
-    @AfterTest
+    @AfterMethod
     public void afterTest() {
-        MainApp mainApp = opportunityDetail.clickDeleteButton();
-        tabBar = mainApp.goToTabBar();
-        accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.getValue()));
-        accountProfile.clickDeleteButton();
+        // Deleting account, it is deleted the opportunity too.
+        accountDetail = opportunityDetail.clickAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()));
+        accountDetail.clickDeleteButton();
     }
 }

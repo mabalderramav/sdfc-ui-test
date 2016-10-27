@@ -3,17 +3,17 @@ package org.fundacionjala.sfdc.pages.opportunities;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.AssertsDetails;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
+import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.AssertsDetails;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.AMOUNT;
@@ -196,6 +196,17 @@ public class OpportunityDetail extends DetailBase {
     }
 
     /**
+     * This method finds the account name.
+     *
+     * @param accountName a string with account name.
+     * @return {@link AccountDetail}.
+     */
+    public AccountDetail clickAccountName(String accountName) {
+        driver.findElement(By.xpath("//a[contains(.,'" + accountName + "')]")).click();
+        return new AccountDetail();
+    }
+
+    /**
      * This method verify if opportunity is displayed.
      *
      * @param opportunityName string with name opportunity.
@@ -209,7 +220,6 @@ public class OpportunityDetail extends DetailBase {
             return false;
         }
     }
-
 
     /**
      * Method that to permit gets texts.
@@ -232,5 +242,4 @@ public class OpportunityDetail extends DetailBase {
 
         return strategyMap;
     }
-
 }
