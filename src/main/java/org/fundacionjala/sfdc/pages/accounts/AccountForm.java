@@ -119,7 +119,8 @@ public class AccountForm extends FormBase {
         strategyMap.put("accountSite", () -> setSiteTextField(String.valueOf(values.get("accountSite"))));
         strategyMap.put("accountPhone", () -> setPhoneTextField(String.valueOf(values.get("accountPhone"))));
         strategyMap.put("accountWebsite", () -> setWebsiteTextField(String.valueOf(values.get("accountWebsite"))));
-        strategyMap.put("accountEmployees", () -> setEmployeesTextField(String.valueOf(values.get("accountEmployees"))));
+        strategyMap.put("accountEmployees",
+                () -> setEmployeesTextField(String.valueOf(values.get("accountEmployees"))));
         return strategyMap;
     }
 
