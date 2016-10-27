@@ -8,23 +8,23 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 /**
  * Class to Manage the emergent windows.
  */
-public class ModalWindow extends AbstractBasePage {
+class ModalWindow extends AbstractBasePage {
 
     private LinkedList<String> windowsList;
 
     /**
      * Saves the flow between windows to advance, change or return to a window.
      */
-    public void init() {
+    void init() {
         Set<String> windowsHandleSet = driver.getWindowHandles();
-        this.windowsList = new LinkedList<>(windowsHandleSet);
-        driver.switchTo().window(this.windowsList.getLast());
+        windowsList = new LinkedList<>(windowsHandleSet);
+        driver.switchTo().window(windowsList.getLast());
     }
 
     /**
      * Switch from the actual window to the parent window, without close it.
      */
-    public void switchToParentWithoutCloseAction() {
+    void switchToParentWithoutCloseAction() {
         driver.switchTo().window(windowsList.getFirst());
     }
 }

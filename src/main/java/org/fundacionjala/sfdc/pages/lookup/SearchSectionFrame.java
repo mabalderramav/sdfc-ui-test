@@ -8,7 +8,8 @@ import org.openqa.selenium.support.ui.Select;
 /**
  * Class to represent the Search popup.
  */
-public class SearchSectionFrame extends SectionFrame {
+class SearchSectionFrame extends SectionFrame {
+
 
     @FindBy(id = "searchFrame")
     private WebElement searchSection;
@@ -25,7 +26,7 @@ public class SearchSectionFrame extends SectionFrame {
     /**
      * Method that select the search popup.
      */
-    public SearchSectionFrame() {
+    SearchSectionFrame() {
         driver.switchTo().frame(0);
         ExpectedConditions.frameToBeAvailableAndSwitchToIt(searchSection);
     }
@@ -50,15 +51,25 @@ public class SearchSectionFrame extends SectionFrame {
         returnRoot();
     }
 
+
     /**
      * Method that sets the se scope and the parent campaign to make the search.
      *
      * @param parentCampaign String with the Campaign name.
      * @param scope          String with the scope data.
      */
-    public void searchTheCampaign(final String parentCampaign, final String scope) {
+    void searchTheCampaign(final String parentCampaign, final String scope) {
         setScope(scope);
         setCampaign(parentCampaign);
+    }
+
+    /**
+     * Method that sets the se scope and the parent campaign to make the search.
+     *
+     * @param campaign String with the Campaign name.
+     */
+    void searchTheCampaign(final String campaign) {
+        setCampaign(campaign);
     }
 
     /**
@@ -66,7 +77,7 @@ public class SearchSectionFrame extends SectionFrame {
      *
      * @param scope String with the scope data.
      */
-    public void scopeRequired(final String scope) {
+    private void scopeRequired(final String scope) {
         if (scope != null) {
             setCampaignScope(scope);
         }
@@ -75,7 +86,8 @@ public class SearchSectionFrame extends SectionFrame {
     /**
      * Method that makes a click on the Search icon.
      */
-    public void clickSearch() {
+    private void clickSearch() {
+
         wait.until(ExpectedConditions.visibilityOf(this.searchButton));
         searchButton.click();
     }
@@ -85,10 +97,10 @@ public class SearchSectionFrame extends SectionFrame {
      *
      * @param campaignScope String with the campaign scope info.
      */
-    public void setCampaignScope(final String campaignScope) {
+    private void setCampaignScope(final String campaignScope) {
         wait.until(ExpectedConditions.visibilityOf(this.campaignScopeSelect));
-        Select campaignScopeSelect = new Select(this.campaignScopeSelect);
-        campaignScopeSelect.selectByVisibleText(campaignScope);
+        Select newCampaignScopeSelect = new Select(this.campaignScopeSelect);
+        newCampaignScopeSelect.selectByVisibleText(campaignScope);
     }
 
     /**
@@ -96,10 +108,9 @@ public class SearchSectionFrame extends SectionFrame {
      *
      * @param campaignName String with the campaign name.
      */
-    public void setCampaignName(final String campaignName) {
+    private void setCampaignName(final String campaignName) {
         wait.until(ExpectedConditions.visibilityOf(this.campaignNameField));
         this.campaignNameField.clear();
         this.campaignNameField.sendKeys(campaignName);
     }
-
 }
