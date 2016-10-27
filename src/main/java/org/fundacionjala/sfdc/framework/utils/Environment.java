@@ -13,7 +13,7 @@ import java.util.Properties;
  * This class is in charge to set the default  parameters to
  * establishes the connection with pivotal tracker.
  */
-public class Environment {
+public final class Environment {
 
     private static final Logger LOGGER = LogManager.getLogger(Environment.class);
 

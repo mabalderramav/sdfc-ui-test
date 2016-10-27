@@ -230,7 +230,7 @@ public class ContractDetail extends DetailBase {
      * @param contractNumber string with contract number.
      * @return true if the contract with the number sent is displayed.
      */
-    public boolean isContractDisplayed(String contractNumber) {
+    public boolean isContractDisplayed(final String contractNumber) {
         try {
             driver.findElement(By.linkText(contractNumber)).getText();
             return true;

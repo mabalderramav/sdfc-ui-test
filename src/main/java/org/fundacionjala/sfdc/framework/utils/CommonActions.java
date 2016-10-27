@@ -13,7 +13,7 @@ import org.fundacionjala.sfdc.framework.browser.DriverManager;
 
 /**
  * This class contains the common procedures to manage Add, and Delete elements from different components:
- * Leads, Campaign, Account, Contact, ContractHome, Products
+ * Leads, Campaign, Account, Contact, ContractHome, Products.
  */
 public final class CommonActions {
 
@@ -42,10 +42,6 @@ public final class CommonActions {
      * @param value    value to fill.
      */
     public static void sendKeys(final WebElement element, final String value) {
-        if (value == null) {
-            //throw new IllegalArgumentException("");
-            //Logger.warn()
-        }
         DriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(value);

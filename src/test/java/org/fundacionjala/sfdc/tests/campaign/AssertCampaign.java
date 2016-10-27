@@ -1,21 +1,30 @@
 package org.fundacionjala.sfdc.tests.campaign;
 
-import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
-import org.junit.Assert;
-
 import java.util.Map;
 
-/**
- * Created by AlvaroDaza on 10/25/2016.
- */
-public class AssertCampaign {
+import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 
+import static org.junit.Assert.assertEquals;
+
+/**
+ * Class to manage the assertions for campaign.
+ */
+public final class AssertCampaign {
+
+    /**
+     * Private constructor.
+     */
     private AssertCampaign() {
     }
 
-    static void assertDetailValues(CampaignDetail campaignDetail, Map<String, String> valuesMapJson) {
+    /**
+     * Method that makes the assertions.
+     * @param campaignDetail {@link CampaignDetail}
+     * @param valuesMapJson Json values to be asserts.
+     */
+    static void assertDetailValues(final CampaignDetail campaignDetail, final Map<String, String> valuesMapJson) {
         valuesMapJson.keySet()
-                .forEach(value -> Assert.assertEquals(campaignDetail.getStrategyAssertMap().get(value).getText(),
+                .forEach(value -> assertEquals(campaignDetail.getStrategyAssertMap().get(value).getText(),
                         valuesMapJson.get(value)));
     }
 }

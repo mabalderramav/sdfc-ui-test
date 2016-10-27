@@ -19,6 +19,7 @@ import org.openqa.selenium.support.FindBy;
  */
 public class ContactsDetail extends AbstractBasePage {
 
+    public static final int NAME_LABEL_LENGTH = 3;
     @FindBy(id = "con2_ileinner")
     @CacheLookup
     private WebElement nameLabel;
@@ -40,16 +41,16 @@ public class ContactsDetail extends AbstractBasePage {
     private WebElement editButton;
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
     public String getNameLabel() {
-        return getTopName().length == 3 ? getTopName()[1] : getTopName()[0];
+        return getTopName().length == NAME_LABEL_LENGTH ? getTopName()[1] : getTopName()[0];
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -58,16 +59,16 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
     public String getLastNameLabel() {
-        return getTopName().length == 3 ? getTopName()[2] : getTopName()[1];
+        return getTopName().length == NAME_LABEL_LENGTH ? getTopName()[2] : getTopName()[1];
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -76,7 +77,7 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -85,7 +86,7 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -94,7 +95,7 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -106,7 +107,7 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
+     * This method gets name label.
      *
      * @return a name label.
      */
@@ -116,14 +117,14 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
-     *
+     * This method gets name label.
+     * @param contact String with the contact name.
      * @return a name label.
      */
-    public boolean isContactDisplayed(final String Contact) {
+    public boolean isContactDisplayed(final String contact) {
         WebElement contactContainer;
         try {
-            contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + Contact + "')]"));
+            contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + contact + "')]"));
         } catch (WebDriverException e) {
             return false;
         }
@@ -132,8 +133,8 @@ public class ContactsDetail extends AbstractBasePage {
     }
 
     /**
-     * This method gets name label
-     *
+     * This method gets name label.
+     * @param webElement the element to find in the page.
      * @return a name label.
      */
     public boolean isElementPresent(final WebElement webElement) {

@@ -9,15 +9,18 @@ import org.openqa.selenium.support.ui.Select;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
+/**
+ * Class to manage the account view detail page.
+ */
 public class AccountViewDetail extends DetailBase {
 
     /**
      * Verify if a column exist.
      *
      * @param value String with the column value to search
-     * @return returns <code>true<code/> if account is displayed or <code>false<code/> if it's not.
+     * @return returns <value>true<value/> if account is displayed or <value>false<value/> if it's not.
      */
-    public Boolean existColumnName(String value) {
+    public Boolean existColumnName(final String value) {
         Boolean result = false;
         try {
             driver.findElement(By.cssSelector("[title='" + value + "']"));
@@ -32,10 +35,10 @@ public class AccountViewDetail extends DetailBase {
     /**
      * Verify if a view name exist.
      *
-     * @param value String with the name value to search
-     * @return returns <code>true<code/> if account is displayed or <code>false<code/> if it's not.
+     * @param value String with the name value to search.
+     * @return returns <value>true<value/> if account is displayed or <value>false<value/> if it's not.
      */
-    public Boolean existViewName(String value) {
+    public Boolean existViewName(final String value) {
         Boolean result = false;
         try {
             Select select = new Select(driver.findElement(By.className("title")));
@@ -49,13 +52,16 @@ public class AccountViewDetail extends DetailBase {
     }
 
     /**
-     * @return {@link AccountForm}
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickEditButton() {
         return new AccountForm();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AbstractBasePage clickDeleteButton() {
         deleteBtn.click();

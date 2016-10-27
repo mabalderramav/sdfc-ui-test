@@ -6,6 +6,9 @@ import org.openqa.selenium.support.FindBy;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 
+/**
+ * Class that represents the details options.
+ */
 public abstract class DetailBase extends AbstractBasePage {
 
     @FindBy(className = "topName")

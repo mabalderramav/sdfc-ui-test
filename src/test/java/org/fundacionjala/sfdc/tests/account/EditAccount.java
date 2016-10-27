@@ -1,21 +1,21 @@
 package org.fundacionjala.sfdc.tests.account;
 
-import org.fundacionjala.sfdc.pages.LoginPage;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
-import org.fundacionjala.sfdc.pages.accounts.AccountForm;
-import org.fundacionjala.sfdc.pages.accounts.AccountHome;
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+import java.util.Map;
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Map;
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
+import org.fundacionjala.sfdc.pages.accounts.AccountForm;
+import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 
 /**
- * Created by erickaviraca on 10/24/2016.
+ * Class that verify the edit option for an account.
  */
 public class EditAccount {
     /**
@@ -32,6 +32,9 @@ public class EditAccount {
     private Map<String, String> valuesMapJson;
     private Map<String, String> valuesMapEditJson;
 
+    /**
+     * Before method.
+     */
     @BeforeMethod
     public void login() {
         valuesMapJson = JsonMapper.getMapJson(ACCOUNT_DATA_PATH);
@@ -46,8 +49,11 @@ public class EditAccount {
                         valuesMapJson.get(value)));
     }
 
+    /**
+     * Test to verify the edit of account.
+     */
     @Test
-    public void EditAccount() {
+    public void editAccount() {
         accountForm = accountDetail.clickEditButton();
         valuesMapEditJson = JsonMapper.getMapJson(ACCOUNT_DATA_EDIT_PATH);
         accountForm.fillTheForm(valuesMapEditJson);
@@ -57,7 +63,9 @@ public class EditAccount {
                         valuesMapEditJson.get(value)));
     }
 
-
+    /**
+     * Method to delete the created account.
+     */
     @AfterMethod
     public void afterTest() {
         accountDetail.clickDeleteButton();

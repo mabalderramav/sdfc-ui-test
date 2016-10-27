@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.pages.lookup;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 /**
- *  Class to manage the current windows.
+ * Class to manage the current windows.
  */
 public abstract class SectionFrame extends AbstractBasePage {
 

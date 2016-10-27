@@ -13,7 +13,6 @@ import java.util.Map;
 /**
  * It is the account base page, abstract class.
  *
- * {@link FormBase}
  */
 public class AccountForm extends FormBase {
 
@@ -35,7 +34,7 @@ public class AccountForm extends FormBase {
     private WebElement accountEmployeesTextbox;
 
     /**
-     * {@link FormBase}
+     * {@inheritDoc}
      */
     @Override
     public AccountDetail clickSaveButton() {
@@ -44,7 +43,7 @@ public class AccountForm extends FormBase {
     }
 
     /**
-     * {@link FormBase}
+     * {@inheritDoc}
      */
     @Override
     public AccountDetail clickSaveNewButton() {
@@ -59,7 +58,7 @@ public class AccountForm extends FormBase {
      * @param accountName String with the account name.
      * @return Return this class.
      */
-    public AccountForm setAccountName(String accountName) {
+    public AccountForm setAccountName(final String accountName) {
         CommonActions.sendKeys(accountNameTextbox, accountName);
         return this;
     }
@@ -70,7 +69,7 @@ public class AccountForm extends FormBase {
      * @param accountSite String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountSite(String accountSite) {
+    public AccountForm setAccountSite(final String accountSite) {
         CommonActions.sendKeys(accountSiteTextbox, accountSite);
         return this;
     }
@@ -81,7 +80,7 @@ public class AccountForm extends FormBase {
      * @param accountPhone String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountPhone(String accountPhone) {
+    public AccountForm setAccountPhone(final String accountPhone) {
         CommonActions.sendKeys(accountPhoneTextbox, accountPhone);
         return this;
     }
@@ -92,7 +91,7 @@ public class AccountForm extends FormBase {
      * @param accountWebsite String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountWebsite(String accountWebsite) {
+    public AccountForm setAccountWebsite(final String accountWebsite) {
         CommonActions.sendKeys(accountWebsiteTextbox, accountWebsite);
         return this;
     }
@@ -103,7 +102,7 @@ public class AccountForm extends FormBase {
      * @param accountEmployees String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountEmployees(String accountEmployees) {
+    public AccountForm setAccountEmployees(final String accountEmployees) {
         CommonActions.sendKeys(accountEmployeesTextbox, accountEmployees);
         return this;
     }
@@ -128,9 +127,9 @@ public class AccountForm extends FormBase {
     /**
      * This method loads data to fill the form for a given Json file.
      *
-     * @param valuesMapCreate
+     * @param valuesMapCreate Map with the json values.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }

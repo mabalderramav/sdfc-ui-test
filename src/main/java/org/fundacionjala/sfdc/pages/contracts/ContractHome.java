@@ -9,21 +9,22 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * This class represents to opportunity pages.
+ * This class represents the opportunity pages.
  */
 public class ContractHome extends HomeBase {
 
     @FindBy(name = "new")
     @CacheLookup
-    WebElement newButton;
+    private WebElement newButton;
 
     @FindBy(css = "span.fFooter a:first-child")
     @CacheLookup
-    WebElement editViewLink;
+    private WebElement editViewLink;
 
     @FindBy(css = "span.fFooter a:last-child")
     @CacheLookup
-    WebElement createNewViewLink;
+    private WebElement createNewViewLink;
+
     /**
      * This method makes click in new button in contract page.
      *
@@ -59,7 +60,7 @@ public class ContractHome extends HomeBase {
      * @param url a string with url of the page.
      * @return ContractDetail page object.
      */
-    public ContractDetail goContractDetail(String url) {
+    public ContractDetail goContractDetail(final String url) {
         driver.navigate().to(url);
         return new ContractDetail();
     }
@@ -70,7 +71,7 @@ public class ContractHome extends HomeBase {
      * @param accountName a string with name account.
      * @return ContractDetail page object.
      */
-    public ContractDetail clickOnAccount(String accountName) {
+    public ContractDetail clickOnAccount(final String accountName) {
         driver.findElement(By.linkText(accountName)).click();
         return new ContractDetail();
     }

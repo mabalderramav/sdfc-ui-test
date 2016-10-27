@@ -9,10 +9,9 @@ import org.fundacionjala.sfdc.pages.base.FormBase;
 
 /**
  * It is the account base page, abstract class.
- *
- * {@link FormBase}
  */
 public class AccountViewForm extends FormBase {
+
     @FindBy(id = "fname")
     @CacheLookup
     private WebElement viewNameText;
@@ -51,7 +50,7 @@ public class AccountViewForm extends FormBase {
      * @param viewName String with the view name.
      * @return Return this class.
      */
-    public AccountViewForm setViewNameText(String viewName) {
+    public AccountViewForm setViewNameText(final String viewName) {
         CommonActions.sendKeys(viewNameText, viewName);
         return this;
     }
@@ -62,7 +61,7 @@ public class AccountViewForm extends FormBase {
      * @param uniqueName String with the unique view name.
      * @return Return this class.
      */
-    public AccountViewForm setViewUniqueNameText(String uniqueName) {
+    public AccountViewForm setViewUniqueNameText(final String uniqueName) {
         CommonActions.sendKeys(viewUniqueNameText, uniqueName);
         return this;
     }
@@ -78,7 +77,7 @@ public class AccountViewForm extends FormBase {
     }
 
     /**
-     * {@link AccountForm}
+     * {@inheritDoc}
      */
     @Override
     public AccountForm clickSaveButton() {
@@ -86,7 +85,7 @@ public class AccountViewForm extends FormBase {
     }
 
     /**
-     * {@link AccountForm}
+     * {@inheritDoc}
      */
     @Override
     public AccountForm clickSaveNewButton() {

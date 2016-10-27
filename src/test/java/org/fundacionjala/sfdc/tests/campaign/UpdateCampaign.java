@@ -1,5 +1,11 @@
 package org.fundacionjala.sfdc.tests.campaign;
 
+import java.util.Map;
+
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -7,11 +13,6 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.Map;
 
 /**
  * Update a campaign created.
@@ -47,10 +48,10 @@ public class UpdateCampaign {
     public void updateCampaignWithJson() {
         Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(CAMPAIGN_UPDATE_CAMPAIGN_DATA);
         campaignForm = campaignDetail.clickEditButton();
-       campaignForm.fillTheForm(valuesMapEditJson);
-       campaignDetail = campaignForm.clickSaveButton();
+        campaignForm.fillTheForm(valuesMapEditJson);
+        campaignDetail = campaignForm.clickSaveButton();
         AssertCampaign.assertDetailValues(campaignDetail, valuesMapEditJson);
-   }
+    }
 
     /**
      * Update a Campaign using the Builder Pattern.
@@ -58,17 +59,17 @@ public class UpdateCampaign {
     @Test()
     public void editProduct() {
 
-       campaignForm=campaignDetail.clickEditButton();
-        Campaigns campaigns= new Campaigns.ProductBuilder("UpdatedWhitBuilder")
+        campaignForm = campaignDetail.clickEditButton();
+        Campaigns campaigns = new Campaigns.ProductBuilder("UpdatedWhitBuilder")
                 .setTypeDropDown("Direct Mail")
                 .setStatusDropDown("Completed")
                 .build();
         campaignDetail = campaigns.createCampaign();
-       AssertCampaign.assertDetailValues(campaignDetail, campaigns.getValuesMap());
+        AssertCampaign.assertDetailValues(campaignDetail, campaigns.getValuesMap());
     }
 
     /**
-     * Delete the campaign crated.
+     * Delete the created campaign.
      */
     @AfterMethod()
     public void afterTest() {

@@ -172,13 +172,14 @@ public class ContactForm extends FormBase {
     /**
      * Method that to permit set values to create a new Contact Home.
      *
-     * @param values a map to set of the strategy
+     * @param values a map to set of the strategy.
      * @return a Map with the values of the opportunity create.
      */
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("firstNameCategory", () -> selectFirstNameCategory(String.valueOf(values.get("firstNameCategory"))));
+        strategyMap.put("firstNameCategory",
+                () -> selectFirstNameCategory(String.valueOf(values.get("firstNameCategory"))));
         strategyMap.put("contactName", () -> setContactNameField(String.valueOf(values.get("contactName"))));
         strategyMap.put("lastName", () -> setLastName(String.valueOf(values.get("lastName"))));
         strategyMap.put("title", () -> setTitle(String.valueOf(values.get("title"))));
@@ -190,9 +191,9 @@ public class ContactForm extends FormBase {
     /**
      * This method loads data to fill the form for a given Json file.
      *
-     * @param valuesMapCreate
+     * @param valuesMapCreate Map with the json values.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }

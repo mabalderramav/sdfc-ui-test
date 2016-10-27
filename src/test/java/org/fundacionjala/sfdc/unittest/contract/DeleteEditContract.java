@@ -19,7 +19,7 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 
 /**
- * This class is a test to edit and delete of a opportunity.
+ * This class is a test to edit and delete of a contract.
  */
 public class DeleteEditContract {
 
@@ -32,15 +32,16 @@ public class DeleteEditContract {
     private AccountForm newAccountForm;
     private AccountDetail accountProfile;
     private MainApp mainApp;
-    public static final String OPPORTUNITY_DATA_EDIT_PATH = "src/test/resources/json/opportunity/CreateOpportunityData.json";
+    public static final String OPPORTUNITY_DATA_EDIT_PATH =
+            "src/test/resources/json/opportunity/CreateOpportunityData.json";
     private Map<String, String> valuesMapJson;
     private Map<String, String> valuesMapEditJson;
 
     /**
-     * This method is a preconditions to edit and delete a opportunity.
+     * This method is a preconditions to edit and delete a contract.
      */
     @BeforeMethod
-    public void BeforeTest() {
+    public void beforeTest() {
         valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
@@ -60,19 +61,19 @@ public class DeleteEditContract {
     }
 
     /**
-     * This a test to delete a opportunities
+     * This a test to delete a contract.
      */
     @Test
-    public void DeleteOpportunity() {
+    public void deleteOpportunity() {
         opportunityDetail.clickDeleteButton();
         Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get("opportunityName")));
     }
 
     /**
-     * This is a test to edit a opportunities
+     * This is a test to edit a contract.
      */
     @Test
-    public void EditOpportunity() {
+    public void editOpportunity() {
         opportunityForm = opportunityDetail.clickEditButton();
         valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         opportunityForm.fillTheForm(valuesMapEditJson);
@@ -81,7 +82,7 @@ public class DeleteEditContract {
     }
 
     /**
-     * This is a post conditions a opportunities.
+     * This is a post conditions a contract.
      */
     @AfterMethod
     public void afterTest() {
