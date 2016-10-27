@@ -2,6 +2,7 @@ package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 
+
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -19,6 +20,7 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
+import static org.testng.Assert.assertFalse;
 
 /**
  * This class is a test to edit and delete of a opportunity.
@@ -30,7 +32,7 @@ public class DeleteEditOpportunity {
     private OpportunityForm opportunityForm;
     private OpportunityDetail opportunityDetail;
     private AccountHome accountsHome;
-    private AccountDetail accountProfile;
+    private AccountDetail accountDetail;
     private MainApp mainApp;
     private Map<String, String> valuesMapJson;
 
@@ -46,8 +48,10 @@ public class DeleteEditOpportunity {
 
         accountsHome = tabBar.clickOnAccountsHome();
         AccountForm newAccountForm = accountsHome.clickNewButton();
-        accountProfile = newAccountForm
+
+        accountDetail = newAccountForm
                 .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
+
                 .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
@@ -60,16 +64,17 @@ public class DeleteEditOpportunity {
      * This a test to delete a opportunities
      */
     @Test
-    public void DeleteOpportunity() {
+    public void deleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-        Assert.assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())));
+
+        assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())));
     }
 
     /**
-     * This is a test to edit a opportunities
+     * This is a test to edit an opportunity.
      */
     @Test
-    public void EditOpportunity() {
+    public void editOpportunity() {
         opportunityForm = opportunityDetail.clickEditButton();
         Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
 
@@ -79,14 +84,15 @@ public class DeleteEditOpportunity {
     }
 
     /**
-     * This is a post conditions a opportunities.
+     * This is a post conditions for an opportunity.
      */
     @AfterMethod
     public void afterTest() {
         tabBar = mainApp.goToTabBar();
         accountsHome = tabBar.clickOnAccountsHome();
-        accountProfile = accountsHome.clickOnAccount(valuesMapJson.get(ACCOUNT_NAME.getValue()));
-        mainApp = accountProfile.clickDeleteButton();
+
+        accountDetail = accountsHome.clickAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()));
+        mainApp = accountDetail.clickDeleteButton();
     }
 
 }

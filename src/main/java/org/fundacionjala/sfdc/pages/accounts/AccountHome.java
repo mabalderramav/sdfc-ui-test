@@ -3,6 +3,7 @@ package org.fundacionjala.sfdc.pages.accounts;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
+import org.openqa.selenium.By;
 
 /**
  * It is the account base page, abstract class.
@@ -48,6 +49,19 @@ public class AccountHome  extends HomeBase {
     }
 
     public AccountDetail clickOnAccount(String accountName) {
+
+
         return new AccountDetail();
     }
+    /**
+     * This method finds the account name.
+     *
+     * @param accountName a string with account name.
+     * @return {@link AccountDetail}.
+     */
+    public AccountDetail clickAccountName(String accountName) {
+        driver.findElement(By.xpath("//a[contains(.,'" + accountName + "')]")).click();
+        return new AccountDetail();
+    }
+
 }
