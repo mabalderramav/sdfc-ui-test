@@ -21,6 +21,7 @@ import static org.fundacionjala.sfdc.pages.leads.LeadFields.FIRST_NAME;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.LAST_NAME;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.STATE_PROVINCE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ZIP_CODE;
+import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
 import static org.testng.AssertJUnit.assertFalse;
 
 /**
@@ -75,7 +76,7 @@ public class UpdateDeleteLead {
                 .setCountry(valuesMapJson.get(COUNTRY.toString()))
                 .build();
         leadDetails = leadForm.saveLead();
-        new AssertLead().assertDetailValues(leadDetails, leadForm.getLeadValues());
+        assertDetailValues(leadDetails, leadForm.formatJson(leadForm.getLeadValues()));
     }
 
     /**
