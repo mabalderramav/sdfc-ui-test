@@ -7,17 +7,11 @@ import org.openqa.selenium.By;
 
 /**
  * It is the account base page, abstract class.
- * <p>
- * {@link HomeBase}
  */
 public class AccountHome extends HomeBase {
 
     /**
-     * Makes click on the "new" button.
-     * <p>
-     * {@link HomeBase}
-     *
-     * @return AccountForm
+     * {@inheritDoc}
      */
     @Override
     public AccountForm clickNewButton() {
@@ -35,9 +29,7 @@ public class AccountHome extends HomeBase {
     }
 
     /**
-     * Makes click on the "edit" link for a view.
-     *
-     * @return AccountForm.
+     * {@inheritDoc}
      */
     @Override
     public AbstractBasePage clickEditViewLink() {
@@ -53,7 +45,6 @@ public class AccountHome extends HomeBase {
      */
     public AccountDetail clickOnAccount(final String accountName) {
 
-
         return new AccountDetail();
     }
 
@@ -66,6 +57,16 @@ public class AccountHome extends HomeBase {
     public AccountDetail clickAccountName(final String accountName) {
         driver.findElement(By.xpath("//a[contains(.,'" + accountName + "')]")).click();
         return new AccountDetail();
+    }
+
+    /**
+     * This method verify that account is displayed.
+     *
+     * @param account String with account.
+     * @return returns <account>true<account/> if account is displayed or <account>false<account/> if it is not .
+     */
+    public boolean isAccountDisplayed(final String account) {
+        return CommonActions.existElementByLinkText(account);
     }
 
 }
