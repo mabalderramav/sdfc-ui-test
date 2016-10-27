@@ -4,6 +4,9 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+/**
+ * Class to represent the displayed buttons in the home pages.
+ */
 public abstract class HomeBase extends AbstractBasePage {
 
     @FindBy(name = "new")

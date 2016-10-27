@@ -10,77 +10,108 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by Miguel.Pari on 6/24/2015.
+ * Class to manage the lookup window, where the search is performed.
  */
 public class LookUpWindow extends ModalWindow {
 
 
     @FindBy(xpath = "//div[@class='pBody']/select")
     @CacheLookup
-    WebElement SearchWithinDropdown;
+    private WebElement searchWithinDropdown;
 
     @FindBy(xpath = "//div[@class='pBody']/input[@type='text']")
     @CacheLookup
-    WebElement SearchField;
+    private WebElement searchField;
 
     @FindBy(xpath = "//div[@class='pBody']/input[@class='btn' and @type='submit']")
     @CacheLookup
-    WebElement GoButton;
+    private WebElement goButton;
 
     @FindBy(className = "dataRow even last first")
     @CacheLookup
-    WebElement RowsContaine;
-
+    private WebElement rowsContainer;
 
     @FindBy(id = "searchFrame")
     @CacheLookup
-    WebElement SearchFrame;
+    private WebElement searchFrame;
 
     @FindBy(id = "resultsFrame")
     @CacheLookup
-    WebElement SearchResultFrame;
-    //endregion
+    private WebElement searchResultFrame;
 
-    public LookUpWindow selectSearchWithinDropdown(String item) {
-        CommonActions.selectItem(SearchWithinDropdown, item);
-
+    /**
+     * Method that select the item in the Search within dropdown.
+     *
+     * @param item String with the item to be selected.
+     * @return {@link LookUpWindow}.
+     */
+    public LookUpWindow selectSearchWithinDropdown(final String item) {
+        CommonActions.selectItem(searchWithinDropdown, item);
         return this;
     }
 
-    public LookUpWindow setSearchWithinField(String text) {
-        CommonActions.sendKeys(SearchField, text);
+    /**
+     * This method sets the text to be searched.
+     *
+     * @param text String with the text to search.
+     * @return {@link LookUpWindow}.
+     */
+    public LookUpWindow setSearchWithinField(final String text) {
+        CommonActions.sendKeys(searchField, text);
         return this;
     }
 
+    /**
+     * Method that makes click on go button.
+     *
+     * @return {@link LookUpWindow}.
+     */
     public LookUpWindow clickGoButton() {
-        CommonActions.clickElement(GoButton);
-
+        CommonActions.clickElement(goButton);
         return this;
     }
 
-    public CampaignForm clickResult(String text) {
-        CommonActions.clickElement(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
+    /**
+     * Method that click in the link name of the search result.
+     *
+     * @param text String with the text searched.
+     * @return {@link CampaignForm}.
+     */
+    public CampaignForm clickResult(final String text) {
+        CommonActions.clickElement(rowsContainer.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
         driver.switchTo().defaultContent();
-
         return new CampaignForm();
     }
 
-    public OpportunityForm clickResultGotoNewOpportunityForm(String text) {
-        CommonActions.clickElement(RowsContaine.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
+    /**
+     * Method that makes click on new button in the search popup.
+     *
+     * @param text String with the text that contain the opportunity name.
+     * @return {@link OpportunityForm}.
+     */
+    public OpportunityForm clickResultGotoNewOpportunityForm(final String text) {
+        CommonActions.clickElement(rowsContainer.findElement(By.xpath("//a[contains(.,'" + text + "')]")));
         driver.switchTo().defaultContent();
-
         return new OpportunityForm();
     }
 
+    /**
+     * Method that change to the search frame.
+     *
+     * @return {@link LookUpWindow}.
+     */
     public LookUpWindow switchSearchFrame() {
-        driver.switchTo().frame(SearchFrame);
+        driver.switchTo().frame(searchFrame);
         return this;
     }
 
+    /**
+     * Method that change to result frame.
+     *
+     * @return {@link LookUpWindow}.
+     */
     public LookUpWindow switchResultsFrame() {
-        driver.switchTo().frame(SearchResultFrame);
+        driver.switchTo().frame(searchResultFrame);
         return this;
     }
-
-
 }

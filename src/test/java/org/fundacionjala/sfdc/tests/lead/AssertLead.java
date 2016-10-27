@@ -35,7 +35,7 @@ public class AssertLead {
         Map<String, String> formatJson = formatJson(valuesMapJson);
 
         formatJson.keySet()
-                .forEach(value -> Assert.assertEquals(leadDetail.getStrategyAssertLead(valuesMapJson).get(value).getText(),
+                .forEach(value -> Assert.assertEquals(leadDetail.getStrategyAssertLead().get(value).getText(),
                         valuesMapJson.get(value)));
     }
 

@@ -47,7 +47,7 @@ public class PostForm extends SectionFrame {
      *                 written in the post text field.
      * @return {@link PostForm}
      */
-    public PostForm setPostTxt(String postText) {
+    public PostForm setPostTxt(final String postText) {
         this.postText = postText;
         Actions action = new Actions(driver);
         action.moveToElement(textAreaField).sendKeys(postText).build().perform();
@@ -63,9 +63,11 @@ public class PostForm extends SectionFrame {
      * @param postText    Is the post to fin to write the comment.
      * @return {@link PostForm}
      */
-    public PostForm setCommentTxt(String commentText, String postText) {
+    public PostForm setCommentTxt(final String commentText, final String postText) {
         this.postText = commentText;
-        WebElement commentTxt = driver.findElement(By.xpath("//span[contains(.,'" + postText + "')]/following::textarea[contains(@class,'foobar cxnewcommenttext groupAtMentionsEnabled')]"));
+        WebElement commentTxt = driver.findElement(By.xpath("//span[contains(.,'"
+                + postText + "')]/following::textarea[contains(@class,"
+                + "'foobar cxnewcommenttext groupAtMentionsEnabled')]"));
         CommonActions.sendKeys(commentTxt, commentText);
         return this;
     }
@@ -77,7 +79,7 @@ public class PostForm extends SectionFrame {
      *                written in the post text field.
      * @return {@link PostForm}
      */
-    public PostForm editPostTxt(String postTxt) {
+    public PostForm editPostTxt(final String postTxt) {
         this.postText = postTxt;
         wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
         CommonActions.sendKeys(editTxtArea, postTxt);
@@ -112,7 +114,8 @@ public class PostForm extends SectionFrame {
      * @return {@link PostContainer}
      */
     public PostContainer clickCommentBtn() {
-        WebElement commentBtn = driver.findElement(By.xpath("//span[contains(.,'" + this.postText + "')]/following::input[@value = 'Comment']"));
+        WebElement commentBtn = driver.findElement(
+                By.xpath("//span[contains(.,'" + this.postText + "')]/following::input[@value = 'Comment']"));
         CommonActions.clickElement(commentBtn);
         return new PostContainer().setPostTxt(this.postText);
     }

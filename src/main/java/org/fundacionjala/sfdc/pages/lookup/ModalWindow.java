@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
+/**
+ * Class to Manage the emergent windows.
+ */
 public class ModalWindow extends AbstractBasePage {
 
     private LinkedList<String> windowsList;

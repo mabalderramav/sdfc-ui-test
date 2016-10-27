@@ -14,6 +14,9 @@ public final class JsonMapper {
 
     private static final String SRC_TEST_RESOURCES_JSON = "src/test/resources/json/";
 
+    /**
+     * Private constructor.
+     */
     private JsonMapper() {
     }
 

@@ -34,13 +34,10 @@ import static org.fundacionjala.sfdc.pages.leads.LeadFields.SICCODE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.TITLE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.WEBSITE;
 
-
 /**
  * Class to manage the Detail of the LeadHome Page when it was created.
  */
 public class LeadDetails extends DetailBase {
-
-    //region Locators
 
     /*LeadHome Information*/
     @FindBy(id = "lea1_ileinner")
@@ -141,7 +138,6 @@ public class LeadDetails extends DetailBase {
     @FindBy(id = "LastModifiedBy_ileinner")
     @CacheLookup
     private WebElement lastModifiedByLabel;
-    //endregion
 
     /**
      * Method that gets the Owner that was registered in the creation of LeadHome.
@@ -344,9 +340,10 @@ public class LeadDetails extends DetailBase {
     /**
      * This method gets the campaign that was selected.
      *
+     * @param campaignName String with the campaign name.
      * @return a String with the campaign name.
      */
-    public String getCampaign(String campaignName) {
+    public String getCampaign(final String campaignName) {
         return driver.findElement(By.xpath("//a[contains(.," + campaignName + ")]")).getText();
     }
 
@@ -372,19 +369,16 @@ public class LeadDetails extends DetailBase {
     /**
      * method that load the Strategy Map to make the assertions.
      *
-     * @param valuesMapJson Json Map with the information.
      * @return the Map with the values to make assertions.
      */
-    public Map<String, AssertsDetails> getStrategyAssertLead(Map<String, String> valuesMapJson) {
-        final Map<String, AssertsDetails> strategyMap = new HashMap();
+    public Map<String, AssertsDetails> getStrategyAssertLead() {
+        final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
         strategyMap.put(FULL_NAME.toString(), this::getNameLabel);
         strategyMap.put(COMPANY.toString(), this::getCompanyLabel);
         strategyMap.put(TITLE.toString(), this::getTitleLabel);
         strategyMap.put(LEAD_SOURCE.toString(), this::getLeadSourceLabel);
-        // strategyMap.put(CAMPAIGN.toString(), () -> getCampaign(valuesMapJson.get("campaignLookup")));
         strategyMap.put(INDUSTRY.toString(), this::getIndustryLabel);
-        //strategyMap.put(ANNUAL_REVENUE.toString(), this::getAnnualRevenueLabel);
         strategyMap.put(PHONE.toString(), this::getPhoneLabel);
         strategyMap.put(MOBILE.toString(), this::getMobileLabel);
         strategyMap.put(FAX.toString(), this::getFaxLabel);
