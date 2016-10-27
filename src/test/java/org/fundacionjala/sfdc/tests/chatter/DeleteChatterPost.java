@@ -1,14 +1,18 @@
 package org.fundacionjala.sfdc.tests.chatter;
 
+import org.testng.Assert;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.chatter.PostContainer;
 import org.fundacionjala.sfdc.pages.chatter.PostForm;
-import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
+/**
+ * Class to verify the deletion of chatter post.
+ */
 public class DeleteChatterPost {
     private static final String POST_CONTAIN = "TestDeletePost";
     private ChatterAbstractPage chatterHome;
@@ -16,6 +20,9 @@ public class DeleteChatterPost {
     private TabBar tabBar;
     private PostContainer postContainer;
 
+    /**
+     * Before method.
+     */
     @BeforeMethod
     public void setUp() {
         mainApp = new MainApp();
@@ -25,6 +32,9 @@ public class DeleteChatterPost {
         postContainer = postForm.clickShareBtn();
     }
 
+    /**
+     * Method that verify if a chatter is deleted.
+     */
     @Test
     public void deleteChatterPostTest() {
         postContainer.deletePost(POST_CONTAIN);

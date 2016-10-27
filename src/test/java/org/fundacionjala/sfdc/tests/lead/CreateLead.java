@@ -42,7 +42,7 @@ public class CreateLead {
      * This method create a new LeadFields and make the corresponding assertions.
      */
     @Test
-    public void createLeadTest(){
+    public void createLeadTest() {
         LeadForm leadForm = leadHomePage.clickNewButton();
         valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
         leadForm.fillTheForm(valuesMapJson);
@@ -56,7 +56,7 @@ public class CreateLead {
      */
     @AfterMethod
     public void tearDown() {
-       leadDetails.clickDeleteButton();
+        leadDetails.clickDeleteButton();
     }
 }
 

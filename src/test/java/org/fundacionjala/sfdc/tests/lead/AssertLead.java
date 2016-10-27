@@ -31,7 +31,7 @@ public class AssertLead {
      * @param leadDetail    {@link LeadDetails}
      * @param valuesMapJson Json values to be asserts.
      */
-    public void assertDetailValues(LeadDetails leadDetail, Map<String, String> valuesMapJson) {
+    public void assertDetailValues(final LeadDetails leadDetail, final Map<String, String> valuesMapJson) {
         Map<String, String> formatJson = formatJson(valuesMapJson);
 
         formatJson.keySet()

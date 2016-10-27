@@ -1,8 +1,8 @@
 package org.fundacionjala.sfdc.unittest.contract;
 
-import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
-
 import java.util.Map;
+
+import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 
 import static org.testng.Assert.assertEquals;
 
@@ -11,6 +11,9 @@ import static org.testng.Assert.assertEquals;
  */
 public final class AssertContract {
 
+    /**
+     * Private constructor.
+     */
     private AssertContract() {
     }
 

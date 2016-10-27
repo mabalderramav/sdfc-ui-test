@@ -11,6 +11,9 @@ import static org.testng.Assert.assertEquals;
  */
 public final class AssertOpportunity {
 
+    /**
+     * Private constructor.
+     */
     private AssertOpportunity() {
     }
 
