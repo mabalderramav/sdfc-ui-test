@@ -19,20 +19,32 @@ public class CampaignLookup extends ModalWindow {
         init();
     }
 
-    public CampaignForm selectCampaignWithNameByScope(String parentCampaign, String scope) {
-        setSearchCampaignByScope(parentCampaign,scope);
-
+    /**
+     * Method that select a campaign given a scope.
+     *
+     * @param parentCampaign String with the campaign name.
+     * @param scope          String with the scope info.
+     * @return {@link CampaignForm}.
+     */
+    public CampaignForm selectCampaignWithNameByScope(final String parentCampaign, final String scope) {
+        setSearchCampaignByScope(parentCampaign, scope);
         setACampaignFromResults();
         return new CampaignForm();
     }
 
-    public void setSearchCampaignByScope(String campaign, String scope) {
+    /**
+     * Method that makes the campaign search by the scope.
+     *
+     * @param campaign String with the campaign name.
+     * @param scope    String with the scope info.
+     */
+    public void setSearchCampaignByScope(final String campaign, final String scope) {
         SearchSectionFrame searchFrame = new SearchSectionFrame();
         searchFrame.searchTheCampaign(campaign, scope);
     }
 
     /**
-     *
+     * Method that select the campaigns name link from the result search.
      */
     public void setACampaignFromResults() {
         ListSectionFrame listFrame = new ListSectionFrame();

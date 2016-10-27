@@ -14,9 +14,9 @@ public class LeadHome extends HomeBase {
      * This method verify if the Deleted Lead is displayed in the page.
      *
      * @param lead the name of the Lead.
-     * @return <code>true<code/> if Lead is displayed.
+     * @return <lead>true<lead/> if Lead is displayed.
      */
-    public boolean isLeadDisplayed(String lead) {
+    public boolean isLeadDisplayed(final String lead) {
         return CommonActions.existElementByLinkText(lead);
     }
 

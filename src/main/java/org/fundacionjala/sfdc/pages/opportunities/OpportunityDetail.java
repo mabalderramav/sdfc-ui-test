@@ -27,7 +27,7 @@ import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.STAGE
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.TYPE;
 
 /**
- * This class represents of the opportunity detail.
+ * This class represents the opportunity detail.
  */
 public class OpportunityDetail extends DetailBase {
 
@@ -201,7 +201,7 @@ public class OpportunityDetail extends DetailBase {
      * @param accountName a string with account name.
      * @return {@link AccountDetail}.
      */
-    public AccountDetail clickAccountName(String accountName) {
+    public AccountDetail clickAccountName(final String accountName) {
         driver.findElement(By.xpath("//a[contains(.,'" + accountName + "')]")).click();
         return new AccountDetail();
     }

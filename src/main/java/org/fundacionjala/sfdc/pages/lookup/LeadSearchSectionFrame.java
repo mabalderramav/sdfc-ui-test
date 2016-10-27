@@ -1,10 +1,15 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
 /**
- * Created by ccatari on 6/20/2016.
+ * Class to manage the search popup for Lead.
  */
 public class LeadSearchSectionFrame extends SearchSectionFrame {
-    public void searchTheCampaign(String campaign) {
+    /**
+     * Method that makes the search given the campaign name.
+     *
+     * @param campaign String with the campaign name.
+     */
+    public void searchTheCampaign(final String campaign) {
         setCampaign(campaign);
     }
 }

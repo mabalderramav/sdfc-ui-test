@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * This class represent to a form to create or edit a opportunity
+ * This class represent to a form to create or edit a Contract.
  */
 public class ContractForm extends AbstractBasePage {
 
@@ -176,7 +176,7 @@ public class ContractForm extends AbstractBasePage {
      * This method  sets the contract start date.
      *
      * @param contractStartDate a string to set.
-     * @return a contract form..
+     * @return a contract form.
      */
     public ContractForm setContractStartDate(final String contractStartDate) {
         contractStartDateTextBox.clear();
@@ -301,19 +301,30 @@ public class ContractForm extends AbstractBasePage {
      * @return a Map with the values of the contract create.
      */
     public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
-        final Map<String, FormSteps> strategyMap = new HashMap();
+        final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", () -> setAccountName(String.valueOf(values.get("accountName"))));
-        strategyMap.put("customerSignedBy", () -> setCustomerSignedBy(String.valueOf(values.get("customerSignedBy"))));
-        strategyMap.put("customerSignedTitle", () -> setCustomerSignedTitle(String.valueOf(values.get("customerSignedTitle"))));
-        strategyMap.put("customerSignedDate", () -> setCustomerSignedDate(String.valueOf(values.get("customerSignedDate"))));
-        strategyMap.put("priceBook", () -> choosePriceBookType(String.valueOf(values.get("priceBook"))));
-        strategyMap.put("status", () -> chooseStatus(String.valueOf(values.get("status"))));
-        strategyMap.put("contractStartDate", () -> setContractStartDate(String.valueOf(values.get("contractStartDate"))));
-        strategyMap.put("contractTermMonths", () -> setContractTermMonths(String.valueOf(values.get("contractTermMonths"))));
-        strategyMap.put("ownerExpirationNotice", () -> setAccountName(String.valueOf(values.get("ownerExpirationNotice"))));
-        strategyMap.put("companySignedBy", () -> setCompanySignedBy(String.valueOf(values.get("companySignedBy"))));
-        strategyMap.put("companySignedDate", () -> setCompanySignedDate(String.valueOf(values.get("companySignedDate"))));
+        strategyMap.put("accountName",
+                () -> setAccountName(String.valueOf(values.get("accountName"))));
+        strategyMap.put("customerSignedBy",
+                () -> setCustomerSignedBy(String.valueOf(values.get("customerSignedBy"))));
+        strategyMap.put("customerSignedTitle",
+                () -> setCustomerSignedTitle(String.valueOf(values.get("customerSignedTitle"))));
+        strategyMap.put("customerSignedDate",
+                () -> setCustomerSignedDate(String.valueOf(values.get("customerSignedDate"))));
+        strategyMap.put("priceBook",
+                () -> choosePriceBookType(String.valueOf(values.get("priceBook"))));
+        strategyMap.put("status",
+                () -> chooseStatus(String.valueOf(values.get("status"))));
+        strategyMap.put("contractStartDate",
+                () -> setContractStartDate(String.valueOf(values.get("contractStartDate"))));
+        strategyMap.put("contractTermMonths",
+                () -> setContractTermMonths(String.valueOf(values.get("contractTermMonths"))));
+        strategyMap.put("ownerExpirationNotice",
+                () -> setAccountName(String.valueOf(values.get("ownerExpirationNotice"))));
+        strategyMap.put("companySignedBy",
+                () -> setCompanySignedBy(String.valueOf(values.get("companySignedBy"))));
+        strategyMap.put("companySignedDate",
+                () -> setCompanySignedDate(String.valueOf(values.get("companySignedDate"))));
 
         return strategyMap;
     }
@@ -321,9 +332,9 @@ public class ContractForm extends AbstractBasePage {
     /**
      * This method loads data to fill the form for a given Json file.
      *
-     * @param valuesMapCreate
+     * @param valuesMapCreate Map with the info of the Json file.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }

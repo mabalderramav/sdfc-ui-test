@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * this class content all the Account data.
+ * This class content all the Account data.
  */
 public class AccountDetail extends DetailBase {
 
@@ -41,7 +41,7 @@ public class AccountDetail extends DetailBase {
     protected WebElement deleteButton;
 
     /**
-     * {@link DetailBase}
+     * {@inheritDoc}
      */
     @Override
     public AccountForm clickEditButton() {
@@ -67,7 +67,7 @@ public class AccountDetail extends DetailBase {
      *
      * @return Url
      */
-    public String getUrl(){
+    public String getUrl() {
         return driver.getCurrentUrl();
     }
 
@@ -77,7 +77,7 @@ public class AccountDetail extends DetailBase {
      * @return String with account name
      */
     public String getAccountName() {
-        return accountName.getText().substring(0,accountName.getText().indexOf("[")-1);
+        return accountName.getText().substring(0, accountName.getText().indexOf("[") - 1);
     }
 
     /**
@@ -122,7 +122,7 @@ public class AccountDetail extends DetailBase {
      * @return a Map with the values of opportunity edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
-        final Map<String, AssertsDetails> strategyMap = new HashMap();
+        final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
         strategyMap.put("accountName", this::getAccountName);
         strategyMap.put("accountSite", this::getAccountSite);
@@ -137,9 +137,9 @@ public class AccountDetail extends DetailBase {
      * This method verify that account is displayed.
      *
      * @param account String with account.
-     * @return returns <code>true<code/> if account is displayed or <code>false<code/> if it is not .
+     * @return returns <account>true<account/> if account is displayed or <account>false<account/> if it is not .
      */
-    public boolean isAccountDisplayed(String account) {
+    public boolean isAccountDisplayed(final String account) {
         WebElement contactContainer;
         try {
             contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + account + "')]"));
@@ -150,7 +150,13 @@ public class AccountDetail extends DetailBase {
 
     }
 
-    public boolean isElementPresent(WebElement webElement) {
+    /**
+     * Method that validate is an element is present in the page.
+     *
+     * @param webElement element to validate is it is present.
+     * @return <webElement>true<webElement/> if the element is present.
+     */
+    public boolean isElementPresent(final WebElement webElement) {
         try {
             webElement.getText();
             return true;
@@ -158,5 +164,4 @@ public class AccountDetail extends DetailBase {
             return false;
         }
     }
-
 }

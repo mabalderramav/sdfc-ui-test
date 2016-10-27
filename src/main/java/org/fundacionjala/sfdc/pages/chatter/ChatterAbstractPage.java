@@ -7,34 +7,33 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
 /**
- * Created by Gisela on 6/29/2015.
+ * Class to represent the Chatter options.
  */
 public class ChatterAbstractPage extends AbstractBasePage {
 
     @FindBy(xpath = "//textarea[@id='publishereditablearea']")
     @CacheLookup
-    WebElement publisheredArea;
+    private WebElement publisheredArea;
 
     @FindBy(id = "publishersharebutton")
-    WebElement shareButton;
+    private WebElement shareButton;
 
     @FindBy(xpath = "//a[@onclick='chatter.getFeed().showCommentBoxViaAnchor(this);']")
     @CacheLookup
-    WebElement CommentLink;
+    private WebElement commentLink;
 
 
     @FindBy(xpath = "//textarea[@data-uidsfdc='126']")
     @CacheLookup
-    WebElement commentText;
-    //driver.findElement(By.xpath("//input[@type='button']"));
-    //driver.findElement(By.xpath("//input[contains(@id,'ext-gen8')]"));
+    private WebElement commentText;
+
     @FindBy(xpath = "//input[contains(@id,'ext-gen8')]")
     @CacheLookup
-    WebElement CommentButton;
+    private WebElement commentButton;
 
     @FindBy(id = "publishereditablearea")
     @CacheLookup
-    WebElement textArea;
+    private WebElement textArea;
 
     /*
     public ChatterAbstractPage setPubliSheredArea(String text) {
@@ -47,7 +46,7 @@ public class ChatterAbstractPage extends AbstractBasePage {
     }
 
     public ChatterAbstractPage clickCommentLink() {
-        CommonActions.clickElement(CommentLink);
+        CommonActions.clickElement(commentLink);
         return this;
     }
 
@@ -57,11 +56,16 @@ public class ChatterAbstractPage extends AbstractBasePage {
     }
 
     public ChatterAbstractPage clickCommentButton() {
-        CommonActions.clickElement(CommentButton);
+        CommonActions.clickElement(commentButton);
         return this;
     }
     */
 
+    /**
+     * Method tha click on post link.
+     *
+     * @return {@link PostForm}
+     */
     public PostForm clickPostLnk() {
         CommonActions.clickElement(textArea);
         //Actions action = new Actions(driver);
