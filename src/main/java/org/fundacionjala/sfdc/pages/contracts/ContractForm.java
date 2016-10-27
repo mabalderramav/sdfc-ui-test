@@ -1,17 +1,18 @@
 package org.fundacionjala.sfdc.pages.contracts;
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.FormSteps;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.base.FormBase;
-import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-import java.util.HashMap;
-import java.util.Map;
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.FormSteps;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CUSTOMER_SIGNED_BY;
