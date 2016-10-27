@@ -49,7 +49,7 @@ public class DeleteEditOpportunity {
         AccountForm newAccountForm = accountsHome.clickNewButton();
 
         accountDetail = newAccountForm
-                .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
+                .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.getValue()))
 
                 .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();

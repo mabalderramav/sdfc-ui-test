@@ -3,7 +3,7 @@ package org.fundacionjala.sfdc.tests.account;
 import java.util.Map;
 
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -14,43 +14,45 @@ import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
 import org.fundacionjala.sfdc.pages.accounts.AccountForm;
 import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 
+import static org.testng.Assert.assertFalse;
+
 /**
- * Class that verify the edit option for an account.
+ * Class that verify the edit and delete options for an account.
  */
-public class EditAccount {
-    /**
-     * This test is to edit  an account.
-     */
-    private AccountHome accountHome;
-    private MainApp mainApp;
-    private TabBar tabBar;
+public class EditDeleteAccount {
     private AccountDetail accountDetail;
     private AccountForm accountForm;
-
-    public static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
-    public static final String ACCOUNT_DATA_EDIT_PATH = "account/EditAccountData.json";
+    private AccountHome accountHome;
+    private static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
+    private static final String ACCOUNT_DATA_EDIT_PATH = "account/EditAccountData.json";
     private Map<String, String> valuesMapJson;
     private Map<String, String> valuesMapEditJson;
 
     /**
-     * Before method.
+     * This method is a preconditions to edit and delete an account.
      */
     @BeforeMethod
-    public void login() {
+    public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(ACCOUNT_DATA_PATH);
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
+        MainApp mainApp = new MainApp();
+        TabBar tabBar = mainApp.goToTabBar();
         accountHome = tabBar.clickOnAccountsHome();
         accountForm = accountHome.clickNewButton();
         accountForm.fillTheForm(valuesMapJson);
         accountDetail = accountForm.clickSaveButton();
-        valuesMapJson.keySet()
-                .forEach(value -> Assert.assertEquals(accountDetail.getStrategyAssertMap().get(value).getText(),
-                        valuesMapJson.get(value)));
     }
 
     /**
-     * Test to verify the edit of account.
+     * Test to verify the delete of an account.
+     */
+    @Test
+    public void deleteAccount() {
+        accountDetail.clickDeleteButton();
+        assertFalse(accountHome.isAccountDisplayed(valuesMapJson.get("accountName")));
+    }
+
+    /**
+     * Test to verify the edit of an account.
      */
     @Test
     public void editAccount() {
@@ -64,11 +66,10 @@ public class EditAccount {
     }
 
     /**
-     * Method to delete the created account.
+     * This method delete the created AccountFields.
      */
-    @AfterMethod
-    public void afterTest() {
+    @AfterClass
+    public void tearDown() {
         accountDetail.clickDeleteButton();
-        mainApp.clickUserButton().clickLogout();
     }
 }

@@ -50,7 +50,7 @@ public class DeleteEditContract {
         accountsHome = tabBar.clickOnAccountsHome();
         newAccountForm = accountsHome.clickNewButton();
         accountProfile = newAccountForm
-                .setAccountName(valuesMapJson.get("accountName"))
+                .setNameTextField(valuesMapJson.get("accountName"))
                 .clickSaveButton();
         opportunityHomeHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHomeHome.clickNewButton();
