@@ -4,31 +4,14 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.HomeBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
 
 /**
- * This class represents the opportunity pages.
+ * This class represents to opportunity pages.
  */
 public class ContractHome extends HomeBase {
 
-    @FindBy(name = "new")
-    @CacheLookup
-    private WebElement newButton;
-
-    @FindBy(css = "span.fFooter a:first-child")
-    @CacheLookup
-    private WebElement editViewLink;
-
-    @FindBy(css = "span.fFooter a:last-child")
-    @CacheLookup
-    private WebElement createNewViewLink;
-
     /**
-     * This method makes click in new button in contract page.
-     *
-     * @return a contract form page object.
+     * {@inheritDoc}
      */
     @Override
     public ContractForm clickNewButton() {

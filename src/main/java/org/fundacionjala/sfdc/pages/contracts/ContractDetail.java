@@ -1,11 +1,7 @@
 package org.fundacionjala.sfdc.pages.contracts;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
-import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
@@ -14,19 +10,26 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CUSTOMER_SIGNED_BY;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CUSTOMER_SIGNED_TITLE;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.COMPANY_SIGNED_BY;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CONTRACT_START_DATE;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.COMPANY_SIGNED_DATE;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CONTRACT_TERM_MONTHS;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CUSTOMER_SIGNED_DATE;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.OWNER_EXPIRATION_NOTICE;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.PRICE_BOOK;
+import static org.fundacionjala.sfdc.pages.contracts.ContractFields.STATUS;
 /**
  * This class represents of the contract detail.
  */
 public class ContractDetail extends DetailBase {
-
-    @FindBy(name = "del")
-    @CacheLookup
-    private WebElement deleteBtn;
-
-    @FindBy(name = "edit")
-    @CacheLookup
-    private WebElement editBtn;
 
     @FindBy(id = "ctrc2_ileinner")
     @CacheLookup
@@ -81,21 +84,7 @@ public class ContractDetail extends DetailBase {
     private WebElement companySignedDateLabel;
 
     /**
-     * This method makes click on delete button.
-     *
-     * @return main app.
-     */
-    public MainApp clickDeleteBtn() {
-        CommonActions.clickElement(deleteBtn);
-        Alert alert = driver.switchTo().alert();
-        alert.accept();
-        return new MainApp();
-    }
-
-    /**
-     * This method makes a click on edit button.
-     *
-     * @return a contract form.
+     * {@inheritDoc}
      */
     @Override
     public ContractForm clickEditButton() {
@@ -103,9 +92,15 @@ public class ContractDetail extends DetailBase {
         return new ContractForm();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public AbstractBasePage clickDeleteButton() {
-        return null;
+        CommonActions.clickElement(deleteBtn);
+        Alert alert = wait.until(ExpectedConditions.alertIsPresent());
+        alert.accept();
+        return new ContractHome();
     }
 
     /**
@@ -154,9 +149,9 @@ public class ContractDetail extends DetailBase {
     }
 
     /**
-     * This method gets the status.
+     * This method gets the STATUS.
      *
-     * @return a string with status text.
+     * @return a string with STATUS text.
      */
     public String getStatus() {
         return statusLabel.getText();
@@ -224,6 +219,7 @@ public class ContractDetail extends DetailBase {
     public String getContractNumber() {
         return contractNumberLabel.getText();
     }
+
     /**
      * This method that verifies if the contract is displayed.
      *
@@ -248,17 +244,17 @@ public class ContractDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", this::getAccountName);
-        strategyMap.put("customerSignedBy", this::getCustomerSignedBy);
-        strategyMap.put("customerSignedTitle", this::getCustomerSignedTitle);
-        strategyMap.put("customerSignedDate", this::getCustomerSignedDate);
-        strategyMap.put("priceBook", this::getPriceBook);
-        strategyMap.put("status", this::getStatus);
-        strategyMap.put("contractStartDate", this::getContractStartDate);
-        strategyMap.put("contractTermMonths", this::getContractTermMonths);
-        strategyMap.put("ownerExpirationNotice", this::getOwnerExpirationNotice);
-        strategyMap.put("companySignedBy", this::getCompanySignedBy);
-        strategyMap.put("companySignedDate", this::getCompanySignedDate);
+        strategyMap.put(ACCOUNT_NAME.toString(), this::getAccountName);
+        strategyMap.put(CUSTOMER_SIGNED_BY.toString(), this::getCustomerSignedBy);
+        strategyMap.put(CUSTOMER_SIGNED_TITLE.toString(), this::getCustomerSignedTitle);
+        strategyMap.put(CUSTOMER_SIGNED_DATE.toString(), this::getCustomerSignedDate);
+        strategyMap.put(PRICE_BOOK.toString(), this::getPriceBook);
+        strategyMap.put(STATUS.toString(), this::getStatus);
+        strategyMap.put(CONTRACT_START_DATE.toString(), this::getContractStartDate);
+        strategyMap.put(CONTRACT_TERM_MONTHS.toString(), this::getContractTermMonths);
+        strategyMap.put(OWNER_EXPIRATION_NOTICE.toString(), this::getOwnerExpirationNotice);
+        strategyMap.put(COMPANY_SIGNED_BY.toString(), this::getCompanySignedBy);
+        strategyMap.put(COMPANY_SIGNED_DATE.toString(), this::getCompanySignedDate);
         return strategyMap;
     }
 

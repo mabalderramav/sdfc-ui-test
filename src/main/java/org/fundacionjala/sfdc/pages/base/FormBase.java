@@ -7,7 +7,7 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 
 /**
  * This class contains the common procedures to manage Add, and Delete elements from different components:
- * Leads, Campaign, Account, Contact, Contract, Products.
+ * Leads, Campaign, Account, Contact, ContractFields, Products.
  */
 public abstract class FormBase extends AbstractBasePage {
 
