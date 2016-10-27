@@ -5,7 +5,7 @@ sudo: required
 
 script: gradle check
 branches:
-only: develop2
+only: develop
 
 notifications:
   email: true
