@@ -2,8 +2,6 @@ package org.fundacionjala.sfdc.tests.opportunity;
 
 import java.util.Map;
 
-
-import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -40,7 +38,7 @@ public class DeleteEditOpportunity {
      * This method is a preconditions to edit and delete a opportunity.
      */
     @BeforeMethod
-    public void BeforeTest() {
+    public void beforeTest() {
         valuesMapJson = JsonMapper.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
         mainApp = new MainApp();
 
@@ -61,7 +59,7 @@ public class DeleteEditOpportunity {
     }
 
     /**
-     * This a test to delete a opportunities
+     * This a test to delete a opportunities.
      */
     @Test
     public void deleteOpportunity() {

@@ -18,7 +18,7 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 
 /**
- * This class is a test to create a opportunity
+ * This class is a test to create a contract.
  */
 public class CreateContract {
 
@@ -35,10 +35,10 @@ public class CreateContract {
     private Map<String, String> valuesMapJson;
 
     /**
-     * This method is a preconditions to create a opportunities.
+     * This method is a preconditions to create a contract.
      */
     @BeforeTest
-    public void BeforeTest() {
+    public void beforeTest() {
         valuesMapJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_PATH);
         loginPage = new LoginPage();
         mainApp = loginPage.loginAsPrimaryUser();
