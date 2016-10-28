@@ -17,11 +17,15 @@ public class CampaignsHome extends AbstractBasePage {
 
     @FindBy(xpath = "//*[@name='new' and @type='button']")
     @CacheLookup
-   private WebElement newButtton;
+    private WebElement newButtton;
 
     @FindBy(className = "hotListElement")
     @CacheLookup
-   private WebElement allCampaigns;
+    private WebElement allCampaigns;
+
+    @FindBy(className = " dataCell ")
+    @CacheLookup
+    private WebElement campaignNameLink;
 
     /**
      * click on the new button.
@@ -44,4 +48,14 @@ public class CampaignsHome extends AbstractBasePage {
         return campaigns.stream().filter(x -> x.equals(campaignName)).findAny().isPresent();
     }
 
+    /**
+     * Method that select the campaign name from the list.
+     *
+     * @param campaignName String with the campaign name.
+     * @return {@link CampaignDetail}.
+     */
+    public CampaignDetail selectCampaign(final String campaignName) {
+        allCampaigns.findElement(By.linkText(campaignName)).click();
+        return new CampaignDetail();
+    }
 }

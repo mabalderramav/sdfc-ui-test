@@ -70,7 +70,7 @@ public class CreateCampaign {
     @Test()
     public void createCampaign() {
         campaignsHome.clickNewButton();
-        Campaigns campaigns = new Campaigns.ProductBuilder("builderTest")
+        Campaigns campaigns = new Campaigns.CampaignBuilder("builderTest")
                 .setTypeDropDown("Email")
                 .setStatusDropDown("In Progress")
                 .setStartDate("10/25/2015")
