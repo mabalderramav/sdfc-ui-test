@@ -1,7 +1,7 @@
 {
-  "accountName" :"Account Name Edited",
-  "accountSite" :"SCZtestSite",
-  "accountPhone" :"+(591)79719902",
-  "accountWebsite" :"http://test.mydomain.local",
-  "accountEmployees" : "0"
+  "ACCOUNT_NAME":"Test Account Name Edited",
+  "ACCOUNT_SITE":"Test Account Site Edited",
+  "PHONE":"+(591)71234567",
+  "WEBSITE":"http://www.editedDomain.com",
+  "EMPLOYEES":"0"
 }

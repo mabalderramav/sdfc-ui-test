@@ -2,7 +2,6 @@ package org.fundacionjala.sfdc.pages.accounts;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
-import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
@@ -12,6 +11,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.*;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.EMPLOYEES;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.WEBSITE;
 
 /**
  * This class content all the Account data.
@@ -51,11 +54,11 @@ public class AccountDetail extends DetailBase {
      * {@inheritDoc}
      */
     @Override
-    public MainApp clickDeleteButton() {
+    public AccountHome clickDeleteButton() {
         CommonActions.clickElement(deleteButton);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        return new MainApp();
+        return new AccountHome();
     }
 
     /**
@@ -112,11 +115,12 @@ public class AccountDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", this::getName);
-        strategyMap.put("accountSite", this::getSite);
-        strategyMap.put("accountPhone", this::getPhone);
-        strategyMap.put("accountWebsite", this::getWebsite);
-        strategyMap.put("accountEmployees", this::getEmployees);
+
+        strategyMap.put(ACCOUNT_NAME.toString(), this::getName);
+        strategyMap.put(ACCOUNT_SITE.toString(), this::getSite);
+        strategyMap.put(PHONE.toString(), this::getPhone);
+        strategyMap.put(WEBSITE.toString(), this::getWebsite);
+        strategyMap.put(EMPLOYEES.toString(), this::getEmployees);
 
         return strategyMap;
     }

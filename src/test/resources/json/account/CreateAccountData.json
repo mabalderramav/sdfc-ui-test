@@ -1,7 +1,7 @@
 {
-  "accountName" :"Account Name",
-  "accountSite" :"PZtestSite",
-  "accountPhone" :"+(591)71234567",
-  "accountWebsite" :"http://test.jalasoft.local",
-  "accountEmployees" : "2"
+  "ACCOUNT_NAME" : "Test Account Name",
+  "ACCOUNT_SITE":"Test Account Site",
+  "PHONE":"+(591)71234567",
+  "WEBSITE":"http://www.mydomain.com",
+  "EMPLOYEES":"3"
 }

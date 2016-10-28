@@ -2,7 +2,7 @@ package org.fundacionjala.sfdc.tests.account;
 
 import java.util.Map;
 
-import org.testng.Assert;
+import org.fundacionjala.sfdc.tests.Asserts;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -18,9 +18,11 @@ import org.fundacionjala.sfdc.pages.accounts.AccountHome;
  * Class that verify the creation of the account.
  */
 public class CreateAccount {
-    private AccountHome accountHome;
-    private AccountDetail accountDetail;
     private static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
+    private static final String NAME_TEST = "nameTest";
+    private static final String SITE_TEST = "site test";
+    private AccountDetail accountDetail;
+    private AccountForm accountForm;
     private Map<String, String> valuesMapJson;
 
     /**
@@ -31,7 +33,18 @@ public class CreateAccount {
         valuesMapJson = JsonMapper.getMapJson(ACCOUNT_DATA_PATH);
         MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
-        accountHome = tabBar.clickOnAccountsHome();
+        AccountHome accountHome = tabBar.clickOnAccountsHome();
+        accountForm = accountHome.clickNewButton();
+    }
+
+    /**
+     * Method that verify the creation of the account with json file.
+     */
+    @Test
+    public void createAccountWithJson() {
+        accountForm.fillTheForm(valuesMapJson);
+        accountDetail = accountForm.clickSaveButton();
+        Asserts.assertDetailValues(accountDetail, valuesMapJson);
     }
 
     /**
@@ -39,19 +52,18 @@ public class CreateAccount {
      */
     @Test
     public void createAccount() {
-        AccountForm accountForm = accountHome.clickNewButton();
-        accountForm.fillTheForm(valuesMapJson);
-        accountDetail = accountForm.clickSaveButton();
-        valuesMapJson.keySet()
-                .forEach(value -> Assert.assertEquals(accountDetail.getStrategyAssertMap().get(value).getText(),
-                        valuesMapJson.get(value)));
+        accountForm = new AccountForm.AccountBuilder(NAME_TEST)
+                .setSite(SITE_TEST)
+                .build();
+        accountDetail = accountForm.saveAccount();
+        Asserts.assertDetailValues(accountDetail, accountForm.getValuesMap());
     }
 
     /**
-     * Delete the created account.
+     * Delete the created account after the tests.
      */
     @AfterMethod
-    public void afterTest() {
+    public void tearDown() {
         accountDetail.clickDeleteButton();
     }
 }
