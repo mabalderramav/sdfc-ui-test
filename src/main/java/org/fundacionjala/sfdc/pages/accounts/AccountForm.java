@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
@@ -7,31 +10,27 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * It is the account base page, abstract class.
- *
  */
 public class AccountForm extends FormBase {
 
     //account form fields
     @FindBy(id = "acc2")
     @CacheLookup
-    private WebElement accountNameTextbox;
+    private WebElement nameTextField;
     @FindBy(id = "acc23")
     @CacheLookup
-    private WebElement accountSiteTextbox;
+    private WebElement siteTextField;
     @FindBy(id = "acc10")
     @CacheLookup
-    private WebElement accountPhoneTextbox;
+    private WebElement phoneTextField;
     @FindBy(id = "acc12")
     @CacheLookup
-    private WebElement accountWebsiteTextbox;
+    private WebElement websiteTextField;
     @FindBy(id = "acc15")
     @CacheLookup
-    private WebElement accountEmployeesTextbox;
+    private WebElement employeesTextField;
 
     /**
      * {@inheritDoc}
@@ -58,8 +57,8 @@ public class AccountForm extends FormBase {
      * @param accountName String with the account name.
      * @return Return this class.
      */
-    public AccountForm setAccountName(final String accountName) {
-        CommonActions.sendKeys(accountNameTextbox, accountName);
+    public AccountForm setNameTextField(final String accountName) {
+        CommonActions.sendKeys(nameTextField, accountName);
         return this;
     }
 
@@ -69,8 +68,8 @@ public class AccountForm extends FormBase {
      * @param accountSite String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountSite(final String accountSite) {
-        CommonActions.sendKeys(accountSiteTextbox, accountSite);
+    private AccountForm setSiteTextField(final String accountSite) {
+        CommonActions.sendKeys(siteTextField, accountSite);
         return this;
     }
 
@@ -80,8 +79,8 @@ public class AccountForm extends FormBase {
      * @param accountPhone String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountPhone(final String accountPhone) {
-        CommonActions.sendKeys(accountPhoneTextbox, accountPhone);
+    private AccountForm setPhoneTextField(final String accountPhone) {
+        CommonActions.sendKeys(phoneTextField, accountPhone);
         return this;
     }
 
@@ -91,8 +90,8 @@ public class AccountForm extends FormBase {
      * @param accountWebsite String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountWebsite(final String accountWebsite) {
-        CommonActions.sendKeys(accountWebsiteTextbox, accountWebsite);
+    private AccountForm setWebsiteTextField(final String accountWebsite) {
+        CommonActions.sendKeys(websiteTextField, accountWebsite);
         return this;
     }
 
@@ -102,8 +101,8 @@ public class AccountForm extends FormBase {
      * @param accountEmployees String with the site account name.
      * @return Return this class.
      */
-    public AccountForm setAccountEmployees(final String accountEmployees) {
-        CommonActions.sendKeys(accountEmployeesTextbox, accountEmployees);
+    private AccountForm setEmployeesTextField(final String accountEmployees) {
+        CommonActions.sendKeys(employeesTextField, accountEmployees);
         return this;
     }
 
@@ -113,14 +112,15 @@ public class AccountForm extends FormBase {
      * @param values a map to set of the strategy
      * @return a Map with the values of the account created.
      */
-    public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
-        final Map<String, FormSteps> strategyMap = new HashMap();
+    private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", () -> setAccountName(String.valueOf(values.get("accountName"))));
-        strategyMap.put("accountSite", () -> setAccountSite(String.valueOf(values.get("accountSite"))));
-        strategyMap.put("accountPhone", () -> setAccountPhone(String.valueOf(values.get("accountPhone"))));
-        strategyMap.put("accountWebsite", () -> setAccountWebsite(String.valueOf(values.get("accountWebsite"))));
-        strategyMap.put("accountEmployees", () -> setAccountEmployees(String.valueOf(values.get("accountEmployees"))));
+        strategyMap.put("accountName", () -> setNameTextField(String.valueOf(values.get("accountName"))));
+        strategyMap.put("accountSite", () -> setSiteTextField(String.valueOf(values.get("accountSite"))));
+        strategyMap.put("accountPhone", () -> setPhoneTextField(String.valueOf(values.get("accountPhone"))));
+        strategyMap.put("accountWebsite", () -> setWebsiteTextField(String.valueOf(values.get("accountWebsite"))));
+        strategyMap.put("accountEmployees",
+                () -> setEmployeesTextField(String.valueOf(values.get("accountEmployees"))));
         return strategyMap;
     }
 

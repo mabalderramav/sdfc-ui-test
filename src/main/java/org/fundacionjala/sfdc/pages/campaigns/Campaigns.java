@@ -8,18 +8,18 @@ import java.util.Map;
  */
 public class Campaigns {
 
-    private Campaigns.ProductBuilder productBuilder;
+    private CampaignBuilder campaignBuilder;
 
     private Map<String, String> valuesMap;
 
     /**
      * constructor.
      *
-     * @param productBuilder Product Builder.
+     * @param campaignBuilder Product Builder.
      */
-    public Campaigns(final Campaigns.ProductBuilder productBuilder) {
+    public Campaigns(final CampaignBuilder campaignBuilder) {
         valuesMap = new HashMap<>();
-        this.productBuilder = productBuilder;
+        this.campaignBuilder = campaignBuilder;
     }
 
     /**
@@ -29,7 +29,7 @@ public class Campaigns {
      */
     public CampaignDetail createCampaign() {
         CampaignForm campaignForm = new CampaignForm();
-        valuesMap = productBuilder.getStrategyMap();
+        valuesMap = campaignBuilder.getStrategyMap();
         campaignForm.fillTheForm(valuesMap);
         return campaignForm.clickSaveButton();
     }
@@ -46,9 +46,10 @@ public class Campaigns {
     /**
      * builder Pattern.
      */
-    public static class ProductBuilder {
+    public static class CampaignBuilder {
 
         private String name;
+        private String active;
         private String typeDropDown;
         private String statusDropDown;
         private String startDate;
@@ -71,10 +72,22 @@ public class Campaigns {
          *
          * @param name String the name of the campaign.
          */
-        public ProductBuilder(final String name) {
+        public CampaignBuilder(final String name) {
             strategyMap = new HashMap<>();
             strategyMap.put("campaignName", name);
             this.name = name;
+        }
+
+        /**
+         * Method that sets the Active campaign.
+         *
+         * @param active String with active campaign.
+         * @return {@link CampaignBuilder}
+         */
+        public CampaignBuilder setActive(final String active) {
+            strategyMap.put("active", startDate);
+            this.active = active;
+            return this;
         }
 
         /**
@@ -83,7 +96,7 @@ public class Campaigns {
          * @param startDate String whit the date.
          * @return campaign builder
          */
-        public Campaigns.ProductBuilder setStartDate(final String startDate) {
+        public CampaignBuilder setStartDate(final String startDate) {
             strategyMap.put("startDate", startDate);
             this.startDate = startDate;
             return this;
@@ -95,7 +108,7 @@ public class Campaigns {
          * @param typeDropDown String whit the value.
          * @return campaign builder.
          */
-        public Campaigns.ProductBuilder setTypeDropDown(final String typeDropDown) {
+        public CampaignBuilder setTypeDropDown(final String typeDropDown) {
             strategyMap.put("typeDropDown", typeDropDown);
             this.typeDropDown = typeDropDown;
             return this;
@@ -107,7 +120,7 @@ public class Campaigns {
          * @param statusDropDown String whit the value.
          * @return campaign builder.
          */
-        public Campaigns.ProductBuilder setStatusDropDown(final String statusDropDown) {
+        public CampaignBuilder setStatusDropDown(final String statusDropDown) {
             strategyMap.put("statusDropDown", statusDropDown);
             this.statusDropDown = statusDropDown;
             return this;
@@ -119,7 +132,7 @@ public class Campaigns {
          * @param revenue String whit the value.
          * @return campaign builder.
          */
-        public Campaigns.ProductBuilder setRevenue(final String revenue) {
+        public CampaignBuilder setRevenue(final String revenue) {
             strategyMap.put("revenue", revenue);
             this.revenue = revenue;
             return this;
@@ -131,7 +144,7 @@ public class Campaigns {
          * @param endDate String whi the date.
          * @return campaign builder.
          */
-        public Campaigns.ProductBuilder setEndDate(final String endDate) {
+        public CampaignBuilder setEndDate(final String endDate) {
             strategyMap.put("endDate", endDate);
             this.endDate = endDate;
             return this;

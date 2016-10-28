@@ -5,8 +5,6 @@ import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -38,7 +36,7 @@ public class AccountDetail extends DetailBase {
     private WebElement accountEmployees;
     @FindBy(name = "delete")
     @CacheLookup
-    protected WebElement deleteButton;
+    private WebElement deleteButton;
 
     /**
      * {@inheritDoc}
@@ -50,9 +48,7 @@ public class AccountDetail extends DetailBase {
     }
 
     /**
-     * Deletes the account.
-     *
-     * @return a new MainApp
+     * {@inheritDoc}
      */
     @Override
     public MainApp clickDeleteButton() {
@@ -63,21 +59,13 @@ public class AccountDetail extends DetailBase {
     }
 
     /**
-     * Returns the current Url.
-     *
-     * @return Url
-     */
-    public String getUrl() {
-        return driver.getCurrentUrl();
-    }
-
-    /**
      * Returns the account name.
      *
      * @return String with account name
      */
-    public String getAccountName() {
-        return accountName.getText().substring(0, accountName.getText().indexOf("[") - 1);
+    public String getName() {
+        String accountName = this.accountName.getText();
+        return accountName.substring(0, accountName.indexOf("[") - 1);
     }
 
     /**
@@ -85,7 +73,7 @@ public class AccountDetail extends DetailBase {
      *
      * @return String with account site
      */
-    public String getAccountSite() {
+    private String getSite() {
         return accountSite.getText();
     }
 
@@ -94,7 +82,7 @@ public class AccountDetail extends DetailBase {
      *
      * @return String with account phone
      */
-    public String getAccountPhone() {
+    private String getPhone() {
         return accountPhone.getText();
     }
 
@@ -103,7 +91,7 @@ public class AccountDetail extends DetailBase {
      *
      * @return String with account website
      */
-    public String getAccountWebsite() {
+    private String getWebsite() {
         return accountWebsite.getText();
     }
 
@@ -112,7 +100,7 @@ public class AccountDetail extends DetailBase {
      *
      * @return String with account employees
      */
-    public String getAccountEmployees() {
+    private String getEmployees() {
         return accountEmployees.getText();
     }
 
@@ -124,44 +112,13 @@ public class AccountDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", this::getAccountName);
-        strategyMap.put("accountSite", this::getAccountSite);
-        strategyMap.put("accountPhone", this::getAccountPhone);
-        strategyMap.put("accountWebsite", this::getAccountWebsite);
-        strategyMap.put("accountEmployees", this::getAccountEmployees);
+        strategyMap.put("accountName", this::getName);
+        strategyMap.put("accountSite", this::getSite);
+        strategyMap.put("accountPhone", this::getPhone);
+        strategyMap.put("accountWebsite", this::getWebsite);
+        strategyMap.put("accountEmployees", this::getEmployees);
 
         return strategyMap;
     }
 
-    /**
-     * This method verify that account is displayed.
-     *
-     * @param account String with account.
-     * @return returns <account>true<account/> if account is displayed or <account>false<account/> if it is not .
-     */
-    public boolean isAccountDisplayed(final String account) {
-        WebElement contactContainer;
-        try {
-            contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + account + "')]"));
-        } catch (WebDriverException e) {
-            return false;
-        }
-        return isElementPresent(contactContainer);
-
-    }
-
-    /**
-     * Method that validate is an element is present in the page.
-     *
-     * @param webElement element to validate is it is present.
-     * @return <webElement>true<webElement/> if the element is present.
-     */
-    public boolean isElementPresent(final WebElement webElement) {
-        try {
-            webElement.getText();
-            return true;
-        } catch (WebDriverException e) {
-            return false;
-        }
-    }
 }
