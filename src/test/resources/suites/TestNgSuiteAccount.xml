@@ -3,7 +3,7 @@
     <listeners>
         <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener"/>
     </listeners>
-    <test name="Account">
+    <test name="Accounts">
         <classes>
             <class name="org.fundacionjala.sfdc.tests.account.CreateAccount"/>
             <class name="org.fundacionjala.sfdc.tests.account.EditDeleteAccount"/>
