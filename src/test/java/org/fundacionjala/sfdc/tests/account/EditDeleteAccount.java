@@ -2,7 +2,7 @@ package org.fundacionjala.sfdc.tests.account;
 
 import java.util.Map;
 
-import org.testng.Assert;
+import org.fundacionjala.sfdc.tests.Asserts;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -14,6 +14,7 @@ import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
 import org.fundacionjala.sfdc.pages.accounts.AccountForm;
 import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_NAME;
 import static org.testng.Assert.assertFalse;
 
 /**
@@ -26,7 +27,6 @@ public class EditDeleteAccount {
     private static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
     private static final String ACCOUNT_DATA_EDIT_PATH = "account/EditAccountData.json";
     private Map<String, String> valuesMapJson;
-    private Map<String, String> valuesMapEditJson;
 
     /**
      * This method is a preconditions to edit and delete an account.
@@ -43,30 +43,28 @@ public class EditDeleteAccount {
     }
 
     /**
-     * Test to verify the delete of an account.
+     * Test to verify the successful deleting of an account.
      */
     @Test
     public void deleteAccount() {
         accountDetail.clickDeleteButton();
-        assertFalse(accountHome.isAccountDisplayed(valuesMapJson.get("accountName")));
+        assertFalse(accountHome.isAccountDisplayed(valuesMapJson.get(ACCOUNT_NAME.toString())));
     }
 
     /**
-     * Test to verify the edit of an account.
+     * Test to verify the correct edition of an account.
      */
     @Test
     public void editAccount() {
+        Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(ACCOUNT_DATA_EDIT_PATH);
         accountForm = accountDetail.clickEditButton();
-        valuesMapEditJson = JsonMapper.getMapJson(ACCOUNT_DATA_EDIT_PATH);
         accountForm.fillTheForm(valuesMapEditJson);
         accountDetail = accountForm.clickSaveButton();
-        valuesMapJson.keySet()
-                .forEach(value -> Assert.assertEquals(accountDetail.getStrategyAssertMap().get(value).getText(),
-                        valuesMapEditJson.get(value)));
+        Asserts.assertDetailValues(accountDetail, valuesMapEditJson);
     }
 
     /**
-     * This method delete the created AccountFields.
+     * This method delete the created  Account.
      */
     @AfterClass
     public void tearDown() {

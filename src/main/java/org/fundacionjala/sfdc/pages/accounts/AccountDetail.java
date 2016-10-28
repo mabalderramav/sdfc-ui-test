@@ -13,6 +13,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_SITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.PHONE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.WEBSITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.EMPLOYEES;
+
 /**
  * This class content all the Account data.
  */
@@ -107,16 +113,17 @@ public class AccountDetail extends DetailBase {
     /**
      * Method that to permit gets texts.
      *
-     * @return a Map with the values of opportunity edit.
+     * @return a Map with the values of account edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", this::getName);
-        strategyMap.put("accountSite", this::getSite);
-        strategyMap.put("accountPhone", this::getPhone);
-        strategyMap.put("accountWebsite", this::getWebsite);
-        strategyMap.put("accountEmployees", this::getEmployees);
+
+        strategyMap.put(ACCOUNT_NAME.toString(), this::getName);
+        strategyMap.put(ACCOUNT_SITE.toString(), this::getSite);
+        strategyMap.put(PHONE.toString(), this::getPhone);
+        strategyMap.put(WEBSITE.toString(), this::getWebsite);
+        strategyMap.put(EMPLOYEES.toString(), this::getEmployees);
 
         return strategyMap;
     }
