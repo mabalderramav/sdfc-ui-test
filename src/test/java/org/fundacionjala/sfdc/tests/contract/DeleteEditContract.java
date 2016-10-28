@@ -65,7 +65,7 @@ public class DeleteEditContract {
     @Test
     public void deleteContract() {
         contractDetail.clickDeleteButton();
-        assertFalse(contractDetail.isContractDisplayed(contractNumber));
+        assertFalse(contractDetail.isContractDisplayed(contractNumber), "The contract shouldn't be displayed");
     }
 
     /**

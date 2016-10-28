@@ -60,7 +60,7 @@ public class UpdateCampaign {
     public void editProduct() {
 
         campaignForm = campaignDetail.clickEditButton();
-        Campaigns campaigns = new Campaigns.ProductBuilder("UpdatedWhitBuilder")
+        Campaigns campaigns = new Campaigns.CampaignBuilder("UpdatedWhitBuilder")
                 .setTypeDropDown("Direct Mail")
                 .setStatusDropDown("Completed")
                 .build();
