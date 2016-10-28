@@ -2,6 +2,7 @@ package org.fundacionjala.sfdc.pages.accounts;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
+import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.WebElement;
@@ -56,11 +57,11 @@ public class AccountDetail extends DetailBase {
      * {@inheritDoc}
      */
     @Override
-    public AccountHome clickDeleteButton() {
+    public MainApp clickDeleteButton() {
         CommonActions.clickElement(deleteButton);
         Alert alert = wait.until(ExpectedConditions.alertIsPresent());
         alert.accept();
-        return new AccountHome();
+        return new MainApp();
     }
 
     /**
