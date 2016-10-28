@@ -64,8 +64,8 @@ public class DeleteEditOpportunity {
     @Test
     public void deleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-
-        assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())));
+        assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())),
+                "The opportunity name shouldn't to be displayed");
     }
 
     /**

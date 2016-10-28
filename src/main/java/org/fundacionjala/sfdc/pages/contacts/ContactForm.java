@@ -10,10 +10,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.BIRTH_DATE;
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.CONTACT_NAME;
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.DEPARTMENT;
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.FIRST_NAME_CATEGORY;
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LAST_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LEAD_SOURCE;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.MAIL;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.MAILING_STREET;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.OTHER_STREET;
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.TITLE;
 
 /**
@@ -61,9 +66,22 @@ public class ContactForm extends FormBase {
     @CacheLookup
     private WebElement phoneField;
 
+    @FindBy(id = "con15")
+    @CacheLookup
+    private WebElement mailField;
+
+    @FindBy(id = "con19street")
+    @CacheLookup
+    private WebElement mailingStreetField;
+
+    @FindBy(id = "con18street")
+    @CacheLookup
+    private WebElement otherStreetField;
+
     @FindBy(xpath = "//input[@tabindex='33']")
     @CacheLookup
-    private WebElement cancelBtn;
+    private WebElement cancelBtnField;
+
 
     /**
      * This method is to select name category.
@@ -145,6 +163,39 @@ public class ContactForm extends FormBase {
     /**
      * This method is to select name category.
      *
+     * @param mail a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setMail(final String mail) {
+        CommonActions.sendKeys(mailField, mail);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
+     * @param mailingStreet a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setMailingStreet(final String mailingStreet) {
+        CommonActions.sendKeys(mailingStreetField, mailingStreet);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
+     * @param otherStreet a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setOtherStreet(final String otherStreet) {
+        CommonActions.sendKeys(otherStreetField, otherStreet);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
      * @param item a string to select.
      * @return {@link ContactForm}.
      */
@@ -154,9 +205,7 @@ public class ContactForm extends FormBase {
     }
 
     /**
-     * This method makes click in save new button.
-     *
-     * @return {@link ContactsDetail}.
+     * {@inheritDoc}.
      */
     @Override
     public ContactsDetail clickSaveButton() {
@@ -165,9 +214,7 @@ public class ContactForm extends FormBase {
     }
 
     /**
-     * This method makes click in save button.
-     *
-     * @return {@link ContactsDetail}.
+     * {@inheritDoc}.
      */
     @Override
     public ContactsDetail clickSaveNewButton() {
@@ -190,6 +237,11 @@ public class ContactForm extends FormBase {
         strategyMap.put(LAST_NAME.getValue(), () -> setLastName(values.get(LAST_NAME.getValue())));
         strategyMap.put(TITLE.getValue(), () -> setTitle(values.get(TITLE.getValue())));
         strategyMap.put(DEPARTMENT.getValue(), () -> setDepartment(values.get(DEPARTMENT.getValue())));
+        strategyMap.put(BIRTH_DATE.getValue(), () -> setBirthDate(values.get(BIRTH_DATE.getValue())));
+        strategyMap.put(LEAD_SOURCE.getValue(), () -> selectLeadSource(values.get(LEAD_SOURCE.getValue())));
+        strategyMap.put(MAIL.getValue(), () -> setMail(values.get(MAIL.getValue())));
+        strategyMap.put(MAILING_STREET.getValue(), () -> setMailingStreet(values.get(MAILING_STREET.getValue())));
+        strategyMap.put(OTHER_STREET.getValue(), () -> setOtherStreet(values.get(OTHER_STREET.getValue())));
 
         return strategyMap;
     }

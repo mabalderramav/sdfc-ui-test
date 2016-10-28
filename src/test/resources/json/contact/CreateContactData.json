@@ -3,5 +3,10 @@
   "contactName": "Test122",
   "lastName": "lastName22",
   "title": "title22",
-  "department": "department22"
+  "department": "department22",
+  "birthDate": "10/25/2016",
+  "leadSource": "Partner Referral",
+  "mail": "fernando@gmail.com",
+  "mailingStreet": "Washington #654",
+  "otherStreet": "Virginia #789"
 }
