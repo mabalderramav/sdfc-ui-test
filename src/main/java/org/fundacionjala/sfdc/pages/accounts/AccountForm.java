@@ -10,7 +10,11 @@ import org.openqa.selenium.support.FindBy;
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.fundacionjala.sfdc.pages.accounts.AccountFields.*;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_SITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.PHONE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.WEBSITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.EMPLOYEES;
 
 /**
  * It is the account base page, abstract class.
