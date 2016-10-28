@@ -50,6 +50,7 @@ public class DeleteEditOpportunity {
 
         accountDetail = newAccountForm
                 .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.getValue()))
+
                 .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
@@ -64,8 +65,8 @@ public class DeleteEditOpportunity {
     @Test
     public void deleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-        assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())),
-                "The opportunity name shouldn't to be displayed");
+
+        assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())));
     }
 
     /**
