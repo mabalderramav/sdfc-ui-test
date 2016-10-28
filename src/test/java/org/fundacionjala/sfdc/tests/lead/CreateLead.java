@@ -3,6 +3,10 @@ package org.fundacionjala.sfdc.tests.lead;
 
 import java.util.Map;
 
+import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -15,18 +19,24 @@ import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
 
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CAMPAIGN;
 import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
 
 /**
  * This class verify the Creation of LeadHome.
  */
 public class CreateLead {
+
+    private static final String CAMPAIGN_NAME = "CampaignTest-01";
+    private static final String LEAD_DATA_PATH = "lead/CreateLeadData.json";
+
     private LeadHome leadHomePage;
+    private CampaignsHome campaignsHome;
+    private CampaignDetail campaignDetail;
     private MainApp mainApp;
-    private TabBar tabBar;
     private LeadDetails leadDetails;
     private LoginPage loginPage;
-    public static final String LEAD_DATA_PATH = "lead/CreateLeadData.json";
+
     private Map<String, String> valuesMapJson;
 
 
@@ -35,9 +45,16 @@ public class CreateLead {
      */
     @BeforeTest
     public void setUp() {
-        tabBar = new MainApp().goToTabBar();
+        TabBar tabBar = new MainApp().goToTabBar();
+        campaignsHome = tabBar.clickCampaigns();
+        CampaignForm campaignForm = campaignsHome.clickNewButton();
+        Campaigns campaigns = new Campaigns.CampaignBuilder(CAMPAIGN_NAME)
+                .setActive("checked")
+                .build();
+        campaignDetail = campaigns.createCampaign();
+        valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
+        valuesMapJson.put(CAMPAIGN.toString(), CAMPAIGN_NAME);
         leadHomePage = tabBar.clickLead();
-        // create campaign
     }
 
     /**
@@ -46,7 +63,6 @@ public class CreateLead {
     @Test
     public void createLeadTest() {
         LeadForm leadForm = leadHomePage.clickNewButton();
-        valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
         leadForm.fillTheForm(valuesMapJson);
         leadDetails = leadForm.clickSaveButton();
         assertDetailValues(leadDetails, leadForm.formatJson(valuesMapJson));
@@ -59,6 +75,9 @@ public class CreateLead {
     @AfterMethod
     public void tearDown() {
         leadDetails.clickDeleteButton();
+        campaignsHome = new TabBar().clickCampaigns();
+        campaignDetail = campaignsHome.selectCampaign(CAMPAIGN_NAME);
+        campaignDetail.clickDeleteButton();
     }
 }
 

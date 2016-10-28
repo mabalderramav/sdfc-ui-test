@@ -60,7 +60,7 @@ public class ProductForm extends FormBase {
     /**
      * Private constructor.
      *
-     * @param productBuilder ProductBuilder class.
+     * @param productBuilder CampaignBuilder class.
      */
     private ProductForm(final ProductBuilder productBuilder) {
         valuesMap = new HashMap<>();
@@ -223,7 +223,7 @@ public class ProductForm extends FormBase {
         }
 
         /**
-         * Constructor the ProductBuilder class.
+         * Constructor the CampaignBuilder class.
          *
          * @param name Name required by the class.
          */
