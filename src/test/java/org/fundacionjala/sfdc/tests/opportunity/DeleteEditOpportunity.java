@@ -50,7 +50,6 @@ public class DeleteEditOpportunity {
 
         accountDetail = newAccountForm
                 .setAccountName(valuesMapJson.get(ACCOUNT_NAME.getValue()))
-
                 .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
