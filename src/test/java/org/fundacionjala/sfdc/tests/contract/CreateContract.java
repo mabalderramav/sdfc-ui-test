@@ -59,7 +59,7 @@ public class CreateContract {
         mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
         Map<String, String> valuesMapAccount = new HashMap<>();
-        valuesMapAccount.put("accountName", valuesMapJson.get(ACCOUNT_NAME.toString()));
+        valuesMapAccount.put(ACCOUNT_NAME.toString(), valuesMapJson.get(ACCOUNT_NAME.toString()));
 
         accountHome = tabBar.clickOnAccountsHome();
         accountForm = accountHome.clickNewButton();
