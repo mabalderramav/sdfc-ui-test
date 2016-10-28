@@ -1,6 +1,8 @@
 package org.fundacionjala.sfdc.pages.leads;
 
+import java.text.NumberFormat;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 import org.openqa.selenium.WebElement;
@@ -302,6 +304,16 @@ public class LeadForm extends FormBase {
     }
 
     /**
+     * Method to fill the form given a Json file or the builder class.
+     *
+     * @param valuesMapCreate Map with the Json or builder map values.
+     */
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    }
+
+    /**
      * Method to give a format the Json, according this new Json is built according the details Page.
      *
      * @param valuesMap Original Json.
@@ -313,13 +325,12 @@ public class LeadForm extends FormBase {
                 + valuesMap.get(LAST_NAME.toString());
         fullName = formatString(fullName);
 
-        String address =
-                valuesMap.get(STREET.toString()) + "\n"
-                        + valuesMap.get(CITY.toString())
-                        + ", " + valuesMap.get(STATE_PROVINCE.toString())
-                        + " " + valuesMap.get(ZIP_CODE.toString())
-                        + "\n" + valuesMap.get(COUNTRY.toString());
-        address = formatString(address);
+        String address = formatAddress(valuesMap);
+
+        if (valuesMap.containsKey(ANNUAL_REVENUE.toString())) {
+            String annualRevenueFormatted = formatNumber(valuesMap.get(ANNUAL_REVENUE.toString()));
+            valuesMap.put(ANNUAL_REVENUE.toString(), annualRevenueFormatted);
+        }
 
         valuesMap.put(FULL_NAME.toString(), fullName);
         valuesMap.put(ADDRESS.toString(), address);
@@ -335,10 +346,42 @@ public class LeadForm extends FormBase {
         valuesMap.remove(ZIP_CODE.toString());
         valuesMap.remove(COUNTRY.toString());
 
-        valuesMap.remove(ANNUAL_REVENUE.toString());
         valuesMap.remove(ASSIGN_RULE.toString());
 
         return valuesMap;
+    }
+
+    /**
+     * Method that give format to a number.
+     *
+     * @param number String with the number to be Formatted.
+     * @return a String with the number formatted.
+     */
+    private String formatNumber(final String number) {
+        return NumberFormat.getNumberInstance(Locale.US).format(Integer.parseInt(number));
+    }
+
+    /**
+     * Method that give a format to an Address.
+     *
+     * @param valuesMap Map that contain the address values to be formatted.
+     * @return a String with the formatted address.
+     */
+    private String formatAddress(final Map<String, String> valuesMap) {
+        String address = "";
+        if (String.valueOf(valuesMap.get(ZIP_CODE.toString())).equals("null")) {
+            address = valuesMap.get(STREET.toString()) + "\n"
+                    + valuesMap.get(CITY.toString())
+                    + ", " + valuesMap.get(STATE_PROVINCE.toString())
+                    + "\n" + valuesMap.get(COUNTRY.toString());
+        } else {
+            address = valuesMap.get(STREET.toString()) + "\n"
+                    + valuesMap.get(CITY.toString())
+                    + ", " + valuesMap.get(STATE_PROVINCE.toString())
+                    + " " + valuesMap.get(ZIP_CODE.toString())
+                    + "\n" + valuesMap.get(COUNTRY.toString());
+        }
+        return formatString(address);
     }
 
     /**
@@ -352,17 +395,7 @@ public class LeadForm extends FormBase {
         if (result.startsWith(",")) {
             result = result.replaceAll(",", "").trim();
         }
-        return result.trim();
-    }
-
-    /**
-     * Method to fill the form given a Json file or the builder class.
-     *
-     * @param valuesMapCreate Map with the Json or builder map values.
-     */
-    public void fillTheForm(final Map<String, String> valuesMapCreate) {
-        valuesMapCreate.keySet()
-                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+        return result;
     }
 
     /**

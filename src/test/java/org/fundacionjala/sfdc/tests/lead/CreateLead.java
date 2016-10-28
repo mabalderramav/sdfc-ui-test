@@ -3,18 +3,17 @@ package org.fundacionjala.sfdc.tests.lead;
 
 import java.util.Map;
 
-import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
-import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
-import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
-import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.LoginPage;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
+import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
+import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
@@ -33,15 +32,14 @@ public class CreateLead {
     private LeadHome leadHomePage;
     private CampaignsHome campaignsHome;
     private CampaignDetail campaignDetail;
-    private MainApp mainApp;
     private LeadDetails leadDetails;
-    private LoginPage loginPage;
 
     private Map<String, String> valuesMapJson;
 
 
     /**
-     * This method execute the preconditions to make the validation to the creation of lead.
+     * This method execute the preconditions to make the validation for creation of lead,
+     * in this method a campaign is created and the LINKS tab is selected.
      */
     @BeforeTest
     public void setUp() {
@@ -70,7 +68,7 @@ public class CreateLead {
     }
 
     /**
-     * This method delete the created LeadFields.
+     * This method delete the created Lead and also delete the created campaign.
      */
     @AfterMethod
     public void tearDown() {

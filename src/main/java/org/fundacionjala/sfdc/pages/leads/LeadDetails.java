@@ -14,6 +14,7 @@ import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ADDRESS;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.ANNUAL_REVENUE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.COMPANY;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.CURRENT_GENERATORS;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.DESCRIPTION;
@@ -139,6 +140,10 @@ public class LeadDetails extends DetailBase {
     @CacheLookup
     private WebElement lastModifiedByLabel;
 
+    @FindBy(css = "div.listRelatedObject.campaignBlock table.list")
+    @CacheLookup
+    private WebElement campaignBlock;
+
     /**
      * Method that gets the Owner that was registered in the creation of LeadHome.
      *
@@ -199,7 +204,8 @@ public class LeadDetails extends DetailBase {
      * @return a String with the Annual Revenue info.
      */
     public String getAnnualRevenueLabel() {
-        return annualRevenueLabel.getText();
+
+        return annualRevenueLabel.getText().substring(1);
     }
 
     /**
@@ -344,7 +350,7 @@ public class LeadDetails extends DetailBase {
      * @return a String with the campaign name.
      */
     public String getCampaign(final String campaignName) {
-        return driver.findElement(By.xpath("//a[contains(.," + campaignName + ")]")).getText();
+        return campaignBlock.findElement(By.linkText(campaignName)).getText();
     }
 
     /**
@@ -381,6 +387,7 @@ public class LeadDetails extends DetailBase {
         strategyMap.put(PHONE.toString(), this::getPhoneLabel);
         strategyMap.put(MOBILE.toString(), this::getMobileLabel);
         strategyMap.put(FAX.toString(), this::getFaxLabel);
+        strategyMap.put(ANNUAL_REVENUE.toString(), this::getAnnualRevenueLabel);
 
         strategyMap.put(EMAIL.toString(), this::getEmailLabel);
         strategyMap.put(WEBSITE.toString(), this::getWebsiteLabel);
