@@ -1,7 +1,7 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
 /**
- * Enum that contain all parameters of the LeadFields Form.
+ * Enum that contain all parameters of the AccountFields Form.
  */
 public enum AccountFields {
 

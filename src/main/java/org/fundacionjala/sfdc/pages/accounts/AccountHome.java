@@ -63,7 +63,7 @@ public class AccountHome extends HomeBase {
      * This method verify that account is displayed.
      *
      * @param account String with account.
-     * @return returns <account>true<account/> if account is displayed or <account>false<account/> if it is not .
+     * @return returns <account>true<account/> if account is displayed or <account>false<account/> if it is not.
      */
     public boolean isAccountDisplayed(final String account) {
         return CommonActions.existElementByLinkText(account);

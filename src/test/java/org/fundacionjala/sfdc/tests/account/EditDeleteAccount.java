@@ -64,7 +64,7 @@ public class EditDeleteAccount {
     }
 
     /**
-     * This method delete the created Account.
+     * This method delete the created  Account.
      */
     @AfterClass
     public void tearDown() {

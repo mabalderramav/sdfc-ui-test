@@ -113,7 +113,7 @@ public class AccountDetail extends DetailBase {
     /**
      * Method that to permit gets texts.
      *
-     * @return a Map with the values of opportunity edit.
+     * @return a Map with the values of account edit.
      */
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();

@@ -60,7 +60,7 @@ public class CreateAccount {
     }
 
     /**
-     * Delete the created account after the tests.
+     * Delete the created account after the  tests.
      */
     @AfterMethod
     public void tearDown() {

@@ -183,7 +183,7 @@ public class AccountForm extends FormBase {
     }
 
     /**
-     * This class handle the builder pattern.
+     * This class handle the account builder pattern.
      */
     public static class AccountBuilder {
 
