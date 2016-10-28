@@ -22,7 +22,7 @@ import static org.fundacionjala.sfdc.pages.leads.LeadFields.LAST_NAME;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.STATE_PROVINCE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ZIP_CODE;
 import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
-import static org.testng.AssertJUnit.assertFalse;
+import static org.testng.Assert.assertFalse;
 
 /**
  * This class update and delete LeadHome.
@@ -52,16 +52,16 @@ public class UpdateDeleteLead {
     }
 
     /**
-     * This test verify the delete process of LeadFields.
+     * This test verify the delete process for Lead.
      */
     @Test
     public void deleteLead() {
         leadDetails.clickDeleteButton();
-        assertFalse(leadHomePage.isLeadDisplayed(valuesMapJson.get(FIRST_NAME.toString())));
+        assertFalse(leadHomePage.isLeadDisplayed(valuesMapJson.get(FIRST_NAME.toString())), "The Lead was not deleted");
     }
 
     /**
-     * This test update the created LeadFields and make the corresponding assertions.
+     * This test update the created Lead and make the corresponding assertions.
      */
     @Test
     public void updateLead() {
@@ -81,7 +81,7 @@ public class UpdateDeleteLead {
     }
 
     /**
-     * This method delete the created LeadFields.
+     * This method delete the Lead that was created in the precondition method.
      */
     @AfterClass
     public void tearDown() {
