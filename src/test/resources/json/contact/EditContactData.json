@@ -3,5 +3,10 @@
   "contactName": "Bruno",
   "lastName": "lastName22",
   "title": "title22",
-  "department": "department22"
+  "department": "department22",
+  "birthDate": "10/25/2016",
+  "leadSource": "Partner Referral",
+  "mail": "bruno@email.com",
+  "mailingStreet": "Colorado #654",
+  "otherStreet": "Virginia #789"
 }

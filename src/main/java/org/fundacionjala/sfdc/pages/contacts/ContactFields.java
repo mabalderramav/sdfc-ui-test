@@ -8,7 +8,12 @@ public enum ContactFields {
     CONTACT_NAME("contactName"),
     LAST_NAME("lastName"),
     TITLE("title"),
-    DEPARTMENT("department");
+    DEPARTMENT("department"),
+    BIRTH_DATE("birthDate"),
+    LEAD_SOURCE("leadSource"),
+    MAIL("mail"),
+    MAILING_STREET("mailingStreet"),
+    OTHER_STREET("otherStreet");
 
     private final String value;
 
