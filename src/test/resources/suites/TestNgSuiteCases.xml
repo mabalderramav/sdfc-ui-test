@@ -3,10 +3,10 @@
     <listeners>
         <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener"/>
     </listeners>
-    <test name="Accounts">
+    <test name="Create Cases">
         <classes>
-            <class name="org.fundacionjala.sfdc.tests.account.CreateAccount"/>
-            <class name="org.fundacionjala.sfdc.tests.account.EditDeleteAccount"/>
+            <class name="org.fundacionjala.sfdc.tests.cases.DeleteCases"/>
+            <class name="org.fundacionjala.sfdc.tests.cases.CreateCases"/>
         </classes>
     </test>
 </suite>

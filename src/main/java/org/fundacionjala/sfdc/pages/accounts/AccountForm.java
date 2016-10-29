@@ -1,5 +1,8 @@
 package org.fundacionjala.sfdc.pages.accounts;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
@@ -7,8 +10,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.HashMap;
-import java.util.Map;
+
+
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.ACCOUNT_SITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.PHONE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.WEBSITE;
+import static org.fundacionjala.sfdc.pages.accounts.AccountFields.EMPLOYEES;
 
 /**
  * It is the account base page, abstract class.
@@ -31,6 +39,47 @@ public class AccountForm extends FormBase {
     @FindBy(id = "acc15")
     @CacheLookup
     private WebElement employeesTextField;
+
+    private AccountBuilder accountBuilder;
+
+    private Map<String, String> valuesMap;
+
+    /**
+     * Constructor that call the parent constructor.
+     */
+    AccountForm() {
+        super();
+    }
+
+    /**
+     * Private constructor.
+     *
+     * @param accountBuilder AccountBuilder class.
+     */
+    private AccountForm(final AccountBuilder accountBuilder) {
+        valuesMap = new HashMap<>();
+        this.accountBuilder = accountBuilder;
+    }
+
+    /**
+     * This method save a new account on "AccountFields" form.
+     *
+     * @return {@link AccountDetail}
+     */
+    public AccountDetail saveAccount() {
+        valuesMap = accountBuilder.getStrategyMap();
+        fillTheForm(valuesMap);
+        return clickSaveButton();
+    }
+
+    /**
+     * This method obtains values the Map set.
+     *
+     * @return A map with values set on "account" form.
+     */
+    public Map<String, String> getValuesMap() {
+        return valuesMap;
+    }
 
     /**
      * {@inheritDoc}
@@ -107,6 +156,16 @@ public class AccountForm extends FormBase {
     }
 
     /**
+     * This method loads data to fill the form for a given Json file.
+     *
+     * @param valuesMapCreate Map with the json values.
+     */
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
+        valuesMapCreate.keySet()
+                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    }
+
+    /**
      * Method that to permit set values to create a new AccountHome.
      *
      * @param values a map to set of the strategy
@@ -115,22 +174,107 @@ public class AccountForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("accountName", () -> setNameTextField(String.valueOf(values.get("accountName"))));
-        strategyMap.put("accountSite", () -> setSiteTextField(String.valueOf(values.get("accountSite"))));
-        strategyMap.put("accountPhone", () -> setPhoneTextField(String.valueOf(values.get("accountPhone"))));
-        strategyMap.put("accountWebsite", () -> setWebsiteTextField(String.valueOf(values.get("accountWebsite"))));
-        strategyMap.put("accountEmployees",
-                () -> setEmployeesTextField(String.valueOf(values.get("accountEmployees"))));
+        strategyMap.put(ACCOUNT_NAME.toString(), () -> setNameTextField(values.get(ACCOUNT_NAME.toString())));
+        strategyMap.put(ACCOUNT_SITE.toString(), () -> setSiteTextField(values.get(ACCOUNT_SITE.toString())));
+        strategyMap.put(PHONE.toString(), () -> setPhoneTextField(values.get(PHONE.toString())));
+        strategyMap.put(WEBSITE.toString(), () -> setWebsiteTextField(values.get(WEBSITE.toString())));
+        strategyMap.put(EMPLOYEES.toString(),
+                    () -> setEmployeesTextField(values.get(EMPLOYEES.toString())));
+
         return strategyMap;
     }
 
     /**
-     * This method loads data to fill the form for a given Json file.
-     *
-     * @param valuesMapCreate Map with the json values.
+     * This class handle the account builder pattern.
      */
-    public void fillTheForm(final Map<String, String> valuesMapCreate) {
-        valuesMapCreate.keySet()
-                .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
+    public static class AccountBuilder {
+
+        private String accountName;
+
+        private String accountSite;
+
+        private String phone;
+
+        private String website;
+
+        private String employees;
+
+        private Map<String, String> strategyMap;
+
+        /**
+         * This method build the Account form.
+         * @return {@link AccountForm}.
+         */
+        public AccountForm build() {
+            return new AccountForm(this);
+        }
+
+        /**
+         * Constructor the AccountBuilder class.
+         *
+         * @param accountName Name required by the class.
+         */
+        public AccountBuilder(final String accountName) {
+            strategyMap = new HashMap<>();
+            strategyMap.put(ACCOUNT_NAME.toString(), accountName);
+            this.accountName = accountName;
+        }
+
+        /**
+         * This method set the product's site.
+         *
+         * @param accountSite String with site.
+         * @return {@link AccountBuilder}
+         */
+        public AccountBuilder setSite(final String accountSite) {
+            strategyMap.put(ACCOUNT_SITE.toString(), accountSite);
+            this.accountSite = accountSite;
+            return this;
+        }
+
+        /**
+         * This method set the account's phone.
+         *
+         * @param phone String with phone.
+         * @return {@link AccountBuilder}
+         */
+        public AccountBuilder setPhone(final String phone) {
+            strategyMap.put(PHONE.toString(), phone);
+            this.phone = phone;
+            return this;
+        }
+
+        /**
+         * This method set the account's website.
+         *
+         * @param website String with website.
+         * @return {@link AccountBuilder}
+         */
+        public AccountBuilder setWebsite(final String website) {
+            strategyMap.put(WEBSITE.toString(), website);
+            this.website = website;
+            return this;
+        }
+
+        /**
+         * This method set the account's employees.
+         *
+         * @param employees String with employees.
+         * @return {@link AccountBuilder}
+         */
+        public AccountBuilder setEmployees(final String employees) {
+            strategyMap.put(EMPLOYEES.toString(), employees);
+            this.employees = employees;
+            return this;
+        }
+
+        /**
+         * This method set the strategyMap account.
+         *
+         * @return A map with values set on "account" form.
+         */
+        public Map<String, String> getStrategyMap() {
+            return strategyMap;
+        }
     }
 }
