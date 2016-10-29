@@ -3,12 +3,12 @@
     <listeners>
         <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener"/>
     </listeners>
-    <test name="Chatter tests">
+    <test name="Account">
         <classes>
-            <class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>
-            <class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>
             <class name="org.fundacionjala.sfdc.tests.chatter.CommentChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>
             <class name="org.fundacionjala.sfdc.tests.chatter.DeleteChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>
         </classes>
     </test>
 </suite>

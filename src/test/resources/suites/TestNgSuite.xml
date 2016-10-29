@@ -1,0 +1,32 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
+<suite name="Suite1" verbose="1">
+    <listeners>
+        <listener class-name="org.fundacionjala.sfdc.framework.testng.SuiteListener"/>
+    </listeners>
+    <test name="SuiteTng">
+        <classes>
+            <class name="org.fundacionjala.sfdc.tests.account.CreateAccount"/>
+            <class name="org.fundacionjala.sfdc.tests.account.EditDeleteAccount"/>
+            <class name="org.fundacionjala.sfdc.tests.campaign.CreateCampaign"/>
+            <class name="org.fundacionjala.sfdc.tests.campaign.UpdateCampaign"/>
+            <class name="org.fundacionjala.sfdc.tests.campaign.DeleteCampaign"/>
+            <class name="org.fundacionjala.sfdc.tests.cases.DeleteCases"/>
+            <class name="org.fundacionjala.sfdc.tests.cases.CreateCases"/>
+            <!--<class name="org.fundacionjala.sfdc.tests.chatter.CommentChatterPost"/>-->
+            <!--<class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>-->
+            <!--<class name="org.fundacionjala.sfdc.tests.chatter.DeleteChatterPost"/>-->
+            <!--<class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>-->
+            <class name="org.fundacionjala.sfdc.tests.contact.DeleteEditContact"/>
+            <class name="org.fundacionjala.sfdc.tests.contact.CreateContact"/>
+            <!--<class name="org.fundacionjala.sfdc.tests.contract.CreateContract"/>-->
+            <!--<class name="org.fundacionjala.sfdc.tests.contract.DeleteEditContract"/>-->
+            <class name="org.fundacionjala.sfdc.tests.lead.CreateLead"/>
+            <class name="org.fundacionjala.sfdc.tests.lead.UpdateDeleteLead"/>
+            <class name="org.fundacionjala.sfdc.tests.opportunity.DeleteEditOpportunity"/>
+            <class name="org.fundacionjala.sfdc.tests.opportunity.CreateOpportunity"/>
+            <class name="org.fundacionjala.sfdc.tests.product.EditProduct"/>
+            <class name="org.fundacionjala.sfdc.tests.product.DeleteProduct"/>
+            <class name="org.fundacionjala.sfdc.tests.product.CreateProduct"/>
+        </classes>
+    </test>
+</suite>

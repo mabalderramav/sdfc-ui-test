@@ -7,7 +7,6 @@
         <classes>
             <class name="org.fundacionjala.sfdc.tests.lead.CreateLead"/>
             <class name="org.fundacionjala.sfdc.tests.lead.UpdateDeleteLead"/>
-
         </classes>
     </test>
 </suite>
