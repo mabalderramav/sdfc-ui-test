@@ -4,10 +4,6 @@
   "priority": "High",
   "type": "Electronic",
   "caseReason": "Performance",
-  "product": "GC3040",
-  "potentialLiability": "No",
-  "engineeringNumber": "15",
-  "slaViolation": "No",
   "subject": "SUBJECT TEST",
   "description":"This is the Description Text"
 }

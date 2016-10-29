@@ -60,10 +60,6 @@ public class CreateCases {
                 .setPriority(valuesMapJson.get("priority"))
                 .setTypeValue(valuesMapJson.get("type"))
                 .setCaseReason(valuesMapJson.get("caseReason"))
-                .setProductValue(valuesMapJson.get("product"))
-                .setPotentialLiability(valuesMapJson.get("potentialLiability"))
-                .setEngineeringNumber(valuesMapJson.get("engineeringNumber"))
-                .setSlaViolation(valuesMapJson.get("slaViolation"))
                 .setSubject(valuesMapJson.get("subject"))
                 .setDescription(valuesMapJson.get("description"))
                 .build();
