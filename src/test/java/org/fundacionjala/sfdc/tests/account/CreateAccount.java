@@ -20,20 +20,17 @@ import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 public class CreateAccount {
     private AccountHome accountHome;
     private AccountDetail accountDetail;
-    private AccountForm accountForm;
-    private MainApp mainApp;
-    private TabBar tabBar;
-    public static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
+    private static final String ACCOUNT_DATA_PATH = "account/CreateAccountData.json";
     private Map<String, String> valuesMapJson;
 
     /**
-     * Before method.
+     * This method is a preconditions to create an account.
      */
     @BeforeMethod
     public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(ACCOUNT_DATA_PATH);
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
+        MainApp mainApp = new MainApp();
+        TabBar tabBar = mainApp.goToTabBar();
         accountHome = tabBar.clickOnAccountsHome();
     }
 
@@ -42,7 +39,7 @@ public class CreateAccount {
      */
     @Test
     public void createAccount() {
-        accountForm = accountHome.clickNewButton();
+        AccountForm accountForm = accountHome.clickNewButton();
         accountForm.fillTheForm(valuesMapJson);
         accountDetail = accountForm.clickSaveButton();
         valuesMapJson.keySet()

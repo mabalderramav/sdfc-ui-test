@@ -4,6 +4,7 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 
 import org.fundacionjala.sfdc.pages.accounts.AccountHome;
 
+import org.fundacionjala.sfdc.pages.contracts.ContractHome;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -50,6 +51,9 @@ public class TabBar extends AbstractBasePage {
     @CacheLookup
     private WebElement opportunitiesTab;
 
+    @FindBy(id = "Contract_Tab")
+    @CacheLookup
+    private WebElement contractsTab;
 
     @FindBy(id = "Case_Tab")
     @CacheLookup
@@ -125,6 +129,16 @@ public class TabBar extends AbstractBasePage {
     public ChatterAbstractPage clickOnChatterTab() {
         CommonActions.clickElement(chatterTab);
         return new ChatterAbstractPage();
+    }
+
+    /**
+     * This method makes click on Contracts tab.
+     *
+     * @return {@link ContractHome}
+     */
+    public ContractHome clickOnContractHome() {
+        CommonActions.clickElement(contractsTab);
+        return new ContractHome();
     }
 
 }
