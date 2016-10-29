@@ -4,6 +4,7 @@ package org.fundacionjala.sfdc.tests.lead;
 import java.util.Map;
 
 import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
@@ -26,7 +27,7 @@ import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
  */
 public class CreateLead {
 
-    private static final String CAMPAIGN_NAME = "CampaignTest-01";
+    private static final String CAMPAIGN_NAME = "AT-CampaignTest-01";
     private static final String LEAD_DATA_PATH = "lead/CreateLeadData.json";
 
     private LeadHome leadHomePage;
@@ -41,7 +42,7 @@ public class CreateLead {
      * This method execute the preconditions to make the validation for creation of lead,
      * in this method a campaign is created and the LINKS tab is selected.
      */
-    @BeforeTest
+    @BeforeMethod
     public void setUp() {
         TabBar tabBar = new MainApp().goToTabBar();
         campaignsHome = tabBar.clickCampaigns();
