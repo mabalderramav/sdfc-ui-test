@@ -1,6 +1,9 @@
 package org.fundacionjala.sfdc.framework.browser;
 
 import org.fundacionjala.sfdc.framework.utils.Environment;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,6 +13,8 @@ import java.util.concurrent.TimeUnit;
  * Class to manage the drivers.
  */
 public final class DriverManager {
+
+    private static final Logger LOGGER = LogManager.getLogger(RemoteBrowser.class);
 
     private static final Environment ENVIRONMENT = Environment.getInstance();
 
@@ -27,6 +32,7 @@ public final class DriverManager {
         final int timeout = ENVIRONMENT.getTimeout();
         final Browser browser = Browser.valueOf(ENVIRONMENT.getBrowser().toUpperCase());
         driver = DriverFactory.getDriver(browser).initDriver();
+
         driver.manage().timeouts().implicitlyWait(timeout, TimeUnit.SECONDS);
         driver.get(baseUrl);
         driver.manage().window().maximize();
