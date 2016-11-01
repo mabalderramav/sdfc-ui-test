@@ -29,6 +29,14 @@ public final class Environment {
 
     private static final String AUTHENTICATION_BASE_URL = "authentication.baseURL";
 
+    private static final String BROWSERSTACK_USER = "browserStackUserName";
+
+    private static final String BROWSERSTACK_KEY = "browserStackKey";
+
+    private static final String AUTHENTICATION_PROXY = "proxy";
+
+    private static final String AUTHENTICATION_PORT = "port";
+
     private static Environment environment;
 
     private Properties properties;
@@ -103,7 +111,7 @@ public final class Environment {
     }
 
     /**
-     * Get the base url of pivotal tracker.
+     * Get the base url of SalesForce.
      *
      * @return String url.
      */
@@ -118,5 +126,41 @@ public final class Environment {
      */
     public int getTimeout() {
         return Integer.parseInt(getEnv(TIMEOUT));
+    }
+
+    /**
+     * Get the user of the browserStack.
+     *
+     * @return String with the configure user.
+     */
+    public String getBrowserStackUser() {
+        return getEnv(BROWSERSTACK_USER);
+    }
+
+    /**
+     * Get the key of the browserStack.
+     *
+     * @return String with the configure key.
+     */
+    public String getBrowserStackKey() {
+        return getEnv(BROWSERSTACK_KEY);
+    }
+
+    /**
+     * Get the proxy.
+     *
+     * @return String with the configured proxy.
+     */
+    public String getProxy() {
+        return getEnv(AUTHENTICATION_PROXY);
+    }
+
+    /**
+     * Get the port.
+     *
+     * @return String with the configured port.
+     */
+    public String getPort() {
+        return getEnv(AUTHENTICATION_PORT);
     }
 }
