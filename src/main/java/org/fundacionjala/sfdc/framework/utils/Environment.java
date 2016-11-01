@@ -29,13 +29,24 @@ public final class Environment {
 
     private static final String AUTHENTICATION_BASE_URL = "authentication.baseURL";
 
-    private static final String BROWSERSTACK_USER = "browserStackUserName";
-
-    private static final String BROWSERSTACK_KEY = "browserStackKey";
-
     private static final String AUTHENTICATION_PROXY = "proxy";
 
     private static final String AUTHENTICATION_PORT = "port";
+
+    //Remote browser
+    private static final String REMOTE_BROWSER = "remoteBrowser";
+
+    private static final String REMOTE_BROWSER_VERSION = "remoteBrowserVersion";
+
+    private static final String REMOTE_PLATFORM = "remotePlatform";
+
+    private static final String REMOTE_PLATFORM_VERSION = "remotePlatformVersion";
+
+    private static final String REMOTE_RESOLUTION = "remoteResolution";
+
+    private static final String REMOTE_USER_NAME = "remoteUserName";
+
+    private static final String REMOTE_KEY = "remoteKey";
 
     private static Environment environment;
 
@@ -133,8 +144,8 @@ public final class Environment {
      *
      * @return String with the configure user.
      */
-    public String getBrowserStackUser() {
-        return getEnv(BROWSERSTACK_USER);
+    public String getRemoteUserName() {
+        return getEnv(REMOTE_USER_NAME);
     }
 
     /**
@@ -142,8 +153,8 @@ public final class Environment {
      *
      * @return String with the configure key.
      */
-    public String getBrowserStackKey() {
-        return getEnv(BROWSERSTACK_KEY);
+    public String getRemoteKey() {
+        return getEnv(REMOTE_KEY);
     }
 
     /**
@@ -162,5 +173,50 @@ public final class Environment {
      */
     public String getPort() {
         return getEnv(AUTHENTICATION_PORT);
+    }
+
+    /**
+     * Get the remote browser.
+     *
+     * @return String with the configured remote browser.
+     */
+    public String getRemoteBrowser() {
+        return getEnv(REMOTE_BROWSER);
+    }
+
+    /**
+     * Get the browser version.
+     *
+     * @return String with the configured browser version.
+     */
+    public String getRemoteBrowserVersion() {
+        return getEnv(REMOTE_BROWSER_VERSION);
+    }
+
+    /**
+     * Get the remote platform.
+     *
+     * @return String with the configured remote platform.
+     */
+    public String getRemotePlatform() {
+        return getEnv(REMOTE_PLATFORM);
+    }
+
+    /**
+     * Get the platform version.
+     *
+     * @return String with the configured platform version.
+     */
+    public String getRemotePlatformVersion() {
+        return getEnv(REMOTE_PLATFORM_VERSION);
+    }
+
+    /**
+     * Get the remote resolution.
+     *
+     * @return String with the configured remote resolution.
+     */
+    public String getRemoteResolution() {
+        return getEnv(REMOTE_RESOLUTION);
     }
 }
