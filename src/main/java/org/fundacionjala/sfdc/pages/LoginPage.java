@@ -14,15 +14,14 @@ import java.util.concurrent.TimeUnit;
  * Class to manage the login process.
  */
 public class LoginPage extends AbstractBasePage {
-    public static final String BASE_URL = "https://na24.salesforce.com/";
     public static final int DURATION = 3;
     @FindBy(id = "username")
     @CacheLookup
-    private WebElement userNameField;
+    private static WebElement userNameField;
 
     @FindBy(id = "password")
     @CacheLookup
-    private WebElement passwordTxt;
+    private static WebElement passwordTxt;
 
     @FindBy(id = "Login")
     @CacheLookup
@@ -32,7 +31,7 @@ public class LoginPage extends AbstractBasePage {
      * Constructor that initialize the default values.
      */
     public LoginPage() {
-        driver.get(BASE_URL);
+        driver.get(Environment.getInstance().getBaseUrl());
     }
 
     /**

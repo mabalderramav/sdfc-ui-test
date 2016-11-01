@@ -1,12 +1,5 @@
 package org.fundacionjala.sfdc.tests.campaign;
 
-import java.util.Map;
-import java.util.Random;
-
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -15,6 +8,13 @@ import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.Campaigns;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
 import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
+import org.fundacionjala.sfdc.tests.Asserts;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Map;
+import java.util.Random;
 
 /**
  * Create a campaign using a builder and Json File.
@@ -61,7 +61,7 @@ public class CreateCampaign {
         lookUpWindow = campaignForm.clickLookUpIcon();
         campaignForm = lookUpWindow.selectCampaignWithNameByScope(campaignParent, CampaignLookup.ALL_CAMPAIGN);
         campaignDetail = campaignForm.clickSaveButton();
-        AssertCampaign.assertDetailValues(campaignDetail, valuesMapJson);
+        Asserts.assertDetailValues(campaignDetail, valuesMapJson);
     }
 
     /**
@@ -78,7 +78,7 @@ public class CreateCampaign {
                 .setRevenue("1,000")
                 .build();
         campaignDetail = campaigns.createCampaign();
-        AssertCampaign.assertDetailValues(campaignDetail, campaigns.getValuesMap());
+        Asserts.assertDetailValues(campaignDetail, campaigns.getValuesMap());
     }
 
     /**

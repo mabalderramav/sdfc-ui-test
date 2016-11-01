@@ -2,15 +2,15 @@ package org.fundacionjala.sfdc.tests.contact;
 
 import java.util.Map;
 
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.contacts.ContactForm;
 import org.fundacionjala.sfdc.pages.contacts.ContactHome;
 import org.fundacionjala.sfdc.pages.contacts.ContactsDetail;
+import org.fundacionjala.sfdc.tests.Asserts;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
 
 import static org.fundacionjala.sfdc.pages.contacts.ContactFields.CONTACT_NAME;
 import static org.fundacionjala.sfdc.tests.contact.CreateContact.CONTACT_DATA_PATH;
@@ -49,11 +49,11 @@ public class DeleteEditContact {
     @Test
     public void editContact() {
         Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(CONTACT_DATA_EDIT_PATH);
-        contactForm = contactsDetail.clickEditContact();
+        contactForm = contactsDetail.clickEditButton();
         contactForm.fillTheForm(valuesMapEditJson);
         contactsDetail = contactForm.clickSaveButton();
-        AssertContact.assertDetailValues(contactsDetail, valuesMapEditJson);
-        contactsDetail.deleteContact();
+        Asserts.assertDetailValues(contactsDetail, valuesMapEditJson);
+        contactsDetail.clickDeleteButton();
     }
 
     /**
@@ -61,8 +61,9 @@ public class DeleteEditContact {
      */
     @Test
     public void deleteContact() {
-        contactsDetail.deleteContact();
+        contactsDetail.clickDeleteButton();
         assertFalse(contactsDetail.isContactDisplayed(valuesMapJson.get(CONTACT_NAME.getValue())
-                .concat(COMMA).concat(valuesMapJson.get(CONTACT_NAME.getValue()))));
+                        .concat(COMMA).concat(valuesMapJson.get(CONTACT_NAME.getValue()))),
+                "The contacts shouldn't to be displayed");
     }
 }
