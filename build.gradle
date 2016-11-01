@@ -20,9 +20,6 @@ checkstyle {
 //handling the download drivers
 apply plugin: 'de.undercouch.download'
 
-
-
-
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use 'jcenter' for resolving your dependencies.
@@ -47,8 +44,6 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.53.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
 
-
-
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
@@ -62,7 +57,10 @@ task runTestNGTestCases(type: Test) {
     useTestNG()
 
     testLogging {
+        exceptionFormat "full"
         events "started", "passed", "failed", "skipped"
+        displayGranularity = 0
+        showStandardStreams = false
     }
 
     options {
@@ -70,13 +68,16 @@ task runTestNGTestCases(type: Test) {
         includeGroups(groups)
         listeners << 'org.uncommons.reportng.HTMLReporter'
     }
-
     systemProperties.put('primaryUserName', primaryUserName)
     systemProperties.put('primaryUserPassword', primaryUserPassword)
     systemProperties.put('browser', browser)
+    systemProperties.put('proxy', proxy)
+    systemProperties.put('port', port)
+    systemProperties.put('browserStackUserName', browserStackUserName)
+    systemProperties.put('browserStackKey', browserStackKey)
 
     println browser
-
+}
 //task downloadDrivers(type: Copy) {
 //        File drivers = new File('./drivers')
 //        drivers.mkdirs()
@@ -102,7 +103,3 @@ task runTestNGTestCases(type: Test) {
 //}
 //
 //downloadDrivers.execute()
-
-}
-
-

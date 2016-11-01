@@ -3,7 +3,7 @@ jdk:
 - oraclejdk8
 sudo: required
 
-script: gradle check
+script: gradle check runTestNGTestCases -Psuites=src/test/resources/suites/TestNgSuiteCampaign.xml -PprimaryUserName=Aldo.Balderrama@mydomain.org -PprimaryUserPassword=P@ssw0rd -PbrowserStackUserName=miguelaldobalder1 -PbrowserStackKey=FsyQMJ7r4yuvjo1wQfEa
 branches:
 only: develop
 
