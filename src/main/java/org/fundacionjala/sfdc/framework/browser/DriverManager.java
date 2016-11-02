@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  */
 public final class DriverManager {
 
-    private static final Logger LOGGER = LogManager.getLogger(RemoteBrowser.class);
+    private static final Logger LOGGER = LogManager.getLogger(BrowserStack.class);
 
     private static final Environment ENVIRONMENT = Environment.getInstance();
 
