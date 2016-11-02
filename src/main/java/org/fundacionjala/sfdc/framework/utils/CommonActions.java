@@ -2,9 +2,7 @@ package org.fundacionjala.sfdc.framework.utils;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -15,7 +13,7 @@ import org.fundacionjala.sfdc.framework.browser.DriverManager;
 
 /**
  * This class contains the common procedures to manage Add, and Delete elements from different components:
- * Leads, Campaign, Account, Contact, ContractHome, Products
+ * Leads, Campaign, Account, Contact, ContractHome, Products.
  */
 public final class CommonActions {
 
@@ -44,10 +42,6 @@ public final class CommonActions {
      * @param value    value to fill.
      */
     public static void sendKeys(final WebElement element, final String value) {
-        if (value == null) {
-            //throw new IllegalArgumentException("");
-            //Logger.warn()
-        }
         DriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(element));
         element.clear();
         element.sendKeys(value);
@@ -123,20 +117,6 @@ public final class CommonActions {
     public static String getText(final WebElement element) {
         DriverManager.getInstance().getWait().until(ExpectedConditions.visibilityOf(element));
         return element.getText();
-    }
-
-    /**
-     * This method waits and delete the element.
-     *
-     * @param driver Driver to wait and deleted elements.
-     */
-    public static void deleteMe(final WebDriver driver) {
-        WebElement deleteElementBtn;
-        deleteElementBtn = driver.findElement(By.xpath("//input[@title='Delete']"));
-        DriverManager.getInstance().getWait().until(ExpectedConditions.elementToBeClickable(deleteElementBtn));
-        deleteElementBtn.click();
-        Alert deleteAlert = driver.switchTo().alert();
-        deleteAlert.accept();
     }
 
     /**

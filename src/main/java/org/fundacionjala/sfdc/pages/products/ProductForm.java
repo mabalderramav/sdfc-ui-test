@@ -15,6 +15,12 @@ import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
 
+import static org.fundacionjala.sfdc.pages.products.ProductFields.ACTIVE;
+import static org.fundacionjala.sfdc.pages.products.ProductFields.CODE;
+import static org.fundacionjala.sfdc.pages.products.ProductFields.DESCRIPTION;
+import static org.fundacionjala.sfdc.pages.products.ProductFields.FAMILY;
+import static org.fundacionjala.sfdc.pages.products.ProductFields.NAME;
+
 /**
  * This class handle the product form.
  */
@@ -44,6 +50,9 @@ public class ProductForm extends FormBase {
 
     private Map<String, String> valuesMap;
 
+    /**
+     * Constructor that call the parent constructor.
+     */
     public ProductForm() {
         super();
     }
@@ -51,7 +60,7 @@ public class ProductForm extends FormBase {
     /**
      * Private constructor.
      *
-     * @param productBuilder ProductBuilder class.
+     * @param productBuilder CampaignBuilder class.
      */
     private ProductForm(final ProductBuilder productBuilder) {
         valuesMap = new HashMap<>();
@@ -59,7 +68,7 @@ public class ProductForm extends FormBase {
     }
 
     /**
-     * This method save a new product on "Product" form.
+     * This method save a new product on "ProductFields" form.
      *
      * @return {@link ProductDetail}
      */
@@ -84,7 +93,7 @@ public class ProductForm extends FormBase {
      * @param productName String with the product name.
      * @return Return this class.
      */
-    public ProductForm setProductName(String productName) {
+    public ProductForm setProductName(final String productName) {
         CommonActions.sendKeys(productNameTextField, productName);
         return this;
     }
@@ -95,7 +104,7 @@ public class ProductForm extends FormBase {
      * @param flag Boolean with flag.
      * @return {@link ProductForm}.
      */
-    public ProductForm checkActiveFlag(boolean flag) {
+    public ProductForm checkActiveFlag(final boolean flag) {
         if (!CommonActions.isSelected(isActiveCheckBox) && flag) {
             CommonActions.clickElement(isActiveCheckBox);
         }
@@ -108,7 +117,7 @@ public class ProductForm extends FormBase {
      * @param productCode String with the product code.
      * @return Return this class.
      */
-    public ProductForm setProductCode(String productCode) {
+    public ProductForm setProductCode(final String productCode) {
         CommonActions.sendKeys(productCodeTextField, productCode);
         return this;
     }
@@ -119,7 +128,7 @@ public class ProductForm extends FormBase {
      * @param productFamily String with the product family.
      * @return Return this class.
      */
-    public ProductForm chooseProductFamilyDdl(String productFamily) {
+    public ProductForm chooseProductFamilyDdl(final String productFamily) {
         wait.until(ExpectedConditions.elementToBeClickable(productFamilySelect));
         Select selectBox = new Select(productFamilySelect);
         if (productFamily.isEmpty()) {
@@ -137,13 +146,13 @@ public class ProductForm extends FormBase {
      * @param description String with the description.
      * @return Return this class.
      */
-    public ProductForm setDescription(String description) {
+    public ProductForm setDescription(final String description) {
         CommonActions.sendKeys(descriptionTextArea, description);
         return this;
     }
 
     /**
-     * {@link FormBase}
+     * {@inheritDoc}.
      */
     @Override
     public ProductDetail clickSaveButton() {
@@ -152,7 +161,7 @@ public class ProductForm extends FormBase {
     }
 
     /**
-     * {@link FormBase}
+     * {@inheritDoc}.
      */
     @Override
     public AbstractBasePage clickSaveNewButton() {
@@ -165,7 +174,7 @@ public class ProductForm extends FormBase {
      *
      * @param valuesMapCreate Map with values.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }
@@ -179,11 +188,11 @@ public class ProductForm extends FormBase {
     private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
         final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("productName", () -> setProductName(values.get("productName")));
-        strategyMap.put("productCode", () -> setProductCode(values.get("productCode")));
-        strategyMap.put("isActive", () -> checkActiveFlag(Boolean.parseBoolean(values.get("isActive"))));
-        strategyMap.put("productFamily", () -> chooseProductFamilyDdl(values.get("productFamily")));
-        strategyMap.put("descriptionProduct", () -> setDescription(values.get("descriptionProduct")));
+        strategyMap.put(NAME.toString(), () -> setProductName(values.get(NAME.toString())));
+        strategyMap.put(CODE.toString(), () -> setProductCode(values.get(CODE.toString())));
+        strategyMap.put(ACTIVE.toString(), () -> checkActiveFlag(Boolean.parseBoolean(values.get(ACTIVE.toString()))));
+        strategyMap.put(FAMILY.toString(), () -> chooseProductFamilyDdl(values.get(FAMILY.toString())));
+        strategyMap.put(DESCRIPTION.toString(), () -> setDescription(values.get(DESCRIPTION.toString())));
 
         return strategyMap;
     }
@@ -205,18 +214,22 @@ public class ProductForm extends FormBase {
 
         private Map<String, String> strategyMap;
 
+        /**
+         * This method build the Product form.
+         * @return {@link ProductForm}.
+         */
         public ProductForm build() {
             return new ProductForm(this);
         }
 
         /**
-         * Constructor the ProductBuilder class.
+         * Constructor the CampaignBuilder class.
          *
          * @param name Name required by the class.
          */
         public ProductBuilder(final String name) {
             strategyMap = new HashMap<>();
-            strategyMap.put("productName", name);
+            strategyMap.put(NAME.toString(), name);
             this.name = name;
         }
 
@@ -227,7 +240,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setCode(final String code) {
-            strategyMap.put("productCode", code);
+            strategyMap.put(CODE.toString(), code);
             this.code = code;
             return this;
         }
@@ -239,7 +252,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setDescription(final String description) {
-            strategyMap.put("descriptionProduct", description);
+            strategyMap.put(DESCRIPTION.toString(), description);
             this.description = description;
             return this;
         }
@@ -251,7 +264,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setActive(final Boolean active) {
-            strategyMap.put("isActive", String.valueOf(active));
+            strategyMap.put(ACTIVE.toString(), String.valueOf(active));
             this.active = active;
             return this;
         }
@@ -263,7 +276,7 @@ public class ProductForm extends FormBase {
          * @return {@link ProductBuilder}
          */
         public ProductBuilder setFamily(final String family) {
-            strategyMap.put("productFamily", family);
+            strategyMap.put(FAMILY.toString(), family);
             this.family = family;
             return this;
         }

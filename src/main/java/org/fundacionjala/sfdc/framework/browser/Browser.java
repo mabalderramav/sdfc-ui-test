@@ -5,5 +5,7 @@ package org.fundacionjala.sfdc.framework.browser;
  */
 public enum Browser {
     CHROME,
-    FIREFOX
+    FIREFOX,
+    BROWSERSTACK,
+    SAUCELABS
 }

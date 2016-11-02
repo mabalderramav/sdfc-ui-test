@@ -5,15 +5,26 @@ import java.util.Map;
 
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+import org.fundacionjala.sfdc.pages.base.FormBase;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.BIRTH_DATE;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.CONTACT_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.DEPARTMENT;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.FIRST_NAME_CATEGORY;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LAST_NAME;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.LEAD_SOURCE;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.MAIL;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.MAILING_STREET;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.OTHER_STREET;
+import static org.fundacionjala.sfdc.pages.contacts.ContactFields.TITLE;
+
 /**
  * This class represent Contact Form.
  */
-public class ContactForm extends AbstractBasePage {
+public class ContactForm extends FormBase {
 
     @FindBy(id = "name_salutationcon2")
     @CacheLookup
@@ -55,24 +66,28 @@ public class ContactForm extends AbstractBasePage {
     @CacheLookup
     private WebElement phoneField;
 
-    @FindBy(xpath = "//input[@tabindex='31']")
-
+    @FindBy(id = "con15")
     @CacheLookup
-    private WebElement saveBtn;
+    private WebElement mailField;
 
-    @FindBy(xpath = "//input[@tabindex='32']")
+    @FindBy(id = "con19street")
     @CacheLookup
-    private WebElement saveNewBtn;
+    private WebElement mailingStreetField;
+
+    @FindBy(id = "con18street")
+    @CacheLookup
+    private WebElement otherStreetField;
 
     @FindBy(xpath = "//input[@tabindex='33']")
     @CacheLookup
-    private WebElement cancelBtn;
+    private WebElement cancelBtnField;
+
 
     /**
      * This method is to select name category.
      *
      * @param item a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm selectFirstNameCategory(final String item) {
         CommonActions.selectItem(firstNameCategoryField, item);
@@ -83,7 +98,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return @return {@link ContactForm}.
      */
     public ContactForm setContactNameField(final String text) {
         CommonActions.sendKeys(firstNameField, text);
@@ -94,7 +109,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setLastName(final String text) {
         CommonActions.sendKeys(lastNameField, text);
@@ -105,7 +120,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setAccountName(final String text) {
         CommonActions.sendKeys(accountNameField, text);
@@ -116,7 +131,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setTitle(final String text) {
         CommonActions.sendKeys(titleField, text);
@@ -127,7 +142,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param text a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setDepartment(final String text) {
         CommonActions.sendKeys(departmentField, text);
@@ -138,7 +153,7 @@ public class ContactForm extends AbstractBasePage {
      * This method is to select name category.
      *
      * @param date a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm setBirthDate(final String date) {
         CommonActions.sendKeys(birthDateField, date);
@@ -148,8 +163,41 @@ public class ContactForm extends AbstractBasePage {
     /**
      * This method is to select name category.
      *
+     * @param mail a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setMail(final String mail) {
+        CommonActions.sendKeys(mailField, mail);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
+     * @param mailingStreet a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setMailingStreet(final String mailingStreet) {
+        CommonActions.sendKeys(mailingStreetField, mailingStreet);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
+     * @param otherStreet a string to select.
+     * @return {@link ContactForm}.
+     */
+    public ContactForm setOtherStreet(final String otherStreet) {
+        CommonActions.sendKeys(otherStreetField, otherStreet);
+        return this;
+    }
+
+    /**
+     * This method is to select name category.
+     *
      * @param item a string to select.
-     * @return a Contact Form page object.
+     * @return {@link ContactForm}.
      */
     public ContactForm selectLeadSource(final String item) {
         CommonActions.selectItem(leadSourceField, item);
@@ -157,29 +205,43 @@ public class ContactForm extends AbstractBasePage {
     }
 
     /**
-     * This method makes click save button.
-     *
-     * @return a Contact Detail page object.
+     * {@inheritDoc}.
      */
+    @Override
     public ContactsDetail clickSaveButton() {
-        CommonActions.clickElement(saveBtn);
+        CommonActions.clickElement(saveButton);
+        return new ContactsDetail();
+    }
+
+    /**
+     * {@inheritDoc}.
+     */
+    @Override
+    public ContactsDetail clickSaveNewButton() {
+        CommonActions.clickElement(saveNewBtn);
         return new ContactsDetail();
     }
 
     /**
      * Method that to permit set values to create a new Contact Home.
      *
-     * @param values a map to set of the strategy
+     * @param values a map to set of the strategy.
      * @return a Map with the values of the opportunity create.
      */
-    public Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
-        final Map<String, FormSteps> strategyMap = new HashMap();
+    private Map<String, FormSteps> getStrategyStepMap(final Map<String, String> values) {
+        final Map<String, FormSteps> strategyMap = new HashMap<>();
 
-        strategyMap.put("firstNameCategory", () -> selectFirstNameCategory(String.valueOf(values.get("firstNameCategory"))));
-        strategyMap.put("contactName", () -> setContactNameField(String.valueOf(values.get("contactName"))));
-        strategyMap.put("lastName", () -> setLastName(String.valueOf(values.get("lastName"))));
-        strategyMap.put("title", () -> setTitle(String.valueOf(values.get("title"))));
-        strategyMap.put("department", () -> setDepartment(String.valueOf(values.get("department"))));
+        strategyMap.put(FIRST_NAME_CATEGORY.getValue(),
+                () -> selectFirstNameCategory(values.get(FIRST_NAME_CATEGORY.getValue())));
+        strategyMap.put(CONTACT_NAME.getValue(), () -> setContactNameField(values.get(CONTACT_NAME.getValue())));
+        strategyMap.put(LAST_NAME.getValue(), () -> setLastName(values.get(LAST_NAME.getValue())));
+        strategyMap.put(TITLE.getValue(), () -> setTitle(values.get(TITLE.getValue())));
+        strategyMap.put(DEPARTMENT.getValue(), () -> setDepartment(values.get(DEPARTMENT.getValue())));
+        strategyMap.put(BIRTH_DATE.getValue(), () -> setBirthDate(values.get(BIRTH_DATE.getValue())));
+        strategyMap.put(LEAD_SOURCE.getValue(), () -> selectLeadSource(values.get(LEAD_SOURCE.getValue())));
+        strategyMap.put(MAIL.getValue(), () -> setMail(values.get(MAIL.getValue())));
+        strategyMap.put(MAILING_STREET.getValue(), () -> setMailingStreet(values.get(MAILING_STREET.getValue())));
+        strategyMap.put(OTHER_STREET.getValue(), () -> setOtherStreet(values.get(OTHER_STREET.getValue())));
 
         return strategyMap;
     }
@@ -187,9 +249,9 @@ public class ContactForm extends AbstractBasePage {
     /**
      * This method loads data to fill the form for a given Json file.
      *
-     * @param valuesMapCreate
+     * @param valuesMapCreate Map with the json values.
      */
-    public void fillTheForm(Map<String, String> valuesMapCreate) {
+    public void fillTheForm(final Map<String, String> valuesMapCreate) {
         valuesMapCreate.keySet()
                 .forEach(step -> getStrategyStepMap(valuesMapCreate).get(step).executeStep());
     }

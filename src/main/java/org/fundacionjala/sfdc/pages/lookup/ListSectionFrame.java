@@ -2,23 +2,29 @@ package org.fundacionjala.sfdc.pages.lookup;
 
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
 
 /**
- * Created by ccatari on 5/22/2016.
+ * Class to represent the list section frame.
  */
-public class ListSectionFrame extends SectionFrame {
+class ListSectionFrame extends SectionFrame {
+
+    private static final String RESULTS_FRAME = "resultsFrame";
     @FindBy(className = " dataCell ")
     private WebElement linkToSelect;
 
-
-    public ListSectionFrame() {
-        driver.switchTo().frame("resultsFrame");
+    /**
+     * Method that select the list in the frame section.
+     */
+    ListSectionFrame() {
+        driver.switchTo().frame(RESULTS_FRAME);
     }
 
-    public void selectACampaignFromTheList() {
-        wait.until(ExpectedConditions.visibilityOf(linkToSelect));
-        linkToSelect.click();
-        // it's not required to run to default due that the window is automatically closed.
+    /**
+     * Method that select a campaign link from the list.
+     */
+    void selectACampaignFromTheList() {
+        CommonActions.clickElement(linkToSelect);
     }
 }

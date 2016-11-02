@@ -20,9 +20,6 @@ checkstyle {
 //handling the download drivers
 apply plugin: 'de.undercouch.download'
 
-
-
-
 // In this section you declare where to find the dependencies of your project
 repositories {
     // Use 'jcenter' for resolving your dependencies.
@@ -47,8 +44,6 @@ dependencies {
     compile group: 'org.seleniumhq.selenium', name: 'selenium-chrome-driver', version: '2.53.0'
     compile group: 'org.seleniumhq.selenium', name: 'selenium-ie-driver', version: '2.53.0'
 
-
-
     // Declare the dependency for your favourite test framework you want to use in your tests.
     // TestNG is also supported by the Gradle Test task. Just change the
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
@@ -58,51 +53,27 @@ dependencies {
 }
 
 task runTestNGTestCases(type: Test) {
-
+    //Use TestNg
     useTestNG()
 
     testLogging {
+        exceptionFormat "full"
         events "started", "passed", "failed", "skipped"
+        displayGranularity = 0
+        showStandardStreams = false
     }
 
     options {
-        suites(suites)
+        suites('src/test/resources/suites/' + suites)
         includeGroups(groups)
         listeners << 'org.uncommons.reportng.HTMLReporter'
     }
-
+    //It's set the environment parameters.
     systemProperties.put('primaryUserName', primaryUserName)
     systemProperties.put('primaryUserPassword', primaryUserPassword)
     systemProperties.put('browser', browser)
-
-    println browser
-
-//task downloadDrivers(type: Copy) {
-//        File drivers = new File('./drivers')
-//        drivers.mkdirs()
-//
-//            download {
-//                src 'http://chromedriver.storage.googleapis.com/2.15/chromedriver_win32.zip'
-//                dest drivers
-//                onlyIfNewer true
-//            }
-//            download {
-//                src 'http://selenium.googlecode.com/files/IEDriverServer_x64_2.28.0.zip'
-//                dest drivers
-//                onlyIfNewer true
-//            }
-//
-//        file(drivers).listFiles().each {
-//            artifact ->
-//                if (artifact.name.endsWith('.zip')) {
-//                    from zipTree(artifact)
-//                    into drivers
-//                }
-//        }
-//}
-//
-//downloadDrivers.execute()
-
+    systemProperties.put('proxy', proxy)
+    systemProperties.put('port', port)
+    systemProperties.put('remoteUserName', remoteUserName)
+    systemProperties.put('remoteKey', remoteKey)
 }
-
-

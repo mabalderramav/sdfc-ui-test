@@ -13,7 +13,7 @@ import java.util.Properties;
  * This class is in charge to set the default  parameters to
  * establishes the connection with pivotal tracker.
  */
-public class Environment {
+public final class Environment {
 
     private static final Logger LOGGER = LogManager.getLogger(Environment.class);
 
@@ -28,6 +28,25 @@ public class Environment {
     private static final String TIMEOUT = "timeout";
 
     private static final String AUTHENTICATION_BASE_URL = "authentication.baseURL";
+
+    private static final String AUTHENTICATION_PROXY = "proxy";
+
+    private static final String AUTHENTICATION_PORT = "port";
+
+    //Remote browser
+    private static final String REMOTE_BROWSER = "remoteBrowser";
+
+    private static final String REMOTE_BROWSER_VERSION = "remoteBrowserVersion";
+
+    private static final String REMOTE_PLATFORM = "remotePlatform";
+
+    private static final String REMOTE_PLATFORM_VERSION = "remotePlatformVersion";
+
+    private static final String REMOTE_RESOLUTION = "remoteResolution";
+
+    private static final String REMOTE_USER_NAME = "remoteUserName";
+
+    private static final String REMOTE_KEY = "remoteKey";
 
     private static Environment environment;
 
@@ -103,7 +122,7 @@ public class Environment {
     }
 
     /**
-     * Get the base url of pivotal tracker.
+     * Get the base url of SalesForce.
      *
      * @return String url.
      */
@@ -118,5 +137,86 @@ public class Environment {
      */
     public int getTimeout() {
         return Integer.parseInt(getEnv(TIMEOUT));
+    }
+
+    /**
+     * Get the user of the browserStack.
+     *
+     * @return String with the configure user.
+     */
+    public String getRemoteUserName() {
+        return getEnv(REMOTE_USER_NAME);
+    }
+
+    /**
+     * Get the key of the browserStack.
+     *
+     * @return String with the configure key.
+     */
+    public String getRemoteKey() {
+        return getEnv(REMOTE_KEY);
+    }
+
+    /**
+     * Get the proxy.
+     *
+     * @return String with the configured proxy.
+     */
+    public String getProxy() {
+        return getEnv(AUTHENTICATION_PROXY);
+    }
+
+    /**
+     * Get the port.
+     *
+     * @return String with the configured port.
+     */
+    public String getPort() {
+        return getEnv(AUTHENTICATION_PORT);
+    }
+
+    /**
+     * Get the remote browser.
+     *
+     * @return String with the configured remote browser.
+     */
+    public String getRemoteBrowser() {
+        return getEnv(REMOTE_BROWSER);
+    }
+
+    /**
+     * Get the browser version.
+     *
+     * @return String with the configured browser version.
+     */
+    public String getRemoteBrowserVersion() {
+        return getEnv(REMOTE_BROWSER_VERSION);
+    }
+
+    /**
+     * Get the remote platform.
+     *
+     * @return String with the configured remote platform.
+     */
+    public String getRemotePlatform() {
+        return getEnv(REMOTE_PLATFORM);
+    }
+
+    /**
+     * Get the platform version.
+     *
+     * @return String with the configured platform version.
+     */
+    public String getRemotePlatformVersion() {
+        return getEnv(REMOTE_PLATFORM_VERSION);
+    }
+
+    /**
+     * Get the remote resolution.
+     *
+     * @return String with the configured remote resolution.
+     */
+    public String getRemoteResolution() {
+        return getEnv(REMOTE_RESOLUTION);
     }
 }

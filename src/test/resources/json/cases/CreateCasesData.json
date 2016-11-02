@@ -1,0 +1,9 @@
+{
+  "status": "Working",
+  "caseOrigin": "Web",
+  "priority": "High",
+  "type": "Electronic",
+  "caseReason": "Performance",
+  "subject": "SUBJECT TEST",
+  "description":"This is the Description Text"
+}

@@ -6,6 +6,7 @@ import java.util.Map;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
 import org.fundacionjala.sfdc.pages.base.DetailBase;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
@@ -14,8 +15,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.AMOUNT;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.CURRENT_CLOSE_DATE;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.DELIVERY_INSTALL_STATUS;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.LEAD_SOURCE;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.NEXT_STEP;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ORDER_NUMBER;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.STAGE;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.TYPE;
+
 /**
- * This class represents of the opportunity detail.
+ * This class represents the opportunity detail.
  */
 public class OpportunityDetail extends DetailBase {
 
@@ -64,7 +76,7 @@ public class OpportunityDetail extends DetailBase {
     private WebElement privateFlagImg;
 
     /**
-     * {@link DetailBase}
+     * {@inheritDoc}.
      */
     @Override
     public OpportunityForm clickEditButton() {
@@ -73,7 +85,7 @@ public class OpportunityDetail extends DetailBase {
     }
 
     /**
-     * {@link DetailBase}
+     * {@inheritDoc}.
      */
     @Override
     public MainApp clickDeleteButton() {
@@ -81,12 +93,6 @@ public class OpportunityDetail extends DetailBase {
         Alert alert = driver.switchTo().alert();
         alert.accept();
         return new MainApp();
-    }
-
-    public OpportunityForm pressEditBtn() {
-        editBtn.click();
-
-        return new OpportunityForm();
     }
 
     /**
@@ -147,34 +153,34 @@ public class OpportunityDetail extends DetailBase {
     /**
      * This method gets the delivery install.
      *
-     * @return a string with delivery install text.
+     * @return a string with delivery install label
      */
     public String getDeliveryInstallation() {
         return deliveryInstallLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the amount label.
      *
-     * @return a string with delivery install text.
+     * @return a string with amount label.
      */
     public String getAmount() {
         return amountLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the type label.
      *
-     * @return a string with delivery install text.
+     * @return a string with type label.
      */
     public String getTypeText() {
         return typeLabel.getText();
     }
 
     /**
-     * This method gets the delivery install.
+     * This method gets the lead source label.
      *
-     * @return a string with delivery install text.
+     * @return a string with lead source label.
      */
     public String getLeadSource() {
         return leadSourceLabel.getText();
@@ -190,12 +196,23 @@ public class OpportunityDetail extends DetailBase {
     }
 
     /**
+     * This method finds the account name.
+     *
+     * @param accountName a string with account name.
+     * @return {@link AccountDetail}.
+     */
+    public AccountDetail clickAccountName(final String accountName) {
+        driver.findElement(By.xpath("//a[contains(.,'" + accountName + "')]")).click();
+        return new AccountDetail();
+    }
+
+    /**
      * This method verify if opportunity is displayed.
      *
      * @param opportunityName string with name opportunity.
      * @return a boolean.
      */
-    public boolean isOpportunityDisplayed(String opportunityName) {
+    public boolean isOpportunityDisplayed(final String opportunityName) {
         try {
             driver.findElement(By.linkText(opportunityName)).getText();
             return true;
@@ -203,7 +220,6 @@ public class OpportunityDetail extends DetailBase {
             return false;
         }
     }
-
 
     /**
      * Method that to permit gets texts.
@@ -213,18 +229,17 @@ public class OpportunityDetail extends DetailBase {
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
-        strategyMap.put("opportunityName", this::getOpportunityName);
-        strategyMap.put("stage", this::getStage);
-        strategyMap.put("orderNumber", this::getOrderNumber);
-        strategyMap.put("deliveryInstallStatus", this::getDeliveryInstallation);
-        strategyMap.put("accountName", this::getAccountName);
-        strategyMap.put("currentCloseDate", this::getCloseDate);
-        strategyMap.put("type", this::getTypeText);
-        strategyMap.put("leadSource", this::getLeadSource);
-        strategyMap.put("nextStep", this::getNextStep);
-        strategyMap.put("amount", this::getAmount);
+        strategyMap.put(OPPORTUNITY_NAME.getValue(), this::getOpportunityName);
+        strategyMap.put(STAGE.getValue(), this::getStage);
+        strategyMap.put(ORDER_NUMBER.getValue(), this::getOrderNumber);
+        strategyMap.put(DELIVERY_INSTALL_STATUS.getValue(), this::getDeliveryInstallation);
+        strategyMap.put(ACCOUNT_NAME.getValue(), this::getAccountName);
+        strategyMap.put(CURRENT_CLOSE_DATE.getValue(), this::getCloseDate);
+        strategyMap.put(TYPE.getValue(), this::getTypeText);
+        strategyMap.put(LEAD_SOURCE.getValue(), this::getLeadSource);
+        strategyMap.put(NEXT_STEP.getValue(), this::getNextStep);
+        strategyMap.put(AMOUNT.getValue(), this::getAmount);
 
         return strategyMap;
     }
-
 }

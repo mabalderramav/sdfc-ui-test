@@ -13,6 +13,11 @@ import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
 
+import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
+
+/**
+ * Class to verify the edition of product.
+ */
 public class EditProduct {
 
     private static final String PRODUCT_DATA_PATH = "product/CreateProductData.json";
@@ -27,6 +32,9 @@ public class EditProduct {
 
     private ProductForm productForm;
 
+    /**
+     * Method that define the preconditions before to execute the product edition test.
+     */
     @BeforeMethod
     public void setup() {
         Map<String, String> valuesMapJson = JsonMapper.getMapJson(PRODUCT_DATA_PATH);
@@ -39,23 +47,32 @@ public class EditProduct {
         productForm = productDetail.clickEditButton();
     }
 
+    /**
+     * Test to verify the edition of product given a Json file.
+     */
     @Test
     public void editProductWithJson() {
         Map<String, String> valuesMapEditJson = JsonMapper.getMapJson(OPPORTUNITY_DATA_EDIT_PATH);
         productForm.fillTheForm(valuesMapEditJson);
         productDetail = productForm.clickSaveButton();
-        AssertProduct.assertDetailValues(productDetail, valuesMapEditJson);
+        assertDetailValues(productDetail, valuesMapEditJson);
     }
 
+    /**
+     * Test to verify the Edition of product using the builder pattern.
+     */
     @Test
     public void editProduct() {
         productForm = new ProductForm.ProductBuilder(NAME_TEST)
                 .setDescription(DESCRIPTION_TEST)
                 .build();
         productDetail = productForm.saveProduct();
-        AssertProduct.assertDetailValues(productDetail, productForm.getValuesMap());
+        assertDetailValues(productDetail, productForm.getValuesMap());
     }
 
+    /**
+     * Method that delete the create product in the precondition.
+     */
     @AfterMethod
     public void afterTest() {
         productDetail.clickDeleteButton();

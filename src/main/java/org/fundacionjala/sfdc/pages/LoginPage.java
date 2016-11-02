@@ -10,31 +10,37 @@ import org.openqa.selenium.support.FindBy;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * Class to manage the login process.
+ */
 public class LoginPage extends AbstractBasePage {
-    public static final String baseURL = "https://na24.salesforce.com/";
     public static final int DURATION = 3;
     @FindBy(id = "username")
     @CacheLookup
-    WebElement userNameField;
+    private static WebElement userNameField;
 
     @FindBy(id = "password")
     @CacheLookup
-    WebElement passwordTxt;
+    private static WebElement passwordTxt;
 
     @FindBy(id = "Login")
     @CacheLookup
-    WebElement loginField;
+    private WebElement loginField;
 
+    /**
+     * Constructor that initialize the default values.
+     */
     public LoginPage() {
-        driver.get(baseURL);
+        driver.get(Environment.getInstance().getBaseUrl());
     }
 
     /**
      * This method set the username in the text field.
      *
      * @param email String with the username or email.
+     * @return {@link LoginPage}
      */
-    public LoginPage setUserNameField(String email) {
+    public LoginPage setUserNameField(final String email) {
         userNameField.clear();
         userNameField.sendKeys(email);
         return this;
@@ -44,8 +50,9 @@ public class LoginPage extends AbstractBasePage {
      * This method set the password in the text field.
      *
      * @param password String  whit the password.
+     * @return {@link LoginPage}
      */
-    public LoginPage setPasswordField(String password) {
+    public LoginPage setPasswordField(final String password) {
         passwordTxt.clear();
         passwordTxt.sendKeys(password);
         return this;
@@ -68,7 +75,7 @@ public class LoginPage extends AbstractBasePage {
      * @param password Password used to perform a login to Salesforce application.
      * @return The main page after login to Salesforce application.
      */
-    public MainApp loginAs(String username, String password) {
+    public MainApp loginAs(final String username, final String password) {
         return setUserNameField(username).setPasswordField(password).clickLogInToSalesforceButton();
     }
 

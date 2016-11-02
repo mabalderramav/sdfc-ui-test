@@ -13,6 +13,7 @@ import org.fundacionjala.sfdc.pages.products.ProductDetail;
 import org.fundacionjala.sfdc.pages.products.ProductForm;
 import org.fundacionjala.sfdc.pages.products.ProductHome;
 
+import static org.fundacionjala.sfdc.pages.products.ProductFields.NAME;
 import static org.testng.Assert.assertFalse;
 
 /**
@@ -46,7 +47,6 @@ public class DeleteProduct {
     @Test
     public void deleteProduct() {
         productDetail.clickDeleteButton();
-        assertFalse(productDetail.isProductDisplayed(valuesMapJson.get("productName")),
-                "ProductHome Deleted");
+        assertFalse(productDetail.isProductDisplayed(valuesMapJson.get(NAME.toString())), "ProductHome Deleted");
     }
 }
