@@ -53,7 +53,7 @@ dependencies {
 }
 
 task runTestNGTestCases(type: Test) {
-
+    //Use TestNg
     useTestNG()
 
     testLogging {
@@ -64,42 +64,16 @@ task runTestNGTestCases(type: Test) {
     }
 
     options {
-        suites(suites)
+        suites('src/test/resources/suites/' + suites)
         includeGroups(groups)
         listeners << 'org.uncommons.reportng.HTMLReporter'
     }
+    //It's set the environment parameters.
     systemProperties.put('primaryUserName', primaryUserName)
     systemProperties.put('primaryUserPassword', primaryUserPassword)
     systemProperties.put('browser', browser)
     systemProperties.put('proxy', proxy)
     systemProperties.put('port', port)
-    systemProperties.put('browserStackUserName', browserStackUserName)
-    systemProperties.put('browserStackKey', browserStackKey)
-
-    println browser
+    systemProperties.put('remoteUserName', remoteUserName)
+    systemProperties.put('remoteKey', remoteKey)
 }
-//task downloadDrivers(type: Copy) {
-//        File drivers = new File('./drivers')
-//        drivers.mkdirs()
-//
-//            download {
-//                src 'http://chromedriver.storage.googleapis.com/2.15/chromedriver_win32.zip'
-//                dest drivers
-//                onlyIfNewer true
-//            }
-//            download {
-//                src 'http://selenium.googlecode.com/files/IEDriverServer_x64_2.28.0.zip'
-//                dest drivers
-//                onlyIfNewer true
-//            }
-//
-//        file(drivers).listFiles().each {
-//            artifact ->
-//                if (artifact.name.endsWith('.zip')) {
-//                    from zipTree(artifact)
-//                    into drivers
-//                }
-//        }
-//}
-//
-//downloadDrivers.execute()

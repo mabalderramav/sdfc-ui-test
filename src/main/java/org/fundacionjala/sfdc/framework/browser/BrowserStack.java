@@ -14,8 +14,8 @@ import org.fundacionjala.sfdc.framework.utils.Environment;
 /**
  * This class initialize the Remote Selenium Web Driver.
  */
-class RemoteBrowser implements Driver {
-    private static final Logger LOGGER = LogManager.getLogger(RemoteBrowser.class);
+class BrowserStack implements Driver {
+    private static final Logger LOGGER = LogManager.getLogger(BrowserStack.class);
 
     private static final Environment ENVIRONMENT = Environment.getInstance();
 
@@ -25,8 +25,6 @@ class RemoteBrowser implements Driver {
 
     private static final String BROWSER = "browser";
 
-    private static final String CHROME = "chrome";
-
     private static final String BROWSER_STACK_DEBUG = "browserstack.debug";
 
     private static final String VALUE = "true";
@@ -35,28 +33,41 @@ class RemoteBrowser implements Driver {
 
     private static final String BUILD = "build";
 
+    private static final String BROWSER_VERSION = "browser_version";
+
+    private static final String RESOLUTION = "resolution";
+
+    private static final String OS = "os";
+
+    private static final String OS_VERSION = "os_version";
+
     /**
      * {@inheritDoc}
      */
     @Override
     public WebDriver initDriver() {
-        final String url =
-                "https://" + Environment.getInstance().getBrowserStackUser() + ":"
-                        + Environment.getInstance().getBrowserStackKey()
-                        + "@hub-cloud.browserstack.com/wd/hub";
+        final String url = String.format("https://%s:%s@hub-cloud.browserstack.com/wd/hub",
+                ENVIRONMENT.getRemoteUserName(),
+                ENVIRONMENT.getRemoteKey());
         DesiredCapabilities caps = new DesiredCapabilities();
+        //Setting proxy.
         if (!ENVIRONMENT.getProxy().isEmpty()) {
             System.getProperties().put(HTTPS_PROXY_HOST, ENVIRONMENT.getProxy());
             System.getProperties().put(HTTPS_PROXY_PORT, ENVIRONMENT.getPort());
         }
-        caps.setCapability(BROWSER, CHROME);
+        caps.setCapability(BROWSER, ENVIRONMENT.getRemoteBrowser());
+        caps.setCapability(BROWSER_VERSION, ENVIRONMENT.getRemoteBrowserVersion());
+        caps.setCapability(OS, ENVIRONMENT.getRemotePlatform());
+        caps.setCapability(OS_VERSION, ENVIRONMENT.getRemotePlatformVersion());
+        caps.setCapability(RESOLUTION, ENVIRONMENT.getRemoteResolution());
         caps.setCapability(BROWSER_STACK_DEBUG, VALUE);
         caps.setCapability(BUILD, FIRST_BUILD);
+        RemoteWebDriver remoteWebDriver = null;
         try {
-            return new RemoteWebDriver(new URL(url), caps);
+            remoteWebDriver = new RemoteWebDriver(new URL(url), caps);
         } catch (MalformedURLException e) {
             LOGGER.warn(e.getMessage(), e);
         }
-        return null;
+        return remoteWebDriver;
     }
 }
