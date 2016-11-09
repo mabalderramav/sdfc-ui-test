@@ -12,10 +12,10 @@
             <class name="org.fundacionjala.sfdc.tests.campaign.DeleteCampaign"/>
             <class name="org.fundacionjala.sfdc.tests.cases.DeleteCases"/>
             <class name="org.fundacionjala.sfdc.tests.cases.CreateCases"/>
-            <!--<class name="org.fundacionjala.sfdc.tests.chatter.CommentChatterPost"/>-->
-            <!--<class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>-->
-            <!--<class name="org.fundacionjala.sfdc.tests.chatter.DeleteChatterPost"/>-->
-            <!--<class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>-->
+            <class name="org.fundacionjala.sfdc.tests.chatter.CommentChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.CreateChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.DeleteChatterPost"/>
+            <class name="org.fundacionjala.sfdc.tests.chatter.EditChatterPost"/>
             <class name="org.fundacionjala.sfdc.tests.contact.DeleteEditContact"/>
             <class name="org.fundacionjala.sfdc.tests.contact.CreateContact"/>
             <!--<class name="org.fundacionjala.sfdc.tests.contract.CreateContract"/>-->
