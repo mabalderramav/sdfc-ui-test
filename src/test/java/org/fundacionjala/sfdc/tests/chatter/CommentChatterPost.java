@@ -16,6 +16,7 @@ import org.fundacionjala.sfdc.pages.chatter.PostForm;
  */
 public class CommentChatterPost {
 
+    public static final String TEST_COMMENT = "TestComment";
     private final String postContain = "TestCommentPost";
     private PostContainer postContainer;
 
@@ -27,7 +28,8 @@ public class CommentChatterPost {
         MainApp mainApp = new MainApp();
         TabBar tabBar = mainApp.goToTabBar();
         ChatterAbstractPage chatterHome = tabBar.clickOnChatterTab();
-        PostForm postForm = chatterHome.clickPostLnk().setPostTxt(postContain);
+        PostForm postForm = chatterHome.clickPostLnk();
+        postForm.setPostTxt(postContain);
         postContainer = postForm.clickShareBtn();
     }
 
@@ -37,8 +39,7 @@ public class CommentChatterPost {
     @Test
     public void commentChatterPostTest() {
         PostForm commentForm = postContainer.clickCommentLkn(postContain);
-        final String commentContain = "TestComment";
-        commentForm.setCommentTxt(commentContain, postContain);
+        commentForm.setCommentTxt(TEST_COMMENT, postContain);
         PostContainer comment = commentForm.clickCommentBtn();
         Assert.assertTrue(comment.isPostDisplayed(), "Chatter Comment Displayed");
     }
@@ -48,7 +49,7 @@ public class CommentChatterPost {
      */
     @AfterMethod
     public void deleteChatterPost() {
-        postContainer.deletePost(postContain);
+        PostForm postForm = postContainer.deletePost(postContain);
     }
 
 }

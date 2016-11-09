@@ -4,19 +4,15 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.lookup.SectionFrame;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Class that represents the form where to introduce the text on chatter.
  */
 public class PostForm extends SectionFrame {
 
-    @FindBy(id = "cke_26_contents")
-    @CacheLookup
-    private WebElement createTxtArea;
+    private static final int TIME_IN_MILLISECONDS = 3000;
 
     @FindBy(id = "publishersharebutton")
     @CacheLookup
@@ -26,13 +22,11 @@ public class PostForm extends SectionFrame {
     @CacheLookup
     private WebElement saveBtn;
 
-    @FindBy(css = "body.chatterPublisherRTE.cke_editable")
+    @FindBy(css = "body[class=\"chatterPublisherRTE cke_editable "
+            + "cke_editable_themed cke_contents_ltr cke_show_borders\"] ")
     @CacheLookup
     private WebElement editTxtArea;
 
-    @FindBy(css = "iframe[class='cke_wysiwyg_frame cke_reset']")
-    @CacheLookup
-    private WebElement textAreaFrame;
 
     @FindBy(tagName = "body")
     @CacheLookup
@@ -49,9 +43,10 @@ public class PostForm extends SectionFrame {
      */
     public PostForm setPostTxt(final String postText) {
         this.postText = postText;
-        Actions action = new Actions(driver);
-        action.moveToElement(textAreaField).sendKeys(postText).build().perform();
-        returnRoot();
+        driver.switchTo().frame(driver
+                .findElement(By.xpath("//iframe[contains(@class,'cke_wysiwyg_frame cke_reset')]")));
+        CommonActions.sendKeys(textAreaField, postText);
+        driver.switchTo().defaultContent();
         return this;
     }
 
@@ -64,6 +59,7 @@ public class PostForm extends SectionFrame {
      * @return {@link PostForm}
      */
     public PostForm setCommentTxt(final String commentText, final String postText) {
+
         this.postText = commentText;
         WebElement commentTxt = driver.findElement(By.xpath("//span[contains(.,'"
                 + postText + "')]/following::textarea[contains(@class,"
@@ -74,6 +70,7 @@ public class PostForm extends SectionFrame {
 
     /**
      * Edits the text of the post already published.
+     * The edit post happens too fast that's why it put a sleep of 3 seconds.
      *
      * @param postTxt Is the text that is going to be
      *                written in the post text field.
@@ -81,11 +78,16 @@ public class PostForm extends SectionFrame {
      */
     public PostForm editPostTxt(final String postTxt) {
         this.postText = postTxt;
-        wait.until(ExpectedConditions.frameToBeAvailableAndSwitchToIt(textAreaFrame));
+        try {
+            Thread.sleep(TIME_IN_MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.switchTo().frame(driver
+                .findElement(By.xpath("//iframe[contains(@title,'Rich Text Editor, quickActionRichTextEditor')]")));
         CommonActions.sendKeys(editTxtArea, postTxt);
-        returnDefault();
+        driver.switchTo().defaultContent();
         return this;
-
     }
 
     /**
