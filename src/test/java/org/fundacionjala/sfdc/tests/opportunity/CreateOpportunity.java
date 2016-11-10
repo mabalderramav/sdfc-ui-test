@@ -1,7 +1,5 @@
 package org.fundacionjala.sfdc.tests.opportunity;
 
-import java.util.Map;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -16,11 +14,13 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Map;
+
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
-import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.CURRENT_CLOSE_DATE;
-import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.STAGE;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.TYPE;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
+import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.CURRENT_CLOSE_DATE;
 
 
 /**
@@ -43,6 +43,7 @@ public class CreateOpportunity {
         MainApp mainApp = new MainApp();
         tabBar = mainApp.goToTabBar();
         AccountHome accountsHome = tabBar.clickOnAccountsHome();
+        //AccountHome accountsHome= Navigator.goToAccount();
         AccountForm newAccountForm = accountsHome.clickNewButton();
         accountDetail = newAccountForm
                 .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.getValue()))
@@ -56,7 +57,6 @@ public class CreateOpportunity {
     public void createOpportunity() {
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         OpportunityForm opportunityForm = opportunityHome.clickNewButton();
-
         opportunityForm = new OpportunityForm.OpportunityBuilder(
                 valuesMapJson.get(OPPORTUNITY_NAME.getValue()),
                 valuesMapJson.get(CURRENT_CLOSE_DATE.getValue()),

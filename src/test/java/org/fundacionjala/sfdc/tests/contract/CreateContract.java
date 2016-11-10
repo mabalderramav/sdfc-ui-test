@@ -1,13 +1,7 @@
 package org.fundacionjala.sfdc.tests.contract;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.accounts.AccountDetail;
@@ -17,6 +11,12 @@ import org.fundacionjala.sfdc.pages.contracts.ContractDetail;
 import org.fundacionjala.sfdc.pages.contracts.ContractForm;
 import org.fundacionjala.sfdc.pages.contracts.ContractHome;
 import org.fundacionjala.sfdc.tests.Asserts;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.ACCOUNT_NAME;
 
@@ -56,12 +56,9 @@ public class CreateContract {
     @BeforeMethod
     public void setup() {
         valuesMapJson = JsonMapper.getMapJson(CONTRACT_DATA_PATH);
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
         Map<String, String> valuesMapAccount = new HashMap<>();
         valuesMapAccount.put(ACCOUNT_NAME.toString(), valuesMapJson.get(ACCOUNT_NAME.toString()));
-
-        accountHome = tabBar.clickOnAccountsHome();
+        accountHome = Navigator.goToAccount();
         accountForm = accountHome.clickNewButton();
         accountForm.fillTheForm(valuesMapAccount);
         accountForm.clickSaveButton();

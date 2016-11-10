@@ -1,11 +1,5 @@
 package org.fundacionjala.sfdc.tests.opportunity;
 
-import java.util.Map;
-
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
@@ -16,6 +10,11 @@ import org.fundacionjala.sfdc.pages.opportunities.OpportunityDetail;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityForm;
 import org.fundacionjala.sfdc.pages.opportunities.OpportunityHome;
 import org.fundacionjala.sfdc.tests.Asserts;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
+import java.util.Map;
 
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.ACCOUNT_NAME;
 import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.OPPORTUNITY_NAME;
@@ -42,15 +41,11 @@ public class DeleteEditOpportunity {
     public void beforeTest() {
         valuesMapJson = JsonMapper.getMapJson(CreateOpportunity.OPPORTUNITY_DATA_PATH);
         mainApp = new MainApp();
-
         tabBar = mainApp.goToTabBar();
-
         accountsHome = tabBar.clickOnAccountsHome();
         AccountForm newAccountForm = accountsHome.clickNewButton();
-
         accountDetail = newAccountForm
                 .setNameTextField(valuesMapJson.get(ACCOUNT_NAME.getValue()))
-
                 .clickSaveButton();
         OpportunityHome opportunityHome = tabBar.clickOnOpportunitiesHome();
         opportunityForm = opportunityHome.clickNewButton();
@@ -65,7 +60,6 @@ public class DeleteEditOpportunity {
     @Test
     public void deleteOpportunity() {
         opportunityDetail.clickDeleteButton();
-
         assertFalse(opportunityDetail.isOpportunityDisplayed(valuesMapJson.get(OPPORTUNITY_NAME.getValue())));
     }
 

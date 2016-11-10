@@ -4,6 +4,7 @@ import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.MainApp;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
@@ -25,9 +26,7 @@ public class DeleteChatterPost {
      */
     @BeforeMethod
     public void setUp() {
-        mainApp = new MainApp();
-        tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();
+        chatterHome = Navigator.goToChatter();
         PostForm postForm = chatterHome.clickPostLnk().setPostTxt(POST_CONTAIN);
         postContainer = postForm.clickShareBtn();
     }
@@ -38,8 +37,8 @@ public class DeleteChatterPost {
     @Test
     public void deleteChatterPostTest() {
         postContainer.deletePost(POST_CONTAIN);
-        tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();
+//        tabBar = mainApp.goToTabBar();
+//        chatterHome = tabBar.clickOnChatterTab();
         Assert.assertFalse(postContainer.isPostDisplayed(), "Chatter Post Deleted");
     }
 
