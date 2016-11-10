@@ -6,11 +6,10 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.chatter.ChatterAbstractPage;
 import org.fundacionjala.sfdc.pages.chatter.PostContainer;
 import org.fundacionjala.sfdc.pages.chatter.PostForm;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 
 /**
  * Method that verify the creation of chatter.
@@ -21,14 +20,13 @@ public class CreateChatterPost {
     private ChatterAbstractPage chatterHome;
     private PostContainer postContainer;
 
+
     /**
      * Before method.
      */
     @BeforeMethod
     public void setUp() {
-        MainApp mainApp = new MainApp();
-        TabBar tabBar = mainApp.goToTabBar();
-        chatterHome = tabBar.clickOnChatterTab();
+        chatterHome = Navigator.goToChatter();
     }
 
     /**

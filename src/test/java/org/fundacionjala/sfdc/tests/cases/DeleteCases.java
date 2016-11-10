@@ -1,8 +1,7 @@
 package org.fundacionjala.sfdc.tests.cases;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.cases.CaseDetail;
 import org.fundacionjala.sfdc.pages.cases.CaseInformation;
 import org.fundacionjala.sfdc.pages.cases.CasesForm;
@@ -31,9 +30,7 @@ public class DeleteCases {
     @BeforeMethod
     public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(CASES_DATA_PATH);
-        final MainApp mainApp = new MainApp();
-        TabBar tabBar = mainApp.goToTabBar();
-        casesHome = tabBar.clickOnCasesHome();
+        casesHome = Navigator.goToCases();
         CasesForm casesForm = casesHome.clickNewButton();
         casesForm.fillTheForm(valuesMapJson);
         caseInformation = casesForm.clickSaveButton();

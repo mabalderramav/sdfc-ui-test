@@ -1,8 +1,7 @@
 package org.fundacionjala.sfdc.tests.campaign;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignsHome;
@@ -29,9 +28,7 @@ public class DeleteCampaign {
     @BeforeMethod()
     public void setup() {
         valuesMapJson = JsonMapper.getMapJson(CAMPAIGN_DATA_PATH);
-        final MainApp mainApp = new MainApp();
-        TabBar tabBar = mainApp.goToTabBar();
-        campaignsHome = tabBar.clickCampaigns();
+        campaignsHome = Navigator.goToCampaign();
         CampaignForm campaignForm = campaignsHome.clickNewButton();
         campaignForm.fillTheForm(valuesMapJson);
         campaignDetail = campaignForm.clickSaveButton();
