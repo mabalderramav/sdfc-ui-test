@@ -5,10 +5,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
 /**
  * Class to represent the Search popup.
  */
-class SearchSectionFrame extends SectionFrame {
+class SearchSectionFrame extends AbstractBasePage{
 
 
     @FindBy(id = "searchFrame")
@@ -48,9 +51,8 @@ class SearchSectionFrame extends SectionFrame {
     public void setCampaign(final String campaign) {
         setCampaignName(campaign);
         clickSearch();
-        returnRoot();
+        CommonActions.returnRoot();
     }
-
 
     /**
      * Method that sets the se scope and the parent campaign to make the search.
@@ -87,7 +89,6 @@ class SearchSectionFrame extends SectionFrame {
      * Method that makes a click on the Search icon.
      */
     private void clickSearch() {
-
         wait.until(ExpectedConditions.visibilityOf(this.searchButton));
         searchButton.click();
     }

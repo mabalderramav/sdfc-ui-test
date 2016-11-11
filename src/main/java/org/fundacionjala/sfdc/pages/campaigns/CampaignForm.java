@@ -5,7 +5,7 @@ import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.fundacionjala.sfdc.pages.base.FormBase;
-import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -139,9 +139,9 @@ public class CampaignForm extends FormBase {
      *
      * @return Campaign Form.
      */
-    public CampaignLookup clickLookUpIcon() {
+    public LookUpWindow clickLookUpIcon() {
         CommonActions.clickElement(lookUpIcon);
-        return new CampaignLookup();
+        return new LookUpWindow();
     }
 
     /**

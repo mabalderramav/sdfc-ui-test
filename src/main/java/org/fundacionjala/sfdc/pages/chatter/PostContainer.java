@@ -8,16 +8,21 @@ import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 
 /**
  * Class to represent the post container.
  */
 public class PostContainer extends AbstractBasePage {
 
+    private static final int EXPECTATION_TIME_OUT = 15;
+    private static final int SLEEP_IN_MILLISECONDS = 100;
 
     @FindBy(linkText = "Delete")
     @CacheLookup
-    protected WebElement deleteOptn;
+    private WebElement deleteOptn;
 
     @FindBy(linkText = "Edit")
     @CacheLookup
@@ -29,13 +34,16 @@ public class PostContainer extends AbstractBasePage {
      *
      * @param postTxt Is the post text used to identify the
      *                publication to be deleted.
+     * @return Class Post Form.
      */
-    public void deletePost(final String postTxt) {
+    public PostForm deletePost(final String postTxt) {
         clickActionMenu(postTxt);
         CommonActions.clickElement(deleteOptn);
+        WebDriverWait wait = new WebDriverWait(driver, EXPECTATION_TIME_OUT, SLEEP_IN_MILLISECONDS);
+        wait.until(ExpectedConditions.alertIsPresent());
         Alert alert = driver.switchTo().alert();
         alert.accept();
-
+        return new PostForm();
     }
 
     /**

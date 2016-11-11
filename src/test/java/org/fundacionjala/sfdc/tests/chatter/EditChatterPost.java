@@ -39,7 +39,8 @@ public class EditChatterPost {
     @Test
     public void editChatterPostTest() {
         postForm = postContainer.editPost(postContain);
-        postContainer = postForm.editPostTxt(newPostContain).clickSaveBtn();
+        postForm.editPostTxt(newPostContain);
+        postContainer = postForm.clickSaveBtn();
         Assert.assertTrue(postContainer.isPostDisplayed(), "Chatter Post Displayed");
     }
 
