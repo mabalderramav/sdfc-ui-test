@@ -5,10 +5,13 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
 /**
  * Class to represent the Search popup.
  */
-class SearchSectionFrame extends SectionFrame {
+class SearchSectionFrame extends AbstractBasePage {
 
 
     @FindBy(id = "searchFrame")
@@ -32,15 +35,6 @@ class SearchSectionFrame extends SectionFrame {
     }
 
     /**
-     * Method that sets the scope in the search popup.
-     *
-     * @param scope String with the scope info to make the search.
-     */
-    private void setScope(final String scope) {
-        scopeRequired(scope);
-    }
-
-    /**
      * Method that set the campaign to make the search in the popup.
      *
      * @param campaign String with the Campaign name.
@@ -48,9 +42,8 @@ class SearchSectionFrame extends SectionFrame {
     public void setCampaign(final String campaign) {
         setCampaignName(campaign);
         clickSearch();
-        returnRoot();
+        CommonActions.returnRoot();
     }
-
 
     /**
      * Method that sets the se scope and the parent campaign to make the search.
@@ -59,7 +52,7 @@ class SearchSectionFrame extends SectionFrame {
      * @param scope          String with the scope data.
      */
     void searchTheCampaign(final String parentCampaign, final String scope) {
-        setScope(scope);
+        setCampaignScope(scope);
         setCampaign(parentCampaign);
     }
 
@@ -73,21 +66,9 @@ class SearchSectionFrame extends SectionFrame {
     }
 
     /**
-     * Method that sets the scope if this data is different of null.
-     *
-     * @param scope String with the scope data.
-     */
-    private void scopeRequired(final String scope) {
-        if (scope != null) {
-            setCampaignScope(scope);
-        }
-    }
-
-    /**
      * Method that makes a click on the Search icon.
      */
     private void clickSearch() {
-
         wait.until(ExpectedConditions.visibilityOf(this.searchButton));
         searchButton.click();
     }

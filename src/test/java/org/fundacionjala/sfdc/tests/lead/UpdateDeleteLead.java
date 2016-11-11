@@ -1,24 +1,25 @@
 package org.fundacionjala.sfdc.tests.lead;
 
 
+import java.util.Map;
+
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Test;
+
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
 import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
 
-import java.util.Map;
-
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.CITY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.COMPANY;
+import static org.fundacionjala.sfdc.pages.leads.LeadFields.COUNTRY;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.FIRST_NAME;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.LAST_NAME;
-import static org.fundacionjala.sfdc.pages.leads.LeadFields.COMPANY;
-import static org.fundacionjala.sfdc.pages.leads.LeadFields.CITY;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.STATE_PROVINCE;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ZIP_CODE;
-import static org.fundacionjala.sfdc.pages.leads.LeadFields.COUNTRY;
 import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
 import static org.testng.Assert.assertFalse;
 

@@ -1,16 +1,18 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.lookup.SectionFrame;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
+
 /**
  * Class that represents the form where to introduce the text on chatter.
  */
-public class PostForm extends SectionFrame {
+public class PostForm extends AbstractBasePage {
 
     private static final int TIME_IN_MILLISECONDS = 3000;
 
