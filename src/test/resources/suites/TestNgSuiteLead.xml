@@ -5,8 +5,13 @@
     </listeners>
     <test name="Lead">
         <classes>
-            <class name="org.fundacionjala.sfdc.tests.lead.CreateLead"/>
+
             <class name="org.fundacionjala.sfdc.tests.lead.UpdateDeleteLead"/>
+<<<<<<< HEAD
+=======
+            <class name="org.fundacionjala.sfdc.tests.lead.CreateLead"/>
+
+>>>>>>> upstream/develop
         </classes>
     </test>
 </suite>
