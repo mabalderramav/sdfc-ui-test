@@ -153,4 +153,11 @@ public final class CommonActions {
         }
     }
 
+    /**
+     * Returns to the current window.
+     */
+    public static void returnRoot() {
+        String currentWindow = DriverManager.getInstance().getDriver().getWindowHandle();
+        DriverManager.getInstance().getDriver().switchTo().window(currentWindow);
+    }
 }

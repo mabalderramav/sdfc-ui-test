@@ -1,93 +1,68 @@
 package org.fundacionjala.sfdc.pages.lookup;
 
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.CacheLookup;
-import org.openqa.selenium.support.FindBy;
+import java.util.LinkedList;
+import java.util.Set;
+
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 /**
  * Class tha represents a modal lookUp.
  */
-public class LookUpWindow extends ModalWindow {
+public class LookUpWindow extends AbstractBasePage {
 
+    public static final String ALL_CAMPAIGN = "All Campaigns";
 
-    @FindBy(xpath = "//div[@class='pBody']/select")
-    @CacheLookup
-    private WebElement searchWithinDropdown;
-
-    @FindBy(xpath = "//div[@class='pBody']/input[@type='text']")
-    @CacheLookup
-    private WebElement searchField;
-
-    @FindBy(xpath = "//div[@class='pBody']/input[@class='btn' and @type='submit']")
-    @CacheLookup
-    private WebElement goButton;
-
-    @FindBy(className = "dataRow even last first")
-    @CacheLookup
-    private WebElement rowsContainer;
-
-    @FindBy(id = "searchFrame")
-    @CacheLookup
-    private WebElement searchFrame;
-
-    @FindBy(id = "resultsFrame")
-    @CacheLookup
-    private WebElement searchResultFrame;
+    private SearchSectionFrame searchFrame;
+    private ListSectionFrame resultFrame;
+    private LinkedList<String> windowsList;
 
     /**
-     * Searches a coincidence inside a dropdown.
-     *
-     * @param item is the item to search.
-     * @return {@link LookUpWindow}.
+     * Constructor that switch the LookUp window.
      */
-    public LookUpWindow selectSearchWithinDropdown(final String item) {
-        CommonActions.selectItem(searchWithinDropdown, item);
-        return this;
+    public LookUpWindow() {
+        Set<String> windowsHandleSet = driver.getWindowHandles();
+        windowsList = new LinkedList<>(windowsHandleSet);
+        driver.switchTo().window(windowsList.getLast());
     }
 
     /**
-     * Edits the search field.
-     *
-     * @param text Is the new test.
-     * @return {@link LookUpWindow}.
+     * Switch from the actual window to the parent window, without close it.
      */
-    public LookUpWindow setSearchWithinField(final String text) {
-        CommonActions.sendKeys(searchField, text);
-        return this;
+    public void switchToParentWithoutCloseAction() {
+        driver.switchTo().window(windowsList.getFirst());
     }
 
     /**
-     * Makes click on go button.
+     * Method that select a campaign given a scope.
      *
-     * @return {@link LookUpWindow}.
+     * @param parentCampaign String with the campaign name.
+     * @param scope          String with the scope info.
      */
-    public LookUpWindow clickGoButton() {
-        CommonActions.clickElement(goButton);
-
-        return this;
+    public void selectCampaignWithNameByScope(final String parentCampaign, final String scope) {
+        searchFrame = new SearchSectionFrame();
+        searchFrame.searchTheCampaign(parentCampaign, scope);
+        setALinkFromResults();
     }
 
     /**
-     * Changes the frame to a search frame.
+     * This method select the campaign given a name.
      *
-     * @return {@link LookUpWindow}.
+     * @param parentCampaign the campaign name to be selected.
      */
-    public LookUpWindow switchSearchFrame() {
-        driver.switchTo().frame(searchFrame);
-        return this;
+    public void selectCampaignWithName(final String parentCampaign) {
+        searchFrame = new SearchSectionFrame();
+        searchFrame.searchTheCampaign(parentCampaign);
+        setALinkFromResults();
     }
 
     /**
-     * Changes the frame to a search result frame.
-     *
-     * @return {@link LookUpWindow}.
+     * Method that select the campaigns name link from the result search.
      */
-    public LookUpWindow switchResultsFrame() {
-        driver.switchTo().frame(searchResultFrame);
-        return this;
+    private void setALinkFromResults() {
+        resultFrame = new ListSectionFrame();
+        resultFrame.selectAResultFromTheList();
+        switchToParentWithoutCloseAction();
     }
-
 
 }

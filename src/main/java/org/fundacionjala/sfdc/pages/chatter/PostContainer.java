@@ -1,7 +1,5 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -10,6 +8,9 @@ import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
 
 /**
@@ -20,6 +21,7 @@ public class PostContainer extends AbstractBasePage {
     private static final int EXPECTATION_TIME_OUT = 15;
     private static final int SLEEP_IN_MILLISECONDS = 100;
     private static final int TIME_IN_MILLISECONDS = 1000;
+
 
     @FindBy(linkText = "Delete")
     @CacheLookup

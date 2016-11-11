@@ -5,7 +5,7 @@
     </listeners>
     <test name="Regression1">
         <classes>
-            <!--<class name="org.fundacionjala.sfdc.tests.opportunity.DeleteEditOpportunity"/>-->
+           <class name="org.fundacionjala.sfdc.tests.opportunity.DeleteEditOpportunity"/>
             <class name="org.fundacionjala.sfdc.tests.opportunity.CreateOpportunity"/>
         </classes>
     </test>

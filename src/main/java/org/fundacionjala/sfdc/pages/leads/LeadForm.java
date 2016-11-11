@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import org.fundacionjala.sfdc.pages.lookup.LookUpWindow;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
 import org.openqa.selenium.support.FindBy;
@@ -13,7 +14,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.FormSteps;
 import org.fundacionjala.sfdc.pages.base.FormBase;
-import org.fundacionjala.sfdc.pages.lookup.CampaignLookup;
 
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ADDRESS;
 import static org.fundacionjala.sfdc.pages.leads.LeadFields.ANNUAL_REVENUE;
@@ -222,7 +222,7 @@ public class LeadForm extends FormBase {
     private void selectCampaign(final String campaignLookupText) {
         wait.until(ExpectedConditions.elementToBeClickable(this.campaignIcon));
         campaignIcon.click();
-        CampaignLookup campaignLookup = new CampaignLookup();
+        LookUpWindow campaignLookup = new LookUpWindow();
         campaignLookup.selectCampaignWithName(campaignLookupText);
     }
 
@@ -420,7 +420,7 @@ public class LeadForm extends FormBase {
         strategyMap.put(LEAD_SOURCE.toString(),
                 () -> CommonActions.selectItem(leadSourceSelect, values.get(LEAD_SOURCE.toString())));
         strategyMap.put(CAMPAIGN.toString(),
-                () -> CommonActions.sendKeys(campaingTextField, values.get(CAMPAIGN.toString())));
+                () -> selectCampaign(values.get(CAMPAIGN.toString())));
         strategyMap.put(INDUSTRY.toString(),
                 () -> CommonActions.selectItem(industrySelect, values.get(INDUSTRY.toString())));
         strategyMap.put(ANNUAL_REVENUE.toString(),
