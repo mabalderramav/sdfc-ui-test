@@ -49,7 +49,6 @@ dependencies {
     // testCompile dependency to testCompile 'org.testng:testng:6.8.1' and add
     // 'test.useTestNG()' to your build script.
     testCompile 'org.testng:testng:6.8.1'
-
 }
 
 task runTestNGTestCases(type: Test) {
@@ -76,4 +75,9 @@ task runTestNGTestCases(type: Test) {
     systemProperties.put('port', port)
     systemProperties.put('remoteUserName', remoteUserName)
     systemProperties.put('remoteKey', remoteKey)
+    systemProperties.put('remoteBrowser', remoteBrowser)
+    systemProperties.put('remoteBrowserVersion', remoteBrowserVersion)
+    systemProperties.put('remotePlatformVersion', remotePlatformVersion)
+    systemProperties.put('remotePlatform', remotePlatform)
+    systemProperties.put('remoteResolution', remoteResolution)
 }

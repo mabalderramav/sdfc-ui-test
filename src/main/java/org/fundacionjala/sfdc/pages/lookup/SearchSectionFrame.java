@@ -11,7 +11,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 /**
  * Class to represent the Search popup.
  */
-class SearchSectionFrame extends AbstractBasePage{
+class SearchSectionFrame extends AbstractBasePage {
 
 
     @FindBy(id = "searchFrame")
@@ -35,15 +35,6 @@ class SearchSectionFrame extends AbstractBasePage{
     }
 
     /**
-     * Method that sets the scope in the search popup.
-     *
-     * @param scope String with the scope info to make the search.
-     */
-    private void setScope(final String scope) {
-        scopeRequired(scope);
-    }
-
-    /**
      * Method that set the campaign to make the search in the popup.
      *
      * @param campaign String with the Campaign name.
@@ -61,7 +52,7 @@ class SearchSectionFrame extends AbstractBasePage{
      * @param scope          String with the scope data.
      */
     void searchTheCampaign(final String parentCampaign, final String scope) {
-        setScope(scope);
+        setCampaignScope(scope);
         setCampaign(parentCampaign);
     }
 
@@ -72,17 +63,6 @@ class SearchSectionFrame extends AbstractBasePage{
      */
     void searchTheCampaign(final String campaign) {
         setCampaign(campaign);
-    }
-
-    /**
-     * Method that sets the scope if this data is different of null.
-     *
-     * @param scope String with the scope data.
-     */
-    private void scopeRequired(final String scope) {
-        if (scope != null) {
-            setCampaignScope(scope);
-        }
     }
 
     /**

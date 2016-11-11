@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.Set;
 
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
-import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
 
 /**
  * Class tha represents a modal lookUp.
@@ -18,7 +17,10 @@ public class LookUpWindow extends AbstractBasePage {
     private ListSectionFrame resultFrame;
     private LinkedList<String> windowsList;
 
-    public LookUpWindow(){
+    /**
+     * Constructor that switch the LookUp window.
+     */
+    public LookUpWindow() {
         Set<String> windowsHandleSet = driver.getWindowHandles();
         windowsList = new LinkedList<>(windowsHandleSet);
         driver.switchTo().window(windowsList.getLast());
@@ -36,13 +38,11 @@ public class LookUpWindow extends AbstractBasePage {
      *
      * @param parentCampaign String with the campaign name.
      * @param scope          String with the scope info.
-     * @return {@link CampaignForm}.
      */
-    public CampaignForm selectCampaignWithNameByScope(final String parentCampaign, final String scope) {
+    public void selectCampaignWithNameByScope(final String parentCampaign, final String scope) {
         searchFrame = new SearchSectionFrame();
         searchFrame.searchTheCampaign(parentCampaign, scope);
         setALinkFromResults();
-        return new CampaignForm();
     }
 
     /**

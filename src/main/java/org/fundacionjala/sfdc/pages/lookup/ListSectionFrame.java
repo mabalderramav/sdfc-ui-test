@@ -9,7 +9,7 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 /**
  * Class to represent the list section frame.
  */
-public class ListSectionFrame extends AbstractBasePage{
+public class ListSectionFrame extends AbstractBasePage {
 
     private static final String RESULTS_FRAME = "resultsFrame";
 

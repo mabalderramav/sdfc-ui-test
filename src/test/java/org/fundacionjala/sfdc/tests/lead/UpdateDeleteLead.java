@@ -8,8 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.leads.LeadDetails;
 import org.fundacionjala.sfdc.pages.leads.LeadForm;
 import org.fundacionjala.sfdc.pages.leads.LeadHome;
@@ -41,8 +40,7 @@ public class UpdateDeleteLead {
     @BeforeMethod
     public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(LEAD_DATA_PATH);
-        TabBar tabBar = new MainApp().goToTabBar();
-        leadHomePage = tabBar.clickLead();
+        leadHomePage = Navigator.goToLead();
         leadForm = leadHomePage.clickNewButton();
         leadDetails = leadForm
                 .setFirstNameTextField(valuesMapJson.get(FIRST_NAME.toString()))

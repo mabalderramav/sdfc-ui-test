@@ -8,7 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.TabBar;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignDetail;
 import org.fundacionjala.sfdc.pages.campaigns.CampaignForm;
@@ -43,8 +43,8 @@ public class CreateLead {
      */
     @BeforeMethod
     public void setUp() {
-        TabBar tabBar = new MainApp().goToTabBar();
-        campaignsHome = tabBar.clickCampaigns();
+        TabBar tabBar = new TabBar();
+        campaignsHome = Navigator.goToCampaign();
         CampaignForm campaignForm = campaignsHome.clickNewButton();
         Campaigns campaigns = new Campaigns.CampaignBuilder(CAMPAIGN_NAME)
                 .setActive("checked")

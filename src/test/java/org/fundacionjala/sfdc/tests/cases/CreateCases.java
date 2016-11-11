@@ -1,12 +1,11 @@
 package org.fundacionjala.sfdc.tests.cases;
 
 import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.cases.CaseDetail;
-import org.fundacionjala.sfdc.pages.cases.CaseInformation;
-import org.fundacionjala.sfdc.pages.cases.CasesForm;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
 import org.fundacionjala.sfdc.pages.cases.CasesHome;
+import org.fundacionjala.sfdc.pages.cases.CaseInformation;
+import org.fundacionjala.sfdc.pages.cases.CaseDetail;
+import org.fundacionjala.sfdc.pages.cases.CasesForm;
 import org.fundacionjala.sfdc.pages.cases.Cases;
 import org.fundacionjala.sfdc.tests.Asserts;
 import org.testng.annotations.AfterMethod;
@@ -32,9 +31,7 @@ public class CreateCases {
     @BeforeMethod
     public void setUp() {
         valuesMapJson = JsonMapper.getMapJson(CASES_DATA_PATH);
-        final MainApp mainApp = new MainApp();
-        TabBar tabBar = mainApp.goToTabBar();
-        casesHome = tabBar.clickOnCasesHome();
+        casesHome = Navigator.goToCases();
     }
 
     /**

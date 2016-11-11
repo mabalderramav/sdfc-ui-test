@@ -8,10 +8,11 @@ import org.openqa.selenium.support.FindBy;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 
+
 /**
  * Class that represents the form where to introduce the text on chatter.
  */
-public class PostForm extends AbstractBasePage{
+public class PostForm extends AbstractBasePage {
 
     private static final int TIME_IN_MILLISECONDS = 3000;
 

@@ -1,7 +1,5 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
-import org.fundacionjala.sfdc.framework.utils.CommonActions;
-import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -11,6 +9,9 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.fundacionjala.sfdc.framework.utils.CommonActions;
+import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
+
 
 /**
  * Class to represent the post container.
@@ -19,6 +20,8 @@ public class PostContainer extends AbstractBasePage {
 
     private static final int EXPECTATION_TIME_OUT = 15;
     private static final int SLEEP_IN_MILLISECONDS = 100;
+    private static final int TIME_IN_MILLISECONDS = 1000;
+
 
     @FindBy(linkText = "Delete")
     @CacheLookup
@@ -66,7 +69,7 @@ public class PostContainer extends AbstractBasePage {
      * @param postTxt Is the post text used to identify the
      *                publication to click its action menu.
      */
-    public void clickActionMenu(final String postTxt) {
+    private void clickActionMenu(final String postTxt) {
         WebElement actionMenu = driver.findElement(By.xpath("//span[contains(.,'" + postTxt + "')]/ancestor::div["
                 + "@class='feeditembody']/following::a[@class='zen-trigger feeditemActionMenuButton']"));
         CommonActions.clickElement(actionMenu);
@@ -80,7 +83,14 @@ public class PostContainer extends AbstractBasePage {
     public boolean isPostDisplayed() {
         WebElement postContainer;
         try {
-            postContainer = driver.findElement(By.xpath("//span[contains(.,'" + this.getPostxt() + "')]"));
+            Thread.sleep(TIME_IN_MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            postContainer = wait.until(ExpectedConditions
+                    .visibilityOf(driver.findElement(By.xpath("//span[contains(.,'" + this.getPostxt() + "')]"))));
         } catch (WebDriverException e) {
             return false;
         }

@@ -1,17 +1,15 @@
 package org.fundacionjala.sfdc.tests.product;
 
-import java.util.Map;
-
+import org.fundacionjala.sfdc.framework.utils.JsonMapper;
+import org.fundacionjala.sfdc.framework.utils.Navigator;
+import org.fundacionjala.sfdc.pages.products.ProductDetail;
+import org.fundacionjala.sfdc.pages.products.ProductForm;
+import org.fundacionjala.sfdc.pages.products.ProductHome;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import org.fundacionjala.sfdc.framework.utils.JsonMapper;
-import org.fundacionjala.sfdc.pages.MainApp;
-import org.fundacionjala.sfdc.pages.TabBar;
-import org.fundacionjala.sfdc.pages.products.ProductDetail;
-import org.fundacionjala.sfdc.pages.products.ProductForm;
-import org.fundacionjala.sfdc.pages.products.ProductHome;
+import java.util.Map;
 
 import static org.fundacionjala.sfdc.tests.Asserts.assertDetailValues;
 
@@ -38,9 +36,7 @@ public class CreateProduct {
     @BeforeMethod
     public void setup() {
         valuesMapJson = JsonMapper.getMapJson(PRODUCT_DATA_PATH);
-        final MainApp mainApp = new MainApp();
-        final TabBar tabBar = mainApp.goToTabBar();
-        final ProductHome productHome = tabBar.clickOnProductsHome();
+        final ProductHome productHome = Navigator.goToProduct();
         productForm = productHome.clickNewButton();
     }
 
