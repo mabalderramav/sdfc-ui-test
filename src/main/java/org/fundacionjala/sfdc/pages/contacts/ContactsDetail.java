@@ -3,6 +3,8 @@ package org.fundacionjala.sfdc.pages.contacts;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -30,7 +32,10 @@ import static org.fundacionjala.sfdc.pages.contacts.ContactFields.TITLE;
  */
 public class ContactsDetail extends DetailBase {
 
-    public static final int NAME_LABEL_LENGTH = 3;
+    private static final Logger LOGGER = LogManager.getLogger(ContactsDetail.class);
+
+    private static final int NAME_LABEL_LENGTH = 3;
+
     @FindBy(id = "con2_ileinner")
     @CacheLookup
     private WebElement nameLabel;
@@ -173,6 +178,7 @@ public class ContactsDetail extends DetailBase {
         try {
             contactContainer = driver.findElement(By.xpath("//span[contains(.,'" + contact + "')]"));
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             return false;
         }
         return isElementPresent(contactContainer);
@@ -190,6 +196,7 @@ public class ContactsDetail extends DetailBase {
             webElement.getText();
             return true;
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             return false;
         }
     }
@@ -219,6 +226,7 @@ public class ContactsDetail extends DetailBase {
      *
      * @return a Map with the values of contact edit.
      */
+    @Override
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 

@@ -5,6 +5,7 @@ target/
 build/
 log/
 drivers/
+.sonar/
 *.iml
 gradlew
 gradlew.bat

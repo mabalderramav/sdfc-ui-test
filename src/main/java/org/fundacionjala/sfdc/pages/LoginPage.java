@@ -1,5 +1,7 @@
 package org.fundacionjala.sfdc.pages;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacionjala.sfdc.framework.browser.DriverManager;
 import org.fundacionjala.sfdc.framework.utils.Environment;
 import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
@@ -14,7 +16,11 @@ import java.util.concurrent.TimeUnit;
  * Class to manage the login process.
  */
 public class LoginPage extends AbstractBasePage {
-    public static final int DURATION = 3;
+
+    private static final Logger LOGGER = LogManager.getLogger(LoginPage.class);
+
+    private static final int DURATION = 3;
+
     @FindBy(id = "username")
     @CacheLookup
     private static WebElement userNameField;
@@ -40,7 +46,7 @@ public class LoginPage extends AbstractBasePage {
      * @param email String with the username or email.
      * @return {@link LoginPage}
      */
-    public LoginPage setUserNameField(final String email) {
+    private LoginPage setUserNameField(final String email) {
         userNameField.clear();
         userNameField.sendKeys(email);
         return this;
@@ -52,7 +58,7 @@ public class LoginPage extends AbstractBasePage {
      * @param password String  whit the password.
      * @return {@link LoginPage}
      */
-    public LoginPage setPasswordField(final String password) {
+    private LoginPage setPasswordField(final String password) {
         passwordTxt.clear();
         passwordTxt.sendKeys(password);
         return this;
@@ -63,7 +69,7 @@ public class LoginPage extends AbstractBasePage {
      *
      * @return The home page.
      */
-    public MainApp clickLogInToSalesforceButton() {
+    private MainApp clickLogInToSalesforceButton() {
         loginField.click();
         return new MainApp();
     }
@@ -75,7 +81,7 @@ public class LoginPage extends AbstractBasePage {
      * @param password Password used to perform a login to Salesforce application.
      * @return The main page after login to Salesforce application.
      */
-    public MainApp loginAs(final String username, final String password) {
+    private MainApp loginAs(final String username, final String password) {
         return setUserNameField(username).setPasswordField(password).clickLogInToSalesforceButton();
     }
 
@@ -86,7 +92,7 @@ public class LoginPage extends AbstractBasePage {
      * @param password Password to perform a login with other user.
      * @return The login to Mach2 application.
      */
-    public MainApp loginOtherUser(final String userName, final String password) {
+    private MainApp loginOtherUser(final String userName, final String password) {
         MainApp homePage;
         try {
             driver.manage().timeouts().implicitlyWait(DURATION, TimeUnit.SECONDS);
@@ -98,6 +104,7 @@ public class LoginPage extends AbstractBasePage {
                 homePage = loginAs(userName, password);
             }
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             DriverManager.getInstance().getDriver().get(Environment.getInstance().getBaseUrl());
             homePage = loginAs(userName, password);
         } finally {

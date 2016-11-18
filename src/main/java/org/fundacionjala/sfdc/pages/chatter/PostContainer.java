@@ -1,5 +1,7 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -18,10 +20,15 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
  */
 public class PostContainer extends AbstractBasePage {
 
+    private static final Logger LOGGER = LogManager.getLogger(PostContainer.class);
+
     private static final int EXPECTATION_TIME_OUT = 15;
+
     private static final int SLEEP_IN_MILLISECONDS = 100;
+
     private static final int TIME_IN_MILLISECONDS = 1000;
 
+    private static final String SPAN_CONTAINS = "//span[contains(.,'";
 
     @FindBy(linkText = "Delete")
     @CacheLookup
@@ -70,7 +77,7 @@ public class PostContainer extends AbstractBasePage {
      *                publication to click its action menu.
      */
     private void clickActionMenu(final String postTxt) {
-        WebElement actionMenu = driver.findElement(By.xpath("//span[contains(.,'" + postTxt + "')]/ancestor::div["
+        WebElement actionMenu = driver.findElement(By.xpath(SPAN_CONTAINS + postTxt + "')]/ancestor::div["
                 + "@class='feeditembody']/following::a[@class='zen-trigger feeditemActionMenuButton']"));
         CommonActions.clickElement(actionMenu);
     }
@@ -84,14 +91,10 @@ public class PostContainer extends AbstractBasePage {
         WebElement postContainer;
         try {
             Thread.sleep(TIME_IN_MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        try {
             postContainer = wait.until(ExpectedConditions
-                    .visibilityOf(driver.findElement(By.xpath("//span[contains(.,'" + this.getPostxt() + "')]"))));
-        } catch (WebDriverException e) {
+                    .visibilityOf(driver.findElement(By.xpath(SPAN_CONTAINS + this.getPostxt() + "')]"))));
+        } catch (InterruptedException | WebDriverException e) {
+            LOGGER.warn(e.getMessage(), e);
             return false;
         }
         return isElementPresent(postContainer);
@@ -103,11 +106,12 @@ public class PostContainer extends AbstractBasePage {
      * @param webElement the element to search.
      * @return true if the element is present.
      */
-    public boolean isElementPresent(final WebElement webElement) {
+    private boolean isElementPresent(final WebElement webElement) {
         try {
             webElement.getText();
             return true;
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             return false;
         }
     }
@@ -117,7 +121,7 @@ public class PostContainer extends AbstractBasePage {
      *
      * @return a String with the Post.
      */
-    public String getPostxt() {
+    private String getPostxt() {
         return this.postText;
     }
 
@@ -127,7 +131,7 @@ public class PostContainer extends AbstractBasePage {
      * @param postTxt String with the post.
      * @return {@link PostContainer}
      */
-    public PostContainer setPostTxt(final String postTxt) {
+    PostContainer setPostTxt(final String postTxt) {
         this.postText = postTxt;
         return this;
     }
@@ -139,7 +143,7 @@ public class PostContainer extends AbstractBasePage {
      * @return {@link PostForm}
      */
     public PostForm clickCommentLkn(final String postTxt) {
-        WebElement postContainer = driver.findElement(By.xpath("//span[contains(.,'"
+        WebElement postContainer = driver.findElement(By.xpath(SPAN_CONTAINS
                 + postTxt + "')]/following::a[text()='Comment']"));
         CommonActions.clickElement(postContainer);
         return new PostForm();

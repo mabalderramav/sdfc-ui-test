@@ -1,5 +1,7 @@
 package org.fundacionjala.sfdc.pages.chatter;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.CacheLookup;
@@ -13,6 +15,8 @@ import org.fundacionjala.sfdc.pages.base.AbstractBasePage;
  * Class that represents the form where to introduce the text on chatter.
  */
 public class PostForm extends AbstractBasePage {
+
+    private static final Logger LOGGER = LogManager.getLogger(PostForm.class);
 
     private static final int TIME_IN_MILLISECONDS = 3000;
 
@@ -82,13 +86,14 @@ public class PostForm extends AbstractBasePage {
         this.postText = postTxt;
         try {
             Thread.sleep(TIME_IN_MILLISECONDS);
+            driver.switchTo().frame(driver
+                    .findElement(By.xpath("//iframe[contains(@title,'Rich Text Editor, quickActionRichTextEditor')]")));
+            CommonActions.sendKeys(editTxtArea, postTxt);
+            driver.switchTo().defaultContent();
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOGGER.warn(e.getMessage(), e);
+            Thread.currentThread().interrupt();
         }
-        driver.switchTo().frame(driver
-                .findElement(By.xpath("//iframe[contains(@title,'Rich Text Editor, quickActionRichTextEditor')]")));
-        CommonActions.sendKeys(editTxtArea, postTxt);
-        driver.switchTo().defaultContent();
         return this;
     }
 

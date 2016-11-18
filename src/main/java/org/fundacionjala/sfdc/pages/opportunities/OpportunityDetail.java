@@ -3,6 +3,8 @@ package org.fundacionjala.sfdc.pages.opportunities;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.fundacionjala.sfdc.framework.utils.CommonActions;
 import org.fundacionjala.sfdc.pages.AssertsDetails;
 import org.fundacionjala.sfdc.pages.MainApp;
@@ -30,6 +32,8 @@ import static org.fundacionjala.sfdc.pages.opportunities.OpportunityFields.TYPE;
  * This class represents the opportunity detail.
  */
 public class OpportunityDetail extends DetailBase {
+
+    private static final Logger LOGGER = LogManager.getLogger(OpportunityDetail.class);
 
     @FindBy(id = "opp3_ileinner")
     @CacheLookup
@@ -102,7 +106,8 @@ public class OpportunityDetail extends DetailBase {
      */
     public boolean isPrivateFlag() {
         String attributeState = privateFlagImg.getAttribute("title");
-        return attributeState.equals("Checked");
+        String checked = "Checked";
+        return attributeState.equals(checked);
     }
 
     /**
@@ -217,6 +222,7 @@ public class OpportunityDetail extends DetailBase {
             driver.findElement(By.linkText(opportunityName)).getText();
             return true;
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             return false;
         }
     }
@@ -226,6 +232,7 @@ public class OpportunityDetail extends DetailBase {
      *
      * @return a Map with the values of opportunity edit.
      */
+    @Override
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 

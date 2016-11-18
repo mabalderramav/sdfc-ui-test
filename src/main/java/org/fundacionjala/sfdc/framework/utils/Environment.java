@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.Properties;
@@ -60,9 +59,6 @@ public final class Environment {
         try (FileReader fileReader = new FileReader(file)) {
             properties = new Properties();
             properties.load(fileReader);
-        } catch (FileNotFoundException e) {
-            LOGGER.warn(e.getMessage(), e);
-
         } catch (IOException e) {
             LOGGER.warn(e.getMessage(), e);
         }

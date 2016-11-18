@@ -13,17 +13,17 @@ import java.net.URL;
 /**
  * Abstract class that is in charge to run test on saucelab and browserstack.
  */
-public abstract class RemoteService implements Driver {
+abstract class RemoteService implements Driver {
 
     private static final Logger LOGGER = LogManager.getLogger(BrowserStack.class);
 
-    protected static final Environment ENVIRONMENT = Environment.getInstance();
+    static final Environment ENVIRONMENT = Environment.getInstance();
 
     private static final String HTTPS_PROXY_HOST = "https.proxyHost";
 
     private static final String HTTPS_PROXY_PORT = "https.proxyPort";
 
-    protected static final String RESOLUTION = "screenResolution";
+    static final String RESOLUTION = "screenResolution";
 
     /**
      * Set the capabilities values for browser stack and sauce labs.
@@ -44,6 +44,7 @@ public abstract class RemoteService implements Driver {
      *
      * @return WebDriver.
      */
+    @Override
     public WebDriver initDriver() {
         final String url = String.format(getUrl(),
                 ENVIRONMENT.getRemoteUserName(),
@@ -57,10 +58,8 @@ public abstract class RemoteService implements Driver {
             remoteWebdriver = new RemoteWebDriver(new URL(url), setCapabilities());
         } catch (MalformedURLException e) {
             LOGGER.warn(e.getMessage(), e);
-            throw new RuntimeException();
+            throw new NullPointerException(e.getMessage());
         }
         return remoteWebdriver;
-
     }
-
 }

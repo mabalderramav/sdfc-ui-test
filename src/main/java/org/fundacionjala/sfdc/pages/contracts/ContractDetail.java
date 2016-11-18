@@ -3,6 +3,8 @@ package org.fundacionjala.sfdc.pages.contracts;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriverException;
@@ -27,10 +29,13 @@ import static org.fundacionjala.sfdc.pages.contracts.ContractFields.CUSTOMER_SIG
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.OWNER_EXPIRATION_NOTICE;
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.PRICE_BOOK;
 import static org.fundacionjala.sfdc.pages.contracts.ContractFields.STATUS;
+
 /**
  * This class represents of the contract detail.
  */
 public class ContractDetail extends DetailBase {
+
+    private static final Logger LOGGER = LogManager.getLogger(ContractDetail.class);
 
     @FindBy(id = "ctrc2_ileinner")
     @CacheLookup
@@ -232,6 +237,7 @@ public class ContractDetail extends DetailBase {
             driver.findElement(By.linkText(contractNumber)).getText();
             return true;
         } catch (WebDriverException e) {
+            LOGGER.info(e.getMessage(), e);
             return false;
         }
     }
@@ -242,6 +248,7 @@ public class ContractDetail extends DetailBase {
      *
      * @return a Map with the values of contract edit.
      */
+    @Override
     public Map<String, AssertsDetails> getStrategyAssertMap() {
         final Map<String, AssertsDetails> strategyMap = new HashMap<>();
 
