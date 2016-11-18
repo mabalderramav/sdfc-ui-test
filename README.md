@@ -74,5 +74,3 @@ Current contributors:
 *Jimmy Romero S. (JimmyRomero) - https://github.com/JimmyRomero
 *Alvaro Daza (AlvaroDazaQuiroga) - https://github.com/AlvaroDazaQuiroga
 *Carlos Gonzales (carledriss) - https://github.com/carledriss
-
-Thanks
